@@ -18,9 +18,15 @@
     <nav class="main-nav" aria-label="Main navigation">
       <a class="nav-link" href="#home">Home</a>
       <a class="nav-link active" href="#practices" aria-current="page">Practices</a>
-      <a class="nav-link" href="#guidance">Guidance</a>
     </nav>
-    <a class="header-cta" href="#practices">Find your moment <span aria-hidden="true">↗</span></a>
+    <div class="header-actions">
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="theme-icon theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        <svg class="theme-icon theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 15.4A8.5 8.5 0 0 1 8.6 3.7 8.5 8.5 0 1 0 20.3 15.4Z"/></svg>
+        <span data-theme-name>Light</span>
+      </button>
+      <button class="header-cta" type="button" data-open-finder>Find My Practice <span aria-hidden="true">↗</span></button>
+    </div>
   </header>
   <main id="home">
     <section class="hero page-width" aria-labelledby="hero-title">
@@ -28,7 +34,10 @@
         <p class="eyebrow"><span class="eyebrow-dot"></span> A LITTLE SPACE TO COME BACK TO YOU</p>
         <h1 id="hero-title">Make room for<br />a little more <em>you.</em></h1>
         <p class="hero-description">Whatever today feels like, there’s a gentle place to begin. Choose a practice that meets you where you are.</p>
-        <a class="primary-button" href="#practices">Explore practices <span aria-hidden="true">→</span></a>
+        <div class="hero-actions">
+          <button class="primary-button" type="button" data-open-finder>Find My Practice <span aria-hidden="true">→</span></button>
+          <a class="browse-link" href="#practices">Browse all practices</a>
+        </div>
         <div class="hero-note"><span class="note-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4m0-12.8L17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="5"/></svg></span><span>Small moments can make a meaningful difference.</span></div>
       </div>
       <div class="hero-art" role="img" aria-label="Illustration of a peaceful sunrise over a quiet landscape">
@@ -75,22 +84,30 @@
         </article>
       </div>
     </section>
-    <section class="guidance page-width" id="guidance" aria-labelledby="guidance-title">
-      <div class="guidance-mark" aria-hidden="true"><svg viewBox="0 0 80 80"><path d="M40 66V38m0 7C20 45 14 32 18 18c14 0 23 8 23 22m-1 15c19 0 26-12 22-26-14 0-23 9-23 23"/><circle cx="40" cy="40" r="36"/></svg></div>
-      <div class="guidance-copy"><p class="eyebrow">A GENTLE PLACE TO START</p><h2 id="guidance-title">Not sure what you need?</h2><p>Check in with yourself and find a practice to match your moment.</p></div>
-      <button class="guidance-button" type="button">Find my practice <span aria-hidden="true">→</span></button>
-    </section>
   </main>
   <footer class="site-footer"><a class="footer-brand" href="#home">SOULSPACE</a><span>A gentle reminder: you deserve a moment, too.</span><a class="back-to-top" href="#home">Back to top ↑</a></footer>
-  <dialog class="guidance-dialog" aria-labelledby="dialog-title">
-    <form method="dialog"><button class="dialog-close" aria-label="Close guidance" value="close">×</button></form>
-    <p class="eyebrow">A MOMENT TO CHECK IN</p><h2 id="dialog-title">What would feel good right now?</h2><p class="dialog-description">There’s no wrong answer. Choose what feels closest.</p>
-    <div class="mood-options">
-      <button class="mood-option" type="button" data-mood="calm"><span>☁</span><span><strong>A little calmer</strong><small>When everything feels like a lot</small></span><b>→</b></button>
-      <button class="mood-option" type="button" data-mood="energy"><span>☀</span><span><strong>A little more energy</strong><small>When you need a gentle lift</small></span><b>→</b></button>
-      <button class="mood-option" type="button" data-mood="rest"><span>☾</span><span><strong>Time to unwind</strong><small>When it’s time to slow down</small></span><b>→</b></button>
+  <dialog class="practice-finder-dialog" aria-labelledby="finder-title">
+    <form method="dialog"><button class="dialog-close" aria-label="Close practice finder" value="close">×</button></form>
+    <div class="finder-progress" id="finder-progress">
+      <div class="finder-progress-label"><span id="question-counter">QUESTION 1 OF 5</span><span id="question-percent">20%</span></div>
+      <div class="progress-track" role="progressbar" aria-label="Questionnaire progress" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1"><span class="progress-fill"></span></div>
     </div>
-    <div class="recommendation" hidden aria-live="polite"></div>
+    <section class="finder-step" id="finder-step">
+      <p class="eyebrow">A MOMENT TO CHECK IN</p>
+      <h2 id="finder-title"></h2>
+      <p class="dialog-description" id="finder-description"></p>
+      <fieldset class="question-options" id="question-options"><legend class="visually-hidden">Choose one answer</legend></fieldset>
+      <div class="finder-controls"><button class="finder-back" id="finder-back" type="button">← Back</button><button class="finder-next" id="finder-next" type="button" disabled>Next question <span aria-hidden="true">→</span></button></div>
+    </section>
+    <section class="finder-results" id="finder-results" aria-live="polite" hidden>
+      <span class="result-mark" aria-hidden="true">✳</span>
+      <p class="eyebrow">YOUR PERSONALIZED PRACTICE</p>
+      <h2>A gentle place to start.</h2>
+      <p class="result-summary" id="result-summary"></p>
+      <div class="result-card"><span class="result-card-label">WE THINK YOU’D ENJOY</span><strong id="result-practice"></strong><p id="result-detail"></p></div>
+      <button class="finder-next result-action" id="result-action" type="button">Explore this practice <span aria-hidden="true">→</span></button>
+      <button class="finder-restart" id="finder-restart" type="button">Start over</button>
+    </section>
   </dialog>
   <div class="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
