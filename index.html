@@ -1,125 +1,98 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SoulSpace — Practices</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap"
-    rel="stylesheet" />
+  <meta name="theme-color" content="#f8f8f4" />
+  <meta name="description" content="A little space to pause, breathe, and find a wellness practice for how you feel today." />
+  <title>SoulSpace — A little space for you</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23eaf0e8'/%3E%3Cpath d='M20 32V19M20 21C9 21 6 14 8 7c8 0 13 4 13 12m-1 6c11 0 14-7 12-14-8 0-13 4-13 12M13 32h14' fill='none' stroke='%23426f59' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <div class="page-decoration decoration-left" aria-hidden="true">❧</div>
-  <div class="page-decoration decoration-right" aria-hidden="true">❧</div>
-
   <header class="site-header">
-    <a class="brand" href="#top" aria-label="SoulSpace home">
-      <span class="brand-flower">♧</span><span>SOULSPACE</span>
+    <a class="brand" href="#home" aria-label="SoulSpace home">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 34V19M20 21C9 21 6 14 8 7c8 0 13 4 13 12M20 25c11 0 14-7 12-14-8 0-13 4-13 12"/><path d="M13 34h14"/></svg>
+      <span>SOULSPACE<small>YOUR DAILY MOMENT</small></span>
     </a>
     <nav class="main-nav" aria-label="Main navigation">
-      <a href="#top">Home</a>
-      <a href="#guidance">AI Guidance</a>
-      <a class="active" href="#practices">Practices</a>
-      <a href="#reflections">My Reflections</a>
+      <a class="nav-link" href="#home">Home</a>
+      <a class="nav-link active" href="#practices" aria-current="page">Practices</a>
+      <a class="nav-link" href="#guidance">Guidance</a>
     </nav>
-    <button class="journey-button" type="button" data-scroll-to="practices"><span>❧</span> Begin Your Journey</button>
+    <a class="header-cta" href="#practices">Find your moment <span aria-hidden="true">↗</span></a>
   </header>
-
-  <main id="top">
-    <section class="hero" id="practices">
-      <p class="eyebrow">A mindful moment, made for you</p>
-      <h1>Choose Your Practice</h1>
-      <h2>Take a few minutes for yourself.</h2>
-      <p class="intro">Choose what your mind, body, or spirit needs today.</p>
-      <div class="flourish" aria-hidden="true"><span></span><b>♧</b><span></span></div>
-    </section>
-
-    <section class="practice-grid" aria-label="Wellness practices">
-      <article class="practice-card" data-practice="Meditation">
-        <div class="card-art art-meditation"><span class="icon">♙</span><span class="shape">☾</span></div>
-        <h3>Meditation</h3>
-        <p>Find stillness and create a little space within.</p>
-        <span class="duration">◷ &nbsp;2–10 min</span><button class="explore-button" type="button">Explore
-          <b>→</b></button>
-      </article>
-      <article class="practice-card" data-practice="Breathwork">
-        <div class="card-art art-breath"><span class="icon">≋</span><span class="rings">◎</span></div>
-        <h3>Breathwork</h3>
-        <p>Let your breath become your anchor.</p>
-        <span class="duration">◷ &nbsp;1–5 min</span><button class="explore-button" type="button">Explore
-          <b>→</b></button>
-      </article>
-      <article class="practice-card" data-practice="Yoga & Light Exercise">
-        <div class="card-art art-yoga"><span class="icon">♧</span><span class="shape">⌁</span></div>
-        <h3>Yoga &amp; Light Exercise</h3>
-        <p>Move gently. Breathe freely.</p>
-        <span class="duration">◷ &nbsp;2–10 min</span><button class="explore-button" type="button">Explore
-          <b>→</b></button>
-      </article>
-      <article class="practice-card" data-practice="Healing Music">
-        <div class="card-art art-music"><span class="icon">♫</span><span class="waves">|||∿|||</span></div>
-        <h3>Healing Music</h3>
-        <p>Create a peaceful atmosphere with calming sounds.</p>
-        <span class="duration">◷ &nbsp;Anytime</span><button class="explore-button" type="button">Explore
-          <b>→</b></button>
-      </article>
-      <article class="practice-card" data-practice="Sleep Stories">
-        <div class="card-art art-sleep"><span class="icon">☾</span><span class="shape">✦</span></div>
-        <h3>Sleep Stories</h3>
-        <p>Let your mind slow down with a gentle story.</p>
-        <span class="duration">◷ &nbsp;5–20 min</span><button class="explore-button" type="button">Explore
-          <b>→</b></button>
-      </article>
-      <article class="practice-card" data-practice="Gratitude">
-        <div class="card-art art-gratitude"><span class="icon">♧</span><span class="shape">✾</span></div>
-        <h3>Gratitude</h3>
-        <p>Notice the little things that make life meaningful.</p>
-        <span class="duration">◷ &nbsp;2 min</span><button class="explore-button" type="button">Explore
-          <b>→</b></button>
-      </article>
-      <article class="practice-card" data-practice="Spiritual Reflection">
-        <div class="card-art art-reflection"><span class="icon">♧</span><span class="shape">☀</span></div>
-        <h3>Spiritual Reflection</h3>
-        <p>Pause, reflect, and understand yourself.</p>
-        <span class="duration">◷ &nbsp;2–5 min</span><button class="explore-button" type="button">Explore
-          <b>→</b></button>
-      </article>
-      <article class="practice-card" data-practice="Daily Journal">
-        <div class="card-art art-journal"><span class="icon">▱</span><span class="shape">✧</span></div>
-        <h3>Daily Journal</h3>
-        <p>Write, understand, and grow.</p>
-        <span class="duration">◷ &nbsp;Your pace</span><button class="explore-button" type="button">Explore
-          <b>→</b></button>
-      </article>
-    </section>
-
-    <section class="guidance" id="guidance">
-      <h2>Not sure where to begin?</h2>
-      <p>Tell us what you're looking for and SoulSpace can suggest a practice for you.</p>
-      <div class="guidance-panel">
-        <span class="leaf-mark" aria-hidden="true">❧</span>
-        <span class="guidance-icon">♧</span>
-        <div>
-          <h3>Let SoulSpace guide you</h3>
-          <p>Share how you're feeling and receive a personalized practice suggestion.</p>
-        </div>
-        <button class="guidance-button" type="button">Get Guidance&nbsp; ✦</button>
+  <main id="home">
+    <section class="hero page-width" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-dot"></span> A LITTLE SPACE TO COME BACK TO YOU</p>
+        <h1 id="hero-title">Make room for<br />a little more <em>you.</em></h1>
+        <p class="hero-description">Whatever today feels like, there’s a gentle place to begin. Choose a practice that meets you where you are.</p>
+        <a class="primary-button" href="#practices">Explore practices <span aria-hidden="true">→</span></a>
+        <div class="hero-note"><span class="note-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4m0-12.8L17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="5"/></svg></span><span>Small moments can make a meaningful difference.</span></div>
+      </div>
+      <div class="hero-art" role="img" aria-label="Illustration of a peaceful sunrise over a quiet landscape">
+        <div class="art-sun"></div><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="art-hill hill-back"></div><div class="art-hill hill-front"></div>
+        <svg class="art-plant" viewBox="0 0 180 220" aria-hidden="true"><path d="M93 220c2-54-4-101-12-151M87 138c-26-7-40-24-43-49 23 2 41 17 43 49ZM82 103c16-9 28-25 29-47-22 5-34 20-29 47ZM91 180c20-8 31-23 34-43-22 4-35 18-34 43ZM78 88C65 70 63 52 71 33c15 15 19 33 7 55Z"/></svg>
+        <div class="art-caption"><span class="caption-sparkle" aria-hidden="true">✳</span><span><strong>A moment for yourself</strong><small>Start wherever you are</small></span></div>
       </div>
     </section>
+    <section class="practices page-width" id="practices" aria-labelledby="practices-title">
+      <div class="section-heading"><div><p class="eyebrow">FIND WHAT FEELS RIGHT</p><h2 id="practices-title">Your practices</h2><p class="section-description">A few minutes, just for you. Pick what sounds good today.</p></div><span class="practice-count"><span aria-hidden="true">✳</span> 8 ways to reset</span></div>
+      <div class="practice-grid">
+        <article class="practice-card tone-lavender" data-practice="Meditation">
+          <div class="card-art"><span class="card-art-label">FIND STILLNESS</span><span class="art-orb"></span><svg class="practice-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M31.8 8.3a16 16 0 1 0 8 28.2A17.2 17.2 0 0 1 31.8 8.3Z"/><path d="m13 15 1 2m8-8v2m16 5-2 2"/></svg></div>
+          <div class="card-content"><div class="card-title-row"><h3>Meditation</h3><span class="duration"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l2.5 1.5"/></svg>2–10 min</span></div><p>Find stillness and make a little space within.</p><button class="explore-button" type="button">Explore practice <span aria-hidden="true">↗</span></button></div>
+        </article>
+        <article class="practice-card tone-blue" data-practice="Breathwork">
+          <div class="card-art"><span class="card-art-label">BREATHE DEEP</span><span class="art-orb"></span><svg class="practice-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M7 18h11c8 0 8-10 15-10 4 0 7 3 7 7s-3 7-7 7h-5"/><path d="M5 26h21c7 0 7 11 14 11 3 0 5-2 5-5s-2-5-5-5h-5"/><path d="M11 34h8"/></svg></div>
+          <div class="card-content"><div class="card-title-row"><h3>Breathwork</h3><span class="duration"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l2.5 1.5"/></svg>1–5 min</span></div><p>Let your breath become a steady anchor.</p><button class="explore-button" type="button">Explore practice <span aria-hidden="true">↗</span></button></div>
+        </article>
+        <article class="practice-card tone-peach" data-practice="Yoga & movement">
+          <div class="card-art"><span class="card-art-label">MOVE GENTLY</span><span class="art-orb"></span><svg class="practice-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="9" r="3.5"/><path d="m22 16-7 7 8 5 5-7 7 2"/><path d="m23 28-7 12m12-17 7 12m-20-12-6 1m23-14-5 6"/></svg></div>
+          <div class="card-content"><div class="card-title-row"><h3>Yoga &amp; movement</h3><span class="duration"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l2.5 1.5"/></svg>2–10 min</span></div><p>Move gently. Breathe freely. Feel at home in your body.</p><button class="explore-button" type="button">Explore practice <span aria-hidden="true">↗</span></button></div>
+        </article>
+        <article class="practice-card tone-yellow" data-practice="Healing Music">
+          <div class="card-art"><span class="card-art-label">LISTEN &amp; UNWIND</span><span class="art-orb"></span><svg class="practice-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M18 33V11l21-4v22"/><ellipse cx="12" cy="34" rx="6" ry="4"/><ellipse cx="33" cy="30" rx="6" ry="4"/><path d="M18 17l21-4"/></svg></div>
+          <div class="card-content"><div class="card-title-row"><h3>Healing music</h3><span class="duration"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l2.5 1.5"/></svg>Anytime</span></div><p>Settle into a calmer space with soothing sounds.</p><button class="explore-button" type="button">Explore practice <span aria-hidden="true">↗</span></button></div>
+        </article>
+        <article class="practice-card tone-indigo" data-practice="Sleep Stories">
+          <div class="card-art"><span class="card-art-label">REST EASY</span><span class="art-orb"></span><svg class="practice-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M31.5 8a17 17 0 1 0 8.8 30A18.3 18.3 0 0 1 31.5 8Z"/><path d="m13 16 .7 1.5 1.6.2-1.2 1.1.3 1.6-1.4-.8-1.4.8.3-1.6-1.2-1.1 1.6-.2Z"/></svg></div>
+          <div class="card-content"><div class="card-title-row"><h3>Sleep stories</h3><span class="duration"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l2.5 1.5"/></svg>5–20 min</span></div><p>Let your mind slow down with a gentle story.</p><button class="explore-button" type="button">Explore practice <span aria-hidden="true">↗</span></button></div>
+        </article>
+        <article class="practice-card tone-green" data-practice="Gratitude">
+          <div class="card-art"><span class="card-art-label">NOTICE THE GOOD</span><span class="art-orb"></span><svg class="practice-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 39s-16-9.6-16-20a8.5 8.5 0 0 1 16-4 8.5 8.5 0 0 1 16 4C40 29.4 24 39 24 39Z"/><path d="m15 24 5 5 12-12"/></svg></div>
+          <div class="card-content"><div class="card-title-row"><h3>Gratitude</h3><span class="duration"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l2.5 1.5"/></svg>2 min</span></div><p>Notice the little things that make life meaningful.</p><button class="explore-button" type="button">Explore practice <span aria-hidden="true">↗</span></button></div>
+        </article>
+        <article class="practice-card tone-sage" data-practice="Spiritual Reflection">
+          <div class="card-art"><span class="card-art-label">TURN INWARD</span><span class="art-orb"></span><svg class="practice-icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="6"/><circle cx="24" cy="24" r="13"/><path d="M24 4v4m0 32v4M4 24h4m32 0h4M9.9 9.9l2.8 2.8m22.6 22.6 2.8 2.8m0-28.2-2.8 2.8m-22.6 22.6-2.8 2.8"/></svg></div>
+          <div class="card-content"><div class="card-title-row"><h3>Quiet reflection</h3><span class="duration"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l2.5 1.5"/></svg>2–5 min</span></div><p>Pause, reflect, and get to know yourself a little better.</p><button class="explore-button" type="button">Explore practice <span aria-hidden="true">↗</span></button></div>
+        </article>
+        <article class="practice-card tone-rose" data-practice="Daily Journal">
+          <div class="card-art"><span class="card-art-label">PUT IT IN WORDS</span><span class="art-orb"></span><svg class="practice-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M27 9H12a3 3 0 0 0-3 3v25a3 3 0 0 0 3 3h24a3 3 0 0 0 3-3V21"/><path d="m23 27 3-7L39 7a3.5 3.5 0 0 1 5 5L31 25l-8 2Zm3-7 5 5M15 16h7m-7 8h4m-4 8h17"/></svg></div>
+          <div class="card-content"><div class="card-title-row"><h3>Daily journal</h3><span class="duration"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M8 4v4l2.5 1.5"/></svg>Your pace</span></div><p>Write it down. Understand your thoughts. Grow from them.</p><button class="explore-button" type="button">Explore practice <span aria-hidden="true">↗</span></button></div>
+        </article>
+      </div>
+    </section>
+    <section class="guidance page-width" id="guidance" aria-labelledby="guidance-title">
+      <div class="guidance-mark" aria-hidden="true"><svg viewBox="0 0 80 80"><path d="M40 66V38m0 7C20 45 14 32 18 18c14 0 23 8 23 22m-1 15c19 0 26-12 22-26-14 0-23 9-23 23"/><circle cx="40" cy="40" r="36"/></svg></div>
+      <div class="guidance-copy"><p class="eyebrow">A GENTLE PLACE TO START</p><h2 id="guidance-title">Not sure what you need?</h2><p>Check in with yourself and find a practice to match your moment.</p></div>
+      <button class="guidance-button" type="button">Find my practice <span aria-hidden="true">→</span></button>
+    </section>
   </main>
-
-  <!-- <footer id="reflections">
-    <p>“Sometimes, all we need is a quiet moment to return to ourselves.”</p>
-    <div class="flourish"><span></span><b>♧</b><span></span></div><strong>SOULSPACE</strong><small>Pause. Breathe.
-      Reflect.</small>
-  </footer> -->
+  <footer class="site-footer"><a class="footer-brand" href="#home">SOULSPACE</a><span>A gentle reminder: you deserve a moment, too.</span><a class="back-to-top" href="#home">Back to top ↑</a></footer>
+  <dialog class="guidance-dialog" aria-labelledby="dialog-title">
+    <form method="dialog"><button class="dialog-close" aria-label="Close guidance" value="close">×</button></form>
+    <p class="eyebrow">A MOMENT TO CHECK IN</p><h2 id="dialog-title">What would feel good right now?</h2><p class="dialog-description">There’s no wrong answer. Choose what feels closest.</p>
+    <div class="mood-options">
+      <button class="mood-option" type="button" data-mood="calm"><span>☁</span><span><strong>A little calmer</strong><small>When everything feels like a lot</small></span><b>→</b></button>
+      <button class="mood-option" type="button" data-mood="energy"><span>☀</span><span><strong>A little more energy</strong><small>When you need a gentle lift</small></span><b>→</b></button>
+      <button class="mood-option" type="button" data-mood="rest"><span>☾</span><span><strong>Time to unwind</strong><small>When it’s time to slow down</small></span><b>→</b></button>
+    </div>
+    <div class="recommendation" hidden aria-live="polite"></div>
+  </dialog>
   <div class="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
 </body>
-
 </html>
