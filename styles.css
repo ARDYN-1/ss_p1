@@ -1,0 +1,538 @@
+:root {
+    --ink: #183a3b;
+    --muted: #71807d;
+    --sage: #75956f;
+    --pale: #eaf0e6;
+    --paper: #fbfaf5;
+    --lavender: #eee9f0
+}
+
+* {
+    box-sizing: border-box
+}
+
+html {
+    scroll-behavior: smooth
+}
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+    font-size: 14px;
+    overflow-x: hidden
+}
+
+body:before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    opacity: .35;
+    z-index: -2;
+    background: radial-gradient(circle at 15% 19%, #f1eee4, transparent 28%), radial-gradient(circle at 83% 55%, #f3f1e9, transparent 28%)
+}
+
+.site-header {
+    height: 64px;
+    border-bottom: 1px solid #e9e7dd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 max(7vw, 40px);
+    background: rgba(251, 250, 245, .85);
+    position: relative;
+    z-index: 2
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: var(--ink);
+    font-family: "Playfair Display", serif;
+    letter-spacing: 2px;
+    font-size: 22px;
+    text-decoration: none
+}
+
+.brand-flower {
+    font-size: 38px;
+    color: #5f7c6c;
+    line-height: 1;
+    transform: rotate(180deg)
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 37px
+}
+
+.main-nav a {
+    padding: 8px 13px;
+    text-decoration: none;
+    color: #223d3d;
+    font-size: 13px
+}
+
+.main-nav .active {
+    background: #e3eadd;
+    border-radius: 18px
+}
+
+.journey-button,
+.explore-button,
+.guidance-button {
+    border: 0;
+    border-radius: 24px;
+    color: #fff;
+    background: linear-gradient(100deg, #65875f, #78966f);
+    font: 500 13px "DM Sans", sans-serif;
+    cursor: pointer;
+    transition: transform .2s, filter .2s;
+    box-shadow: 0 2px 4px #44613e24
+}
+
+.journey-button {
+    padding: 11px 21px
+}
+
+.journey-button span {
+    font-size: 17px;
+    margin-right: 7px
+}
+
+.journey-button:hover,
+.explore-button:hover,
+.guidance-button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05)
+}
+
+.hero {
+    text-align: center;
+    padding: 27px 20px 16px
+}
+
+.eyebrow {
+    display: none
+}
+
+.hero h1,
+.guidance h2,
+.practice-card h3,
+.guidance-panel h3 {
+    font-family: "Playfair Display", serif;
+    font-weight: 500
+}
+
+.hero h1 {
+    font-size: 42px;
+    line-height: 1;
+    margin: 0 0 9px;
+    letter-spacing: -1.8px
+}
+
+.hero h2 {
+    font: 500 19px "Playfair Display", serif;
+    margin: 0 0 6px
+}
+
+.intro {
+    margin: 0;
+    color: #536566;
+    font-size: 13px
+}
+
+.flourish {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    justify-content: center;
+    margin: 10px auto 0;
+    color: #638071
+}
+
+.flourish span {
+    height: 1px;
+    width: 85px;
+    background: #b5c0b6
+}
+
+.flourish b {
+    font: 28px Georgia, serif;
+    transform: rotate(180deg)
+}
+
+.practice-grid {
+    max-width: 1298px;
+    margin: 0 auto;
+    padding: 0 0 23px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px 18px
+}
+
+.practice-card {
+    height: 237px;
+    background: rgba(255, 255, 252, .76);
+    border: 1px solid #e7e4da;
+    border-radius: 10px;
+    padding: 17px 23px 16px;
+    position: relative;
+    box-shadow: 0 2px 7px #203d3510;
+    overflow: hidden;
+    transition: transform .2s, box-shadow .2s
+}
+
+.practice-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 9px 22px #203d3522
+}
+
+.card-art {
+    height: 57px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between
+}
+
+.icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #edf1e9;
+    color: #285052;
+    font: 31px Georgia, serif
+}
+
+.shape {
+    font: 56px Georgia, serif;
+    opacity: .3;
+    line-height: .8;
+    color: #849c7d
+}
+
+.art-meditation .icon {
+    background: #f0ebf1
+}
+
+.art-meditation .shape {
+    color: #b6abc3
+}
+
+.art-breath .rings {
+    font-size: 72px;
+    color: #d8cdde;
+    line-height: .6;
+    opacity: .6
+}
+
+.art-yoga .icon,
+.art-sleep .icon,
+.art-reflection .icon {
+    background: #f1ebf2;
+    color: #67567d
+}
+
+.art-music .waves {
+    font-size: 28px;
+    color: #ddcfdb;
+    letter-spacing: 2px
+}
+
+.art-sleep .shape {
+    color: #b8b0c9
+}
+
+.art-gratitude .shape {
+    color: #aab99b
+}
+
+.art-reflection .shape {
+    color: #e9dba9
+}
+
+.art-journal .shape {
+    color: #a2af8f
+}
+
+.practice-card h3 {
+    font-size: 19px;
+    line-height: 1.1;
+    margin: 2px 0 7px
+}
+
+.practice-card p {
+    color: #707777;
+    margin: 0;
+    max-width: 205px;
+    line-height: 1.35;
+    font-size: 13px;
+    height: 38px
+}
+
+.duration {
+    display: inline-block;
+    margin-top: 9px;
+    border-radius: 14px;
+    padding: 6px 10px;
+    background: #f0f3eb;
+    color: #627362;
+    font-size: 11px
+}
+
+.explore-button {
+    display: block;
+    margin-top: 9px;
+    padding: 8px 20px;
+    min-width: 112px
+}
+
+.explore-button b {
+    font-size: 18px;
+    font-weight: 400;
+    margin-left: 4px;
+    line-height: 0
+}
+
+.guidance {
+    max-width: 1096px;
+    margin: 0 auto 18px
+}
+
+.guidance>h2 {
+    font-size: 23px;
+    margin: 0 0 0
+}
+
+.guidance>p {
+    font-size: 12px;
+    color: #77817e;
+    margin: 0 0 8px
+}
+
+.guidance-panel {
+    height: 90px;
+    background: linear-gradient(100deg, #e8f0e4, #e5ece1);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    padding: 13px 87px 13px 136px;
+    position: relative;
+    overflow: hidden
+}
+
+.leaf-mark {
+    position: absolute;
+    font: 80px Georgia;
+    color: #91aa89;
+    left: 15px;
+    opacity: .52;
+    transform: rotate(25deg)
+}
+
+.guidance-icon {
+    height: 47px;
+    width: 47px;
+    border: 1px solid #f8faf2;
+    border-radius: 50%;
+    background: #eef3e9;
+    display: grid;
+    place-items: center;
+    font: 28px Georgia;
+    color: #5b7a67;
+    margin-right: 19px
+}
+
+.guidance-panel h3 {
+    font-size: 18px;
+    margin: 0 0 4px
+}
+
+.guidance-panel p {
+    font-size: 11px;
+    color: #687674;
+    margin: 0
+}
+
+.guidance-button {
+    padding: 11px 30px;
+    margin-left: auto;
+    white-space: nowrap
+}
+
+footer {
+    text-align: center;
+    padding: 0 0 26px;
+    color: #65706f
+}
+
+footer p {
+    font: italic 13px "Playfair Display", serif;
+    margin: 0
+}
+
+footer .flourish {
+    margin: 5px auto 1px
+}
+
+footer .flourish span {
+    width: 86px
+}
+
+footer .flourish b {
+    font-size: 23px
+}
+
+footer strong {
+    font: 500 15px "Playfair Display", serif;
+    letter-spacing: 2px;
+    display: block;
+    color: #355153
+}
+
+footer small {
+    font-size: 10px
+}
+
+.page-decoration {
+    position: fixed;
+    color: #aab89d;
+    opacity: .18;
+    font: 170px Georgia;
+    z-index: -1
+}
+
+.decoration-left {
+    left: -24px;
+    top: 103px;
+    transform: rotate(43deg)
+}
+
+.decoration-right {
+    right: -34px;
+    bottom: -58px;
+    transform: rotate(-42deg)
+}
+
+.toast {
+    position: fixed;
+    left: 50%;
+    bottom: 24px;
+    transform: translate(-50%, 90px);
+    padding: 11px 20px;
+    border-radius: 25px;
+    background: #244847;
+    color: white;
+    box-shadow: 0 6px 18px #0003;
+    transition: transform .25s;
+    z-index: 5
+}
+
+.toast.show {
+    transform: translate(-50%, 0)
+}
+
+@media (max-width:1000px) {
+    .practice-grid {
+        padding: 0 30px;
+        grid-template-columns: repeat(2, 1fr)
+    }
+
+    .guidance {
+        margin-left: 30px;
+        margin-right: 30px
+    }
+
+    .main-nav {
+        gap: 8px
+    }
+
+    .site-header {
+        padding: 0 30px
+    }
+}
+
+@media (max-width:650px) {
+    .site-header {
+        height: auto;
+        padding: 14px 20px;
+        flex-wrap: wrap;
+        gap: 13px
+    }
+
+    .brand {
+        font-size: 18px
+    }
+
+    .brand-flower {
+        font-size: 29px
+    }
+
+    .main-nav {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        gap: 0
+    }
+
+    .main-nav a {
+        padding: 6px 4px;
+        font-size: 11px
+    }
+
+    .journey-button {
+        padding: 9px 12px;
+        font-size: 11px
+    }
+
+    .hero h1 {
+        font-size: 34px
+    }
+
+    .practice-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+        gap: 13px
+    }
+
+    .practice-card {
+        height: 228px
+    }
+
+    .guidance {
+        margin: 0 20px 22px
+    }
+
+    .guidance-panel {
+        height: auto;
+        min-height: 122px;
+        padding: 15px 16px 15px 23px;
+        flex-wrap: wrap
+    }
+
+    .leaf-mark {
+        display: none
+    }
+
+    .guidance-icon {
+        margin-right: 12px
+    }
+
+    .guidance-panel>div {
+        width: calc(100% - 60px)
+    }
+
+    .guidance-button {
+        margin: 12px 0 0 auto
+    }
+
+    .decoration-left,
+    .decoration-right {
+        display: none
+    }
+}
