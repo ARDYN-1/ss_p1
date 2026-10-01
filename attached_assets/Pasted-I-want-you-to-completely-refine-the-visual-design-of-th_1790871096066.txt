@@ -1,0 +1,342 @@
+I want you to completely refine the visual design of the current UI.
+
+I have attached reference screenshots showing the current result. The current UI technically has gradients, but it still looks too flat, too colorful, and somewhat visually messy.
+
+I want it to look MUCH MORE PREMIUM, BEAUTIFUL, MODERN and POLISHED.
+
+IMPORTANT:
+Do NOT change any functionality, content, routes, interactions, or existing features.
+This is a visual redesign/refinement only.
+
+==================================================
+1. MAKE THE BACKGROUND BEAUTIFUL, NOT JUST COLORFUL
+==================================================
+
+The current background has too many strong purple/blue/green blocks.
+
+Remove that harsh "three-color section" appearance.
+
+Instead create ONE cohesive full-page animated gradient environment.
+
+Use CSS:
+- radial-gradient()
+- linear-gradient()
+- multiple blurred gradient layers
+- pseudo-elements
+- @keyframes
+
+The background should feel like a soft moving aurora / liquid gradient.
+
+Use a sophisticated palette such as:
+- deep navy
+- indigo
+- violet
+- muted magenta
+- deep teal
+- subtle emerald
+
+Do NOT use extremely bright neon colors.
+
+The colors should blend into each other smoothly.
+
+There should NOT be obvious horizontal or vertical color boundaries.
+
+==================================================
+2. ANIMATED BACKGROUND
+==================================================
+
+The gradient background must slowly move.
+
+Create several huge blurred gradient blobs behind the UI.
+
+For example:
+
+- one violet blob
+- one blue/indigo blob
+- one magenta blob
+- one teal blob
+
+Animate their position very slowly.
+
+Use approximately 20–40 second animation cycles.
+
+The movement should be:
+
+slow
+smooth
+organic
+continuous
+subtle
+
+Think of an animated aurora rather than an animated website background.
+
+The background should look beautiful even when the user is not interacting with anything.
+
+Use:
+
+filter: blur(70px–140px);
+opacity: around 0.3–0.6;
+
+Do NOT make the animation too obvious or distracting.
+
+==================================================
+3. IMPORTANT: CONTENT MUST FLOAT ABOVE THE BACKGROUND
+==================================================
+
+The current cards look like solid colored rectangles.
+
+Fix this.
+
+Cards should look like elegant floating glass surfaces.
+
+Use:
+
+background: rgba(...);
+backdrop-filter: blur(20px–30px);
+-webkit-backdrop-filter: blur(...);
+
+Use very subtle borders:
+
+border: 1px solid rgba(255,255,255,0.10–0.16);
+
+Use soft shadows.
+
+Cards should NOT have completely different backgrounds from each other.
+
+They should share the same visual language.
+
+==================================================
+4. REMOVE THE "COLOR BLOCK" LOOK
+==================================================
+
+This is very important.
+
+Currently some sections look like:
+
+PURPLE SECTION
+──────────────
+GREEN SECTION
+──────────────
+BLUE SECTION
+
+I do NOT want this.
+
+Instead the entire page should feel like ONE continuous visual environment.
+
+The animated gradient should exist behind everything.
+
+Cards should be translucent windows over that background.
+
+==================================================
+5. NAVBAR
+==================================================
+
+Make the navbar premium and minimal.
+
+Use:
+
+- translucent dark glass
+- subtle blur
+- very thin border
+- soft shadow
+- rounded corners where appropriate
+
+Do NOT make the navbar a completely opaque black rectangle.
+
+It should feel integrated with the page.
+
+Improve:
+- logo
+- navigation spacing
+- buttons
+- typography
+- active state
+
+The navbar should look like a premium SaaS/productivity application.
+
+==================================================
+6. HERO SECTION
+==================================================
+
+The hero is currently visually heavy.
+
+Make it cleaner and more elegant.
+
+Keep the existing content and illustration.
+
+Improve:
+- typography hierarchy
+- spacing
+- glass surface
+- subtle gradients
+- visual balance
+
+The large heading should become the main focal point.
+
+Use a subtle gradient treatment on important text if it improves the design, but maintain readability.
+
+The hero should feel calm and premium rather than overly colorful.
+
+==================================================
+7. WEEKLY ACTIVITY
+==================================================
+
+Keep the existing simple 7-day activity indicator.
+
+DO NOT create a graph.
+
+DO NOT create:
+- bar chart
+- line chart
+- axes
+- statistics chart
+- minutes graph
+
+It should simply be:
+
+●   ●       ●   ●       ●
+Mon Tue Wed Thu Fri Sat Sun
+
+Filled dot = at least one activity that day.
+Empty dot = no activity.
+
+Keep this component minimal and elegant.
+
+Make the dots use a subtle gradient/glow.
+
+==================================================
+8. PRACTICE CARDS
+==================================================
+
+The practice cards currently have too much color separation.
+
+Make them more premium.
+
+Use a consistent glass-card design.
+
+Each card can have:
+- subtle gradient glow
+- soft translucent surface
+- elegant icon
+- clean typography
+- subtle hover animation
+
+On hover:
+- card slightly lifts
+- border becomes slightly brighter
+- subtle glow appears
+- transition around 250–350ms
+
+Do NOT make cards neon.
+
+==================================================
+9. TYPOGRAPHY
+==================================================
+
+Improve the typography hierarchy.
+
+Use:
+- elegant large serif/display font for major headings
+- clean modern sans-serif for body text
+- smaller uppercase labels with letter spacing
+
+Avoid excessive font weights.
+
+Text should have strong contrast against the background.
+
+==================================================
+10. COLOR SYSTEM
+==================================================
+
+Create a centralized CSS color system.
+
+For example:
+
+--bg-base
+--glass-bg
+--glass-bg-hover
+--glass-border
+--text-primary
+--text-secondary
+--accent-primary
+--accent-secondary
+--gradient-primary
+--gradient-glow
+
+Use these consistently throughout the application.
+
+Do not randomly assign different colors to different sections.
+
+==================================================
+11. DEPTH AND LIGHTING
+==================================================
+
+Add subtle visual depth.
+
+Use:
+- soft shadows
+- blurred gradient glows
+- glass transparency
+- subtle highlights
+- layered backgrounds
+
+The interface should look like the UI is floating above a beautiful animated atmosphere.
+
+==================================================
+12. ANIMATION
+==================================================
+
+Keep animations smooth and premium.
+
+Use:
+- slow background movement
+- subtle card hover
+- button hover
+- gentle opacity/transform transitions
+
+Avoid:
+- bouncing
+- excessive scaling
+- fast movement
+- flashy effects
+
+Respect:
+
+prefers-reduced-motion
+
+==================================================
+13. FINAL DESIGN TARGET
+==================================================
+
+The final result should feel like:
+
+Premium
+Modern
+Elegant
+Calm
+Immersive
+Minimal
+Polished
+
+Think:
+
+"premium wellness + productivity application"
+
+NOT:
+
+"colorful dashboard"
+NOT:
+"gaming UI"
+NOT:
+"neon website"
+
+The reference image should inspire the beautiful gradient atmosphere, but the final UI should be MORE refined and premium than the current implementation.
+
+MOST IMPORTANT:
+
+Do not simply add more gradients.
+
+Instead:
+CREATE A BEAUTIFUL ANIMATED GRADIENT ATMOSPHERE + TRANSLUCENT GLASS UI ON TOP OF IT.
+
+The background should be visually impressive, while the UI content remains clean, readable, and elegant.
