@@ -1,0 +1,117 @@
+Redesign the entire website UI to look modern, premium, attractive, and visually polished using CSS gradients.
+
+IMPORTANT:
+Keep ALL existing functionality, content, sections, buttons, routes, and logic exactly as they are. This is a VISUAL/UI redesign only.
+
+DESIGN STYLE:
+Create a beautiful modern productivity + journal application aesthetic.
+
+Use a sophisticated gradient-based design throughout the entire UI.
+
+Background:
+- Use layered CSS linear-gradient() and radial-gradient() backgrounds.
+- Use a deep dark green / emerald / teal color palette.
+- Add very subtle blue/teal/green gradient glows in different areas.
+- Avoid a plain solid-color background.
+- Create depth using multiple soft radial gradients.
+- The background should feel elegant and premium, not flashy.
+
+Cards:
+- Use subtle gradient backgrounds instead of flat colors.
+- Use glassmorphism where appropriate.
+- Add rgba-based translucent surfaces.
+- Use backdrop-filter: blur().
+- Add very subtle borders.
+- Add soft shadows.
+- Use large but elegant border-radius.
+- Cards should blend naturally with the page background.
+
+Buttons:
+- Use attractive gradient backgrounds.
+- Add subtle hover transitions.
+- Slightly brighten/lift the gradient on hover.
+- Use smooth 200–300ms transitions.
+- Make primary buttons visually prominent without being overly bright.
+
+Inputs / Textareas:
+- Use dark translucent gradient surfaces.
+- Add subtle borders.
+- Add a beautiful focus state using a gradient/glow.
+- Keep text highly readable.
+
+Navigation:
+- Give the navbar a subtle glass/gradient appearance.
+- Make active navigation items visually distinct using gradient accents.
+- Keep the navigation clean and minimal.
+
+Typography:
+- Use a modern elegant font hierarchy.
+- Strong headings.
+- Softer muted text for descriptions.
+- Maintain excellent contrast and readability.
+- Do not use too many font styles.
+
+Visual effects:
+- Subtle gradient glow behind important sections.
+- Soft hover effects.
+- Smooth transitions.
+- Very subtle shadows.
+- Optional subtle animated gradient movement ONLY if it does not affect performance.
+- Avoid excessive animations, neon effects, or distracting effects.
+
+COLOR DIRECTION:
+Primary:
+Deep forest green
+Emerald
+Teal
+
+Secondary accents:
+Muted blue-green
+Soft cyan
+Subtle green highlights
+
+Keep the colors dark, sophisticated and calming.
+
+IMPORTANT:
+Do NOT make every component extremely colorful.
+The entire website should have ONE cohesive gradient visual language.
+
+Think:
+"premium modern journal/productivity app"
+rather than
+"generic admin dashboard".
+
+RESPONSIVE DESIGN:
+Make sure the redesigned UI looks excellent on:
+- Desktop
+- Laptop
+- Tablet
+- Mobile
+
+Do not introduce horizontal scrolling or broken layouts.
+
+CSS REQUIREMENTS:
+Prefer clean reusable CSS variables for the color palette and gradients, for example:
+
+:root {
+  --bg-primary: ...;
+  --bg-secondary: ...;
+  --gradient-main: ...;
+  --gradient-card: ...;
+  --gradient-accent: ...;
+  --border-subtle: ...;
+}
+
+Use CSS gradients throughout the interface instead of hardcoded flat backgrounds wherever visually appropriate.
+
+FINAL GOAL:
+When I open the website, the entire interface should immediately feel:
+- Modern
+- Premium
+- Attractive
+- Calm
+- Smooth
+- Consistent
+- Visually rich
+
+Do not change the application's functionality. Only improve the visual design and styling.
