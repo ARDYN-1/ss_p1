@@ -47,7 +47,7 @@
         <div class="art-caption"><span class="caption-sparkle" aria-hidden="true">✳</span><span><strong>A moment for yourself</strong><small>Start wherever you are</small></span></div>
       </div>
     </section>
-    <section class="weekly-activity page-width" aria-labelledby="weekly-activity-title">
+    <section class="weekly-activity page-width" id="weekly-activity" aria-labelledby="weekly-activity-title">
       <div class="weekly-activity-panel">
         <div class="weekly-activity-heading">
           <div>
@@ -59,7 +59,7 @@
         </div>
         <p class="weekly-activity-error" id="weekly-activity-error" role="alert" hidden></p>
         <div id="weekly-activity-data" hidden>
-          <div class="weekly-summary" aria-label="Weekly activity summary">
+          <div class="weekly-summary" role="group" aria-label="Weekly activity summary">
             <div class="weekly-metric"><strong id="weekly-minutes">0</strong><span>minutes practiced</span></div>
             <div class="weekly-metric"><strong id="weekly-active-days">0 / 7</strong><span>active days</span></div>
             <div class="weekly-metric"><strong id="weekly-practices">0</strong><span>practice sessions</span></div>
@@ -69,7 +69,7 @@
             <span class="weekly-legend"><i aria-hidden="true"></i> Minutes practiced</span>
           </div>
           <div class="weekly-chart-layout">
-            <div class="weekly-chart-axis" id="weekly-chart-axis" aria-hidden="true"></div>
+            <div class="weekly-chart-axis" aria-hidden="true"><div class="weekly-chart-axis-labels" id="weekly-chart-axis"></div></div>
             <div class="weekly-chart-main">
               <div class="weekly-chart-plot">
                 <div class="weekly-chart-grid" id="weekly-chart-grid" aria-hidden="true"></div>

@@ -402,3 +402,4 @@ document.querySelector('#finder-restart').addEventListener('click', () => {
 });
 
 renderQuestion();
+loadWeeklyActivity();
