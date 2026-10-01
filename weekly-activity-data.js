@@ -1,19 +1,11 @@
 /*
- * Demo activity source. When the Django endpoint is ready, replace getWeek()
- * with a fetch call that returns the same shape:
- * { weekStart: "YYYY-MM-DD", days: [{ date: "YYYY-MM-DD", minutes: 18, practiceCount: 2 }] }
- * Keep this interface stable so the chart renderer does not need to change.
+ * Demo activity source. Replace getActiveDates() with a Django request later.
+ * Its response only needs to be an array of date-only strings (YYYY-MM-DD)
+ * for days with at least one activity in the current local Monday-Sunday week.
+ * Activity type and count are intentionally not part of this interface.
  */
 (() => {
-  const demoDays = [
-    { minutes: 18, practiceCount: 2 },
-    { minutes: 32, practiceCount: 3 },
-    { minutes: 12, practiceCount: 1 },
-    { minutes: 0, practiceCount: 0 },
-    { minutes: 25, practiceCount: 2 },
-    { minutes: 40, practiceCount: 3 },
-    { minutes: 16, practiceCount: 2 },
-  ];
+  const activeWeekdays = [0, 1, 3, 4, 6];
 
   function toIsoDate(date) {
     const year = date.getFullYear();
@@ -30,16 +22,13 @@
 
   window.soulspaceWeeklyActivityProvider = {
     sourceLabel: 'Demo data',
-    async getWeek() {
+    async getActiveDates() {
       const weekStart = getMonday(new Date());
-      return {
-        weekStart: toIsoDate(weekStart),
-        days: demoDays.map((activity, index) => {
-          const date = new Date(weekStart);
-          date.setDate(date.getDate() + index);
-          return { date: toIsoDate(date), ...activity };
-        }),
-      };
+      return activeWeekdays.map((offset) => {
+        const date = new Date(weekStart);
+        date.setDate(date.getDate() + offset);
+        return toIsoDate(date);
+      });
     },
   };
 })();

@@ -1,0 +1,66 @@
+Change the current "Weekly activity" section. Keep the existing overall design, dark theme, typography, spacing, rounded card style, and visual quality, but completely replace the current bar chart / minutes-practiced analytics with a much simpler weekly activity indicator.
+
+I do NOT want:
+- Minutes practiced
+- Practice sessions
+- Bar charts
+- 0–60 minute scale
+- Session counts
+- The current 143 minutes / 6 of 7 active days / 13 sessions analytics
+
+Instead, the purpose of this section is simply to show whether the user did ANY activity on each day of the current week.
+
+Concept:
+
+Weekly Activity
+
+Mon    Tue    Wed    Thu    Fri    Sat    Sun
+ ●      ●             ●      ●             ●
+
+- Filled dot = the user completed at least one activity on that day.
+- Empty/blank = the user did not complete any activity that day.
+- It does NOT matter which activity was completed.
+- Journal is only one of many possible activities. Other activities may include study, exercise, reading, etc.
+- If the user completes multiple activities on the same day, still show only ONE dot for that day.
+- The graph should only represent daily activity presence/absence.
+
+Visual direction:
+
+┌─────────────────────────────────────────────────────┐
+│  YOUR WEEK, YOUR PACE                               │
+│  Weekly activity                                    │
+│  See your activity, day by day.                     │
+│                                                     │
+│     ●        ●              ●        ●        ●     │
+│    Mon      Tue      Wed   Thu      Fri      Sat Sun│
+│                                                     │
+│              5 / 7 active days                     │
+└─────────────────────────────────────────────────────┘
+
+Make the visualization elegant and minimal, similar to a habit/activity tracker rather than an analytics chart.
+
+Requirements:
+1. Keep the existing dark green visual theme.
+2. Make the seven days clearly visible and evenly spaced.
+3. Use a clean, attractive filled dot for active days.
+4. Inactive days should have an empty/subtle circle or simply remain visually inactive.
+5. Highlight today's day slightly so the user can immediately identify today.
+6. Add a small "X / 7 active days" summary if it fits naturally.
+7. Remove unnecessary numerical analytics and bar-chart elements.
+8. The component should look good on both desktop and mobile.
+9. Use demo/mock activity data for now.
+10. Structure the code so that later I can connect it to my Django + DynamoDB backend. The frontend should eventually only need the dates on which the user had at least one activity.
+11. Do not change other sections of the website.
+
+Example behavior:
+
+If activities exist on Monday, Tuesday, Thursday, Friday and Sunday:
+
+Mon    Tue    Wed    Thu    Fri    Sat    Sun
+ ●      ●             ●      ●             ●
+                     ↑
+                  Today (if applicable)
+
+Summary: 5 / 7 active days
+
+Again, this is NOT a minutes/practice chart. It is a simple weekly "Was I active today?" indicator.

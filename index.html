@@ -53,32 +53,18 @@
           <div>
             <p class="eyebrow">YOUR WEEK, YOUR PACE</p>
             <h2 id="weekly-activity-title">Weekly activity</h2>
-            <p class="weekly-activity-subtitle">Small moments add up. See your practice, day by day.</p>
+            <p class="weekly-activity-subtitle">See your activity, day by day.</p>
           </div>
           <span class="activity-source-badge" id="activity-source">DEMO DATA</span>
         </div>
         <p class="weekly-activity-error" id="weekly-activity-error" role="alert" hidden></p>
         <div id="weekly-activity-data" hidden>
-          <div class="weekly-summary" role="group" aria-label="Weekly activity summary">
-            <div class="weekly-metric"><strong id="weekly-minutes">0</strong><span>minutes practiced</span></div>
-            <div class="weekly-metric"><strong id="weekly-active-days">0 / 7</strong><span>active days</span></div>
-            <div class="weekly-metric"><strong id="weekly-practices">0</strong><span>practice sessions</span></div>
+          <div class="weekly-days" id="weekly-days" role="list" aria-label="Daily activity this week"></div>
+          <div class="weekly-active-summary" role="status">
+            <strong id="weekly-active-days">0 / 7</strong>
+            <span>active days</span>
           </div>
-          <div class="weekly-chart-heading">
-            <span class="weekly-date-range" id="weekly-date-range"></span>
-            <span class="weekly-legend"><i aria-hidden="true"></i> Minutes practiced</span>
-          </div>
-          <div class="weekly-chart-layout">
-            <div class="weekly-chart-axis" aria-hidden="true"><div class="weekly-chart-axis-labels" id="weekly-chart-axis"></div></div>
-            <div class="weekly-chart-main">
-              <div class="weekly-chart-plot">
-                <div class="weekly-chart-grid" id="weekly-chart-grid" aria-hidden="true"></div>
-                <div class="weekly-bars" id="weekly-bars" role="list" aria-label="Daily practice activity"></div>
-              </div>
-              <div class="weekly-day-labels" id="weekly-day-labels" aria-hidden="true"></div>
-            </div>
-          </div>
-          <p class="weekly-chart-note" id="weekly-chart-note">Sample data for preview — ready to connect to your activity history.</p>
+          <p class="weekly-activity-note">Sample activity dates for preview — each filled dot represents at least one activity.</p>
         </div>
       </div>
     </section>

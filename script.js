@@ -8,10 +8,8 @@ const nextButton = document.querySelector('#finder-next');
 const backButton = document.querySelector('#finder-back');
 const weeklyActivityData = document.querySelector('#weekly-activity-data');
 const weeklyActivityError = document.querySelector('#weekly-activity-error');
-const weeklyChartAxis = document.querySelector('#weekly-chart-axis');
-const weeklyChartGrid = document.querySelector('#weekly-chart-grid');
-const weeklyBars = document.querySelector('#weekly-bars');
-const weeklyDayLabels = document.querySelector('#weekly-day-labels');
+const weeklyDays = document.querySelector('#weekly-days');
+const weeklyActiveDays = document.querySelector('#weekly-active-days');
 const activityOrder = ['Breathwork', 'Meditation', 'Movement', 'HealingMusic', 'Sleep', 'Gratitude', 'Reflection'];
 let toastTimer;
 let currentQuestion = 0;
@@ -110,76 +108,51 @@ function formatIsoDate(date) {
   ].join('-');
 }
 
-function validateWeeklyActivity(week) {
-  if (!week || !Array.isArray(week.days) || week.days.length !== 7) {
-    throw new TypeError('Weekly activity must contain exactly seven days.');
-  }
-  const weekStart = parseIsoDate(week.weekStart);
-  if (weekStart.getDay() !== 1) throw new TypeError('Weekly activity must start on a Monday.');
+function getMonday(date) {
+  const monday = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  monday.setDate(monday.getDate() - ((monday.getDay() + 6) % 7));
+  return monday;
+}
 
-  const days = week.days.map((entry, index) => {
-    const date = parseIsoDate(entry.date);
-    const expectedDate = new Date(weekStart);
-    expectedDate.setDate(expectedDate.getDate() + index);
-    if (formatIsoDate(date) !== formatIsoDate(expectedDate)) {
-      throw new TypeError('Weekly activity dates must run Monday through Sunday without gaps.');
+function validateActiveDates(activeDates) {
+  if (!Array.isArray(activeDates)) {
+    throw new TypeError('Weekly activity must be a list of active dates.');
+  }
+
+  const today = new Date();
+  const todayIso = formatIsoDate(today);
+  const weekStart = getMonday(today);
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekEnd.getDate() + 6);
+  const firstDate = formatIsoDate(weekStart);
+  const lastDate = formatIsoDate(weekEnd);
+  const activeDateSet = new Set();
+
+  activeDates.forEach((value) => {
+    const date = parseIsoDate(value);
+    const isoDate = formatIsoDate(date);
+    if (isoDate < firstDate || isoDate > lastDate) {
+      throw new RangeError('Weekly activity dates must fall within the current Monday-to-Sunday week.');
     }
-    if (!Number.isFinite(entry.minutes) || entry.minutes < 0) {
-      throw new TypeError('Daily practice minutes must be a non-negative number.');
-    }
-    if (!Number.isInteger(entry.practiceCount) || entry.practiceCount < 0) {
-      throw new TypeError('Daily practice counts must be non-negative whole numbers.');
-    }
-    return { date, minutes: entry.minutes, practiceCount: entry.practiceCount };
+    activeDateSet.add(isoDate);
   });
 
-  return { weekStart, days };
+  const days = Array.from({ length: 7 }, (_, index) => {
+    const date = new Date(weekStart);
+    date.setDate(date.getDate() + index);
+    const isoDate = formatIsoDate(date);
+    return {
+      date,
+      isActive: activeDateSet.has(isoDate),
+      isToday: isoDate === todayIso,
+    };
+  });
+
+  return days;
 }
 
-function appendWeeklyAxisLabels(tickStep) {
-  weeklyChartAxis.replaceChildren();
-  weeklyChartGrid.replaceChildren();
-  for (let index = 0; index <= 4; index += 1) {
-    const value = tickStep * (4 - index);
-    const position = index * 25;
-    const label = document.createElement('span');
-    label.className = 'weekly-axis-label';
-    label.textContent = String(value);
-    label.style.top = `${position}%`;
-    if (index === 0) label.classList.add('is-top');
-    if (index === 4) label.classList.add('is-bottom');
-    weeklyChartAxis.append(label);
-
-    const line = document.createElement('span');
-    line.className = 'weekly-grid-line';
-    line.style.top = `${position}%`;
-    if (index === 0) line.classList.add('is-top');
-    if (index === 4) line.classList.add('is-bottom');
-    weeklyChartGrid.append(line);
-  }
-}
-
-function renderWeeklyActivity(week, sourceLabel) {
-  const totalMinutes = week.days.reduce((total, day) => total + day.minutes, 0);
-  const totalPractices = week.days.reduce((total, day) => total + day.practiceCount, 0);
-  const activeDays = week.days.filter((day) => day.minutes > 0 || day.practiceCount > 0).length;
-  const maxMinutes = Math.max(...week.days.map((day) => day.minutes));
-  const tickStep = Math.max(15, Math.ceil(maxMinutes / 4 / 15) * 15);
-  const chartMaximum = tickStep * 4;
-  const endOfWeek = new Date(week.weekStart);
-  endOfWeek.setDate(endOfWeek.getDate() + 6);
-  const formatRangeDate = new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' });
-
-  document.querySelector('#activity-source').textContent = (sourceLabel || 'Activity data').toUpperCase();
-  document.querySelector('#weekly-minutes').textContent = String(totalMinutes);
-  document.querySelector('#weekly-active-days').textContent = `${activeDays} / 7`;
-  document.querySelector('#weekly-practices').textContent = String(totalPractices);
-  document.querySelector('#weekly-date-range').textContent =
-    `${formatRangeDate.format(week.weekStart)} – ${formatRangeDate.format(endOfWeek)}${week.weekStart.getFullYear() === endOfWeek.getFullYear() ? `, ${endOfWeek.getFullYear()}` : `, ${week.weekStart.getFullYear()} – ${endOfWeek.getFullYear()}`}`;
-  appendWeeklyAxisLabels(tickStep);
-  weeklyBars.replaceChildren();
-  weeklyDayLabels.replaceChildren();
-
+function renderWeeklyActivity(days, sourceLabel) {
+  const activeDayCount = days.filter((day) => day.isActive).length;
   const formatLongDate = new Intl.DateTimeFormat(undefined, {
     weekday: 'long',
     month: 'long',
@@ -187,42 +160,39 @@ function renderWeeklyActivity(week, sourceLabel) {
   });
   const formatWeekday = new Intl.DateTimeFormat(undefined, { weekday: 'short' });
 
-  week.days.forEach((day) => {
-    const percentage = chartMaximum === 0 ? 0 : (day.minutes / chartMaximum) * 100;
-    const practiceWord = day.practiceCount === 1 ? 'practice' : 'practices';
-    const description = `${formatLongDate.format(day.date)}: ${day.minutes} ${day.minutes === 1 ? 'minute' : 'minutes'} practiced, ${day.practiceCount} ${practiceWord}.`;
+  document.querySelector('#activity-source').textContent = (sourceLabel || 'Activity data').toUpperCase();
+  weeklyActiveDays.textContent = `${activeDayCount} / 7`;
+  weeklyDays.replaceChildren();
 
-    const column = document.createElement('div');
-    column.className = 'weekly-bar-column';
-    column.setAttribute('role', 'listitem');
-    column.setAttribute('aria-label', description);
-    column.title = description;
-    if (day.minutes === 0) column.classList.add('no-activity');
+  days.forEach((day) => {
+    const item = document.createElement('div');
+    item.className = 'weekly-day';
+    item.setAttribute('role', 'listitem');
+    item.setAttribute(
+      'aria-label',
+      `${formatLongDate.format(day.date)}: ${day.isActive ? 'Activity completed.' : 'No activity recorded.'}${day.isToday ? ' Today.' : ''}`,
+    );
+    if (day.isActive) item.classList.add('is-active');
+    if (day.isToday) {
+      item.classList.add('is-today');
+      item.setAttribute('aria-current', 'date');
+    }
 
-    const track = document.createElement('div');
-    track.className = 'weekly-bar-track';
-    const fill = document.createElement('span');
-    fill.className = 'weekly-bar-fill';
-    fill.style.height = `${percentage}%`;
-    const minutes = document.createElement('span');
-    minutes.className = 'weekly-bar-value';
-    minutes.textContent = `${day.minutes}m`;
-    minutes.style.bottom = `calc(${percentage}% + 6px)`;
-    track.append(fill, minutes);
-    column.append(track);
-    weeklyBars.append(column);
+    const dot = document.createElement('span');
+    dot.className = 'weekly-day-dot';
+    dot.setAttribute('aria-hidden', 'true');
 
-    const label = document.createElement('div');
-    label.className = 'weekly-day-label';
-    label.setAttribute('role', 'presentation');
     const weekday = document.createElement('span');
     weekday.className = 'weekly-day-name';
     weekday.textContent = formatWeekday.format(day.date);
-    const count = document.createElement('span');
-    count.className = 'weekly-day-count';
-    count.textContent = day.practiceCount > 0 ? `${day.practiceCount} ${day.practiceCount === 1 ? 'session' : 'sessions'}` : 'Rest day';
-    label.append(weekday, count);
-    weeklyDayLabels.append(label);
+
+    const todayLabel = document.createElement('span');
+    todayLabel.className = 'weekly-day-today';
+    todayLabel.textContent = day.isToday ? 'Today' : '';
+    todayLabel.setAttribute('aria-hidden', String(!day.isToday));
+
+    item.append(dot, weekday, todayLabel);
+    weeklyDays.append(item);
   });
 
   weeklyActivityError.hidden = true;
@@ -232,11 +202,11 @@ function renderWeeklyActivity(week, sourceLabel) {
 async function loadWeeklyActivity() {
   try {
     const provider = window.soulspaceWeeklyActivityProvider;
-    if (!provider || typeof provider.getWeek !== 'function') {
+    if (!provider || typeof provider.getActiveDates !== 'function') {
       throw new Error('The weekly activity data provider is not available.');
     }
-    const activity = validateWeeklyActivity(await provider.getWeek());
-    renderWeeklyActivity(activity, provider.sourceLabel);
+    const days = validateActiveDates(await provider.getActiveDates());
+    renderWeeklyActivity(days, provider.sourceLabel);
   } catch (error) {
     console.error('Unable to load weekly activity:', error);
     weeklyActivityData.hidden = true;
