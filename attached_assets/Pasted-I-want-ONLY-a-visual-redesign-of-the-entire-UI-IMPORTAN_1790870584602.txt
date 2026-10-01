@@ -1,0 +1,109 @@
+I want ONLY a visual redesign of the entire UI.
+
+IMPORTANT: DO NOT ADD, CREATE, OR MODIFY ANY GRAPH, CHART, BAR CHART, LINE CHART, OR ACTIVITY GRAPH.
+
+Use the reference image I attached as the visual inspiration for the overall background style.
+
+I want the ENTIRE website to have a beautiful, colorful, animated CSS gradient background similar to the reference image.
+
+### BACKGROUND
+
+Create a full-page animated gradient background using only CSS.
+
+Use multiple layered:
+- radial-gradient()
+- linear-gradient()
+- pseudo-elements
+- CSS @keyframes
+
+Use attractive colors such as:
+- Deep purple
+- Royal blue
+- Magenta / pink
+- Cyan / teal
+- Subtle orange highlights
+
+The gradients should blend smoothly together like the reference image.
+
+MOST IMPORTANT:
+The background must MOVE slowly.
+
+Create large blurred gradient blobs/orbs that slowly move around the page.
+
+The animation should feel like:
+- flowing liquid
+- aurora
+- moving colorful light
+- smooth and relaxing
+
+Use slow animation around 20–30 seconds with ease-in-out and infinite looping.
+
+The movement should be clearly visible but very smooth and subtle. No fast or distracting animation.
+
+Example concept:
+
+Large purple glow
+      ↓ slowly moves
+
+Pink/magenta glow
+      ↓ slowly moves
+
+Blue/cyan glow
+      ↓ slowly moves
+
+All of them blend together continuously.
+
+### UI
+
+Keep the existing website functionality and content exactly the same.
+
+Only redesign the visual appearance.
+
+Make all UI elements look beautiful over the animated background:
+
+- Glassmorphism cards
+- Transparent/translucent surfaces
+- backdrop-filter: blur()
+- Soft borders
+- Soft shadows
+- Rounded corners
+- Gradient buttons
+- Gradient highlights
+- Smooth hover effects
+- Premium typography
+
+The background should remain visible through the UI.
+
+DO NOT use solid black/solid dark backgrounds that hide the gradient.
+
+Use translucent backgrounds such as rgba() so the animated gradient can still be seen behind the components.
+
+### OVERALL LOOK
+
+The final website should feel like a:
+
+Premium modern journal + productivity app
+
+with:
+
+Animated colorful gradient background
++
+Glassmorphism UI
++
+Soft glowing elements
++
+Smooth animations
++
+Clean typography
+
+Use the attached reference image as the MAIN visual inspiration for the gradient background.
+
+IMPORTANT:
+Do NOT add any graph or chart.
+Do NOT redesign the Weekly Activity functionality.
+Do NOT add analytics.
+Do NOT add bars or axes.
+
+This request is ONLY about making the entire UI and background visually attractive with a moving CSS gradient background.
+
+Also make sure the animation works smoothly on desktop and mobile and respects prefers-reduced-motion.
