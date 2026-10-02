@@ -22,7 +22,7 @@ const activities = {
   HealingMusic: { name: 'Healing music', card: 'Healing Music', detail: 'Soothing sounds can make it easier to unwind and find a calmer rhythm.' },
   Sleep: { name: 'Sleep stories', card: 'Sleep Stories', detail: 'A gentle story can help you slow down and prepare for rest.' },
   Gratitude: { name: 'Gratitude', card: 'Gratitude', detail: 'Noticing what is already good can bring a little perspective to your day.' },
-  Reflection: { name: 'Quiet reflection', card: 'Spiritual Reflection', detail: 'A few minutes of reflection can help you reconnect with what matters to you.' },
+  Reflection: { name: 'Quiet Reflection', card: 'Quiet Reflection', detail: 'A few minutes of reflection can help you reconnect with what matters to you.' },
 };
 
 const questions = [

@@ -69,6 +69,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid #8cae8a; outline-offs
 .brand-mark {
   width: 38px;
   height: 38px;
+  object-fit: contain;
   fill: none;
   stroke: #64896d;
   stroke-width: 1.8;
@@ -1629,3 +1630,78 @@ body::after {
     transform: none;
   }
 }
+
+/* Use the supplied meditation artwork in the existing Hero visual area. */
+.hero-art::after { display: none; }
+.hero-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding: 24px 28px;
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (max-width: 620px) {
+  .hero-image { padding: 18px 24px; }
+}
+
+.practice-card[data-practice="Meditation"] .card-art {
+  background-image: url("activities_assets/meditation_background.webp");
+  background-color: var(--tint);
+  background-size: cover;
+  background-position: center;
+}
+.practice-card[data-practice="Meditation"] .practice-icon { object-fit: contain; }
+.practice-card[data-practice="Breathwork"] .card-art {
+  background-image: url("activities_assets/breathwork_background.png");
+  background-color: var(--tint);
+  background-size: cover;
+  background-position: center;
+}
+.practice-card[data-practice="Breathwork"] .practice-icon { object-fit: contain; }
+.practice-card[data-practice="Yoga & movement"] .card-art {
+  background-image: url("activities_assets/yoga_background.png");
+  background-color: var(--tint);
+  background-size: cover;
+  background-position: center;
+}
+.practice-card[data-practice="Yoga & movement"] .practice-icon { object-fit: contain; }
+.practice-card[data-practice="Healing Music"] .card-art {
+  background-image: url("activities_assets/music_background.png");
+  background-color: var(--tint);
+  background-size: cover;
+  background-position: center;
+}
+.practice-card[data-practice="Healing Music"] .practice-icon { object-fit: contain; }
+.practice-card[data-practice="Sleep Stories"] .card-art {
+  background-image: url("activities_assets/story_background.png");
+  background-color: var(--tint);
+  background-size: cover;
+  background-position: center;
+}
+.practice-card[data-practice="Sleep Stories"] .practice-icon { object-fit: contain; }
+.practice-card[data-practice="Gratitude"] .card-art {
+  background-image: url("activities_assets/gratitude_background.png");
+  background-color: var(--tint);
+  background-size: cover;
+  background-position: center;
+}
+.practice-card[data-practice="Gratitude"] .practice-icon { object-fit: contain; }
+.practice-card[data-practice="Daily Journal"] .card-art {
+  background-image: url("activities_assets/journal_background.png");
+  background-color: var(--tint);
+  background-size: cover;
+  background-position: center;
+}
+.practice-card[data-practice="Daily Journal"] .practice-icon { object-fit: contain; }
+.practice-card[data-practice="Quiet Reflection"] .card-art {
+  background-image: url("activities_assets/reflection_background.png");
+  background-color: var(--tint);
+  background-size: cover;
+  background-position: center;
+}
+.practice-card[data-practice="Quiet Reflection"] .practice-icon { object-fit: contain; }
