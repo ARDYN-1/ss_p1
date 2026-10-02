@@ -1650,56 +1650,48 @@ body::after {
 }
 
 .practice-card[data-practice="Meditation"] .card-art {
-  background-image: url("activities_assets/meditation_background.webp");
   background-color: var(--tint);
   background-size: cover;
   background-position: center;
 }
 .practice-card[data-practice="Meditation"] .practice-icon { object-fit: contain; }
 .practice-card[data-practice="Breathwork"] .card-art {
-  background-image: url("activities_assets/breathwork_background.png");
   background-color: var(--tint);
   background-size: cover;
   background-position: center;
 }
 .practice-card[data-practice="Breathwork"] .practice-icon { object-fit: contain; }
 .practice-card[data-practice="Yoga & movement"] .card-art {
-  background-image: url("activities_assets/yoga_background.png");
   background-color: var(--tint);
   background-size: cover;
   background-position: center;
 }
 .practice-card[data-practice="Yoga & movement"] .practice-icon { object-fit: contain; }
 .practice-card[data-practice="Healing Music"] .card-art {
-  background-image: url("activities_assets/music_background.png");
   background-color: var(--tint);
   background-size: cover;
   background-position: center;
 }
 .practice-card[data-practice="Healing Music"] .practice-icon { object-fit: contain; }
 .practice-card[data-practice="Sleep Stories"] .card-art {
-  background-image: url("activities_assets/story_background.png");
   background-color: var(--tint);
   background-size: cover;
   background-position: center;
 }
 .practice-card[data-practice="Sleep Stories"] .practice-icon { object-fit: contain; }
 .practice-card[data-practice="Gratitude"] .card-art {
-  background-image: url("activities_assets/gratitude_background.png");
   background-color: var(--tint);
   background-size: cover;
   background-position: center;
 }
 .practice-card[data-practice="Gratitude"] .practice-icon { object-fit: contain; }
 .practice-card[data-practice="Daily Journal"] .card-art {
-  background-image: url("activities_assets/journal_background.png");
   background-color: var(--tint);
   background-size: cover;
   background-position: center;
 }
 .practice-card[data-practice="Daily Journal"] .practice-icon { object-fit: contain; }
 .practice-card[data-practice="Quiet Reflection"] .card-art {
-  background-image: url("activities_assets/reflection_background.png");
   background-color: var(--tint);
   background-size: cover;
   background-position: center;

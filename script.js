@@ -15,6 +15,30 @@ let toastTimer;
 let currentQuestion = 0;
 let answers = [];
 
+const cardVisuals = document.querySelectorAll('.card-art[data-background-image]');
+const loadCardVisual = (visual) => {
+  visual.style.backgroundImage = `url("${visual.dataset.backgroundImage}")`;
+  const icon = visual.querySelector('img[data-lazy-src]');
+  if (icon) {
+    icon.src = icon.dataset.lazySrc;
+    icon.removeAttribute('data-lazy-src');
+  }
+};
+
+if ('IntersectionObserver' in window) {
+  const cardVisualObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      loadCardVisual(entry.target);
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '300px 0px' });
+
+  cardVisuals.forEach((visual) => cardVisualObserver.observe(visual));
+} else {
+  cardVisuals.forEach(loadCardVisual);
+}
+
 const activities = {
   Meditation: { name: 'Meditation', card: 'Meditation', detail: 'A quiet pause can give your mind room to settle and refocus.' },
   Breathwork: { name: 'Breathwork', card: 'Breathwork', detail: 'Simple, steady breathing can help you feel more grounded in the moment.' },
