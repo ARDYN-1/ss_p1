@@ -1,0 +1,357 @@
+# SOULSPACE — DAILY JOURNAL FULL IMPLEMENTATION
+
+I want you to implement the complete Daily Journal feature for my existing SOULSPACE website.
+
+IMPORTANT:
+Before changing anything, inspect the existing project structure and understand how the current homepage and activity cards are implemented.
+
+DO NOT redesign the existing website.
+
+The current UI is already finalized and I like it.
+The existing homepage must remain visually unchanged except for connecting the Daily Journal card to the new journal page.
+
+---
+
+# 1. EXISTING HOMEPAGE — DAILY JOURNAL CARD
+
+There is already a Daily Journal activity card on the existing SOULSPACE homepage.
+
+The card has:
+
+- Daily Journal title
+- journal background image
+- journal icon
+- duration
+- description
+- `Explore practice` button
+
+The existing Daily Journal card should NOT be redesigned or recreated.
+
+Find the EXISTING Daily Journal activity card in the current code.
+
+Find its existing:
+
+`Explore practice`
+
+button.
+
+When the user clicks that specific button, it must open:
+
+`journal.html`
+
+Use a normal navigation such as:
+
+`href="journal.html"`
+
+or the equivalent JavaScript navigation depending on the existing project structure.
+
+IMPORTANT:
+
+Do NOT connect the `Explore practice` buttons of other activities to journal.html.
+
+Only:
+
+`Daily Journal → Explore practice → journal.html`
+
+must open the journal page.
+
+Do NOT change:
+
+- Daily Journal card size
+- card layout
+- card image
+- card icon
+- typography
+- spacing
+- button design
+- hover effect
+- activity grid
+- any other activity
+
+Only connect the existing Daily Journal button to the new page.
+
+---
+
+# 2. CREATE JOURNAL PAGE
+
+Create a new page:
+
+`journal.html`
+
+Also create the required frontend files:
+
+`journal.css`
+
+`journal.js`
+
+Use the existing project structure if it already has a suitable place for these files.
+
+Do NOT unnecessarily restructure the entire project.
+
+---
+
+# 3. JOURNAL PAGE DESIGN
+
+The journal page should feel like a natural part of SOULSPACE.
+
+Use the same visual language as the existing website:
+
+- dark calming background
+- purple/indigo/magenta atmosphere
+- subtle gradient
+- glassmorphism
+- rounded cards
+- soft borders
+- subtle shadows
+- clean typography
+- calm wellness/productivity aesthetic
+
+However, this should be a dedicated journal-writing page.
+
+Do NOT copy the homepage layout exactly.
+
+The page should be clean and focused on writing.
+
+Do NOT make the page unnecessarily large or oversized.
+
+---
+
+# 4. JOURNAL NAVBAR
+
+Create a compact navbar consistent with SOULSPACE.
+
+Include:
+
+- SOULSPACE logo/branding
+- Home/Back option
+
+The Back/Home option should take the user back to the existing homepage.
+
+For example:
+
+`index.html`
+
+Use the actual homepage filename/path discovered from the existing project.
+
+Do NOT assume the homepage filename if it is different.
+Inspect the project first.
+
+---
+
+# 5. JOURNAL HEADER
+
+Create a calm header section.
+
+Small label:
+
+`DAILY JOURNAL`
+
+Main heading:
+
+`How are you feeling today?`
+
+Supporting text:
+
+`Take a moment to slow down, write freely, and check in with yourself.`
+
+Keep the typography elegant but compact.
+
+Do not use huge text.
+
+---
+
+# 6. JOURNAL WRITING AREA
+
+Create a large glassmorphism card for writing.
+
+Inside the card:
+
+### Current Date
+
+Display the current date dynamically.
+
+Example:
+
+`October 3, 2026`
+
+Do NOT hardcode the date.
+
+Generate it using JavaScript.
+
+Use a readable format such as:
+
+`MMMM D, YYYY`
+
+---
+
+### Textarea
+
+Create a large journal textarea.
+
+Placeholder:
+
+`Write whatever is on your mind...`
+
+The textarea should:
+
+- support long journal entries
+- be comfortable on desktop
+- be comfortable on mobile
+- have good padding
+- have no unnecessary visual clutter
+- fit the existing SOULSPACE design
+
+Plain text is enough.
+
+Do NOT create a complicated rich text editor.
+
+---
+
+# 7. SAVE JOURNAL
+
+Add a primary button:
+
+`Save Journal`
+
+When clicked:
+
+1. Check that the journal content is not empty.
+2. If empty, show a small friendly validation message.
+3. Show a saving state while the request is running.
+4. Send the journal to the FastAPI backend.
+5. If successful, show:
+
+`Your journal has been saved.`
+
+6. Clear/reset the editor if appropriate.
+7. Refresh the Previous Journals section so the newly saved journal appears immediately.
+
+Do not reload the entire website unnecessarily.
+
+---
+
+# 8. PREVIOUS JOURNALS
+
+Below the editor create:
+
+### Heading
+
+`Previous Journals`
+
+Supporting text:
+
+`Revisit your thoughts, one day at a time.`
+
+Display saved journals in a clean date-based list.
+
+Newest journals should appear first.
+
+Example:
+
+----------------------------
+
+October 3, 2026
+
+A peaceful day. I spent some time...
+
+`Read journal →`
+
+----------------------------
+
+October 2, 2026
+
+Today was a little challenging...
+
+`Read journal →`
+
+----------------------------
+
+Only show a short preview in the list.
+
+Do not display the complete journal content in the list.
+
+---
+
+# 9. OPEN COMPLETE JOURNAL
+
+When the user clicks a previous journal entry or:
+
+`Read journal →`
+
+open the complete journal.
+
+Use whichever implementation fits the existing SOULSPACE design best:
+
+- modal/detail panel
+OR
+- dedicated journal detail view
+
+Keep it simple.
+
+The full journal view must show:
+
+- Date
+- Complete journal content
+- Close/back option
+
+The complete journal content must remain readable on mobile.
+
+---
+
+# 10. FASTAPI BACKEND
+
+Use:
+
+**FastAPI**
+
+Do NOT use Django for this feature.
+
+The architecture should be:
+
+Frontend
+↓
+JavaScript fetch()
+↓
+FastAPI
+↓
+boto3
+↓
+DynamoDB
+
+Keep the backend simple.
+
+---
+
+# 11. BACKEND FILE STRUCTURE
+
+Create a simple backend structure such as:
+
+`backend/main.py`
+
+`backend/requirements.txt`
+
+Use the existing project structure if appropriate.
+
+Do NOT unnecessarily restructure the entire project.
+
+---
+
+# 12. FASTAPI ENDPOINTS
+
+Create these endpoints:
+
+### POST
+
+`/api/journals/`
+
+Purpose:
+
+Save a new journal.
+
+Request example:
+
+```json
+{
+  "date": "2026-10-03",
+  "content": "Today I felt..."
+}
