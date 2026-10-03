@@ -1,0 +1,12 @@
+[project]
+name = "repl-nix-workspace"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "boto3>=1.43.108",
+    "clerk-backend-api>=7.0.0",
+    "fastapi>=0.142.2",
+    "httpx>=0.28.1",
+    "uvicorn>=0.54.0",
+]

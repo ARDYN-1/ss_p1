@@ -11,6 +11,9 @@
   const dialogTitle = document.querySelector("#entry-dialog-title");
   const dialogBody = document.querySelector("#entry-dialog-body");
   const closeEntry = document.querySelector("#close-entry");
+  const pageContent = document.querySelector("#journal-main");
+  const authStatus = document.querySelector("#journal-auth-status");
+  const signOutButton = document.querySelector("#journal-sign-out");
   const localDate = (date = new Date()) => {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -108,7 +111,11 @@
     setListBusy(true);
     listNode.innerHTML = '<div class="journal-skeleton" aria-hidden="true"><span></span><span></span></div><div class="journal-skeleton" aria-hidden="true"><span></span><span></span></div><span class="journal-sr-only">Loading previous journals</span>';
     try {
-      const response = await fetch("/api/journals/", { headers: { Accept: "application/json" } });
+      const response = await fetch("/api/journals/", { credentials: "same-origin", headers: { Accept: "application/json" } });
+      if (response.status === 401) {
+        window.location.replace("index.html");
+        return;
+      }
       if (!response.ok) throw new Error(`Journal list request failed (${response.status})`);
       const result = await response.json();
       if (!result || !Array.isArray(result.journals)) throw new Error("Journal list response was not valid");
@@ -145,7 +152,11 @@
     dialogBody.textContent = "Loading this page...";
     if (!dialog.open) dialog.showModal();
     try {
-      const response = await fetch(`/api/journals/${encodeURIComponent(date)}`, { headers: { Accept: "application/json" } });
+      const response = await fetch(`/api/journals/${encodeURIComponent(date)}`, { credentials: "same-origin", headers: { Accept: "application/json" } });
+      if (response.status === 401) {
+        window.location.replace("index.html");
+        return;
+      }
       if (!response.ok) throw new Error(`Journal entry request failed (${response.status})`);
       const entry = await response.json();
       if (!entry || typeof entry.content !== "string") throw new Error("Journal entry response was not valid");
@@ -174,9 +185,14 @@
     try {
       const response = await fetch("/api/journals/", {
         method: "POST",
+        credentials: "same-origin",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ date: today, content }),
       });
+      if (response.status === 401) {
+        window.location.replace("index.html");
+        return;
+      }
       if (!response.ok) throw new Error(`Journal save request failed (${response.status})`);
       await response.json();
       textarea.value = "";
@@ -199,5 +215,34 @@
   dialog.addEventListener("click", (event) => {
     if (event.target === dialog) dialog.close();
   });
-  loadJournals();
+  async function startPrivateJournal() {
+    try {
+      const clerk = await window.soulspaceClerkReady;
+      if (!clerk.isSignedIn) {
+        window.location.replace("sign-in.html");
+        return;
+      }
+      authStatus.hidden = true;
+      pageContent.hidden = false;
+      signOutButton.hidden = false;
+      signOutButton.addEventListener("click", async () => {
+        signOutButton.disabled = true;
+        try {
+          await clerk.signOut({ redirectUrl: "index.html" });
+        } catch {
+          signOutButton.disabled = false;
+          authStatus.textContent = "Sign out could not be completed. Please try again.";
+          authStatus.classList.add("is-error");
+          authStatus.hidden = false;
+        }
+      });
+      await loadJournals();
+    } catch {
+      authStatus.textContent = "Your secure journal could not be opened. Please refresh and try again.";
+      authStatus.classList.add("is-error");
+      authStatus.hidden = false;
+    }
+  }
+
+  startPrivateJournal();
 })();

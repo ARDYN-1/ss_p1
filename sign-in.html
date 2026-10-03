@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#171529" />
+  <title>Sign in — SoulSpace</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23171529'/%3E%3Cpath d='M20 32V19M20 21C9 21 6 14 8 7c8 0 13 4 13 12m-1 6c11 0 14-7 12-14-8 0-13 4-13 12M13 32h14' fill='none' stroke='%23c5a6e8' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="journal.css" />
+  <script src="auth.js" defer></script>
+</head>
+<body class="journal-page journal-auth-page" data-auth-mode="sign-in">
+  <div class="journal-atmosphere" aria-hidden="true"></div>
+  <header class="journal-header journal-auth-header">
+    <a class="journal-brand" href="index.html" aria-label="SoulSpace home">
+      <img src="assets/logo.webp" alt="" width="44" height="44" />
+      <span>SOULSPACE<small>YOUR DAILY MOMENT</small></span>
+    </a>
+    <a class="journal-home-link" href="index.html">Home</a>
+  </header>
+  <main class="journal-main journal-auth-main">
+    <section class="journal-auth-card journal-glass" aria-labelledby="auth-heading">
+      <p class="journal-eyebrow"><span class="journal-eyebrow-dot" aria-hidden="true"></span>YOUR PRIVATE JOURNAL</p>
+      <h1 id="auth-heading">Welcome back.</h1>
+      <p class="journal-auth-description">Sign in to write and revisit your private journal pages.</p>
+      <p class="journal-auth-message" id="auth-message" role="alert" hidden></p>
+      <div id="clerk-widget" aria-label="Sign-in form"></div>
+      <p class="journal-auth-footer">Your journal entries are private to your account.</p>
+    </section>
+  </main>
+</body>
+</html>
