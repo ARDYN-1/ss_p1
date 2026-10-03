@@ -10,9 +10,3 @@ dependencies = [
     "httpx>=0.28.1",
     "uvicorn[standard]>=0.54.0",
 ]
-
-[tool.vercel]
-entrypoint = "backend.main:app"
-
-[tool.vercel.fastapi.static]
-cdn = false

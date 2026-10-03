@@ -18,6 +18,7 @@
   ]);
   const profileMenu = document.querySelector("#profile-menu");
   const profileToggle = document.querySelector("#profile-toggle");
+  const profileToggleLabel = document.querySelector("#profile-toggle-label");
   const profilePanel = document.querySelector("#profile-panel");
   const profileName = document.querySelector("#profile-name");
   const profileEmail = document.querySelector("#profile-email");
@@ -240,15 +241,17 @@
     if (!profileMenu || !clerk) return;
     const user = clerk.user;
     const isSignedIn = Boolean(clerk.isSignedIn && user);
-    profileMenu.hidden = !isSignedIn;
+    profileMenu.hidden = false;
     if (!isSignedIn) {
+      if (profileToggleLabel) profileToggleLabel.textContent = "Sign in";
       closeProfile();
       return;
     }
+    if (profileToggleLabel) profileToggleLabel.textContent = "Profile";
 
     const fullName = user.fullName
       || [user.firstName, user.lastName].filter(Boolean).join(" ")
-      || "SoulSpace member";
+      || "Not provided";
     const primaryEmail = user.primaryEmailAddress?.emailAddress
       || user.emailAddresses?.[0]?.emailAddress
       || "No email available";
@@ -258,7 +261,17 @@
   }
 
   if (profileToggle && profilePanel) {
-    profileToggle.addEventListener("click", () => {
+    profileToggle.addEventListener("click", async () => {
+      let clerk;
+      try {
+        clerk = await window.soulspaceClerkReady;
+      } catch {
+        return;
+      }
+      if (!clerk.isSignedIn) {
+        await window.soulspaceRequireAuth("/");
+        return;
+      }
       const willOpen = profilePanel.hidden;
       profilePanel.hidden = !willOpen;
       profileToggle.setAttribute("aria-expanded", String(willOpen));

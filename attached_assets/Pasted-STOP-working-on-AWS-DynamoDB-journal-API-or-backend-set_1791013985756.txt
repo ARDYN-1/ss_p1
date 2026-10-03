@@ -1,0 +1,541 @@
+STOP working on AWS, DynamoDB, journal API, or backend setup for now.
+
+For this task, I ONLY want you to implement the FRONTEND AUTHENTICATION FLOW using the EXISTING CLERK setup and add the PROFILE section on the homepage.
+
+Do not work on database or journal backend.
+Do not change the existing UI design.
+
+==================================================
+1. THE EXACT AUTHENTICATION BEHAVIOR I WANT
+==================================================
+
+The homepage must remain PUBLIC.
+
+When a user visits the homepage for the first time, NO login should automatically appear.
+
+The user can freely view the homepage.
+
+Authentication should appear ONLY when a logged-out user tries to use an activity.
+
+Examples of activities:
+
+- Find My Practice
+- Daily Journal
+- Meditation
+- Breathwork
+- Yoga & Movement
+- Healing Music
+- Sleep Stories
+- Gratitude
+- Quiet Reflection
+- Any other activity/practice button on the homepage
+
+==================================================
+2. FIRST ACTIVITY CLICK
+==================================================
+
+Example:
+
+User opens SOULSPACE homepage.
+
+User is NOT logged in.
+
+User clicks:
+
+"Find My Practice"
+
+Then:
+
+Homepage
+↓
+Find My Practice clicked
+↓
+User is logged out
+↓
+OPEN CLERK SIGN IN / SIGN UP
+↓
+User completes authentication
+↓
+Open Find My Practice
+
+The same behavior must work for Daily Journal and every other activity.
+
+==================================================
+3. AUTHENTICATION MUST HAPPEN ONLY ONCE
+==================================================
+
+This is the most important requirement.
+
+Once the user successfully signs in/signs up through Clerk, the Clerk session remains active.
+
+After that, DO NOT show authentication again for every activity.
+
+Example:
+
+User is logged out.
+
+Clicks Find My Practice
+→ Clerk authentication appears
+
+User logs in successfully.
+
+Find My Practice opens.
+
+Then user goes back to homepage.
+
+Clicks Daily Journal
+→ OPEN DAILY JOURNAL DIRECTLY
+→ DO NOT show Clerk authentication again.
+
+Then:
+
+Clicks Meditation
+→ OPEN DIRECTLY
+
+Clicks Breathwork
+→ OPEN DIRECTLY
+
+Clicks Yoga
+→ OPEN DIRECTLY
+
+Clicks any other activity
+→ OPEN DIRECTLY
+
+As long as the Clerk session is active, there must be NO repeated login.
+
+==================================================
+4. IF USER LOGS OUT
+==================================================
+
+If the user clicks Logout from the Profile section:
+
+Clerk session must end.
+
+After logout:
+
+Homepage remains public.
+
+But if the user clicks any activity again:
+
+→ Clerk authentication must appear again.
+
+Example:
+
+Login
+↓
+Use activities normally
+↓
+Logout
+↓
+Click Find My Practice
+↓
+Clerk authentication appears again
+
+==================================================
+5. PRESERVE THE USER'S ORIGINAL ACTIVITY
+==================================================
+
+If the user is logged out and clicks an activity, remember that activity.
+
+Example:
+
+User clicks Daily Journal
+↓
+Authentication
+↓
+Successful login
+↓
+Open Daily Journal
+
+User clicks Find My Practice
+↓
+Authentication
+↓
+Successful login
+↓
+Open Find My Practice
+
+Do NOT always redirect the user to the homepage after login.
+
+Return the user to the activity they originally clicked.
+
+==================================================
+6. USE EXISTING CLERK ONLY
+==================================================
+
+The project already uses Clerk.
+
+DO NOT:
+
+- create Firebase Auth
+- create custom JWT authentication
+- create another login system
+- create custom password storage
+- create a second Clerk initialization
+- replace the existing Clerk setup
+
+Inspect the current Clerk implementation and reuse it.
+
+The Clerk session should be the single source of truth for:
+
+- logged-in state
+- user ID
+- email
+- name
+
+==================================================
+7. ADD PROFILE ICON TO HOMEPAGE
+==================================================
+
+Add a small Profile icon/button at the TOP RIGHT of the existing homepage navbar.
+
+IMPORTANT:
+
+DO NOT redesign the navbar.
+
+DO NOT increase navbar height.
+
+DO NOT change the existing logo.
+
+DO NOT change existing navigation.
+
+DO NOT change typography or spacing unnecessarily.
+
+Just add a small profile icon on the right side.
+
+==================================================
+8. PROFILE PANEL
+==================================================
+
+When the user clicks the Profile icon:
+
+Open a small panel/dropdown/section near the top-right of the screen.
+
+The panel should show the CURRENT CLERK USER information.
+
+Display:
+
+User ID
+[actual Clerk user ID]
+
+Email
+[actual Clerk email]
+
+Name
+[actual Clerk name, if available]
+
+And:
+
+[ Logout ]
+
+Do NOT use fake/demo data.
+
+Do NOT ask the user to enter these details.
+
+Get them directly from Clerk.
+
+==================================================
+9. PROFILE WHEN LOGGED OUT
+==================================================
+
+When the user is logged out, do not show fake profile information.
+
+The profile area can either:
+
+- show a small Sign In option
+
+OR
+
+- show the profile icon but clicking it opens Clerk authentication.
+
+Use whichever fits the existing design better.
+
+But DO NOT automatically open authentication just because the homepage loaded.
+
+Authentication should only appear when the user attempts to use an activity, or intentionally chooses Sign In/Profile.
+
+==================================================
+10. LOGOUT
+==================================================
+
+Use Clerk's existing sign-out functionality.
+
+Do not create custom logout logic.
+
+After logout:
+
+- Clerk session ends
+- profile panel closes
+- user becomes logged out
+- homepage remains public
+- activities require authentication again
+
+==================================================
+11. DAILY JOURNAL
+==================================================
+
+For this task, ONLY fix the authentication/navigation behavior.
+
+Do NOT work on:
+
+- DynamoDB
+- AWS
+- FastAPI journal storage
+- journal database
+- journal API
+- user-specific journal backend
+
+Daily Journal should simply follow this frontend flow:
+
+Logged out:
+Daily Journal clicked
+→ Clerk authentication
+→ after login → journal.html
+
+Logged in:
+Daily Journal clicked
+→ journal.html directly
+
+Do not try to solve the journal backend now.
+
+==================================================
+12. OTHER ACTIVITIES
+==================================================
+
+Inspect the existing homepage and existing activity buttons.
+
+Do NOT invent new pages.
+
+Use the existing destination/behavior of each activity.
+
+If an activity already has a page/route:
+protect it with the authentication guard.
+
+If an activity does not yet have a separate page:
+DO NOT create a complicated new page just for this task.
+
+The important thing is that the authentication guard is ready and works consistently.
+
+==================================================
+13. CENTRALIZED AUTH GUARD
+==================================================
+
+Implement one reusable frontend authentication guard.
+
+Conceptually:
+
+requireAuth(destination)
+
+If Clerk says the user is authenticated:
+
+    open destination
+
+If Clerk says the user is NOT authenticated:
+
+    remember destination
+    open Clerk Sign In / Sign Up
+
+After successful authentication:
+
+    open the remembered destination
+
+Do not duplicate completely different authentication logic inside every activity.
+
+==================================================
+14. DO NOT USE LOCALSTORAGE AS AUTH
+==================================================
+
+Do NOT create fake authentication using:
+
+localStorage
+sessionStorage
+cookies created manually
+custom user flags
+
+Clerk must control authentication state.
+
+You may use a temporary redirect/return mechanism if needed, but the actual logged-in state must come from Clerk.
+
+==================================================
+15. NO BACKEND WORK
+==================================================
+
+For this task, ignore:
+
+AWS
+DynamoDB
+FastAPI journal storage
+database
+journal API
+production database configuration
+
+I will configure those later.
+
+Your job RIGHT NOW is only:
+
+1. Clerk authentication flow
+2. Activity protection
+3. First-click authentication
+4. Persistent Clerk session
+5. Original activity redirect after login
+6. Profile icon
+7. Profile panel
+8. Logout
+
+==================================================
+16. DO NOT CHANGE THE EXISTING DESIGN
+==================================================
+
+The current SOULSPACE homepage design is already correct.
+
+Do NOT change:
+
+- hero
+- hero size
+- navbar dimensions
+- activity cards
+- card sizes
+- activity grid
+- colors
+- typography
+- animations
+- background
+- weekly activity indicator
+- buttons
+- spacing
+
+Only add the required authentication/profile functionality.
+
+==================================================
+17. TEST THESE EXACT SCENARIOS
+==================================================
+
+TEST 1:
+
+Open homepage while logged out.
+
+Expected:
+Homepage opens normally.
+NO authentication popup automatically.
+
+TEST 2:
+
+Logged out → click Find My Practice.
+
+Expected:
+Clerk authentication opens.
+
+TEST 3:
+
+Complete login.
+
+Expected:
+Find My Practice opens.
+
+TEST 4:
+
+Return to homepage.
+
+Click Daily Journal.
+
+Expected:
+journal.html opens DIRECTLY.
+NO authentication again.
+
+TEST 5:
+
+Click Meditation.
+
+Expected:
+opens directly.
+NO authentication.
+
+TEST 6:
+
+Click Breathwork.
+
+Expected:
+opens directly.
+NO authentication.
+
+TEST 7:
+
+Click Profile.
+
+Expected:
+small profile panel opens.
+
+It shows:
+
+- actual Clerk User ID
+- actual Clerk Email
+- actual Clerk Name if available
+- Logout
+
+TEST 8:
+
+Click Logout.
+
+Expected:
+Clerk session ends.
+
+TEST 9:
+
+After logout, click Find My Practice.
+
+Expected:
+Clerk authentication appears again.
+
+TEST 10:
+
+Refresh homepage while logged in.
+
+Expected:
+user remains logged in through Clerk.
+Activities still open directly.
+
+==================================================
+FINAL REQUIREMENT
+==================================================
+
+Do NOT continue with AWS/DynamoDB/backend work.
+
+Do NOT redesign anything.
+
+Do NOT create a new authentication system.
+
+Use the EXISTING Clerk setup.
+
+The exact desired user experience is:
+
+FIRST TIME / LOGGED OUT:
+
+Homepage
+→ click ANY activity
+→ Clerk Auth
+→ Login/Sign Up
+→ requested activity opens
+
+AFTER LOGIN:
+
+Homepage
+→ click ANY activity
+→ opens directly
+→ NO AUTH AGAIN
+
+PROFILE:
+
+Top-right Profile icon
+→ Profile panel
+→ User ID
+→ Email
+→ Name
+→ Logout
+
+LOGOUT:
+
+Logout
+→ Clerk session ends
+→ activities require authentication again
+
+Implement ONLY this now and test these flows before finishing.
