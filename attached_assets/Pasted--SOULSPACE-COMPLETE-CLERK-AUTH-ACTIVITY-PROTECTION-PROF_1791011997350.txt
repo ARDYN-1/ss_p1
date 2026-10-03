@@ -1,0 +1,758 @@
+# SOULSPACE — COMPLETE CLERK AUTH + ACTIVITY PROTECTION + PROFILE + USER-SPECIFIC JOURNAL SYSTEM
+
+You are working on my existing SOULSPACE project.
+
+IMPORTANT:
+Before changing anything, inspect the existing project structure, current authentication implementation, frontend pages, JavaScript files, FastAPI backend, and journal implementation.
+
+DO NOT rebuild the project from scratch.
+DO NOT create duplicate authentication.
+DO NOT redesign the existing UI.
+DO NOT change existing dimensions, spacing, typography, navbar size, hero size, card size, animations, colors, or layout unless absolutely required for the requested functionality.
+
+The current UI/design is already correct. Only make the minimum code changes required for functionality.
+
+--------------------------------------------------
+1. EXISTING AUTHENTICATION — USE CLERK
+--------------------------------------------------
+
+The project already uses CLERK for authentication.
+
+This is extremely important:
+
+- Do NOT replace Clerk.
+- Do NOT create custom authentication.
+- Do NOT create custom JWT authentication.
+- Do NOT use Firebase Auth.
+- Do NOT create another login system.
+- Do NOT store passwords yourself.
+- Reuse the existing Clerk setup, Clerk Sign In, Clerk Sign Up, Clerk session, and Clerk logout functionality.
+
+Clerk must remain the single source of truth for:
+
+- authentication status
+- user ID
+- name
+- email
+- session
+
+First inspect how Clerk is currently integrated and continue using the existing implementation.
+
+--------------------------------------------------
+2. HOMEPAGE MUST REMAIN PUBLIC
+--------------------------------------------------
+
+The SOULSPACE homepage should remain publicly accessible.
+
+A logged-out user can:
+
+- open homepage
+- view hero section
+- view weekly activity indicator
+- view all activity cards
+- browse the UI
+
+No login should be forced just to view the homepage.
+
+--------------------------------------------------
+3. PROTECT ALL ACTIVITIES
+--------------------------------------------------
+
+If a user is NOT logged in and clicks ANY activity/practice, they must be sent to Clerk Sign In / Sign Up first.
+
+This applies to ALL activities, not only Daily Journal.
+
+Activities include:
+
+- Daily Journal
+- Meditation
+- Breathwork
+- Yoga & Movement
+- Healing Music
+- Sleep Stories
+- Gratitude
+- Quiet Reflection
+- Find My Practice
+- and any other activity/practice currently available in the project
+
+Do not remove or disable the existing activity cards.
+
+Instead, intercept their navigation/action when the user is logged out.
+
+--------------------------------------------------
+4. LOGIN SHOULD ONLY BE REQUIRED ONCE
+--------------------------------------------------
+
+After the user successfully logs in through Clerk:
+
+- keep the Clerk session active
+- allow access to all protected activities
+- do NOT ask the user to log in again for every activity
+- do NOT redirect them back to login unnecessarily
+
+Example:
+
+User is logged out
+→ clicks Daily Journal
+→ Clerk Sign In
+→ successfully logs in
+→ automatically opens journal.html
+
+Then:
+
+User clicks Meditation
+→ Meditation page opens directly
+
+User clicks Breathwork
+→ Breathwork page opens directly
+
+No second login should be required.
+
+--------------------------------------------------
+5. PRESERVE THE ORIGINAL DESTINATION
+--------------------------------------------------
+
+This is very important.
+
+If a logged-out user clicks an activity, remember which activity they originally wanted.
+
+Examples:
+
+Case 1:
+
+User clicks:
+Daily Journal
+
+→ not logged in
+→ Clerk Sign In / Sign Up
+→ after successful authentication
+→ automatically redirect to:
+
+journal.html
+
+Case 2:
+
+User clicks:
+Meditation
+
+→ not logged in
+→ Clerk Sign In / Sign Up
+→ after authentication
+→ automatically redirect to the Meditation page.
+
+Case 3:
+
+User clicks:
+Breathwork
+
+→ login
+→ return to Breathwork page.
+
+Use a clean return/redirect mechanism.
+
+Do not always redirect every user to the homepage after login.
+
+Only redirect to homepage if there is no stored destination.
+
+--------------------------------------------------
+6. CLERK USER INFORMATION
+--------------------------------------------------
+
+Use the currently authenticated Clerk user.
+
+Do NOT ask users to manually enter:
+
+- user ID
+- name
+- email
+
+Retrieve these directly from Clerk.
+
+The application should be able to access:
+
+- Clerk User ID
+- Name
+- Email
+
+Use the actual Clerk User ID as the unique ownership identifier for user data.
+
+Example concept:
+
+clerk_user_id = user.id
+
+Never trust a user ID sent manually from the frontend.
+
+--------------------------------------------------
+7. ADD PROFILE OPTION TO NAVBAR
+--------------------------------------------------
+
+Add a small "Profile" option to the EXISTING navbar.
+
+IMPORTANT:
+
+Do NOT redesign the navbar.
+
+Do NOT make the navbar bigger.
+
+Do NOT change the existing logo.
+
+Do NOT change:
+
+- navbar height
+- existing spacing
+- typography
+- logo size
+- navigation positioning
+
+Just add the minimum UI required for a compact Profile option.
+
+The Profile option should be visible appropriately when the user is authenticated.
+
+--------------------------------------------------
+8. PROFILE PANEL
+--------------------------------------------------
+
+When the user clicks Profile, open a clean profile panel/modal/dropdown/side panel that matches the existing SOULSPACE design.
+
+It should display actual Clerk information:
+
+Name:
+[actual Clerk user name]
+
+Email:
+[actual Clerk email]
+
+User ID:
+[actual Clerk user ID]
+
+Also include:
+
+Logout
+
+The panel should be:
+
+- compact
+- responsive
+- visually consistent with existing SOULSPACE glassmorphism design
+- mobile friendly
+
+Do NOT create a huge profile page unless the existing architecture already has one.
+
+A compact panel/dropdown/modal is preferred.
+
+--------------------------------------------------
+9. LOGOUT
+--------------------------------------------------
+
+Logout must use Clerk's existing logout/sign-out functionality.
+
+Do NOT create custom logout logic.
+
+After logout:
+
+- Clerk session must end
+- Profile should no longer show authenticated user information
+- Protected activities should require login again
+- Homepage should still remain publicly accessible
+
+Example:
+
+Logged in
+→ Logout
+→ user becomes logged out
+→ homepage remains accessible
+→ clicking Daily Journal again requires Clerk authentication
+
+--------------------------------------------------
+10. DAILY JOURNAL
+--------------------------------------------------
+
+The existing Daily Journal functionality should continue working.
+
+The journal page is:
+
+journal.html
+
+The user should be able to:
+
+- write a journal
+- save it
+- view previous journals
+- click previous journal entries
+- read the full journal
+- delete journal if delete functionality already exists / is required
+
+The date should be generated automatically.
+
+Newest journals should appear first.
+
+--------------------------------------------------
+11. USER-SPECIFIC JOURNALS
+--------------------------------------------------
+
+This is critical.
+
+Each user's journal data must be completely separated.
+
+Example:
+
+User A logs in
+→ writes Journal A
+→ saves it
+
+User B logs in
+→ must NOT see Journal A
+
+User B should only see their own journals.
+
+User A should only see their own journals.
+
+Use Clerk User ID as the ownership identifier.
+
+Each DynamoDB journal item should contain something similar to:
+
+{
+  "id": "...",
+  "clerk_user_id": "...",
+  "date": "...",
+  "content": "...",
+  "created_at": "..."
+}
+
+The exact structure can follow the existing implementation if already present.
+
+--------------------------------------------------
+12. FASTAPI BACKEND
+--------------------------------------------------
+
+The backend should use FastAPI.
+
+Architecture:
+
+SOULSPACE Frontend
+        ↓
+Clerk Authentication
+        ↓
+FastAPI
+        ↓
+DynamoDB
+
+FastAPI must verify that the request comes from an authenticated Clerk user.
+
+Do NOT trust:
+
+- user ID sent by frontend
+- arbitrary request body user ID
+- localStorage user ID
+
+The backend must determine the authenticated Clerk user identity securely.
+
+Use the authenticated Clerk User ID as:
+
+clerk_user_id
+
+--------------------------------------------------
+13. JOURNAL API
+--------------------------------------------------
+
+Keep/create the following API structure if it matches the existing project:
+
+POST
+
+/api/journals/
+
+Purpose:
+Create a journal for the currently authenticated Clerk user.
+
+GET
+
+/api/journals/
+
+Purpose:
+Return ONLY journals belonging to the currently authenticated Clerk user.
+
+GET
+
+/api/journals/{id}
+
+Purpose:
+Return a specific journal ONLY if it belongs to the authenticated user.
+
+DELETE
+
+/api/journals/{id}
+
+Purpose:
+Delete a journal ONLY if it belongs to the authenticated user.
+
+Security rule:
+
+User A must never be able to request User B's journal by changing an ID.
+
+The backend must verify ownership before returning, editing, or deleting journal data.
+
+--------------------------------------------------
+14. DYNAMODB
+--------------------------------------------------
+
+Use DynamoDB for journal storage.
+
+Suggested table name:
+
+SOULSPACE_Journals
+
+Suggested partition key:
+
+id
+Type: String
+
+Each item should contain:
+
+id
+clerk_user_id
+date
+content
+created_at
+
+If the current project already has a DynamoDB table structure, inspect it first and reuse it where practical.
+
+Do not unnecessarily recreate the database.
+
+--------------------------------------------------
+15. AWS CONFIGURATION
+--------------------------------------------------
+
+Never hardcode AWS credentials.
+
+Use environment variables such as:
+
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_REGION
+DYNAMODB_TABLE_NAME
+
+If the AWS/DynamoDB configuration is not currently available, keep the backend structured so I can configure it later.
+
+Do NOT put credentials inside:
+
+- HTML
+- JavaScript
+- GitHub
+- frontend environment variables exposed to the browser
+
+--------------------------------------------------
+16. DEVELOPMENT / MOCK MODE
+--------------------------------------------------
+
+If AWS/DynamoDB is not configured yet, you may keep a simple development/mock mode so the frontend can still be tested.
+
+But:
+
+- do NOT use localStorage as the final journal database
+- do NOT replace DynamoDB permanently with localStorage
+- clearly separate mock development mode from production DynamoDB mode
+
+The final architecture must remain:
+
+Clerk → FastAPI → DynamoDB
+
+--------------------------------------------------
+17. FRONTEND AUTH GUARD
+--------------------------------------------------
+
+Create/reuse a centralized authentication guard instead of writing completely separate authentication logic for every activity.
+
+For example, conceptually:
+
+requireAuth(destination)
+
+If authenticated:
+    open destination
+
+If not authenticated:
+    save destination
+    open Clerk Sign In / Sign Up
+
+Use the existing Clerk integration.
+
+Avoid duplicating the same authentication code across every HTML page.
+
+--------------------------------------------------
+18. IMPORTANT — DO NOT BREAK EXISTING ACTIVITY LINKS
+--------------------------------------------------
+
+Inspect the existing activity cards and determine their current destinations.
+
+Do NOT invent incorrect filenames.
+
+Use the actual existing routes/pages.
+
+For example:
+
+Daily Journal → journal.html
+
+For other activities, inspect the existing project and preserve their current destinations.
+
+Only add authentication protection around those existing destinations.
+
+--------------------------------------------------
+19. WEEKLY ACTIVITY INDICATOR
+--------------------------------------------------
+
+There is a weekly activity indicator on the homepage.
+
+IMPORTANT:
+
+It is NOT a graph.
+
+It must remain a simple 7-day dot indicator:
+
+Mon Tue Wed Thu Fri Sat Sun
+
+One dot per day.
+
+If the user completed at least one activity that day:
+●
+
+If no activity:
+○ / empty state
+
+Multiple activities on the same day still count as ONE active day.
+
+Example:
+
+Mon ●
+Tue ●
+Wed ○
+Thu ●
+Fri ●
+Sat ○
+Sun ●
+
+5 / 7 active days
+
+Do NOT convert this into:
+
+- bar chart
+- line chart
+- graph
+- analytics dashboard
+
+Keep the current UI exactly as it is.
+
+If backend integration is already present, activity status can eventually be derived from activity records.
+
+Do not create a separate complicated activity-tracking system unless necessary.
+
+--------------------------------------------------
+20. UI PRESERVATION — VERY IMPORTANT
+--------------------------------------------------
+
+The current SOULSPACE UI is already designed correctly.
+
+Do NOT make broad visual changes.
+
+Do NOT:
+
+- increase navbar size
+- increase hero size
+- increase activity card size
+- change grid layout
+- change typography
+- change button sizes
+- change spacing globally
+- change background style
+- remove glassmorphism
+- remove animations
+- change colors unnecessarily
+- redesign the homepage
+- replace existing components unnecessarily
+- create a new design system
+
+Only make targeted changes required for:
+
+- authentication
+- protected activities
+- redirect handling
+- profile
+- logout
+- journal ownership
+- FastAPI authentication
+- DynamoDB integration
+
+--------------------------------------------------
+21. RESPONSIVE DESIGN
+--------------------------------------------------
+
+Everything must continue working on:
+
+- desktop
+- tablet
+- mobile
+
+Do not introduce horizontal scrolling.
+
+Profile panel must also work properly on mobile.
+
+--------------------------------------------------
+22. SECURITY REQUIREMENTS
+--------------------------------------------------
+
+Never trust frontend data for authorization.
+
+Never trust:
+
+request body user ID
+
+URL user ID
+
+localStorage user ID
+
+Frontend-only authentication checks.
+
+The backend must verify the authenticated Clerk identity.
+
+Every journal operation must be scoped to that authenticated Clerk user.
+
+For example:
+
+GET /api/journals/
+
+must effectively mean:
+
+"Return journals belonging to the currently authenticated Clerk user."
+
+NOT:
+
+"Return all journals and let the frontend filter them."
+
+--------------------------------------------------
+23. CODE QUALITY
+--------------------------------------------------
+
+Before making changes:
+
+1. Inspect existing files.
+2. Identify current Clerk integration.
+3. Identify current FastAPI backend.
+4. Identify current journal code.
+5. Identify existing activity routes.
+6. Identify current navbar implementation.
+7. Identify current profile/auth UI if any.
+
+Then make the smallest required changes.
+
+Reuse existing components/functions wherever possible.
+
+Do not duplicate files unnecessarily.
+
+Do not create multiple authentication systems.
+
+Do not create duplicate journal APIs.
+
+Do not create duplicate Clerk initialization.
+
+--------------------------------------------------
+24. TEST THESE FLOWS
+--------------------------------------------------
+
+After implementation, test the following.
+
+TEST 1:
+
+Logged out
+→ open homepage
+→ homepage works normally.
+
+TEST 2:
+
+Logged out
+→ click Daily Journal
+→ Clerk login appears
+→ complete login
+→ automatically opens journal.html.
+
+TEST 3:
+
+After login
+→ click Meditation
+→ opens Meditation directly
+→ no login screen.
+
+TEST 4:
+
+After login
+→ click Breathwork
+→ opens Breathwork directly.
+
+TEST 5:
+
+After login
+→ open Profile
+→ shows actual Clerk name
+→ shows actual Clerk email
+→ shows actual Clerk User ID.
+
+TEST 6:
+
+Click Logout
+→ Clerk session ends
+→ homepage remains accessible.
+
+TEST 7:
+
+After logout
+→ click Daily Journal
+→ login required again.
+
+TEST 8:
+
+User A logs in
+→ creates journal
+→ journal appears in Previous Journals.
+
+TEST 9:
+
+User B logs in
+→ User A's journal must NOT appear.
+
+TEST 10:
+
+User B attempts to access User A's journal ID directly
+→ backend must deny access.
+
+TEST 11:
+
+Refresh page while logged in
+→ Clerk session remains active
+→ user does not need to log in again unnecessarily.
+
+TEST 12:
+
+Open protected activity directly while logged out
+→ authentication required
+→ after login return to the originally requested activity.
+
+--------------------------------------------------
+25. IMPORTANT FINAL RULE
+--------------------------------------------------
+
+Do not change the visual design unless required for the functionality above.
+
+The final project should feel like the same SOULSPACE website as before, just with:
+
+- proper Clerk authentication
+- protected activities
+- one persistent login session
+- correct post-login destination
+- Profile panel
+- Logout
+- secure user-specific journals
+- FastAPI authentication
+- DynamoDB journal storage
+
+Before finishing, inspect your changes for duplicate auth logic, broken links, incorrect redirects, security issues, and accidental UI changes.
+
+If something is already implemented correctly, DO NOT rewrite it.
+
+Only modify what is necessary.

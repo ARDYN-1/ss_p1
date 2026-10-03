@@ -35,8 +35,29 @@
         </svg>
         <span data-theme-name>Light</span>
       </button>
+      <div class="profile-menu" id="profile-menu" hidden>
+        <button class="profile-toggle" id="profile-toggle" type="button" aria-expanded="false"
+          aria-controls="profile-panel">
+          <svg class="profile-avatar" viewBox="0 0 20 20" aria-hidden="true">
+            <circle cx="10" cy="6.5" r="3.25"></circle>
+            <path d="M3.5 17c.5-3.1 2.8-4.8 6.5-4.8s6 1.7 6.5 4.8"></path>
+          </svg>
+          <span>Profile</span>
+        </button>
+        <section class="profile-panel" id="profile-panel" role="dialog" aria-modal="false"
+          aria-labelledby="profile-heading" hidden>
+          <h2 id="profile-heading">Your profile</h2>
+          <dl>
+            <div><dt>Name</dt><dd id="profile-name"></dd></div>
+            <div><dt>Email</dt><dd id="profile-email"></dd></div>
+            <div><dt>User ID</dt><dd class="profile-user-id" id="profile-user-id"></dd></div>
+          </dl>
+          <button class="profile-sign-out" id="profile-sign-out" type="button">Log out</button>
+        </section>
+      </div>
       <button class="header-cta" type="button" data-open-finder>Find My Practice <span
           aria-hidden="true">↗</span></button>
+      <p class="site-auth-status" id="site-auth-status" role="alert" hidden></p>
     </div>
   </header>
   <main id="home">
@@ -93,7 +114,7 @@
         </div><span class="practice-count"><span aria-hidden="true">✳</span> 8 ways to reset</span>
       </div>
       <div class="practice-grid">
-        <article class="practice-card tone-lavender" data-practice="Meditation">
+        <article class="practice-card tone-lavender" id="practice-meditation" data-practice="Meditation" data-auth-target="/#practice-meditation">
           <div class="card-art" data-background-image="activities_assets/meditation_background.webp"><span class="card-art-label">FIND STILLNESS</span><span class="art-orb"></span><img
               class="practice-icon" data-lazy-src="activities_assets/meditation_icon.webp" alt="" loading="lazy" decoding="async" /></div>
           <div class="card-content">
@@ -107,7 +128,7 @@
               practice <span aria-hidden="true">↗</span></button>
           </div>
         </article>
-        <article class="practice-card tone-blue" data-practice="Breathwork">
+        <article class="practice-card tone-blue" id="practice-breathwork" data-practice="Breathwork" data-auth-target="/#practice-breathwork">
           <div class="card-art" data-background-image="activities_assets/breathwork_background.webp"><span class="card-art-label">BREATHE DEEP</span><span class="art-orb"></span><img
               class="practice-icon" data-lazy-src="activities_assets/breathing_icon.webp" alt="" loading="lazy" decoding="async" /></div>
           <div class="card-content">
@@ -121,7 +142,7 @@
               <span aria-hidden="true">↗</span></button>
           </div>
         </article>
-        <article class="practice-card tone-peach" data-practice="Yoga & movement">
+        <article class="practice-card tone-peach" id="practice-yoga-movement" data-practice="Yoga & movement" data-auth-target="/#practice-yoga-movement">
           <div class="card-art" data-background-image="activities_assets/yoga_background.webp"><span class="card-art-label">MOVE GENTLY</span><span class="art-orb"></span><img
               class="practice-icon" data-lazy-src="activities_assets/yoga_icon.webp" alt="" loading="lazy" decoding="async" /></div>
           <div class="card-content">
@@ -135,7 +156,7 @@
               type="button">Explore practice <span aria-hidden="true">↗</span></button>
           </div>
         </article>
-        <article class="practice-card tone-yellow" data-practice="Healing Music">
+        <article class="practice-card tone-yellow" id="practice-healing-music" data-practice="Healing Music" data-auth-target="/#practice-healing-music">
           <div class="card-art" data-background-image="activities_assets/music_background.webp"><span class="card-art-label">LISTEN &amp; UNWIND</span><span class="art-orb"></span><img
               class="practice-icon" data-lazy-src="activities_assets/music_icon.webp" alt="" loading="lazy" decoding="async" /></div>
           <div class="card-content">
@@ -149,7 +170,7 @@
               practice <span aria-hidden="true">↗</span></button>
           </div>
         </article>
-        <article class="practice-card tone-indigo" data-practice="Sleep Stories">
+        <article class="practice-card tone-indigo" id="practice-sleep-stories" data-practice="Sleep Stories" data-auth-target="/#practice-sleep-stories">
           <div class="card-art" data-background-image="activities_assets/story_background.webp"><span class="card-art-label">REST EASY</span><span class="art-orb"></span><img
               class="practice-icon" data-lazy-src="activities_assets/story_icon.webp" alt="" loading="lazy" decoding="async" /></div>
           <div class="card-content">
@@ -163,7 +184,7 @@
               practice <span aria-hidden="true">↗</span></button>
           </div>
         </article>
-        <article class="practice-card tone-green" data-practice="Gratitude">
+        <article class="practice-card tone-green" id="practice-gratitude" data-practice="Gratitude" data-auth-target="/#practice-gratitude">
           <div class="card-art" data-background-image="activities_assets/gratitude_background.webp"><span class="card-art-label">NOTICE THE GOOD</span><span class="art-orb"></span><img
               class="practice-icon" data-lazy-src="activities_assets/gratitude_icon.webp" alt="" loading="lazy" decoding="async" /></div>
           <div class="card-content">
@@ -177,7 +198,7 @@
               type="button">Explore practice <span aria-hidden="true">↗</span></button>
           </div>
         </article>
-        <article class="practice-card tone-sage" data-practice="Quiet Reflection">
+        <article class="practice-card tone-sage" id="practice-quiet-reflection" data-practice="Quiet Reflection" data-auth-target="/#practice-quiet-reflection">
           <div class="card-art" data-background-image="activities_assets/reflection_background.webp"><span class="card-art-label">PAUSE &amp; REFLECT</span><span class="art-orb"></span><img class="practice-icon" data-lazy-src="activities_assets/reflection_icon.webp" alt="" loading="lazy" decoding="async" /></div>
           <div class="card-content">
             <div class="card-title-row">
@@ -190,7 +211,7 @@
               type="button">Explore practice <span aria-hidden="true">↗</span></button>
           </div>
         </article>
-        <article class="practice-card tone-rose" data-practice="Daily Journal">
+        <article class="practice-card tone-rose" id="practice-daily-journal" data-practice="Daily Journal" data-auth-target="/journal.html">
           <div class="card-art" data-background-image="activities_assets/journal_background.webp"><span class="card-art-label">WRITE &amp; REFLECT</span><span class="art-orb"></span><img class="practice-icon" data-lazy-src="activities_assets/journal_icon.webp" alt="" loading="lazy" decoding="async" />
           </div>
           <div class="card-content">
@@ -201,7 +222,7 @@
                 </svg>5–15 min</span>
             </div>
             <p>Put your thoughts into words and create a little space to reflect, reset, and reconnect with yourself.
-            </p><a class="explore-button" href="journal.html">Explore practice <span aria-hidden="true">↗</span></a>
+            </p><a class="explore-button" href="journal.html" data-auth-target="/journal.html">Explore practice <span aria-hidden="true">↗</span></a>
           </div>
         </article>
       </div>
@@ -244,6 +265,7 @@
     </section>
   </dialog>
   <div class="toast" role="status" aria-live="polite"></div>
+  <script src="auth.js"></script>
   <script src="weekly-activity-data.js"></script>
   <script src="script.js"></script>
 </body>

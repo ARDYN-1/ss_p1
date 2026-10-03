@@ -270,10 +270,19 @@ themeToggle.addEventListener('click', () => {
   applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark', true);
 });
 
-document.querySelectorAll('.explore-button').forEach((button) => {
-  button.addEventListener('click', () => {
-    const practice = button.closest('.practice-card').dataset.practice;
-    showToast(`${practice} selected — take this moment at your own pace.`);
+document.querySelectorAll('.practice-card[data-auth-target] .explore-button').forEach((button) => {
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    const card = button.closest('.practice-card');
+    const practice = card.dataset.practice;
+    window.soulspaceRequireAuth(card.dataset.authTarget).then((isAuthenticated) => {
+      if (!isAuthenticated) return;
+      if (card.dataset.authTarget === '/journal.html') {
+        window.location.assign('/journal.html');
+        return;
+      }
+      showToast(`${practice} selected — take this moment at your own pace.`);
+    });
   });
 });
 
@@ -360,7 +369,9 @@ function showResult() {
   document.querySelector('#finder-restart').focus();
 }
 
-function startFinder() {
+async function startFinder() {
+  const isAuthenticated = await window.soulspaceRequireAuth('/?open-finder=1');
+  if (!isAuthenticated) return;
   currentQuestion = 0;
   answers = Array(questions.length).fill(null);
   finderStep.hidden = false;
@@ -397,3 +408,17 @@ document.querySelector('#finder-restart').addEventListener('click', () => {
 
 renderQuestion();
 loadWeeklyActivity();
+
+if (new URLSearchParams(window.location.search).get('open-finder') === '1') {
+  window.history.replaceState(null, '', `${window.location.pathname}${window.location.hash}`);
+  startFinder();
+}
+
+const returnHash = window.location.hash;
+const returnedCard = returnHash.startsWith('#practice-')
+  ? document.getElementById(returnHash.slice(1))
+  : null;
+if (returnedCard?.matches('.practice-card')) {
+  returnedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  showToast(`${returnedCard.dataset.practice} is ready when you are.`);
+}

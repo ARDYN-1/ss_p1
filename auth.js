@@ -1,10 +1,80 @@
 (() => {
   const authMessage = document.querySelector("#auth-message");
   const journalStatus = document.querySelector("#journal-auth-status");
+  const siteAuthStatus = document.querySelector("#site-auth-status");
   const authMode = document.body.dataset.authMode;
+  const returnToKey = "soulspace-return-to";
+  const allowedReturnTargets = new Set([
+    "/",
+    "/journal.html",
+    "/?open-finder=1",
+    "/#practice-meditation",
+    "/#practice-breathwork",
+    "/#practice-yoga-movement",
+    "/#practice-healing-music",
+    "/#practice-sleep-stories",
+    "/#practice-gratitude",
+    "/#practice-quiet-reflection",
+  ]);
+  const profileMenu = document.querySelector("#profile-menu");
+  const profileToggle = document.querySelector("#profile-toggle");
+  const profilePanel = document.querySelector("#profile-panel");
+  const profileName = document.querySelector("#profile-name");
+  const profileEmail = document.querySelector("#profile-email");
+  const profileUserId = document.querySelector("#profile-user-id");
+  const profileSignOut = document.querySelector("#profile-sign-out");
+  let activeClerk;
+
+  function safeReturnTarget(target) {
+    return typeof target === "string" && allowedReturnTargets.has(target) ? target : "/";
+  }
+
+  function pendingReturnTarget() {
+    const fromQuery = new URLSearchParams(window.location.search).get("return_to");
+    if (fromQuery) return safeReturnTarget(fromQuery);
+    try {
+      return safeReturnTarget(window.sessionStorage.getItem(returnToKey));
+    } catch {
+      return "/";
+    }
+  }
+
+  function clearPendingReturnTarget() {
+    try {
+      window.sessionStorage.removeItem(returnToKey);
+    } catch {
+      // The URL parameter remains available when browser storage is disabled.
+    }
+  }
+
+  function restorePendingReturnTarget(clerk) {
+    if (!clerk.isSignedIn) return;
+    let storedTarget;
+    try {
+      storedTarget = window.sessionStorage.getItem(returnToKey);
+    } catch {
+      return;
+    }
+    if (!storedTarget) return;
+
+    const destination = safeReturnTarget(storedTarget);
+    clearPendingReturnTarget();
+    const currentLocation = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+    if (destination !== currentLocation) window.location.replace(destination);
+  }
+
+  function storeReturnTarget(target) {
+    const safeTarget = safeReturnTarget(target);
+    try {
+      window.sessionStorage.setItem(returnToKey, safeTarget);
+    } catch {
+      // A same-origin URL parameter also carries the allowlisted destination.
+    }
+    return safeTarget;
+  }
 
   function showError(message) {
-    const target = authMessage || journalStatus;
+    const target = authMessage || journalStatus || siteAuthStatus;
     if (!target) return;
     target.textContent = message;
     target.hidden = false;
@@ -123,35 +193,117 @@
     const widget = document.querySelector("#clerk-widget");
     if (!widget) return;
     if (clerk.isSignedIn) {
-      window.location.replace("journal.html");
+      const destination = pendingReturnTarget();
+      clearPendingReturnTarget();
+      window.location.replace(destination);
       return;
     }
 
+    const returnTo = pendingReturnTarget();
+    const returnQuery = `?return_to=${encodeURIComponent(returnTo)}`;
     const options = {
       routing: "hash",
       appearance: clerkAppearance(),
-      fallbackRedirectUrl: "/journal.html",
-      forceRedirectUrl: "/journal.html",
-      signUpFallbackRedirectUrl: "/journal.html",
-      signUpForceRedirectUrl: "/journal.html",
-      signInUrl: "/sign-in.html",
-      signUpUrl: "/sign-up.html",
+      fallbackRedirectUrl: returnTo,
+      forceRedirectUrl: returnTo,
+      signUpFallbackRedirectUrl: returnTo,
+      signUpForceRedirectUrl: returnTo,
+      signInUrl: `/sign-in.html${returnQuery}`,
+      signUpUrl: `/sign-up.html${returnQuery}`,
     };
     if (authMode === "sign-up") {
       clerk.mountSignUp(widget, {
         ...options,
-        signInUrl: "/sign-in.html",
+        signInUrl: `/sign-in.html${returnQuery}`,
       });
     } else {
       clerk.mountSignIn(widget, {
         ...options,
-        signUpUrl: "/sign-up.html",
+        signUpUrl: `/sign-up.html${returnQuery}`,
       });
     }
   }
 
+  function closeProfile() {
+    if (!profilePanel || !profileToggle) return;
+    profilePanel.hidden = true;
+    profileToggle.setAttribute("aria-expanded", "false");
+  }
+
+  function updateProfile(clerk) {
+    if (!profileMenu || !clerk) return;
+    const user = clerk.user;
+    const isSignedIn = Boolean(clerk.isSignedIn && user);
+    profileMenu.hidden = !isSignedIn;
+    if (!isSignedIn) {
+      closeProfile();
+      return;
+    }
+
+    const fullName = user.fullName
+      || [user.firstName, user.lastName].filter(Boolean).join(" ")
+      || "SoulSpace member";
+    const primaryEmail = user.primaryEmailAddress?.emailAddress
+      || user.emailAddresses?.[0]?.emailAddress
+      || "No email available";
+    profileName.textContent = fullName;
+    profileEmail.textContent = primaryEmail;
+    profileUserId.textContent = user.id;
+  }
+
+  if (profileToggle && profilePanel) {
+    profileToggle.addEventListener("click", () => {
+      const willOpen = profilePanel.hidden;
+      profilePanel.hidden = !willOpen;
+      profileToggle.setAttribute("aria-expanded", String(willOpen));
+    });
+    document.addEventListener("click", (event) => {
+      if (!profileMenu?.contains(event.target)) closeProfile();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !profilePanel.hidden) {
+        closeProfile();
+        profileToggle.focus();
+      }
+    });
+  }
+
+  if (profileSignOut) {
+    profileSignOut.addEventListener("click", async () => {
+      if (!activeClerk) return;
+      profileSignOut.disabled = true;
+      try {
+        await activeClerk.signOut({ redirectUrl: "/" });
+      } catch {
+        profileSignOut.disabled = false;
+        showError("Sign out could not be completed. Please try again.");
+      }
+    });
+  }
+
+  window.soulspaceRequireAuth = async (destination) => {
+    try {
+      const clerk = await window.soulspaceClerkReady;
+      if (clerk.isSignedIn) return true;
+      const returnTo = storeReturnTarget(destination);
+      const signInUrl = new URL("/sign-in.html", window.location.origin);
+      signInUrl.searchParams.set("return_to", returnTo);
+      window.location.assign(`${signInUrl.pathname}${signInUrl.search}`);
+      return false;
+    } catch (error) {
+      showError(error instanceof Error ? error.message : "Sign-in could not be loaded. Please try again.");
+      return false;
+    }
+  };
+
   window.soulspaceClerkReady = initializeClerk()
     .then(async (clerk) => {
+      activeClerk = clerk;
+      updateProfile(clerk);
+      if (typeof clerk.addListener === "function") {
+        clerk.addListener(() => updateProfile(clerk));
+      }
+      restorePendingReturnTarget(clerk);
       await mountAuthPage(clerk);
       return clerk;
     })

@@ -217,11 +217,9 @@
   });
   async function startPrivateJournal() {
     try {
+      const isAuthenticated = await window.soulspaceRequireAuth("/journal.html");
+      if (!isAuthenticated) return;
       const clerk = await window.soulspaceClerkReady;
-      if (!clerk.isSignedIn) {
-        window.location.replace("sign-in.html");
-        return;
-      }
       authStatus.hidden = true;
       pageContent.hidden = false;
       signOutButton.hidden = false;
