@@ -38,6 +38,23 @@
     listNode.setAttribute("aria-busy", String(busy));
   }
 
+  async function readApiResponse(response, fallback) {
+    const payload = await response.json().catch(() => null);
+    if (!response.ok) {
+      const message = typeof payload?.detail === "string" ? payload.detail : `${fallback} (${response.status})`;
+      throw new Error(message);
+    }
+    return payload;
+  }
+
+  function journalErrorMessage(error, fallback) {
+    const detail = error instanceof Error ? error.message : "";
+    if (/Journal storage is not configured|AWS credentials are not configured|configured DynamoDB journal table was not found|credentials do not have permission/i.test(detail)) {
+      return `${detail} Configure AWS_REGION, DYNAMODB_TABLE, and AWS credentials (or an IAM role) for this host. In Replit, set the values in the app environment and Secrets; in Vercel, use Project Settings → Environment Variables.`;
+    }
+    return fallback;
+  }
+
   function showListState(title, description, actionLabel, action) {
     listNode.replaceChildren();
     const state = document.createElement("div");
@@ -116,8 +133,7 @@
         window.location.replace("index.html");
         return;
       }
-      if (!response.ok) throw new Error(`Journal list request failed (${response.status})`);
-      const result = await response.json();
+      const result = await readApiResponse(response, "Journal list request failed");
       if (!result || !Array.isArray(result.journals)) throw new Error("Journal list response was not valid");
       renderJournals(result.journals);
     } catch (error) {
@@ -125,7 +141,7 @@
       countNode.textContent = "—";
       countNode.setAttribute("aria-label", "Journal count unavailable");
       setListBusy(false);
-      showListState("Your journals did not load.", "Please check your connection and try again.", "Try again", loadJournals);
+      showListState("Your journals did not load.", journalErrorMessage(error, "Please check your connection and try again."), "Try again", loadJournals);
     }
   }
 
@@ -157,8 +173,7 @@
         window.location.replace("index.html");
         return;
       }
-      if (!response.ok) throw new Error(`Journal entry request failed (${response.status})`);
-      const entry = await response.json();
+      const entry = await readApiResponse(response, "Journal entry request failed");
       if (!entry || typeof entry.content !== "string") throw new Error("Journal entry response was not valid");
       dialogBody.replaceChildren();
       const content = document.createElement("div");
@@ -166,7 +181,7 @@
       dialogBody.append(content);
     } catch (error) {
       console.error("Unable to load journal entry:", error);
-      setDialogMessage("This entry could not be loaded. Please try again.", true, () => openEntry(date));
+      setDialogMessage(journalErrorMessage(error, "This entry could not be loaded. Please try again."), true, () => openEntry(date));
     }
   }
 
@@ -193,14 +208,13 @@
         window.location.replace("index.html");
         return;
       }
-      if (!response.ok) throw new Error(`Journal save request failed (${response.status})`);
-      await response.json();
+      await readApiResponse(response, "Journal save request failed");
       textarea.value = "";
       setFeedback("Your journal has been saved.", "success");
       await loadJournals();
     } catch (error) {
       console.error("Unable to save journal:", error);
-      setFeedback("Your entry could not be saved. Please try again.", "error");
+      setFeedback(journalErrorMessage(error, "Your entry could not be saved. Please try again."), "error");
     } finally {
       saveButton.disabled = false;
       saveButton.removeAttribute("aria-busy");

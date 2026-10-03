@@ -147,7 +147,13 @@
 
   async function initializeClerk() {
     const response = await fetch("/api/auth/config", { credentials: "same-origin" });
-    if (!response.ok) throw new Error("Sign-in is not available right now.");
+    if (!response.ok) {
+      const errorBody = await response.json().catch(() => null);
+      const detail = typeof errorBody?.detail === "string"
+        ? errorBody.detail
+        : `Sign-in configuration endpoint returned HTTP ${response.status}.`;
+      throw new Error(detail);
+    }
     const config = await response.json();
     if (typeof config.publishableKey !== "string" || !config.publishableKey) {
       throw new Error("Sign-in is not configured.");

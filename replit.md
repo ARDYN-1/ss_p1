@@ -20,6 +20,12 @@ Install backend dependencies with:
 pip install -r backend/requirements.txt
 ```
 
+## Vercel deployment
+
+Vercel uses `backend.main:app` as the FastAPI entrypoint, configured in `pyproject.toml`. Static-file CDN promotion is disabled so the FastAPI public-file allowlist and API routes handle requests consistently.
+
+Replit Secrets do not automatically populate a separate Vercel project. Configure `CLERK_PUBLISHABLE_KEY` (or `VITE_CLERK_PUBLISHABLE_KEY`) and `CLERK_SECRET_KEY` in the Vercel environment used by the deployment. Also configure the AWS journal settings below in each host where journal persistence is required.
+
 ## Daily Journal setup
 
 The journal API uses the Replit-managed Clerk app for sign-in and AWS DynamoDB for persistent storage. Clerk keys are managed through Replit's Auth pane and must never be hardcoded in the project.

@@ -1,0 +1,624 @@
+# SOULSPACE — FIX CLERK AUTHENTICATION FLOW + PROFILE MENU
+# IMPORTANT: KEEP THE EXISTING UI AND EXISTING CLERK SETUP
+
+The previous implementation is not working correctly.
+
+Current problems:
+- Clicking "Explore Practice" does nothing.
+- On the deployed Vercel site, the journal page is not working.
+- Locally, the journal page is also not working correctly.
+- Homepage shows "Sign in is not available right now" at the top right.
+- Authentication works partially in Replit Preview but does not work properly locally or on Vercel.
+
+I want you to FIX the existing implementation instead of creating a new authentication system.
+
+IMPORTANT:
+The project ALREADY uses CLERK.
+
+DO NOT replace Clerk.
+DO NOT create Firebase authentication.
+DO NOT create custom JWT authentication.
+DO NOT create another login system.
+DO NOT redesign the website.
+
+First inspect the existing project and find exactly how Clerk is currently initialized and how the activity cards/navigation currently work.
+
+Then fix the implementation.
+
+--------------------------------------------------
+1. SIMPLE AUTHENTICATION BEHAVIOR
+--------------------------------------------------
+
+I want this exact behavior:
+
+The homepage is public.
+
+A user can open the homepage without logging in.
+
+But when a user clicks ANY activity for the FIRST TIME while logged out, Clerk authentication should appear.
+
+Examples:
+
+Daily Journal
+Meditation
+Breathwork
+Yoga & Movement
+Healing Music
+Sleep Stories
+Gratitude
+Quiet Reflection
+Find My Practice
+and every other protected activity.
+
+Example:
+
+User opens homepage
+↓
+User clicks "Explore Practice" on Daily Journal
+↓
+User is NOT logged in
+↓
+Clerk Sign In / Sign Up opens
+↓
+User signs in/signs up
+↓
+User is automatically taken to Daily Journal
+
+Another example:
+
+User is logged out
+↓
+User clicks "Find My Practice"
+↓
+Clerk authentication opens
+↓
+User logs in
+↓
+Find My Practice opens
+
+The important part is:
+
+AUTHENTICATION SHOULD HAPPEN ONLY WHEN THE USER FIRST TRIES TO USE AN ACTIVITY WHILE LOGGED OUT.
+
+--------------------------------------------------
+2. AFTER LOGIN, DO NOT ASK AGAIN
+--------------------------------------------------
+
+Once the user successfully logs in through Clerk, the Clerk session should remain active.
+
+After that:
+
+User clicks Daily Journal
+→ opens directly
+
+User clicks Find My Practice
+→ opens directly
+
+User clicks Meditation
+→ opens directly
+
+User clicks Breathwork
+→ opens directly
+
+User clicks Yoga
+→ opens directly
+
+User clicks any other activity
+→ opens directly
+
+DO NOT show the login screen again while the Clerk session is active.
+
+The user should NOT have to authenticate separately for every activity.
+
+--------------------------------------------------
+3. PRESERVE THE ACTIVITY THE USER CLICKED
+--------------------------------------------------
+
+If a logged-out user clicks an activity, remember that activity.
+
+For example:
+
+Daily Journal clicked
+→ authentication
+→ after successful login
+→ open journal.html
+
+Find My Practice clicked
+→ authentication
+→ after successful login
+→ open Find My Practice page
+
+Meditation clicked
+→ authentication
+→ after successful login
+→ open Meditation page
+
+Do not always send the user back to the homepage after login.
+
+Return them to the activity they originally selected.
+
+--------------------------------------------------
+4. FIX "EXPLORE PRACTICE"
+--------------------------------------------------
+
+Inspect every existing "Explore Practice" button.
+
+Make sure clicking it actually works.
+
+Do NOT remove the buttons.
+
+Do NOT change their visual design.
+
+The buttons should use the existing destination/page for each activity.
+
+For Daily Journal specifically:
+
+Explore Practice
+→ journal.html
+
+But authentication must happen first if the user is logged out.
+
+Flow:
+
+Logged out:
+Explore Practice
+→ Clerk authentication
+→ successful login
+→ journal.html
+
+Logged in:
+Explore Practice
+→ journal.html directly
+
+--------------------------------------------------
+5. FIX JOURNAL PAGE
+--------------------------------------------------
+
+The journal page must work both:
+
+- locally
+- on Vercel deployment
+
+Inspect why journal.html currently does not work.
+
+Check:
+
+- file path
+- relative URLs
+- JavaScript imports
+- API URLs
+- routing
+- Clerk initialization
+- frontend errors
+- CORS
+- backend URL configuration
+- production/development environment variables
+
+Do not assume the problem is DynamoDB.
+
+First make sure the journal page itself loads correctly.
+
+The Daily Journal page must be accessible after authentication.
+
+--------------------------------------------------
+6. CLERK MUST WORK IN LOCAL + VERCEL
+--------------------------------------------------
+
+The current message:
+
+"Sign in is not available right now"
+
+must be investigated and fixed.
+
+Do NOT hide the message just to make the UI look correct.
+
+Find the actual reason.
+
+Inspect:
+
+- Clerk publishable key configuration
+- environment variables
+- frontend Clerk initialization
+- allowed origins / domains
+- Vercel environment variables
+- local environment variables
+- Clerk frontend setup
+- any JavaScript errors
+
+Make the implementation work correctly in both:
+
+LOCAL DEVELOPMENT
+
+and
+
+VERCEL DEPLOYMENT
+
+Use environment variables correctly.
+
+Never hardcode secret keys.
+
+Do not expose secret Clerk keys in frontend code.
+
+--------------------------------------------------
+7. USE THE EXISTING CLERK SESSION
+--------------------------------------------------
+
+Use Clerk's existing authentication state.
+
+The application should be able to determine:
+
+is the user logged in?
+
+If logged in:
+allow activities.
+
+If logged out:
+show Clerk authentication when an activity is clicked.
+
+Do not build a second session system using localStorage.
+
+Do not store passwords.
+
+Do not create custom login forms.
+
+--------------------------------------------------
+8. ADD PROFILE ICON TO TOP RIGHT
+--------------------------------------------------
+
+On the homepage, add a small Profile icon/button at the TOP RIGHT of the existing navbar.
+
+IMPORTANT:
+
+Keep the current navbar design.
+
+Do NOT make the navbar bigger.
+
+Do NOT change the logo.
+
+Do NOT change the existing navigation.
+
+Do NOT move the existing elements unnecessarily.
+
+Just add a compact profile icon on the right side.
+
+The profile icon should work on desktop and mobile.
+
+--------------------------------------------------
+9. PROFILE PANEL
+--------------------------------------------------
+
+When the user clicks the Profile icon:
+
+Open a small profile section/panel/dropdown near the top-right of the screen.
+
+It should show the currently authenticated Clerk user's information.
+
+Display:
+
+User ID
+Email
+
+If the user's name is available through Clerk, it can also show:
+
+Name
+
+And include:
+
+Logout
+
+Example:
+
+-------------------------
+Profile
+
+User ID
+user_xxxxxxxxx
+
+Email
+user@example.com
+
+[ Logout ]
+-------------------------
+
+The panel should be compact and match the existing SOULSPACE design.
+
+Use the existing glassmorphism / dark theme style.
+
+Do NOT create a huge new page.
+
+--------------------------------------------------
+10. PROFILE SHOULD SHOW ACTUAL CLERK DATA
+--------------------------------------------------
+
+Do NOT use fake/demo data.
+
+Use the currently authenticated Clerk user.
+
+For example:
+
+user.id
+user.primaryEmailAddress
+user.firstName / user.fullName where available
+
+The User ID and Email must come directly from Clerk.
+
+--------------------------------------------------
+11. LOGOUT
+--------------------------------------------------
+
+The Logout button must use Clerk's existing sign-out functionality.
+
+When the user clicks Logout:
+
+→ Clerk session ends
+→ profile panel closes
+→ user becomes logged out
+
+Then:
+
+If the user clicks any activity again:
+
+→ Clerk authentication appears again.
+
+Example:
+
+Login
+→ use activities
+→ Logout
+→ click Daily Journal
+→ authentication appears again
+
+--------------------------------------------------
+12. DO NOT CHANGE HOMEPAGE DESIGN
+--------------------------------------------------
+
+This is VERY IMPORTANT.
+
+The current homepage design is already correct.
+
+Do not redesign it.
+
+Do not change:
+
+- hero size
+- hero layout
+- navbar height
+- activity card dimensions
+- activity card grid
+- typography
+- colors
+- background
+- animations
+- spacing
+- buttons
+- weekly activity indicator
+
+Only add/fix:
+
+1. Activity authentication
+2. Activity navigation
+3. Journal navigation
+4. Clerk session handling
+5. Profile icon
+6. Profile panel
+7. Logout
+
+--------------------------------------------------
+13. DO NOT BREAK THE WEEKLY ACTIVITY INDICATOR
+--------------------------------------------------
+
+Keep the existing weekly activity indicator exactly as it is.
+
+It is a simple 7-day dot indicator.
+
+It is NOT a graph.
+
+Do not replace it with a chart.
+
+--------------------------------------------------
+14. IMPORTANT — DO NOT MODIFY BACKEND UNNECESSARILY
+--------------------------------------------------
+
+First fix the frontend authentication/navigation problem.
+
+Do not rewrite the entire FastAPI backend.
+
+Do not recreate DynamoDB.
+
+Do not create another authentication backend.
+
+Only modify backend code if it is actually required for the existing journal functionality.
+
+The immediate priority is:
+
+CLERK AUTH → ACTIVITY ACCESS → PROFILE → LOGOUT → JOURNAL NAVIGATION
+
+--------------------------------------------------
+15. INSPECT BEFORE MODIFYING
+--------------------------------------------------
+
+Before changing code, inspect:
+
+- current Clerk setup
+- current authentication JavaScript
+- homepage HTML
+- homepage JavaScript
+- navbar
+- activity cards
+- Explore Practice buttons
+- journal.html
+- journal JavaScript
+- current backend/API URL configuration
+- environment variables
+- Vercel configuration
+
+Find the actual cause of the current problem.
+
+Do not guess.
+
+--------------------------------------------------
+16. TEST EXACTLY THESE FLOWS
+--------------------------------------------------
+
+TEST A:
+
+Open homepage while logged out.
+
+Expected:
+Homepage loads normally.
+
+TEST B:
+
+Click Daily Journal → Explore Practice.
+
+Expected:
+Clerk authentication appears.
+
+TEST C:
+
+Complete authentication.
+
+Expected:
+journal.html opens automatically.
+
+TEST D:
+
+Go back to homepage.
+
+Click Meditation.
+
+Expected:
+Meditation opens directly.
+NO login screen.
+
+TEST E:
+
+Click Find My Practice.
+
+Expected:
+Find My Practice opens directly.
+NO login screen.
+
+TEST F:
+
+Click Profile icon.
+
+Expected:
+Profile panel opens.
+
+It shows:
+
+- actual Clerk User ID
+- actual Clerk Email
+- actual Name if available
+- Logout
+
+TEST G:
+
+Click Logout.
+
+Expected:
+User is logged out.
+
+TEST H:
+
+Click Daily Journal again.
+
+Expected:
+Clerk authentication appears again.
+
+TEST I:
+
+Open the project locally.
+
+Expected:
+Clerk authentication works.
+
+TEST J:
+
+Open the Vercel deployment.
+
+Expected:
+Clerk authentication works.
+
+TEST K:
+
+Open Daily Journal from Vercel.
+
+Expected:
+journal.html loads correctly.
+
+--------------------------------------------------
+17. VERY IMPORTANT — NO "SIGN IN NOT AVAILABLE" MESSAGE
+--------------------------------------------------
+
+Do not simply remove the message:
+
+"Sign in is not available right now"
+
+Find why Clerk is unavailable.
+
+Fix the actual Clerk initialization/configuration issue.
+
+If environment variables are missing, clearly identify exactly which environment variable is required and where it needs to be configured.
+
+For Vercel, check the production environment variable configuration.
+
+For local development, check the local environment configuration.
+
+--------------------------------------------------
+18. FINAL IMPLEMENTATION GOAL
+--------------------------------------------------
+
+The final user experience should be extremely simple:
+
+FIRST VISIT:
+
+Homepage
+↓
+User clicks any activity
+↓
+Clerk Sign In / Sign Up
+↓
+Login
+↓
+Requested activity opens
+
+AFTER LOGIN:
+
+Homepage
+↓
+Any activity
+↓
+Opens directly
+
+PROFILE:
+
+Top-right Profile icon
+↓
+Profile panel
+↓
+User ID
+Email
+Name
+Logout
+
+LOGOUT:
+
+Profile
+↓
+Logout
+↓
+Session ends
+↓
+Activities require authentication again
+
+Keep everything else in SOULSPACE exactly as it currently looks.
+
+Do not redesign anything.
+
+Do not create a new authentication system.
+
+Use the existing Clerk implementation and fix it properly.
+
+After making the changes, run the application and verify the above flows before finishing.
