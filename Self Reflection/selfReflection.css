@@ -1,0 +1,1171 @@
+/* ==========================================================================
+   SOULSPACE — SPIRITUAL REFLECTION PAGE
+   Direct Visual Match with the Authoritative Reference Image
+   ========================================================================== */
+
+/* ---------- CSS Reset & Base ---------- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* --- Authoritative Color Palette --- */
+    /* Primary Deep Forest Greens */
+    --c-forest-900: #14281C;
+    --c-forest-800: #1B3626;
+    --c-forest-700: #234934;
+    --c-forest-600: #2B573E;
+    --c-forest-500: #35694C;
+
+    /* Secondary Sage Greens */
+    --c-sage-600: #4A6D56;
+    --c-sage-500: #5D8469;
+    --c-sage-400: #739A7F;
+    --c-sage-300: #93B89E;
+    --c-sage-200: #BDD4C4;
+    --c-sage-100: #DEEADF;
+    --c-sage-50: #EEF4EE;
+
+    /* Warm Ivory & Cream Backgrounds */
+    --c-ivory-page: #FAF7F2;
+    --c-cream-card: #FFFEFC;
+    --c-cream-alt: #FCFAF6;
+    --c-cream-tint: #F8F4EC;
+    --c-border-warm: #EAE3D6;
+    --c-border-mid: #DFD7CB;
+    --c-border-dark: #C9BFB0;
+
+    /* High Contrast Text */
+    --c-text-title: #183323;
+    --c-text-sub: #254533;
+    --c-text-body: #334D3F;
+    --c-text-muted: #4F685A;
+    --c-text-faint: #6D8477;
+
+    /* Accents (Muted & Warm) */
+    --c-tint-sage: #EEF4ED;
+    --c-tint-beige: #F8F3E8;
+    --c-tint-rose: #FAF4F2;
+    --c-tint-blue: #F3F6F8;
+    --c-tint-lavend: #F6F4F8;
+
+    /* Shadows & Radii */
+    --shadow-card: 0 4px 16px rgba(30, 50, 36, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+    --shadow-card-hover: 0 12px 28px rgba(30, 50, 36, 0.11), 0 2px 6px rgba(0, 0, 0, 0.03);
+    --shadow-active: 0 3px 12px rgba(35, 73, 52, 0.28);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-pill: 50px;
+
+    /* Typography */
+    --font-heading: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --font-card-title: 'Lora', Georgia, serif;
+    --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-sanskrit: 'Noto Sans Devanagari', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: var(--c-ivory-page);
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--c-ivory-page);
+    color: var(--c-text-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   Integrated wide atmospheric landscape, soft blend, eucalyptus foliage
+   ========================================================================== */
+.hero-section {
+    position: relative;
+    width: 100%;
+    padding: 38px 48px 30px;
+    background: linear-gradient(135deg,
+            #FAF7F2 0%,
+            #F5EFE5 45%,
+            #FAF6EE 75%,
+            #FAF7F2 100%);
+    overflow: hidden;
+    border-bottom: 1px solid rgba(223, 215, 203, 0.4);
+}
+
+/* Botanical Left Corner */
+.hero-botanical-left {
+    position: absolute;
+    bottom: -15px;
+    left: 12px;
+    width: 140px;
+    height: 220px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.85;
+}
+
+.hero-botanical-left svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Botanical Right Corner */
+.hero-botanical-right {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    width: 120px;
+    height: 190px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.8;
+}
+
+.hero-botanical-right svg {
+    width: 100%;
+    height: 100%;
+}
+
+.hero-container {
+    max-width: 1260px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Hero Left: Text Content */
+.hero-content {
+    flex: 0 0 440px;
+    max-width: 440px;
+    padding-left: 20px;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 47px;
+    font-weight: 700;
+    color: var(--c-text-title);
+    line-height: 1.12;
+    letter-spacing: -0.4px;
+    margin-bottom: 8px;
+}
+
+.hero-subtitle {
+    font-family: var(--font-heading);
+    font-size: 19px;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--c-text-sub);
+    margin-bottom: 14px;
+    letter-spacing: 0.2px;
+}
+
+.hero-description {
+    font-size: 13.5px;
+    color: var(--c-text-body);
+    line-height: 1.68;
+    font-weight: 400;
+}
+
+/* Hero Center-Right: Blended Landscape Artwork + Quote */
+.hero-artwork-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    min-height: 255px;
+    padding-right: 10px;
+}
+
+.hero-image-blend {
+    position: relative;
+    width: 520px;
+    max-width: 100%;
+    height: 250px;
+    margin-right: 135px;
+    /* Moves illustration slightly to the left, giving ample breathing room for quote */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Seamless radial/linear gradient blend — soft fade on right edge before reaching quote */
+    -webkit-mask-image:
+        radial-gradient(ellipse 85% 82% at 50% 50%, black 50%, transparent 95%),
+        linear-gradient(to right, transparent 0%, black 14%, black 72%, transparent 96%);
+    mask-image:
+        radial-gradient(ellipse 85% 82% at 50% 50%, black 50%, transparent 95%),
+        linear-gradient(to right, transparent 0%, black 14%, black 72%, transparent 96%);
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(0.95) contrast(1.02);
+}
+
+/* Tiny birds in hero sky */
+.hero-birds {
+    position: absolute;
+    top: 25px;
+    right: 245px;
+    width: 110px;
+    height: 45px;
+    pointer-events: none;
+    z-index: 3;
+    opacity: 0.85;
+}
+
+/* Hero Right: Quote — clearly readable, perfectly coexisting with artwork */
+.hero-quote-block {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: right;
+    z-index: 4;
+    max-width: 220px;
+    padding: 12px 14px;
+    border-radius: var(--radius-md);
+    /* Subtle warm aura matching ivory background — preserves continuous blending without harsh boxes */
+    background: radial-gradient(ellipse at 75% 50%, rgba(250, 247, 242, 0.88) 0%, rgba(250, 247, 242, 0.5) 60%, transparent 100%);
+}
+
+.hero-quote-text {
+    font-family: var(--font-heading);
+    font-size: 21px;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--c-forest-900);
+    line-height: 1.42;
+    margin-bottom: 8px;
+    letter-spacing: 0.2px;
+}
+
+.hero-quote-author {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    font-style: normal;
+    color: var(--c-text-sub);
+}
+
+/* ==========================================================================
+   FILTER TABS
+   Rounded pills, crisp text, rich active forest green
+   ========================================================================== */
+.filters-container {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 24px 48px 18px;
+}
+
+.filters-inner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 20px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--c-border-mid);
+    background-color: #FFFFFF;
+    color: var(--c-forest-800);
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.22s ease-in-out;
+    box-shadow: 0 1px 4px rgba(35, 55, 40, 0.04);
+}
+
+.filter-btn .btn-icon {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.filter-btn .om-symbol-icon {
+    font-family: var(--font-sanskrit);
+    font-size: 15px;
+    line-height: 1;
+    font-weight: 700;
+}
+
+.filter-btn:hover {
+    border-color: var(--c-sage-400);
+    background-color: var(--c-cream-tint);
+    color: var(--c-forest-900);
+    transform: translateY(-1px);
+}
+
+/* Active State */
+.filter-btn.active {
+    background-color: var(--c-forest-700);
+    color: #FFFFFF;
+    border-color: var(--c-forest-700);
+    box-shadow: var(--shadow-active);
+}
+
+.filter-btn.active .btn-icon {
+    color: #FFFFFF;
+    stroke: #FFFFFF;
+    fill: currentColor;
+}
+
+.filter-btn.active .om-symbol-icon {
+    color: #FFFFFF;
+}
+
+/* ==========================================================================
+   MAIN CONTENT AREA
+   4-Column Layout: Stories (Row 1), Slokas (Row 2), Quote Card (Col 4, Row 1-2)
+   ========================================================================== */
+.main-wrapper {
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 0 48px 30px;
+}
+
+.spiritual-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) 270px;
+    gap: 20px;
+    align-items: stretch;
+}
+
+/* ==========================================================================
+   CARD SHARED STYLES
+   ========================================================================== */
+.content-card {
+    background-color: var(--c-cream-card);
+    border: 1px solid var(--c-border-warm);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.content-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--c-border-mid);
+}
+
+.card-content {
+    padding: 16px 18px 14px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+.card-title {
+    font-family: var(--font-card-title);
+    font-size: 16.5px;
+    font-weight: 600;
+    color: var(--c-text-title);
+    line-height: 1.35;
+    margin-bottom: 8px;
+}
+
+.card-text {
+    font-size: 12.8px;
+    color: var(--c-text-body);
+    line-height: 1.68;
+    flex: 1;
+    margin-bottom: 14px;
+}
+
+.card-footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: auto;
+}
+
+/* Round Action Arrow Button */
+.action-arrow-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1.5px solid var(--c-border-mid);
+    background-color: #FAF7F2;
+    color: var(--c-forest-700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.22s ease-in-out;
+}
+
+.action-arrow-btn svg {
+    width: 15px;
+    height: 15px;
+    stroke: currentColor;
+    transition: transform 0.2s ease;
+}
+
+.action-arrow-btn:hover {
+    background-color: var(--c-forest-700);
+    border-color: var(--c-forest-700);
+    color: #FFFFFF;
+    transform: scale(1.08);
+}
+
+.action-arrow-btn:hover svg {
+    transform: translateX(1.5px);
+}
+
+/* Category Badge (Floating or inline) */
+.category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.category-badge svg {
+    width: 11px;
+    height: 11px;
+}
+
+/* ==========================================================================
+   STORY CARDS
+   Warm illustrated cards with tinted moral footer boxes
+   ========================================================================== */
+.story-card .card-media {
+    position: relative;
+    width: 100%;
+    height: 165px;
+    overflow: hidden;
+    background-color: #EDE8DE;
+}
+
+.story-card .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.45s ease;
+}
+
+.story-card:hover .card-image {
+    transform: scale(1.04);
+}
+
+.badge-story {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    color: var(--c-forest-800);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+/* Moral Pill Variations */
+.moral-pill {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 7px 11px;
+    border-radius: var(--radius-sm);
+    flex: 1;
+}
+
+.moral-pill .moral-icon {
+    width: 13px;
+    height: 13px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.moral-pill .moral-label {
+    font-size: 11.3px;
+    line-height: 1.48;
+    font-weight: 500;
+}
+
+/* Story 1 & 3: Soft Sage */
+.moral-sage {
+    background-color: var(--c-tint-sage);
+    border: 1px solid #DFE8DD;
+    color: var(--c-forest-800);
+}
+
+.moral-sage .moral-icon {
+    color: var(--c-sage-500);
+}
+
+/* Story 2: Warm Beige / Sand */
+.moral-beige {
+    background-color: var(--c-tint-beige);
+    border: 1px solid #EBE0CE;
+    color: #403524;
+}
+
+.moral-beige .moral-icon {
+    color: #8C734B;
+}
+
+/* ==========================================================================
+   SIDEBAR QUOTE CARD
+   Tall vertical card in Column 4 spanning Row 1 & 2
+   ========================================================================== */
+.sidebar-quote-card {
+    grid-column: 4;
+    grid-row: 1 / span 2;
+    position: relative;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--c-border-warm);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    min-height: 520px;
+    background-color: #FAF5F2;
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+
+.sidebar-quote-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.quote-bg-wrapper {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.quote-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(0.95);
+}
+
+.quote-content-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 22px;
+    margin: auto 0;
+}
+
+.quote-text-container {
+    margin-bottom: 22px;
+}
+
+.quote-phrase {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--c-text-title);
+    line-height: 1.35;
+    letter-spacing: 0.1px;
+}
+
+.quote-lotus-ornament {
+    width: 44px;
+    height: 30px;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quote-lotus-ornament svg {
+    width: 100%;
+    height: 100%;
+}
+
+.quote-tagline {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 550;
+    letter-spacing: 2px;
+    color: var(--c-text-muted);
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   GITA SLOKA CARDS
+   Rich decorative spiritual watermarks: Om, Peacock Feather, Lotus
+   ========================================================================== */
+.gita-card {
+    background-color: var(--c-cream-card);
+    position: relative;
+    padding-top: 4px;
+}
+
+/* Decorative Watermark at Top Right */
+.gita-watermark-top {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    width: 90px;
+    height: 75px;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.42;
+    transition: opacity 0.3s ease;
+}
+
+.gita-card:hover .gita-watermark-top {
+    opacity: 0.65;
+}
+
+/* Card 1: Warm Ivory Base */
+.gita-card-1 {
+    background: linear-gradient(145deg, #FCFAF6 0%, #FAF7F2 100%);
+}
+
+/* Card 2: Peacock Feather Decoration */
+.gita-card-2 {
+    background: linear-gradient(145deg, #FAF8F4 0%, #F5F7F7 100%);
+}
+
+.peacock-feather-ornament {
+    width: 110px;
+    height: 90px;
+    top: 6px;
+    right: 8px;
+    opacity: 0.55;
+    transition: opacity 0.3s ease;
+}
+
+/* Card 3: Soft Lavender / Sage Tint */
+.gita-card-3 {
+    background: linear-gradient(145deg, #FCFAF8 0%, #F7F5F8 100%);
+}
+
+/* Gita Badge with Devanagari Om */
+.gita-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--c-forest-700);
+    margin-bottom: 12px;
+}
+
+.gita-badge .om-text {
+    font-family: var(--font-sanskrit);
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--c-forest-700);
+    line-height: 1;
+}
+
+/* Gita Title */
+.gita-title {
+    font-family: var(--font-card-title);
+    font-size: 15.2px;
+    font-weight: 600;
+    color: var(--c-text-title);
+    line-height: 1.38;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.gita-flourish {
+    color: var(--c-sage-500);
+    font-size: 12px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+/* Devanagari Sanskrit */
+.gita-sanskrit {
+    font-family: var(--font-sanskrit);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--c-text-sub);
+    line-height: 1.74;
+    margin-bottom: 6px;
+}
+
+/* Chapter & Verse Reference */
+.gita-ref {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--c-text-muted);
+    margin-bottom: 10px;
+}
+
+/* Meaning */
+.gita-meaning {
+    font-size: 12.8px;
+    color: var(--c-text-body);
+    line-height: 1.66;
+    margin-bottom: 14px;
+}
+
+/* Bottom Left Leaf Ornament */
+.gita-leaf-ornament {
+    width: 20px;
+    height: 20px;
+    opacity: 0.45;
+}
+
+.gita-leaf-ornament svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================================================
+   LIFE LESSONS SECTION
+   Independent category with distinct cards
+   ========================================================================== */
+.lessons-container {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 1px solid var(--c-border-warm);
+}
+
+.lessons-header {
+    margin-bottom: 22px;
+    text-align: left;
+}
+
+.lessons-section-title {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--c-text-title);
+    margin-bottom: 4px;
+}
+
+.lessons-section-subtitle {
+    font-size: 14px;
+    color: var(--c-text-muted);
+}
+
+.lessons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.lesson-card {
+    background-color: var(--c-cream-card);
+}
+
+.lesson-accent-bar {
+    height: 3.5px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--c-sage-500), var(--c-sage-300), var(--c-sage-500));
+}
+
+.badge-lesson {
+    background-color: var(--c-tint-sage);
+    color: var(--c-forest-800);
+    border: 1px solid #DFE8DD;
+    margin-bottom: 12px;
+    align-self: flex-start;
+}
+
+.lesson-title {
+    font-size: 16.5px;
+    margin-bottom: 6px;
+}
+
+.lesson-quote {
+    font-family: var(--font-heading);
+    font-size: 15.5px;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--c-forest-700);
+    line-height: 1.5;
+    margin-bottom: 10px;
+    padding-left: 2px;
+}
+
+.lesson-deco-icon {
+    width: 18px;
+    height: 18px;
+    opacity: 0.45;
+}
+
+.lesson-deco-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* ==========================================================================
+   FILTER DISPLAY LOGIC
+   Strict separation: ALL = everything, STORIES = stories, SLOKAS = slokas, LESSONS = lessons
+   ========================================================================== */
+
+/* Filter: ALL — Stories + Gita Slokas ONLY (Life Lessons hidden) */
+body[data-filter="all"] .story-card,
+body[data-filter="all"] .gita-card,
+body[data-filter="all"] .sidebar-quote-card {
+    display: flex;
+}
+
+body[data-filter="all"] .lessons-container {
+    display: none !important;
+}
+
+body[data-filter="all"] .sidebar-quote-card {
+    grid-column: 4;
+    grid-row: 1 / span 2;
+}
+
+/* Filter: STORIES */
+body[data-filter="story"] .story-card {
+    display: flex;
+}
+
+body[data-filter="story"] .sidebar-quote-card {
+    display: flex;
+    grid-column: 4;
+    grid-row: 1 / span 1;
+    min-height: 380px;
+}
+
+body[data-filter="story"] .gita-card,
+body[data-filter="story"] .lessons-container {
+    display: none !important;
+}
+
+/* Filter: GITA SLOKAS */
+body[data-filter="sloka"] .gita-card {
+    display: flex;
+}
+
+body[data-filter="sloka"] .sidebar-quote-card {
+    display: flex;
+    grid-column: 4;
+    grid-row: 1 / span 1;
+    min-height: 380px;
+}
+
+body[data-filter="sloka"] .story-card,
+body[data-filter="sloka"] .lessons-container {
+    display: none !important;
+}
+
+/* Filter: LIFE LESSONS */
+body[data-filter="lesson"] .lessons-container {
+    display: block !important;
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
+}
+
+body[data-filter="lesson"] .story-card,
+body[data-filter="lesson"] .gita-card,
+body[data-filter="lesson"] .sidebar-quote-card {
+    display: none !important;
+}
+
+/* ==========================================================================
+   PAGE FOOTER
+   Centered quote with delicate horizontal divider lines
+   ========================================================================== */
+.page-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 32px 48px 44px;
+    max-width: 1260px;
+    margin: 0 auto;
+}
+
+.footer-divider-line {
+    height: 1px;
+    width: 65px;
+    background: linear-gradient(to right, transparent, var(--c-border-mid), transparent);
+}
+
+.footer-quote-text {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-style: italic;
+    font-weight: 550;
+    color: var(--c-text-muted);
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+/* ==========================================================================
+   MODAL DIALOG
+   Rich modal dialog with rich content per category
+   ========================================================================== */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background-color: rgba(20, 38, 26, 0.55);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.28s ease, visibility 0.28s ease;
+    padding: 20px;
+}
+
+.modal-backdrop.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-dialog {
+    background-color: #FFFFFF;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--c-border-warm);
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 24px 60px rgba(18, 38, 25, 0.25);
+    transform: translateY(18px) scale(0.97);
+    transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-backdrop.open .modal-dialog {
+    transform: translateY(0) scale(1);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--c-tint-sage);
+    color: var(--c-forest-800);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    z-index: 10;
+}
+
+.modal-close-btn:hover {
+    background-color: var(--c-sage-200);
+    transform: scale(1.08);
+}
+
+.modal-body-content {
+    padding: 32px 30px;
+}
+
+/* Modal Content Variations */
+.modal-story-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-family: var(--font-card-title);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--c-text-title);
+    line-height: 1.3;
+    margin-bottom: 12px;
+}
+
+.modal-paragraph {
+    font-size: 14.5px;
+    line-height: 1.75;
+    color: var(--c-text-body);
+    margin-bottom: 14px;
+}
+
+.modal-moral-highlight {
+    background-color: var(--c-tint-sage);
+    border-left: 3.5px solid var(--c-forest-700);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--c-forest-800);
+    margin-top: 18px;
+}
+
+.modal-sanskrit-box {
+    background-color: var(--c-cream-tint);
+    border: 1px solid var(--c-border-warm);
+    border-radius: var(--radius-md);
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.modal-sanskrit-text {
+    font-family: var(--font-sanskrit);
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--c-text-title);
+    line-height: 1.8;
+}
+
+.modal-reference-tag {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--c-text-muted);
+    margin-top: 6px;
+    display: inline-block;
+}
+
+.modal-lesson-quote {
+    font-family: var(--font-heading);
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--c-forest-800);
+    padding-left: 14px;
+    border-left: 3px solid var(--c-sage-500);
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 1100px) {
+    .spiritual-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sidebar-quote-card {
+        grid-column: span 2;
+        grid-row: auto;
+        min-height: 300px;
+    }
+
+    .lessons-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        flex: none;
+        max-width: 100%;
+        padding-left: 0;
+    }
+
+    .hero-image-blend {
+        margin-right: 0;
+    }
+
+    .hero-quote-block {
+        position: static;
+        text-align: center;
+        max-width: 100%;
+        margin-top: 16px;
+        transform: none;
+    }
+
+    .hero-birds {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 30px 20px 24px;
+    }
+
+    .hero-title {
+        font-size: 34px;
+    }
+
+    .filters-container {
+        padding: 16px 20px 14px;
+    }
+
+    .filters-inner {
+        flex-wrap: wrap;
+    }
+
+    .main-wrapper {
+        padding: 0 20px 24px;
+    }
+
+    .spiritual-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar-quote-card {
+        grid-column: 1;
+    }
+
+    .lessons-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-quote-text {
+        white-space: normal;
+        text-align: center;
+    }
+}
