@@ -547,6 +547,7 @@ dependencies = [
     { name = "clerk-backend-api" },
     { name = "fastapi" },
     { name = "httpx" },
+    { name = "python-dotenv" },
     { name = "uvicorn", extra = ["standard"] },
 ]
 
@@ -556,6 +557,7 @@ requires-dist = [
     { name = "clerk-backend-api", specifier = ">=7.0.0" },
     { name = "fastapi", specifier = ">=0.142.2" },
     { name = "httpx", specifier = ">=0.28.1" },
+    { name = "python-dotenv", specifier = ">=1.2.4" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.54.0" },
 ]
 

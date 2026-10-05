@@ -3,3 +3,4 @@ uvicorn[standard]
 boto3
 clerk-backend-api
 httpx
+python-dotenv

@@ -11,6 +11,7 @@ import httpx
 from botocore.exceptions import BotoCoreError, ClientError, NoCredentialsError, PartialCredentialsError
 from clerk_backend_api import Clerk
 from clerk_backend_api.security.types import AuthenticateRequestOptions
+from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
@@ -18,9 +19,10 @@ from starlette.responses import Response
 from boto3.dynamodb.conditions import Key
 
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+load_dotenv(PROJECT_ROOT / ".env")
 logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
 logger = logging.getLogger("soulspace.journal")
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
 CLERK_FAPI = "https://frontend-api.clerk.dev"
 CLERK_PROXY_PATH = "/api/__clerk"
 MAX_ENTRY_BYTES = 350_000
