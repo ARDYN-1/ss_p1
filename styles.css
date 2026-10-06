@@ -1761,3 +1761,11 @@ body::after {
   .profile-avatar { width: 13px; height: 13px; }
   .profile-panel { padding: 15px; }
 }
+
+@media (max-width: 620px) {
+  body::before,
+  body::after {
+    animation: none;
+    will-change: auto;
+  }
+}
