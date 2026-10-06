@@ -12,6 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="yoga.css">
+  <script>
+    (() => { let theme = null; try { theme = localStorage.getItem('soulspace-theme'); } catch {} document.documentElement.dataset.theme = theme === 'dark' || theme === 'light' ? theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); })();
+  </script>
 </head>
 <body>
 
@@ -77,6 +80,14 @@
         </svg>
         <span class="brand-name">SOULSPACE</span>
       </a>
+      <div class="practice-header-actions">
+        <a class="practice-home-button" href="/">Home</a>
+        <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+          <svg class="theme-icon theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+          <svg class="theme-icon theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 15.4A8.5 8.5 0 0 1 8.6 3.7 8.5 8.5 0 1 0 20.3 15.4Z"/></svg>
+          <span data-theme-name>Light</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -707,5 +718,8 @@
   </div>
 
   <script src="yoga.js"></script>
+  <script>
+    (() => { const button = document.querySelector('.theme-toggle'); const apply = (theme, persist = false) => { const dark = theme === 'dark'; document.documentElement.dataset.theme = dark ? 'dark' : 'light'; document.documentElement.style.colorScheme = dark ? 'dark' : 'light'; button.setAttribute('aria-pressed', String(dark)); button.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`); button.querySelector('[data-theme-name]').textContent = dark ? 'Dark' : 'Light'; if (persist) { try { localStorage.setItem('soulspace-theme', dark ? 'dark' : 'light'); } catch {} } }; apply(document.documentElement.dataset.theme); button.addEventListener('click', () => apply(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark', true)); })();
+  </script>
 </body>
 </html>

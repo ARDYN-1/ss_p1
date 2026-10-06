@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="healing_music.css">
 
   <script>
     tailwind.config = {
@@ -55,26 +57,20 @@
       box-shadow: 0 16px 32px -8px rgba(38, 59, 51, 0.08);
     }
 
-    /* Audio wave bar pulse animation */
-    @keyframes barPulse {
-      0%, 100% { height: 4px; }
-      50% { height: 16px; }
-    }
-    .wave-bar {
-      width: 2.5px;
-      background-color: currentColor;
-      border-radius: 999px;
-      animation: barPulse 1.2s ease-in-out infinite;
-    }
-    .wave-bar:nth-child(2) { animation-delay: 0.2s; }
-    .wave-bar:nth-child(3) { animation-delay: 0.4s; }
-    .wave-bar:nth-child(4) { animation-delay: 0.15s; }
-
     /* Custom subtle leaf background accents */
-    .bg-watercolor {
+  .bg-watercolor {
       background: radial-gradient(circle at 50% 15%, rgba(255,255,255,0.7) 0%, rgba(247,244,238,0.95) 70%);
     }
   </style>
+  <script>
+    (() => {
+      let theme = null;
+      try { theme = localStorage.getItem('soulspace-theme'); } catch {}
+      document.documentElement.dataset.theme = theme === 'dark' || theme === 'light'
+        ? theme
+        : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    })();
+  </script>
 </head>
 <body class="bg-watercolor selection:bg-emerald-100 flex flex-col justify-between min-h-screen relative p-4 sm:p-6 md:p-8 lg:p-10">
 
@@ -103,23 +99,37 @@
     </svg>
   </div>
 
-  <header class="relative z-10 w-full max-w-7xl mx-auto mb-6 sm:mb-8 md:mb-10">
+  <nav class="healing-nav relative z-20" aria-label="Main navigation">
+    <a class="healing-brand" href="/" aria-label="SOULSPACE home">
+      <img src="../assets/logo.webp" alt="" width="38" height="38" decoding="async">
+      <span>SOULSPACE<small>YOUR DAILY MOMENT</small></span>
+    </a>
+    <div class="healing-nav-actions">
+      <a class="healing-home-link" href="/">Home</a>
+      <button class="theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+        <svg class="theme-icon theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+        <svg class="theme-icon theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 15.4A8.5 8.5 0 0 1 8.6 3.7 8.5 8.5 0 1 0 20.3 15.4Z"/></svg>
+        <span data-theme-name>Light</span>
+      </button>
+      <div class="profile-menu" id="profile-menu">
+        <button class="profile-toggle" id="profile-toggle" type="button" aria-expanded="false" aria-controls="profile-panel">
+          <svg class="profile-avatar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="6.5" r="3.25"></circle><path d="M3.5 17c.5-3.1 2.8-4.8 6.5-4.8s6 1.7 6.5 4.8"></path></svg>
+          <span id="profile-toggle-label">Profile</span>
+        </button>
+        <section class="profile-panel" id="profile-panel" role="dialog" aria-modal="false" aria-labelledby="profile-heading" hidden>
+          <h2 id="profile-heading">Your profile</h2>
+          <dl><div><dt>Name</dt><dd id="profile-name"></dd></div><div><dt>Email</dt><dd id="profile-email"></dd></div><div><dt>User ID</dt><dd class="profile-user-id" id="profile-user-id"></dd></div></dl>
+          <button class="profile-sign-out" id="profile-sign-out" type="button">Log out</button>
+        </section>
+      </div>
+      <p class="site-auth-status" id="site-auth-status" role="alert" hidden></p>
+    </div>
+  </nav>
+
+  <header class="healing-intro relative z-10 w-full max-w-7xl mx-auto mb-6 sm:mb-8 md:mb-10">
     <div class="grid grid-cols-1 md:grid-cols-12 items-start gap-4">
       
-      <!-- Brand Logo / Sub-brand (Left) -->
-      <div class="md:col-span-3 flex items-start gap-3 pt-1">
-        <!-- Botanical Lotus Emblem -->
-        <svg class="w-8 h-8 text-[#3c5448] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-          <path d="M12 21C12 21 8 16 8 11C8 8.79 9.79 7 12 7C14.21 7 16 8.79 16 11C16 16 12 21 12 21Z" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M12 21C12 21 4.5 17.5 4.5 12C4.5 9 6.5 7.5 8 9" stroke-linecap="round"/>
-          <path d="M12 21C12 21 19.5 17.5 19.5 12C19.5 9 17.5 7.5 16 9" stroke-linecap="round"/>
-          <circle cx="12" cy="5" r="1.5" fill="currentColor"/>
-        </svg>
-        <div>
-          <h1 class="text-xs sm:text-sm font-semibold tracking-[0.25em] text-[#283d34] uppercase font-sans">SOULSPACE</h1>
-          <p class="text-[11px] text-[#55695f] tracking-wider font-light mt-0.5">Pause. Breathe. Reflect.</p>
-        </div>
-      </div>
+      <div class="md:col-span-3" aria-hidden="true"></div>
 
       <!-- Center Title Section -->
       <div class="md:col-span-6 text-center px-2 flex flex-col items-center">
@@ -162,8 +172,8 @@
           <!-- Thumbnail Image with Circular Overlapping Badge -->
           <div class="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden shadow-inner">
             <img 
-              src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=700&q=80" 
-              alt="Books and coffee by a sunlit window"
+              src="https://i.ytimg.com/vi/oPVte6aMprI/hqdefault.jpg"
+              alt="Deep Focus music video thumbnail"
               class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
@@ -198,24 +208,18 @@
               />
               <div class="text-left">
                 <span class="block text-xs font-semibold text-[#283d33]">Deep Focus</span>
-                <span class="text-[10px] text-[#6e847a]" id="timer-0">3:52</span>
+                <span class="text-[10px] text-[#6e847a]">YouTube video</span>
               </div>
             </div>
             <!-- Play/Pause Toggle -->
             <button 
-              onclick="toggleAudio(0)" 
-              id="btn-0"
+              data-featured-video data-video-id="oPVte6aMprI" data-video-title="Deep Focus - Music For Studying, Concentration and Work"
               aria-label="Play Deep Focus"
               class="w-9 h-9 rounded-full bg-[#3d5e4e] hover:bg-[#324f41] text-white flex items-center justify-center transition-transform active:scale-95 shadow-sm"
             >
               <svg id="icon-play-0" class="w-4 h-4 ml-0.5 fill-current" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z"/>
               </svg>
-              <div id="icon-wave-0" class="hidden items-center gap-0.5 h-3">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
             </button>
           </div>
         </div>
@@ -227,8 +231,8 @@
           <!-- Thumbnail Image with Circular Overlapping Badge -->
           <div class="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden shadow-inner">
             <img 
-              src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=700&q=80" 
-              alt="Lush forest and flowing stream"
+              src="https://i.ytimg.com/vi/1t7g690boao/hqdefault.jpg"
+              alt="Forest stream nature sounds video thumbnail"
               class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
@@ -263,24 +267,18 @@
               />
               <div class="text-left">
                 <span class="block text-xs font-semibold text-[#213a2c]">Forest Stream</span>
-                <span class="text-[10px] text-[#607e6e]" id="timer-1">5:20</span>
+                <span class="text-[10px] text-[#607e6e]">YouTube video</span>
               </div>
             </div>
             <!-- Play/Pause Toggle -->
             <button 
-              onclick="toggleAudio(1)" 
-              id="btn-1"
+              data-featured-video data-video-id="1t7g690boao" data-video-title="4K Forest Stream - Relaxing River Sounds"
               aria-label="Play Forest Stream"
               class="w-9 h-9 rounded-full bg-[#466a56] hover:bg-[#395746] text-white flex items-center justify-center transition-transform active:scale-95 shadow-sm"
             >
               <svg id="icon-play-1" class="w-4 h-4 ml-0.5 fill-current" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z"/>
               </svg>
-              <div id="icon-wave-1" class="hidden items-center gap-0.5 h-3">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
             </button>
           </div>
         </div>
@@ -292,8 +290,8 @@
           <!-- Thumbnail Image with Circular Overlapping Badge -->
           <div class="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden shadow-inner">
             <img 
-              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80" 
-              alt="Pastel sunset over tranquil ocean waves"
+              src="https://i.ytimg.com/vi/3hbrurFgnzk/hqdefault.jpg"
+              alt="Relaxing ocean music video thumbnail"
               class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
@@ -329,24 +327,18 @@
               />
               <div class="text-left">
                 <span class="block text-xs font-semibold text-[#392d40]">Ocean Waves</span>
-                <span class="text-[10px] text-[#7e6d87]" id="timer-2">4:36</span>
+                <span class="text-[10px] text-[#7e6d87]">YouTube video</span>
               </div>
             </div>
             <!-- Play/Pause Toggle -->
             <button 
-              onclick="toggleAudio(2)" 
-              id="btn-2"
+              data-featured-video data-video-id="3hbrurFgnzk" data-video-title="Relaxing Music, Ocean Waves, Sleeping Music, Calming Music"
               aria-label="Play Ocean Waves"
               class="w-9 h-9 rounded-full bg-[#826687] hover:bg-[#6e5373] text-white flex items-center justify-center transition-transform active:scale-95 shadow-sm"
             >
               <svg id="icon-play-2" class="w-4 h-4 ml-0.5 fill-current" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z"/>
               </svg>
-              <div id="icon-wave-2" class="hidden items-center gap-0.5 h-3">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
             </button>
           </div>
         </div>
@@ -358,8 +350,8 @@
           <!-- Thumbnail Image with Circular Overlapping Badge -->
           <div class="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden shadow-inner">
             <img 
-              src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=700&q=80" 
-              alt="Tibetan singing bowl and candle"
+              src="https://i.ytimg.com/vi/wvSby-59ets/hqdefault.jpg"
+              alt="Tibetan singing bowls spiritual sound bath video thumbnail"
               class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
               loading="lazy"
             />
@@ -393,30 +385,54 @@
               </div>
               <div class="text-left">
                 <span class="block text-xs font-semibold text-[#413620]">Om Chanting</span>
-                <span class="text-[10px] text-[#867756]" id="timer-3">6:12</span>
+                <span class="text-[10px] text-[#867756]">YouTube video</span>
               </div>
             </div>
             <!-- Play/Pause Toggle -->
             <button 
-              onclick="toggleAudio(3)" 
-              id="btn-3"
+              data-featured-video data-video-id="wvSby-59ets" data-video-title="Tibetan Singing Bowls - Spiritual Healing Sound Bath"
               aria-label="Play Om Chanting"
               class="w-9 h-9 rounded-full bg-[#a3824b] hover:bg-[#8e6e3c] text-white flex items-center justify-center transition-transform active:scale-95 shadow-sm"
             >
               <svg id="icon-play-3" class="w-4 h-4 ml-0.5 fill-current" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7z"/>
               </svg>
-              <div id="icon-wave-3" class="hidden items-center gap-0.5 h-3">
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-                <span class="wave-bar"></span>
-              </div>
             </button>
           </div>
         </div>
       </article>
 
     </div>
+
+    <section class="music-player-panel" id="music-player-panel" aria-labelledby="music-player-title" hidden>
+      <div class="music-player-heading"><div><p class="eyebrow">NOW PLAYING</p><h2 id="music-player-title">Healing music</h2></div><button class="quiet-button" id="close-music-player" type="button">Close</button></div>
+      <div class="music-player-frame" id="music-player-frame"></div>
+    </section>
+
+    <section class="healing-discovery" aria-labelledby="discovery-title">
+      <p class="eyebrow">LISTEN YOUR WAY</p><h2 id="discovery-title">Explore healing sounds</h2>
+      <p class="section-copy">Choose a soundscape to find music that meets this moment.</p>
+      <div class="healing-keywords" aria-label="Popular sound searches">
+        <button type="button" data-healing-query="deep focus music">Deep focus</button>
+        <button type="button" data-healing-query="nature sounds relaxing">Nature sounds</button>
+        <button type="button" data-healing-query="meditation healing music">Meditation</button>
+        <button type="button" data-healing-query="stress relief relaxing music">Stress relief</button>
+        <button type="button" data-healing-query="spiritual healing music">Spiritual sounds</button>
+      </div>
+      <p class="search-feedback" id="keyword-feedback" aria-live="polite" hidden></p>
+      <div id="keyword-search-results" class="healing-results" aria-live="polite"></div>
+    </section>
+
+    <section class="healing-manual-search" aria-labelledby="manual-search-title">
+      <p class="eyebrow">YOUR OWN SOUNDTRACK</p><h2 id="manual-search-title">Looking for something specific?</h2>
+      <form id="manual-healing-search" class="healing-search-form" novalidate>
+        <label class="visually-hidden" for="manual-healing-query">Search healing music</label>
+        <input id="manual-healing-query" name="query" type="search" maxlength="120" placeholder="Search healing music" autocomplete="off">
+        <button type="submit">Find music</button>
+      </form>
+      <p class="search-feedback" id="manual-feedback" aria-live="polite" hidden></p>
+      <div id="manual-search-results" class="healing-results" aria-live="polite"></div>
+    </section>
   </main>
 
   <footer class="relative z-10 w-full max-w-7xl mx-auto mt-10 sm:mt-12 text-center pb-2">
@@ -457,248 +473,9 @@
     </div>
   </footer>
 
-  <script>
-    // State management for audio tracks
-    const tracks = [
-      { name: 'Deep Focus', duration: 232, initialText: '3:52', active: false },
-      { name: 'Forest Stream', duration: 320, initialText: '5:20', active: false },
-      { name: 'Ocean Waves', duration: 276, initialText: '4:36', active: false },
-      { name: 'Om Chanting', duration: 372, initialText: '6:12', active: false }
-    ];
+  <script src="../assets/youtube-media.js" defer></script>
+  <script src="healing_music.js" defer></script>
+  <script src="../auth.js" defer></script>
 
-    let audioCtx = null;
-    let activeNodes = [];
-    let currentTrackIdx = null;
-    let timerInterval = null;
-    let currentSeconds = 0;
-
-    function initAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-    }
-
-    // Stop current sound generator nodes
-    function stopCurrentSynth() {
-      if (activeNodes.length > 0) {
-        activeNodes.forEach(node => {
-          try {
-            if (node.stop) node.stop();
-            if (node.disconnect) node.disconnect();
-          } catch(e) {}
-        });
-        activeNodes = [];
-      }
-      if (timerInterval) {
-        clearInterval(timerInterval);
-        timerInterval = null;
-      }
-    }
-
-    // High quality calming ambient synthesizers using Web Audio
-    function playTrackSynth(idx) {
-      initAudio();
-      stopCurrentSynth();
-
-      const masterGain = audioCtx.createGain();
-      masterGain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-      masterGain.gain.exponentialRampToValueAtTime(0.4, audioCtx.currentTime + 1.2);
-      masterGain.connect(audioCtx.destination);
-      activeNodes.push(masterGain);
-
-      if (idx === 0) {
-        // Deep Focus: Soothing dual binaural alpha waves + warm low-pass filter
-        const osc1 = audioCtx.createOscillator();
-        const osc2 = audioCtx.createOscillator();
-        osc1.type = 'sine';
-        osc2.type = 'sine';
-        osc1.frequency.setValueAtTime(144, audioCtx.currentTime);     // Warm fundamental
-        osc2.frequency.setValueAtTime(154, audioCtx.currentTime);     // 10 Hz Alpha beat
-
-        const sub = audioCtx.createOscillator();
-        sub.type = 'triangle';
-        sub.frequency.setValueAtTime(72, audioCtx.currentTime);
-
-        const subGain = audioCtx.createGain();
-        subGain.gain.setValueAtTime(0.15, audioCtx.currentTime);
-        sub.connect(subGain);
-        subGain.connect(masterGain);
-
-        osc1.connect(masterGain);
-        osc2.connect(masterGain);
-
-        osc1.start();
-        osc2.start();
-        sub.start();
-        activeNodes.push(osc1, osc2, sub);
-
-      } else if (idx === 1) {
-        // Forest Stream: Filtered pink noise modulated like gentle bubbling water & breeze
-        const bufferSize = audioCtx.sampleRate * 2;
-        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-        const output = noiseBuffer.getChannelData(0);
-        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
-        for (let i = 0; i < bufferSize; i++) {
-          const white = Math.random() * 2 - 1;
-          b0 = 0.99886 * b0 + white * 0.0555179;
-          b1 = 0.99332 * b1 + white * 0.0750759;
-          b2 = 0.96900 * b2 + white * 0.1538520;
-          b3 = 0.86650 * b3 + white * 0.3104856;
-          b4 = 0.55000 * b4 + white * 0.5329522;
-          b5 = -0.7616 * b5 - white * 0.0168980;
-          output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.08;
-          b6 = white * 0.115926;
-        }
-
-        const whiteNoise = audioCtx.createBufferSource();
-        whiteNoise.buffer = noiseBuffer;
-        whiteNoise.loop = true;
-
-        const filter = audioCtx.createBiquadFilter();
-        filter.type = 'bandpass';
-        filter.frequency.setValueAtTime(450, audioCtx.currentTime);
-        filter.Q.setValueAtTime(1.5, audioCtx.currentTime);
-
-        // LFO for bubbling water flow
-        const lfo = audioCtx.createOscillator();
-        lfo.frequency.setValueAtTime(0.3, audioCtx.currentTime);
-        const lfoGain = audioCtx.createGain();
-        lfoGain.gain.setValueAtTime(150, audioCtx.currentTime);
-        lfo.connect(lfoGain);
-        lfoGain.connect(filter.frequency);
-
-        whiteNoise.connect(filter);
-        filter.connect(masterGain);
-
-        whiteNoise.start();
-        lfo.start();
-        activeNodes.push(whiteNoise, lfo);
-
-      } else if (idx === 2) {
-        // Ocean Waves: Rhythmic breathing swells of surf noise
-        const bufferSize = audioCtx.sampleRate * 3;
-        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-        const output = noiseBuffer.getChannelData(0);
-        for (let i = 0; i < bufferSize; i++) {
-          output[i] = (Math.random() * 2 - 1) * 0.2;
-        }
-        const oceanSource = audioCtx.createBufferSource();
-        oceanSource.buffer = noiseBuffer;
-        oceanSource.loop = true;
-
-        const lowpass = audioCtx.createBiquadFilter();
-        lowpass.type = 'lowpass';
-        lowpass.frequency.setValueAtTime(300, audioCtx.currentTime);
-
-        // Slow 0.12Hz wave cycle
-        const waveLfo = audioCtx.createOscillator();
-        waveLfo.frequency.setValueAtTime(0.12, audioCtx.currentTime);
-        const waveGain = audioCtx.createGain();
-        waveGain.gain.setValueAtTime(250, audioCtx.currentTime);
-        waveLfo.connect(waveGain);
-        waveGain.connect(lowpass.frequency);
-
-        oceanSource.connect(lowpass);
-        lowpass.connect(masterGain);
-
-        oceanSource.start();
-        waveLfo.start();
-        activeNodes.push(oceanSource, waveLfo);
-
-      } else if (idx === 3) {
-        // Om Chanting / Singing bowl harmonic resonance
-        const freqs = [108, 216, 324, 432]; // Sacred Solfeggio & Om harmonics
-        freqs.forEach((f, i) => {
-          const osc = audioCtx.createOscillator();
-          const g = audioCtx.createGain();
-          osc.type = i === 0 ? 'sine' : 'triangle';
-          osc.frequency.setValueAtTime(f, audioCtx.currentTime);
-
-          // Slow singing bowl vibrato
-          const vibrato = audioCtx.createOscillator();
-          vibrato.frequency.setValueAtTime(0.25, audioCtx.currentTime);
-          const vGain = audioCtx.createGain();
-          vGain.gain.setValueAtTime(1.8, audioCtx.currentTime);
-          vibrato.connect(vGain);
-          vGain.connect(osc.frequency);
-
-          g.gain.setValueAtTime(0.25 / (i + 1), audioCtx.currentTime);
-          osc.connect(g);
-          g.connect(masterGain);
-
-          osc.start();
-          vibrato.start();
-          activeNodes.push(osc, vibrato);
-        });
-      }
-
-      // Track timer count-up
-      currentSeconds = 0;
-      updateTimerDisplay(idx, currentSeconds);
-      timerInterval = setInterval(() => {
-        currentSeconds++;
-        updateTimerDisplay(idx, currentSeconds);
-      }, 1000);
-    }
-
-    function formatTime(sec) {
-      const m = Math.floor(sec / 60);
-      const s = sec % 60;
-      return `${m}:${s < 10 ? '0' : ''}${s}`;
-    }
-
-    function updateTimerDisplay(idx, sec) {
-      const el = document.getElementById(`timer-${idx}`);
-      if (el) el.innerText = formatTime(sec);
-    }
-
-    // Toggle button handler
-    function toggleAudio(idx) {
-      // If clicking already playing track
-      if (currentTrackIdx === idx) {
-        stopCurrentSynth();
-        resetTrackUI(idx);
-        currentTrackIdx = null;
-        return;
-      }
-
-      // If another track was playing, reset it
-      if (currentTrackIdx !== null) {
-        resetTrackUI(currentTrackIdx);
-      }
-
-      // Activate new track
-      currentTrackIdx = idx;
-      setTrackPlayingUI(idx);
-      playTrackSynth(idx);
-    }
-
-    function setTrackPlayingUI(idx) {
-      const playIcon = document.getElementById(`icon-play-${idx}`);
-      const waveIcon = document.getElementById(`icon-wave-${idx}`);
-      if (playIcon) playIcon.classList.add('hidden');
-      if (waveIcon) {
-        waveIcon.classList.remove('hidden');
-        waveIcon.classList.add('flex');
-      }
-    }
-
-    function resetTrackUI(idx) {
-      const playIcon = document.getElementById(`icon-play-${idx}`);
-      const waveIcon = document.getElementById(`icon-wave-${idx}`);
-      const timerEl = document.getElementById(`timer-${idx}`);
-      if (playIcon) playIcon.classList.remove('hidden');
-      if (waveIcon) {
-        waveIcon.classList.remove('flex');
-        waveIcon.classList.add('hidden');
-      }
-      if (timerEl) {
-        timerEl.innerText = tracks[idx].initialText;
-      }
-    }
-  </script>
 </body>
 </html>

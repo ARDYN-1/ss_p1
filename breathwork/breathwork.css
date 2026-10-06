@@ -1558,3 +1558,138 @@ input:checked + .toggle-slider .toggle-label-text {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+/* Shared SOULSPACE theme control and intentional dark palette */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-page: #171e24;
+  --bg-card: #242d35;
+  --bg-subtle: #202a31;
+  --bg-subtle-hover: #2b373e;
+  --bg-pill-active: #35463f;
+  --text-primary: #edf1eb;
+  --text-secondary: #c5d0c8;
+  --text-muted: #a1b1a7;
+  --brand-forest: #91b29b;
+  --brand-forest-hover: #a5c6ac;
+  --brand-sage: #a5c6ac;
+  --brand-sage-light: #293b35;
+  --brand-border: #45564f;
+  --box-lavender-glow: rgba(126, 101, 153, .48);
+  --box-lavender-ring: #a990c4;
+  --box-lavender-track: #40384e;
+  --box-bg-shape: #302a39;
+  --box-shape-border: #51445f;
+  --slow-sage-glow: rgba(102, 145, 116, .42);
+  --slow-sage-ring: #91b99b;
+  --slow-sage-track: #34483d;
+  --slow-bg-shape: #26342d;
+  --slow-shape-border: #405849;
+  --shadow-card: 0 10px 35px rgba(0,0,0,.25);
+}
+html[data-theme] body,.header,.breathwork-container,.technique-card,.guidance-card,.duration-card,.sound-card,.safety-card,.modal-card,.completion-banner { transition:background-color .22s ease,color .22s ease,border-color .22s ease; }
+.header-container { gap:1rem; }
+.practice-header-actions { display:flex; align-items:center; gap:.55rem; margin-left:auto; }
+.practice-home-button,.theme-toggle { min-height:42px; border:1px solid var(--brand-border); border-radius:999px; background:var(--bg-card); color:var(--text-secondary); display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.55rem .9rem; text-decoration:none; font:500 .78rem var(--font-sans); cursor:pointer; box-shadow:0 4px 14px rgba(35,55,43,.08); transition:background-color .2s ease,color .2s ease,border-color .2s ease; }
+.practice-home-button:hover,.theme-toggle:hover { border-color:var(--brand-sage); color:var(--text-primary); }
+.theme-icon { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+html[data-theme="light"] .theme-moon,html[data-theme="dark"] .theme-sun { display:none; }
+html[data-theme="dark"] .ambient-botanical { opacity:.2; }
+html[data-theme="dark"] .header { background-color:rgba(23,30,36,.94); border-color:#45564f; }
+html[data-theme="dark"] .breathwork-container,html[data-theme="dark"] .technique-card,html[data-theme="dark"] .guidance-card,html[data-theme="dark"] .duration-card,html[data-theme="dark"] .sound-card,html[data-theme="dark"] .safety-card,html[data-theme="dark"] .modal-card { background-color:var(--bg-card); border-color:var(--brand-border); color:var(--text-secondary); }
+html[data-theme="dark"] .technique-card.active { background-color:#293831; border-color:#779783; }
+html[data-theme="dark"] .practice-home-button:focus-visible,html[data-theme="dark"] .theme-toggle:focus-visible { outline:3px solid #a990c4; outline-offset:3px; }
+@media (max-width: 480px) {
+  .header { padding-left:1rem; padding-right:1rem; }
+  .practice-header-actions { gap:.35rem; }
+  .practice-home-button,.theme-toggle { min-height:38px; padding:.45rem .62rem; font-size:.72rem; }
+  .logo-text { font-size:1.05rem; letter-spacing:.14em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] body,.header,.breathwork-container,.technique-card,.guidance-card,.duration-card,.sound-card,.safety-card,.modal-card,.completion-banner,.practice-home-button,.theme-toggle { transition:none; }
+}
+
+/* Contrast refinements for the existing dark theme */
+html[data-theme="dark"] {
+  --brand-forest: #54775d;
+  --brand-forest-hover: #63866b;
+}
+html[data-theme="dark"] .header { color:var(--text-primary); }
+html[data-theme="dark"] .page-title,
+html[data-theme="dark"] .sidebar-title,
+html[data-theme="dark"] .technique-title,
+html[data-theme="dark"] .phase-label,
+html[data-theme="dark"] .phase-counter,
+html[data-theme="dark"] .time-display,
+html[data-theme="dark"] .after-practice-heading,
+html[data-theme="dark"] .duration-label,
+html[data-theme="dark"] .sound-title,
+html[data-theme="dark"] .completion-title,
+html[data-theme="dark"] .history-title,
+html[data-theme="dark"] .modal-title,
+html[data-theme="dark"] .modal-question { color:#f0f2ee; }
+html[data-theme="dark"] .page-subtitle,
+html[data-theme="dark"] .technique-subtext,
+html[data-theme="dark"] .cycle-text,
+html[data-theme="dark"] .guidance-list li,
+html[data-theme="dark"] .duration-current,
+html[data-theme="dark"] .sound-sub,
+html[data-theme="dark"] .completion-sub,
+html[data-theme="dark"] .history-subtitle,
+html[data-theme="dark"] .history-item-detail,
+html[data-theme="dark"] .modal-subtitle,
+html[data-theme="dark"] .modal-reflection-field label { color:#c2cbc5; }
+html[data-theme="dark"] .section-kicker,
+html[data-theme="dark"] .technique-badge,
+html[data-theme="dark"] .safety-icon-wrap,
+html[data-theme="dark"] .volume-icon { color:#b6cbb9; }
+html[data-theme="dark"] .breathwork-container,
+html[data-theme="dark"] .technique-card,
+html[data-theme="dark"] .guidance-card,
+html[data-theme="dark"] .duration-card,
+html[data-theme="dark"] .sound-card,
+html[data-theme="dark"] .safety-card,
+html[data-theme="dark"] .history-section,
+html[data-theme="dark"] .modal-card { background-color:#222b33; border-color:#415149; color:#c2cbc5; }
+html[data-theme="dark"] .technique-card { background-color:#202a31; }
+html[data-theme="dark"] .technique-card.active { background-color:#293831; border-color:#779783; }
+html[data-theme="dark"] .technique-badge,
+html[data-theme="dark"] .guidance-icon-wrap,
+html[data-theme="dark"] .sound-icon-wrap,
+html[data-theme="dark"] .completion-lotus-badge { background-color:#303b3d; border-color:#4a5b53; color:#c8d8ca; }
+html[data-theme="dark"] .guidance-icon-wrap svg,
+html[data-theme="dark"] .safety-icon-wrap svg { stroke:#c8d8ca; }
+html[data-theme="dark"] .progress-track { background-color:#3a4748; }
+html[data-theme="dark"] .ctrl-btn.btn-pause,
+html[data-theme="dark"] .ctrl-btn.btn-reset { background-color:#33413e; border-color:#617268; color:#f0f2ee; }
+html[data-theme="dark"] .ctrl-btn.btn-pause:disabled,
+html[data-theme="dark"] .ctrl-btn.btn-reset:disabled,
+html[data-theme="dark"] .ctrl-btn:disabled { background-color:#2a343a; border-color:#43514b; color:#b2beb6; opacity:1; }
+html[data-theme="dark"] .ctrl-btn.btn-start:disabled { background-color:#34463a; color:#c0cbc2; border-color:#43574a; opacity:1; }
+html[data-theme="dark"] .mood-pill,
+html[data-theme="dark"] .modal-mood-btn,
+html[data-theme="dark"] .duration-pill { background-color:#2a353a; border-color:#46574e; color:#d5ddd7; }
+html[data-theme="dark"] .mood-pill:hover,
+html[data-theme="dark"] .modal-mood-btn:hover,
+html[data-theme="dark"] .duration-pill:hover { background-color:#35433d; border-color:#718d79; }
+html[data-theme="dark"] .mood-pill.active,
+html[data-theme="dark"] .modal-mood-btn.active,
+html[data-theme="dark"] .duration-pill.active { background-color:#405746; border-color:#a0b8a4; color:#fff; box-shadow:inset 0 0 0 1px rgba(215,231,217,.24); }
+html[data-theme="dark"] .mood-pill.active::after,
+html[data-theme="dark"] .modal-mood-btn.active::after { content:"✓"; margin-left:.2rem; font-weight:700; color:#edf4ee; }
+html[data-theme="dark"] .toggle-slider { background-color:#55635d; }
+html[data-theme="dark"] .toggle-switch input:checked + .toggle-slider { background-color:#64846a; }
+html[data-theme="dark"] .toggle-slider::before { background-color:#f0f2ee; }
+html[data-theme="dark"] .toggle-label-text { color:#fff; }
+html[data-theme="dark"] .volume-range { background:#596760; }
+html[data-theme="dark"] .volume-range::-webkit-slider-thumb,
+html[data-theme="dark"] .volume-range::-moz-range-thumb { background:#b2cbb5; }
+html[data-theme="dark"] .audio-status-msg { color:#f0b1ae; }
+html[data-theme="dark"] .history-item { background-color:#29343b; border-color:#46564e; }
+html[data-theme="dark"] .completion-banner { background-color:#283a32; border-color:#475b4d; }
+html[data-theme="dark"] .modal-reflection-field textarea { background-color:#1c252d; border-color:#4a5b53; color:#edf1eb; }
+html[data-theme="dark"] .modal-reflection-field textarea::placeholder { color:#9ca9a1; }
+html[data-theme="dark"] .btn-action-secondary { background-color:#33413e; border-color:#617268; color:#edf1eb; }
+html[data-theme="dark"] .nav-mobile { background:rgba(27,36,43,.98); border-color:#45564f; }
+html[data-theme="dark"] .toast-notice { background-color:#35493d; color:#f0f2ee; }
+html[data-theme="dark"] .sidebar-column { border-color:#3e4d47; }

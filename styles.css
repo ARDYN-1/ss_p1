@@ -1699,6 +1699,15 @@ body::after {
 .practice-card[data-practice="Quiet Reflection"] .practice-icon { object-fit: contain; }
 
 .profile-menu { position: relative; flex: 0 0 auto; }
+.soulguru-launch {
+  display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; gap: 8px; min-height: 42px;
+  padding: 0 17px; border: 1px solid #ddd4ed; border-radius: 24px; background: linear-gradient(135deg,#f8f2ff,#edf5f3);
+  color: #51436f; font-weight: 650; cursor: pointer; white-space: nowrap; transition: box-shadow .2s,border-color .2s,transform .2s;
+}
+.soulguru-launch > span:first-child { color: #8670b1; font-size: 17px; }
+.soulguru-launch:hover { border-color: #c2aedf; box-shadow: 0 5px 18px #8670b126; transform: translateY(-1px); }
+:root[data-theme="dark"] .soulguru-launch { border-color: #4a405f; background: linear-gradient(135deg,#2d283b,#243735); color: #e2d8f3; }
+:root[data-theme="dark"] .soulguru-launch > span:first-child { color: #c8a9f0; }
 .profile-toggle {
   display: inline-flex;
   min-height: 37px;
@@ -1758,6 +1767,8 @@ body::after {
 
 @media (max-width: 620px) {
   .profile-toggle { min-height: 34px; gap: 4px; padding: 7px 8px; font-size: 9px; }
+  .soulguru-launch { width: 37px; min-width: 37px; min-height: 34px; gap: 0; padding: 0; }
+  .soulguru-launch-label { display: none; }
   .profile-avatar { width: 13px; height: 13px; }
   .profile-panel { padding: 15px; }
 }

@@ -1,6 +1,8 @@
+import json
 import logging
 import os
 import re
+import uuid
 from datetime import date as date_type, datetime, timedelta, timezone
 from functools import lru_cache
 from pathlib import Path
@@ -18,6 +20,8 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from starlette.responses import Response
 from boto3.dynamodb.conditions import Key
+from backend.soulguru_ai import DEFAULT_GROQ_MODEL, generate_reply
+from backend.soulguru_store import SoulGuruStore, storage_error
 
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -37,6 +41,8 @@ PUBLIC_FILES = {
     "auth.js",
     "styles.css",
     "script.js",
+    "soulguru.js",
+    "soulguru.css",
     "weekly-activity-data.js",
 }
 PUBLIC_ASSET_DIRS = {
@@ -89,6 +95,11 @@ class ActivityInput(BaseModel):
     activity: str
 
 
+class SoulGuruMessageInput(BaseModel):
+    message: str
+    conversation_id: str | None = None
+
+
 @lru_cache(maxsize=2)
 def _dynamodb_resource(region: str) -> Any:
     return boto3.resource("dynamodb", region_name=region)
@@ -114,6 +125,14 @@ def _activity_table():
             detail="Activity storage is not configured. Set AWS_REGION and provide AWS credentials or an IAM role.",
         )
     return _dynamodb_resource(region).Table(table_name)
+
+
+def _soulguru_store() -> SoulGuruStore:
+    table_name = os.getenv("SOULGURU_TABLE", "SOULSPACE_SoulGuru")
+    region = os.getenv("AWS_REGION") or os.getenv("AWS_DEFAULT_REGION")
+    if not region:
+        raise HTTPException(status_code=503, detail="SoulGuru history storage is not configured.")
+    return SoulGuruStore(_dynamodb_resource(region).Table(table_name))
 
 
 def _record_activity(user_id: str, activity: str, activity_date: date_type | None = None) -> None:
@@ -414,6 +433,107 @@ def get_journal(entry_date: date_type, user_id: str = Depends(require_user_id)):
     if not entry:
         raise HTTPException(status_code=404, detail="Journal entry not found.")
     return {"date": entry["date"], "content": entry["content"]}
+
+
+@app.post("/api/soulguru/conversations")
+def create_soulguru_conversation(user_id: str = Depends(require_user_id)):
+    # Return an id for the client session without persisting an empty item.
+    return {"conversation_id": str(uuid.uuid4())}
+
+
+@app.get("/api/soulguru/conversations")
+def list_soulguru_conversations(user_id: str = Depends(require_user_id)):
+    try:
+        conversations = _soulguru_store().list_for_user(user_id)
+    except (ClientError, BotoCoreError, NoCredentialsError, PartialCredentialsError) as error:
+        raise storage_error(error) from None
+    return {"conversations": conversations}
+
+
+@app.get("/api/soulguru/conversations/{conversation_id}")
+def get_soulguru_conversation(conversation_id: str, user_id: str = Depends(require_user_id)):
+    try:
+        conversation = _soulguru_store().get(user_id, conversation_id)
+    except (ClientError, BotoCoreError, NoCredentialsError, PartialCredentialsError) as error:
+        raise storage_error(error) from None
+    if not conversation:
+        raise HTTPException(status_code=404, detail="Conversation not found.")
+    return {"conversation": conversation}
+
+
+@app.delete("/api/soulguru/conversations/{conversation_id}")
+def delete_soulguru_conversation(conversation_id: str, user_id: str = Depends(require_user_id)):
+    try:
+        _soulguru_store().delete(user_id, conversation_id)
+    except (ClientError, BotoCoreError, NoCredentialsError, PartialCredentialsError) as error:
+        raise storage_error(error) from None
+    return {"deleted": True}
+
+
+@app.post("/api/soulguru/chat")
+async def soulguru_chat(body: SoulGuruMessageInput, user_id: str = Depends(require_user_id)):
+    message = body.message.strip()
+    if not message:
+        raise HTTPException(status_code=422, detail="Write a message before sending.")
+    if len(message) > 2_000:
+        raise HTTPException(status_code=413, detail="Please keep each message under 2,000 characters.")
+
+    conversation_id = body.conversation_id or str(uuid.uuid4())
+    try:
+        uuid.UUID(conversation_id)
+    except (ValueError, AttributeError):
+        raise HTTPException(status_code=422, detail="That conversation could not be opened. Start a new conversation.") from None
+
+    store = _soulguru_store()
+    now = datetime.now(timezone.utc).isoformat()
+    try:
+        conversation = store.get(user_id, conversation_id)
+    except (ClientError, BotoCoreError, NoCredentialsError, PartialCredentialsError) as error:
+        raise storage_error(error) from None
+
+    if conversation is None:
+        conversation = {
+            "user_id": user_id,
+            "conversation_id": conversation_id,
+            "title": " ".join(message.split())[:60],
+            "created_at": now,
+            "updated_at": now,
+            "message_count": 0,
+            "messages": [],
+        }
+    messages = conversation.get("messages", [])
+    if not isinstance(messages, list):
+        logger.error("SoulGuru conversation has an invalid message collection.")
+        raise HTTPException(status_code=503, detail="This conversation is temporarily unavailable.")
+
+    user_message = {"role": "user", "content": message, "timestamp": now}
+    model_context = [
+        {"role": item.get("role"), "content": item.get("content")}
+        for item in messages[-20:]
+        if isinstance(item, dict)
+        and item.get("role") in {"user", "assistant"}
+        and isinstance(item.get("content"), str)
+    ]
+    model_context.append({"role": "user", "content": message})
+    answer = await generate_reply(model_context)
+    assistant_message = {"role": "assistant", "content": answer, "timestamp": datetime.now(timezone.utc).isoformat()}
+    conversation["messages"] = [*messages, user_message, assistant_message]
+    conversation["message_count"] = len(conversation["messages"])
+    conversation["updated_at"] = assistant_message["timestamp"]
+    # DynamoDB limits an item to 400 KB; keep headroom for attribute names and encoding.
+    if len(json.dumps(conversation, ensure_ascii=False).encode("utf-8")) > 350_000:
+        raise HTTPException(status_code=413, detail="This conversation has reached its storage limit. Please start a new conversation.")
+    try:
+        store.save(conversation)
+    except (ClientError, BotoCoreError, NoCredentialsError, PartialCredentialsError) as error:
+        raise storage_error(error) from None
+    return {
+        "conversation_id": conversation_id,
+        "title": conversation["title"],
+        "messages": conversation["messages"],
+        "reply": answer,
+        "model": os.getenv("GROQ_MODEL", DEFAULT_GROQ_MODEL),
+    }
 
 
 @app.api_route(

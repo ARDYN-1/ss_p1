@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Audio settings
     soundEnabled: true,
-    volume: 0.7,
+    volume: 0.3,
     audioAvailable: true,
     
     // Selected mood
@@ -193,44 +193,30 @@ document.addEventListener('DOMContentLoaded', () => {
   // Audio Initialization & Error Handling
   // --------------------------------------------------------------------------
   function setupAudioFiles() {
-    const audioElements = [audioInhale, audioHold, audioExhale];
-
-    audioElements.forEach(audio => {
-      if (!audio) return;
-      audio.volume = state.volume;
-
-      audio.addEventListener('error', () => {
-        state.audioAvailable = false;
-        if (audioStatusMsg) {
-          audioStatusMsg.textContent = 'Breathing sounds are currently unavailable.';
-        }
-      });
-
-      audio.load();
+    if (!audioInhale) return;
+    audioInhale.volume = state.volume;
+    audioInhale.loop = true;
+    audioInhale.addEventListener('error', () => {
+      state.audioAvailable = false;
+      if (audioStatusMsg) audioStatusMsg.textContent = 'Breathing sounds are currently unavailable.';
     });
   }
 
-  function playPhaseSound(soundType) {
+  function startBreathingAudio() {
     if (!state.soundEnabled) return;
-
-    let targetAudio = null;
-    if (soundType === 'inhale') targetAudio = audioInhale;
-    else if (soundType === 'hold') targetAudio = audioHold;
-    else if (soundType === 'exhale') targetAudio = audioExhale;
-
-    if (targetAudio && state.audioAvailable) {
-      targetAudio.volume = state.volume;
-      targetAudio.currentTime = 0;
-      const playPromise = targetAudio.play();
-
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          playZenTone(soundType);
-        });
-      }
-    } else {
-      playZenTone(soundType);
+    if (!audioInhale || !state.audioAvailable) {
+      playZenTone('inhale');
+      return;
     }
+    audioInhale.volume = state.volume;
+    if (audioInhale.paused) {
+      audioInhale.currentTime = 0;
+      audioInhale.play().catch(() => playZenTone('inhale'));
+    }
+  }
+
+  function playPhaseSound(soundType) {
+    if (soundType === 'inhale') startBreathingAudio();
   }
 
   function pauseAllAudio() {
@@ -428,6 +414,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tech = TECHNIQUES[state.currentTechnique];
     const currentPhase = tech.phases[state.currentPhaseIndex];
 
+    startBreathingAudio();
     playPhaseSound(currentPhase.sound);
     applyBreathingCircleAnimation(currentPhase.action, currentPhase.duration);
     updatePhaseText(currentPhase.name, state.phaseRemainingSeconds);
@@ -626,8 +613,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   volumeSlider.addEventListener('input', (e) => {
     state.volume = e.target.value / 100;
-    [audioInhale, audioHold, audioExhale].forEach(a => {
-      if (a) a.volume = state.volume;
+    [audioInhale, audioHold, audioExhale].forEach(audio => {
+      if (audio) audio.volume = state.volume;
     });
   });
 

@@ -1867,3 +1867,54 @@ body {
     justify-content: space-between;
   }
 }
+
+/* Shared SOULSPACE theme control and intentional dark palette */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-page: #171e24;
+  --bg-card: #242d35;
+  --bg-card-subtle: #202a31;
+  --bg-card-hover: #2b373e;
+  --bg-pill-active: #35463f;
+  --bg-pill-subtle: #29343a;
+  --color-primary-sage: #a5c6ac;
+  --color-primary-dark: #c2d3c4;
+  --color-primary-deep: #e3eae3;
+  --color-sage-light: #91b29b;
+  --color-sage-border: #45564f;
+  --color-sage-border-subtle: #394941;
+  --color-sage-glow: rgba(130, 173, 142, .2);
+  --color-text-dark: #edf1eb;
+  --color-text-body: #c5d0c8;
+  --color-text-muted: #a1b1a7;
+  --color-text-light: #91a098;
+  --color-lavender-tint: #342e40;
+  --color-lavender-accent: #bdabd0;
+  --color-blush-tint: #382e36;
+  --color-warm-gold: #e2bb78;
+  --shadow-card: 0 10px 32px rgba(0,0,0,.25);
+  --shadow-feature: 0 18px 48px rgba(0,0,0,.3);
+}
+html[data-theme] body,.feature-card,.practice-card,.practice-mode-card,.reflection-modal { transition:background-color .22s ease,color .22s ease,border-color .22s ease; }
+.header-container { justify-content:space-between; gap:1rem; }
+.practice-header-actions { display:flex; align-items:center; gap:.55rem; }
+.practice-home-button,.theme-toggle { min-height:42px; border:1px solid var(--color-sage-border); border-radius:999px; background:var(--bg-card); color:var(--color-text-body); display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.55rem .9rem; text-decoration:none; font:500 .78rem var(--font-sans); cursor:pointer; box-shadow:0 4px 14px rgba(35,55,43,.08); transition:background-color .2s ease,color .2s ease,border-color .2s ease; }
+.practice-home-button:hover,.theme-toggle:hover { border-color:var(--color-primary-sage); color:var(--color-text-dark); }
+.theme-icon { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+html[data-theme="light"] .theme-moon,html[data-theme="dark"] .theme-sun { display:none; }
+html[data-theme="dark"] .ambient-botanical { opacity:.2; }
+html[data-theme="dark"] .site-header { background-color:rgba(23,30,36,.94); border-color:#45564f; }
+html[data-theme="dark"] .practice-card,html[data-theme="dark"] .feature-card,html[data-theme="dark"] .practice-mode-card,html[data-theme="dark"] .reflection-modal { background-color:var(--bg-card); border-color:var(--color-sage-border); color:var(--color-text-body); }
+html[data-theme="dark"] .practice-card.active { background-color:#293831; border-color:#779783; }
+html[data-theme="dark"] .practice-home-button:focus-visible,html[data-theme="dark"] .theme-toggle:focus-visible { outline:3px solid #a990c4; outline-offset:3px; }
+@media (max-width: 600px) {
+  .site-header { padding:14px 16px; }
+  .brand-logo { gap:7px; }
+  .brand-name { font-size:.94rem; letter-spacing:.15em; }
+  .lotus-icon { width:32px; }
+  .practice-header-actions { gap:.35rem; }
+  .practice-home-button,.theme-toggle { min-height:38px; padding:.45rem .62rem; font-size:.72rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] body,.feature-card,.practice-card,.practice-mode-card,.reflection-modal,.practice-home-button,.theme-toggle { transition:none; }
+}

@@ -1211,3 +1211,50 @@ input:checked + .slider:before {
     opacity: 0.45;
   }
 }
+
+/* Shared SOULSPACE theme control and intentional dark palette */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-warm-ivory: #171e24;
+  --bg-card-white: #242d35;
+  --bg-card-tint: #202a31;
+  --bg-card-hover: #2b373e;
+  --bg-pill-active: #35463f;
+  --bg-pill-selected: #70907a;
+  --color-primary-sage: #a5c6ac;
+  --color-primary-dark: #c2d3c4;
+  --color-sage-light: #91b29b;
+  --color-sage-border: #45564f;
+  --color-sage-pill-bg: #293b35;
+  --color-text-dark: #edf1eb;
+  --color-text-body: #c5d0c8;
+  --color-text-muted: #a1b1a7;
+  --color-text-light: #91a098;
+  --color-lavender-tint: #342e40;
+  --color-lavender-accent: #bdabd0;
+  --shadow-card: 0 20px 48px -8px rgba(0, 0, 0, .28), 0 4px 16px rgba(0, 0, 0, .12);
+}
+html[data-theme] body,.meditation-card,.guidance-card,.ambient-sound-card,.reflection-modal,.reflections-list-modal { transition: background-color .22s ease, color .22s ease, border-color .22s ease; }
+.header-container { justify-content: space-between; gap: 1rem; }
+.practice-header-actions { display:flex; align-items:center; gap:.55rem; }
+.practice-home-button,.theme-toggle { min-height:42px; border:1px solid var(--color-sage-border); border-radius:999px; background:var(--bg-card-white); color:var(--color-text-body); display:inline-flex; align-items:center; justify-content:center; gap:.5rem; padding:.55rem .9rem; text-decoration:none; font:500 .78rem var(--font-sans); cursor:pointer; box-shadow:0 4px 14px rgba(35,55,43,.08); transition:background-color .2s ease,color .2s ease,border-color .2s ease; }
+.practice-home-button:hover,.theme-toggle:hover { border-color:var(--color-primary-sage); color:var(--color-text-dark); }
+.theme-icon { width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+html[data-theme="light"] .theme-moon,html[data-theme="dark"] .theme-sun { display:none; }
+html[data-theme="dark"] .botanical-bg { opacity:.22; }
+html[data-theme="dark"] .meditation-card,html[data-theme="dark"] .guidance-card,html[data-theme="dark"] .ambient-sound-card,html[data-theme="dark"] .reflection-modal,html[data-theme="dark"] .reflections-list-modal { background-color:var(--bg-card-white); border-color:var(--color-sage-border); color:var(--color-text-body); }
+html[data-theme="dark"] .duration-option,html[data-theme="dark"] .mood-btn,html[data-theme="dark"] .modal-mood-btn,html[data-theme="dark"] .reflection-item { background-color:var(--bg-card-tint); border-color:var(--color-sage-border); color:var(--color-text-body); }
+html[data-theme="dark"] .selected-duration-badge,html[data-theme="dark"] .duration-option.is-selected { background-color:var(--bg-pill-active); color:var(--color-text-dark); }
+html[data-theme="dark"] .btn-ctrl.btn-secondary,html[data-theme="dark"] .btn-action:not(.btn-save-practice),html[data-theme="dark"] .btn-secondary-modal { background-color:#34423f; color:#edf1eb; border-color:#52655d; }
+.theme-toggle:focus-visible,.practice-home-button:focus-visible { outline:3px solid #9e83c0; outline-offset:3px; }
+@media (max-width: 480px) {
+  .site-header { padding:12px 14px; }
+  .brand-logo { gap:7px; }
+  .brand-name { font-size:.94rem; letter-spacing:.15em; }
+  .lotus-icon { width:32px; }
+  .practice-header-actions { gap:.35rem; }
+  .practice-home-button,.theme-toggle { min-height:38px; padding:.45rem .62rem; font-size:.72rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] body,.meditation-card,.guidance-card,.ambient-sound-card,.reflection-modal,.reflections-list-modal,.practice-home-button,.theme-toggle { transition:none; }
+}

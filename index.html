@@ -66,6 +66,9 @@
       </div>
       <button class="header-cta" type="button" data-open-finder>Find My Practice <span
           aria-hidden="true">↗</span></button>
+      <button class="soulguru-launch" id="soulguru-launch" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="soulguru-overlay">
+        <span aria-hidden="true">✦</span><span class="soulguru-launch-label">SoulGuru</span>
+      </button>
       <p class="site-auth-status" id="site-auth-status" role="alert" hidden></p>
     </div>
   </header>
@@ -294,9 +297,50 @@
     </section>
   </dialog>
   <div class="toast" role="status" aria-live="polite"></div>
+  <div class="soulguru-overlay" id="soulguru-overlay" hidden>
+    <section class="soulguru-dialog" role="dialog" aria-modal="true" aria-labelledby="soulguru-title" aria-describedby="soulguru-tagline" tabindex="-1">
+      <header class="soulguru-header">
+        <div class="soulguru-brand"><span class="soulguru-mark" aria-hidden="true">✦</span><div><h2 id="soulguru-title">SoulGuru</h2><p id="soulguru-tagline">Your gentle guide to a calmer mind.</p></div></div>
+        <div class="soulguru-header-actions">
+          <button type="button" class="sg-secondary" id="soulguru-new">New Conversation</button>
+          <button type="button" class="sg-secondary" id="soulguru-history-toggle" aria-expanded="false" aria-controls="soulguru-history">History</button>
+          <button type="button" class="sg-close" id="soulguru-close" aria-label="Close SoulGuru">×</button>
+        </div>
+      </header>
+      <div class="soulguru-workspace">
+        <main class="soulguru-main">
+          <div class="soulguru-messages" id="soulguru-messages" aria-live="polite" aria-relevant="additions text">
+            <section class="soulguru-welcome" id="soulguru-welcome">
+              <span class="soulguru-welcome-mark" aria-hidden="true">✦</span>
+              <h3>Welcome to SoulGuru. ✦</h3>
+              <p>Take a slow breath.</p>
+              <p>You don't have to solve everything right now.<br class="sg-desktop-break"> Tell me what's on your mind, and we'll take it one moment at a time.</p>
+              <div class="soulguru-prompts" aria-label="Suggested messages">
+                <button type="button">How can I calm my mind?</button><button type="button">I'm feeling stressed</button>
+                <button type="button">Help me meditate</button><button type="button">I can't stop overthinking</button>
+                <button type="button">Give me a moment of peace</button><button type="button">Help me let go</button>
+              </div>
+            </section>
+          </div>
+          <p class="soulguru-error" id="soulguru-error" role="alert" hidden></p>
+          <form class="soulguru-composer" id="soulguru-form">
+            <label class="visually-hidden" for="soulguru-input">Message SoulGuru</label>
+            <textarea id="soulguru-input" rows="1" maxlength="2000" placeholder="Share what's on your mind..." required></textarea>
+            <button type="submit" id="soulguru-send" aria-label="Send message"><span aria-hidden="true">↑</span></button>
+            <p>One moment at a time · SoulGuru is a gentle reflection companion</p>
+          </form>
+        </main>
+        <aside class="soulguru-history" id="soulguru-history" aria-label="SoulGuru history" hidden>
+          <div class="soulguru-history-heading"><div><p class="sg-kicker">YOUR PRIVATE SPACE</p><h3>SoulGuru History</h3></div><button type="button" id="soulguru-history-close" aria-label="Close history">×</button></div>
+          <div class="soulguru-history-list" id="soulguru-history-list"><p class="sg-history-empty">Your conversations will appear here.</p></div>
+        </aside>
+      </div>
+    </section>
+  </div>
   <script src="auth.js"></script>
   <script src="weekly-activity-data.js"></script>
   <script src="script.js"></script>
+  <script src="soulguru.js" defer></script>
 </body>
 
 </html>

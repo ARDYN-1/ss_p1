@@ -1,0 +1,93 @@
+.soulguru-overlay { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 22px; background: rgba(18,17,31,.46); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); opacity: 0; transition: opacity .24s ease; }
+.soulguru-overlay.is-open { opacity: 1; }
+.soulguru-dialog { --sg-ink:#302d42; --sg-muted:#777487; --sg-line:#e8e3ef; --sg-panel:rgba(255,255,255,.88); --sg-soft:#f5f1fa; --sg-accent:#745d9a; --sg-teal:#4e837c; position:relative; width:min(980px,100%); height:min(760px,calc(100dvh - 44px)); min-height:440px; display:flex; flex-direction:column; overflow:hidden; border:1px solid rgba(255,255,255,.76); border-radius:25px; color:var(--sg-ink); background:linear-gradient(145deg,#fbf9ff 0%,#f6f4fa 52%,#edf6f2 100%); box-shadow:0 30px 100px #14102255; transform:scale(.97); transition:transform .24s ease; outline:none; }
+.is-open .soulguru-dialog { transform:scale(1); }
+:root[data-theme="dark"] .soulguru-dialog { --sg-ink:#eeeaf5; --sg-muted:#b0adbd; --sg-line:#3d3a4d; --sg-panel:rgba(34,32,49,.91); --sg-soft:#302c40; --sg-accent:#c3a8e5; --sg-teal:#8cc8be; border-color:#49445a; background:linear-gradient(145deg,#242236 0%,#25243b 56%,#1e3335 100%); box-shadow:0 30px 100px #0009; }
+.soulguru-header { display:flex; align-items:center; justify-content:space-between; gap:18px; min-height:84px; padding:17px 22px; border-bottom:1px solid var(--sg-line); background:var(--sg-panel); }
+.soulguru-brand { display:flex; align-items:center; gap:12px; min-width:0; }
+.soulguru-mark,.soulguru-welcome-mark { display:grid; place-items:center; flex:none; width:40px; height:40px; border:1px solid #ded4ef; border-radius:50%; color:#846ba9; background:linear-gradient(145deg,#f3eaff,#e4f2ef); box-shadow:0 4px 15px #8069a320; font-size:21px; }
+:root[data-theme="dark"] .soulguru-mark,:root[data-theme="dark"] .soulguru-welcome-mark { border-color:#55486a; color:#d4b9f1; background:linear-gradient(145deg,#39304c,#294543); }
+.soulguru-brand h2 { margin:0; font:600 22px/1.15 var(--serif,Georgia,serif); letter-spacing:-.3px; }
+.soulguru-brand p { margin:5px 0 0; color:var(--sg-muted); font-size:12px; }
+.soulguru-header-actions { display:flex; align-items:center; gap:8px; }
+.sg-secondary,.sg-close,.soulguru-history-heading button { min-height:37px; border:1px solid var(--sg-line); border-radius:19px; color:var(--sg-ink); background:var(--sg-panel); cursor:pointer; transition:background .18s,border-color .18s; }
+.sg-secondary { padding:0 14px; font-size:12px; }
+.sg-secondary:hover,.sg-close:hover,.soulguru-history-heading button:hover { border-color:#c9b7df; background:var(--sg-soft); }
+.sg-close { width:38px; padding:0; font-size:24px; line-height:1; }
+.soulguru-workspace { position:relative; display:flex; flex:1; min-height:0; }
+.soulguru-main { display:flex; flex:1; min-width:0; flex-direction:column; }
+.soulguru-messages { flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; padding:32px clamp(18px,5vw,62px) 20px; scroll-behavior:smooth; }
+.soulguru-welcome { max-width:650px; margin:5px auto 22px; text-align:center; }
+.soulguru-welcome-mark { width:48px; height:48px; margin:0 auto 17px; font-size:24px; }
+.soulguru-welcome h3 { margin:0 0 13px; color:var(--sg-ink); font:500 clamp(23px,3vw,31px)/1.2 var(--serif,Georgia,serif); }
+.soulguru-welcome p { margin:7px auto; max-width:560px; color:var(--sg-muted); font-size:14px; line-height:1.65; }
+.soulguru-welcome p:first-of-type { color:var(--sg-teal); font-weight:650; }
+.soulguru-prompts { display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin:23px auto 0; }
+.soulguru-prompts button { padding:10px 14px; border:1px solid var(--sg-line); border-radius:22px; color:var(--sg-ink); background:var(--sg-panel); cursor:pointer; font-size:12px; transition:transform .18s,border-color .18s,background .18s; }
+.soulguru-prompts button:hover { transform:translateY(-1px); border-color:#c7b3df; background:var(--sg-soft); }
+.soulguru-message { display:flex; align-items:flex-start; gap:10px; max-width:760px; margin:0 auto 17px; }
+.soulguru-message.is-user { justify-content:flex-end; }
+.soulguru-message-icon { display:grid; place-items:center; flex:none; width:28px; height:28px; margin-top:5px; border:1px solid var(--sg-line); border-radius:50%; color:var(--sg-accent); background:var(--sg-soft); font-size:13px; }
+.soulguru-bubble { max-width:min(82%,620px); padding:13px 16px; border:1px solid var(--sg-line); border-radius:18px 18px 18px 5px; color:var(--sg-ink); background:var(--sg-panel); box-shadow:0 5px 18px #37304d0a; font-size:14px; line-height:1.65; overflow-wrap:anywhere; }
+.is-user .soulguru-bubble { border-color:#ddd1ed; border-radius:18px 18px 5px 18px; background:linear-gradient(135deg,#eee6f8,#e6f1ef); }
+:root[data-theme="dark"] .is-user .soulguru-bubble { border-color:#514567; background:linear-gradient(135deg,#39314c,#29403f); }
+.soulguru-bubble p { margin:0 0 8px; white-space:pre-wrap; }
+.soulguru-bubble p:last-child { margin-bottom:0; }
+.soulguru-bubble ul { margin:5px 0 8px; padding-left:21px; }
+.soulguru-bubble li { padding:2px 0; }
+.soulguru-timestamp { display:block; margin-top:7px; color:var(--sg-muted); font-size:10px; }
+.soulguru-typing { color:var(--sg-muted); font-size:13px; font-style:italic; }
+.soulguru-composer { display:grid; grid-template-columns:minmax(0,1fr) 44px; align-items:center; gap:10px; margin:0 clamp(16px,4vw,48px) 12px; padding:12px 13px 7px 17px; border:1px solid var(--sg-line); border-radius:19px; background:var(--sg-panel); box-shadow:0 8px 26px #34304612; }
+.soulguru-composer textarea { width:100%; max-height:130px; min-height:35px; resize:none; border:0; outline:0; color:var(--sg-ink); background:transparent; font:14px/1.5 var(--sans,Arial,sans-serif); }
+.soulguru-composer textarea::placeholder { color:var(--sg-muted); opacity:1; }
+.soulguru-composer > button { width:42px; height:42px; border:0; border-radius:50%; color:white; background:linear-gradient(140deg,#7d66a6,#4e8880); cursor:pointer; font-size:23px; }
+.soulguru-composer > button:disabled { opacity:.48; cursor:wait; }
+.soulguru-composer > p { grid-column:1/-1; margin:0; padding:0 0 2px; color:var(--sg-muted); font-size:10px; text-align:center; }
+.soulguru-error { margin:0 clamp(16px,4vw,48px) 12px; color:#9c4f56; font-size:12px; }
+:root[data-theme="dark"] .soulguru-error { color:#f0aeb3; }
+.soulguru-retry { margin-left:8px; border:0; color:var(--sg-accent); background:none; cursor:pointer; text-decoration:underline; }
+.soulguru-history { position:absolute; z-index:2; inset:0 0 0 auto; display:flex; width:min(350px,88%); flex-direction:column; border-left:1px solid var(--sg-line); background:var(--sg-panel); box-shadow:-18px 0 48px #15102418; }
+.soulguru-history-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:23px 19px 15px; border-bottom:1px solid var(--sg-line); }
+.soulguru-history-heading h3 { margin:4px 0 0; font:500 20px var(--serif,Georgia,serif); }
+.soulguru-history-heading button { width:34px; min-height:34px; padding:0; font-size:21px; }
+.sg-kicker { margin:0; color:var(--sg-teal); font-size:9px; font-weight:700; letter-spacing:1.3px; }
+.soulguru-history-list { flex:1; min-height:0; overflow:auto; padding:10px 12px 18px; }
+.sg-history-group { margin:12px 0 5px; padding:0 8px; color:var(--sg-muted); font-size:10px; font-weight:700; letter-spacing:.9px; text-transform:uppercase; }
+.sg-history-item { display:grid; grid-template-columns:minmax(0,1fr) 34px; align-items:center; gap:6px; margin:3px 0; padding:4px; border-radius:12px; }
+.sg-history-item:hover,.sg-history-item.is-active { background:var(--sg-soft); }
+.sg-history-open { min-width:0; padding:7px 9px; border:0; color:var(--sg-ink); background:none; text-align:left; cursor:pointer; }
+.sg-history-title { display:block; overflow:hidden; font-size:12px; font-weight:650; text-overflow:ellipsis; white-space:nowrap; }
+.sg-history-date { display:block; margin-top:4px; color:var(--sg-muted); font-size:10px; }
+.sg-history-delete { width:31px; height:31px; border:1px solid transparent; border-radius:50%; color:var(--sg-muted); background:transparent; cursor:pointer; }
+.sg-history-delete:hover { border-color:#d7b8c2; color:#a54e5a; background:#fbedf0; }
+:root[data-theme="dark"] .sg-history-delete:hover { color:#f0aeb3; background:#442e3b; }
+.sg-history-empty { padding:16px 9px; color:var(--sg-muted); font-size:12px; line-height:1.6; }
+.soulguru-overlay [hidden] { display:none !important; }
+@media (max-width:560px) {
+  .soulguru-overlay { display:block; padding:0; background:rgba(14,13,25,.55); backdrop-filter:blur(5px); -webkit-backdrop-filter:blur(5px); }
+  .soulguru-dialog { width:100%; height:var(--sg-viewport-height,100dvh); min-height:0; border:0; border-radius:0; padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom); transform:translateY(8px); }
+  .is-open .soulguru-dialog { transform:translateY(0); }
+  .soulguru-header { min-height:72px; gap:8px; padding:11px 12px; }
+  .soulguru-brand { gap:8px; }
+  .soulguru-mark { width:34px; height:34px; font-size:18px; }
+  .soulguru-brand h2 { font-size:19px; }
+  .soulguru-brand p { max-width:150px; margin-top:3px; font-size:9px; }
+  .soulguru-header-actions { gap:5px; }
+  .sg-secondary { min-height:33px; padding:0 9px; font-size:10px; }
+  .sg-close { width:32px; min-height:32px; font-size:21px; }
+  .soulguru-messages { padding:22px 14px 13px; }
+  .soulguru-welcome { margin:9px auto 19px; }
+  .soulguru-welcome h3 { font-size:25px; }
+  .soulguru-welcome p { font-size:13px; }
+  .sg-desktop-break { display:none; }
+  .soulguru-prompts { gap:7px; margin-top:19px; }
+  .soulguru-prompts button { padding:9px 11px; font-size:11px; }
+  .soulguru-bubble { max-width:88%; padding:11px 13px; font-size:13px; }
+  .soulguru-composer { grid-template-columns:minmax(0,1fr) 40px; margin:0 10px calc(8px + env(safe-area-inset-bottom)); padding:9px 9px 6px 13px; }
+  .soulguru-composer > button { width:39px; height:39px; }
+  .soulguru-composer textarea { font-size:16px; }
+  .soulguru-history { inset:0; width:100%; border-left:0; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .soulguru-overlay,.soulguru-dialog,.soulguru-launch,.soulguru-prompts button { transition:none !important; }
+}
