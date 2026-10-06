@@ -1,5 +1,6 @@
 import logging
 import os
+import re
 from datetime import date as date_type, datetime, timedelta, timezone
 from functools import lru_cache
 from pathlib import Path
@@ -12,7 +13,7 @@ from botocore.exceptions import BotoCoreError, ClientError, NoCredentialsError, 
 from clerk_backend_api import Clerk
 from clerk_backend_api.security.types import AuthenticateRequestOptions
 from dotenv import load_dotenv
-from fastapi import Depends, FastAPI, HTTPException, Request
+from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from starlette.responses import Response
@@ -61,6 +62,22 @@ HOP_BY_HOP_HEADERS = {
 }
 
 app = FastAPI(title="SoulSpace Journal API", docs_url=None, redoc_url=None, openapi_url=None)
+YOUTUBE_SEARCH_URL = "https://www.googleapis.com/youtube/v3/search"
+YOUTUBE_VIDEO_ID_PATTERN = re.compile(r"^[A-Za-z0-9_-]{11}$")
+YOUTUBE_SAFE_ERROR_REASONS = {
+    "accessNotConfigured",
+    "backendError",
+    "badRequest",
+    "dailyLimitExceeded",
+    "forbidden",
+    "internalError",
+    "ipRefererBlocked",
+    "keyInvalid",
+    "quotaExceeded",
+    "rateLimitExceeded",
+    "serviceUnavailable",
+    "userRateLimitExceeded",
+}
 
 
 class JournalInput(BaseModel):
@@ -209,6 +226,89 @@ def auth_config():
 
     proxy_url = os.getenv("VITE_CLERK_PROXY_URL")
     return {"publishableKey": publishable_key, "proxyUrl": proxy_url}
+
+
+@app.get("/api/youtube/search")
+async def search_youtube_stories(q: str = Query(..., min_length=1, max_length=120)):
+    query = q.strip()
+    if not query:
+        raise HTTPException(status_code=422, detail="A non-empty sleep-story search is required.")
+
+    api_key = os.getenv("YOUTUBE_API_KEY")
+    if not api_key or not api_key.strip() or "YOUR_KEY" in api_key or "<" in api_key:
+        raise HTTPException(status_code=503, detail="Sleep story search is not configured on this server.")
+
+    params = {
+        "part": "snippet",
+        "type": "video",
+        "maxResults": 6,
+        "videoEmbeddable": "true",
+        "q": query,
+        "key": api_key,
+    }
+    try:
+        async with httpx.AsyncClient(timeout=httpx.Timeout(8.0, connect=3.0)) as client:
+            response = await client.get(YOUTUBE_SEARCH_URL, params=params)
+    except httpx.HTTPError as error:
+        logger.error("YouTube story search request failed (%s).", type(error).__name__)
+        raise HTTPException(status_code=503, detail="Unable to find stories right now. Please try again.") from None
+
+    try:
+        payload = response.json()
+    except ValueError:
+        if response.is_error:
+            payload = {}
+        else:
+            logger.warning("YouTube story search returned an invalid response body.")
+            raise HTTPException(status_code=503, detail="Unable to find stories right now. Please try again.") from None
+
+    if response.is_error:
+        error = payload.get("error") if isinstance(payload, dict) else None
+        provider_errors = error.get("errors", []) if isinstance(error, dict) else []
+        raw_reason = next(
+            (
+                entry.get("reason")
+                for entry in provider_errors
+                if isinstance(entry, dict) and isinstance(entry.get("reason"), str)
+            ),
+            "",
+        )
+        reason = raw_reason if raw_reason in YOUTUBE_SAFE_ERROR_REASONS else "provider_error"
+        logger.warning("YouTube story search failed (status %s, reason %s).", response.status_code, reason)
+        if reason in {"keyInvalid", "accessNotConfigured", "ipRefererBlocked", "forbidden"}:
+            raise HTTPException(status_code=503, detail="Sleep story search is not configured correctly.")
+        raise HTTPException(status_code=503, detail="Unable to find stories right now. Please try again.")
+
+    raw_items = payload.get("items", []) if isinstance(payload, dict) else []
+    items = []
+    if isinstance(raw_items, list):
+        for entry in raw_items:
+            if not isinstance(entry, dict):
+                continue
+            video_data = entry.get("id")
+            snippet = entry.get("snippet")
+            video_id = video_data.get("videoId") if isinstance(video_data, dict) else None
+            if not isinstance(video_id, str) or not YOUTUBE_VIDEO_ID_PATTERN.fullmatch(video_id):
+                continue
+            if not isinstance(snippet, dict):
+                continue
+
+            title = snippet.get("title")
+            channel_title = snippet.get("channelTitle")
+            description = snippet.get("description")
+            if not isinstance(title, str) or not title.strip():
+                continue
+            items.append({
+                "videoId": video_id,
+                "title": title.strip()[:300],
+                "description": description.strip()[:400] if isinstance(description, str) else "",
+                "thumbnail": f"https://i.ytimg.com/vi/{video_id}/hqdefault.jpg",
+                "channelTitle": channel_title.strip()[:120] if isinstance(channel_title, str) else "YouTube creator",
+            })
+            if len(items) == 6:
+                break
+
+    return {"query": query, "items": items}
 
 
 @app.post("/api/journals/")

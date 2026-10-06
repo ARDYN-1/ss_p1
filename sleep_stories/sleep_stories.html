@@ -49,6 +49,64 @@
       </div>
     </section>
 
+    <section class="discovery page-width" aria-label="Sleep story discovery">
+      <article class="tonight-panel">
+        <div class="tonight-copy">
+          <p class="eyebrow">TONIGHT’S STORY</p>
+          <h2>Blue Gold</h2>
+          <p>Stephen Fry leads a gentle journey through the lavender fields of Provence.</p>
+          <p class="story-credit">Calm · narrated by Stephen Fry</p>
+          <button class="tonight-button" type="button" data-play-featured>Start Story</button>
+        </div>
+        <div class="story-player tonight-player" data-video-id="5mGifCwig8I" data-story-title="Blue Gold">
+          <button class="story-poster" type="button" aria-label="Play Tonight’s Story: Blue Gold">
+            <img src="https://i.ytimg.com/vi/5mGifCwig8I/hqdefault.jpg" alt="Blue Gold sleep story thumbnail" width="480" height="360" loading="lazy" decoding="async" />
+            <span class="poster-shade" aria-hidden="true"></span>
+            <span class="play-button" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 6 10 6-10 6V6Z" /></svg></span>
+          </button>
+        </div>
+      </article>
+
+      <section class="discovery-panel mood-panel" aria-labelledby="mood-title">
+        <div class="section-heading discovery-heading">
+          <div><p class="eyebrow">A STORY TO MATCH YOUR MOMENT</p><h2 id="mood-title">How do you want to sleep tonight?</h2></div>
+          <p class="section-note">Choose a mood and discover a story for tonight.</p>
+        </div>
+        <div class="choice-list" role="group" aria-label="Choose your sleep story mood">
+          <button class="choice-chip" type="button" data-mood-query="sleep stories relaxation" aria-pressed="false">🌙 Drift Away</button>
+          <button class="choice-chip" type="button" data-mood-query="cozy bedtime stories" aria-pressed="false">🧸 Cozy</button>
+          <button class="choice-chip" type="button" data-mood-query="dreamy sleep stories" aria-pressed="false">✨ Dreamy</button>
+          <button class="choice-chip" type="button" data-mood-query="peaceful sleep stories" aria-pressed="false">🕊️ Peaceful</button>
+          <button class="choice-chip" type="button" data-mood-query="fantasy sleep stories" aria-pressed="false">🌌 Escape</button>
+        </div>
+      </section>
+
+      <section class="discovery-panel search-panel" aria-labelledby="search-title">
+        <div class="section-heading discovery-heading">
+          <div><p class="eyebrow">GENTLE DISCOVERY</p><h2 id="search-title">Find Your Story</h2></div>
+          <p class="section-note">Search for a story that matches your mood tonight.</p>
+        </div>
+        <form class="manual-search" id="manual-search-form" role="search">
+          <label class="manual-search-label" for="manual-search-input">Looking for something specific?</label>
+          <div class="manual-search-row">
+            <input id="manual-search-input" name="q" type="search" maxlength="120" placeholder="Search for a sleep story..." autocomplete="off" />
+            <button class="choice-chip manual-search-button" type="submit">Search</button>
+          </div>
+        </form>
+        <div class="choice-list keyword-list" role="group" aria-label="Search sleep stories">
+          <button class="choice-chip" type="button" data-search-query="Sleep Stories">Sleep Stories</button>
+          <button class="choice-chip" type="button" data-search-query="Bedtime Stories">Bedtime Stories</button>
+          <button class="choice-chip" type="button" data-search-query="Relaxing Sleep Stories">Relaxing Sleep Stories</button>
+          <button class="choice-chip" type="button" data-search-query="Fairy Tales for Sleep">Fairy Tales for Sleep</button>
+          <button class="choice-chip" type="button" data-search-query="Guided Sleep Stories">Guided Sleep Stories</button>
+          <button class="choice-chip" type="button" data-search-query="Calm Stories for Adults">Calm Stories for Adults</button>
+        </div>
+        <div class="discovery-feedback" id="search-feedback" aria-live="polite" hidden></div>
+        <h3 class="search-results-heading" id="search-results-heading" hidden></h3>
+        <div class="search-results" id="search-results" aria-label="Sleep story search results"></div>
+      </section>
+    </section>
+
     <section class="library page-width" id="library" aria-labelledby="library-title">
       <div class="section-heading">
         <div>
