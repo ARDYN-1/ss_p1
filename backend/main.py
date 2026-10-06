@@ -1,6 +1,6 @@
 import logging
 import os
-from datetime import date as date_type
+from datetime import date as date_type, datetime, timedelta, timezone
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -68,6 +68,10 @@ class JournalInput(BaseModel):
     content: str
 
 
+class ActivityInput(BaseModel):
+    activity: str
+
+
 @lru_cache(maxsize=2)
 def _dynamodb_resource(region: str) -> Any:
     return boto3.resource("dynamodb", region_name=region)
@@ -82,6 +86,39 @@ def _journal_table():
             detail="Journal storage is not configured. Set AWS_REGION and DYNAMODB_TABLE, and provide AWS credentials or an IAM role.",
         )
     return _dynamodb_resource(region).Table(table_name)
+
+
+def _activity_table():
+    table_name = os.getenv("ACTIVITY_TABLE", "SOULSPACE_Activity")
+    region = os.getenv("AWS_REGION") or os.getenv("AWS_DEFAULT_REGION")
+    if not region:
+        raise HTTPException(
+            status_code=503,
+            detail="Activity storage is not configured. Set AWS_REGION and provide AWS credentials or an IAM role.",
+        )
+    return _dynamodb_resource(region).Table(table_name)
+
+
+def _record_activity(user_id: str, activity: str, activity_date: date_type | None = None) -> None:
+    recorded_date = (activity_date or date_type.today()).isoformat()
+    try:
+        _activity_table().update_item(
+            Key={"user_id": user_id, "date": recorded_date},
+            UpdateExpression="SET #activities = list_append(if_not_exists(#activities, :empty), :activity), updated_at = :updated_at",
+            ConditionExpression="attribute_not_exists(#activities) OR NOT contains(#activities, :activity_value)",
+            ExpressionAttributeNames={"#activities": "activities"},
+            ExpressionAttributeValues={
+                ":empty": [],
+                ":activity": [activity],
+                ":activity_value": activity,
+                ":updated_at": datetime.now(timezone.utc).isoformat(),
+            },
+        )
+    except ClientError as error:
+        if error.response.get("Error", {}).get("Code") == "ConditionalCheckFailedException":
+            # A repeated activity is already represented in this user's daily item.
+            return
+        raise
 
 
 def _dynamo_error(error: Exception) -> HTTPException:
@@ -193,7 +230,44 @@ def save_journal(body: JournalInput, user_id: str = Depends(require_user_id)):
     except (ClientError, BotoCoreError, NoCredentialsError, PartialCredentialsError) as error:
         raise _dynamo_error(error) from None
 
+    try:
+        _record_activity(user_id, "journal", body.date)
+    except Exception as error:
+        # Journal saves must succeed independently of the optional activity metric.
+        logger.warning("Could not record journal activity (%s).", type(error).__name__)
+
     return {"date": entry_date, "content": body.content, "message": "Your journal has been saved."}
+
+
+@app.post("/api/activity/")
+def record_activity(body: ActivityInput, user_id: str = Depends(require_user_id)):
+    activity = body.activity.strip()
+    if not activity or len(activity) > 100:
+        raise HTTPException(status_code=422, detail="Provide a valid activity name.")
+    try:
+        _record_activity(user_id, activity)
+    except (ClientError, BotoCoreError, NoCredentialsError, PartialCredentialsError) as error:
+        raise _dynamo_error(error) from None
+    return {"date": date_type.today().isoformat(), "recorded": True}
+
+
+@app.get("/api/activity/weekly")
+def weekly_activity(user_id: str = Depends(require_user_id)):
+    today = date_type.today()
+    week_start = today - timedelta(days=today.weekday())
+    dates = [(week_start + timedelta(days=offset)).isoformat() for offset in range(7)]
+    try:
+        table = _activity_table()
+        response = table.query(
+            KeyConditionExpression=Key("user_id").eq(user_id) & Key("date").between(dates[0], dates[-1]),
+            ProjectionExpression="#entry_date",
+            ExpressionAttributeNames={"#entry_date": "date"},
+        )
+    except (ClientError, BotoCoreError, NoCredentialsError, PartialCredentialsError) as error:
+        raise _dynamo_error(error) from None
+    active_dates = {item["date"] for item in response.get("Items", [])}
+    days = [{"date": entry_date, "active": entry_date in active_dates} for entry_date in dates]
+    return {"days": days, "active_days": sum(day["active"] for day in days)}
 
 
 @app.get("/api/journals/")

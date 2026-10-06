@@ -122,6 +122,16 @@ function showToast(message) {
   toastTimer = setTimeout(() => toast.classList.remove('show'), 2800);
 }
 
+function recordActivity(activity) {
+  fetch('/api/activity/', {
+    method: 'POST',
+    credentials: 'same-origin',
+    keepalive: true,
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({ activity }),
+  }).catch((error) => console.warn('Unable to record activity:', error));
+}
+
 function parseIsoDate(value) {
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) {
     throw new TypeError('Weekly activity dates must use YYYY-MM-DD format.');
@@ -288,6 +298,7 @@ document.querySelectorAll('.practice-card[data-auth-target] .explore-button').fo
     const destination = activityDestinations[practice] || card.dataset.authTarget;
     window.soulspaceRequireAuth(destination).then((isAuthenticated) => {
       if (!isAuthenticated) return;
+      if (practice !== 'Daily Journal') recordActivity(practice);
       window.location.assign(destination);
     });
   });
@@ -370,7 +381,10 @@ function showResult() {
     if (!card) return;
     const destination = activityDestinations[card.dataset.practice] || card.dataset.authTarget;
     window.soulspaceRequireAuth(destination).then((isAuthenticated) => {
-      if (isAuthenticated) window.location.assign(destination);
+      if (isAuthenticated) {
+        recordActivity(result.name);
+        window.location.assign(destination);
+      }
     });
   };
   finderStep.hidden = true;
