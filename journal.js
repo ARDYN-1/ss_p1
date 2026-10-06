@@ -129,6 +129,30 @@
     }
   }
 
+  async function loadTodayJournal() {
+    try {
+      const response = await fetch(`/api/journals/${encodeURIComponent(today)}`, {
+        credentials: "same-origin",
+        headers: { Accept: "application/json" },
+      });
+      if (response.status === 401) {
+        window.location.replace("index.html");
+        return;
+      }
+      if (response.status === 404) {
+        textarea.value = "";
+        return;
+      }
+      if (!response.ok) throw new Error(`Today's journal request failed (${response.status})`);
+      const entry = await response.json();
+      if (!entry || typeof entry.content !== "string") throw new Error("Today's journal response was not valid");
+      textarea.value = entry.content;
+    } catch (error) {
+      console.error("Unable to load today's journal:", error);
+      setFeedback("Today's journal could not be loaded. Please try again.", "error");
+    }
+  }
+
   function setDialogMessage(message, isError = false, retry) {
     dialogBody.replaceChildren();
     const state = document.createElement("div");
@@ -195,12 +219,11 @@
       }
       if (!response.ok) throw new Error(`Journal save request failed (${response.status})`);
       await response.json();
-      textarea.value = "";
       setFeedback("Your journal has been saved.", "success");
       await loadJournals();
     } catch (error) {
       console.error("Unable to save journal:", error);
-      setFeedback("Your entry could not be saved. Please try again.", "error");
+      setFeedback("Unable to save your journal right now. Please try again.", "error");
     } finally {
       saveButton.disabled = false;
       saveButton.removeAttribute("aria-busy");
@@ -234,7 +257,7 @@
           authStatus.hidden = false;
         }
       });
-      await loadJournals();
+      await Promise.all([loadJournals(), loadTodayJournal()]);
     } catch {
       authStatus.textContent = "Your secure journal could not be opened. Please refresh and try again.";
       authStatus.classList.add("is-error");
