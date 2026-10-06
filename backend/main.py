@@ -38,7 +38,17 @@ PUBLIC_FILES = {
     "script.js",
     "weekly-activity-data.js",
 }
-PUBLIC_ASSET_DIRS = {"assets", "activities_assets"}
+PUBLIC_ASSET_DIRS = {
+    "assets",
+    "activities_assets",
+    "meditation",
+    "breathwork",
+    "yoga&movement",
+    "healing_music",
+    "sleep_stories",
+    "gratitude",
+    "Self Reflection",
+}
 HOP_BY_HOP_HEADERS = {
     "connection",
     "keep-alive",

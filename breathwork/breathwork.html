@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoulSpace — Breathe With Intention</title>
+  <meta name="description" content="SoulSpace Breathwork: Pause, breathe, and reflect with intentional breathing exercises.">
+  <link rel="stylesheet" href="breathwork.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Ambient Botanical Background Elements -->
+  <div class="ambient-botanical top-left" aria-hidden="true">
+    <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-20 -20 C60 120, 180 90, 240 240 C140 200, 70 230, -20 180 Z" fill="rgba(195, 212, 197, 0.28)" />
+      <path d="M40 -30 C90 60, 210 60, 280 180 C210 130, 140 180, 20 80 Z" fill="rgba(224, 214, 232, 0.32)" />
+      <!-- Delicate watercolor olive/eucalyptus branch -->
+      <path d="M-10 20 Q120 70 210 170" stroke="#758A78" stroke-width="1.8" stroke-linecap="round" opacity="0.65"/>
+      <ellipse cx="60" cy="40" rx="22" ry="10" transform="rotate(25 60 40)" fill="#8FA693" opacity="0.75"/>
+      <ellipse cx="105" cy="72" rx="26" ry="11" transform="rotate(40 105 72)" fill="#9EB3A1" opacity="0.7"/>
+      <ellipse cx="155" cy="115" rx="28" ry="12" transform="rotate(45 155 115)" fill="#7F9983" opacity="0.75"/>
+      <ellipse cx="198" cy="162" rx="24" ry="10" transform="rotate(55 198 162)" fill="#8FA693" opacity="0.8"/>
+      <ellipse cx="80" cy="85" rx="20" ry="9" transform="rotate(-15 80 85)" fill="#B5C8B8" opacity="0.6"/>
+      <ellipse cx="130" cy="130" rx="22" ry="9" transform="rotate(5 130 130)" fill="#8FA693" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <div class="ambient-botanical top-right" aria-hidden="true">
+    <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M340 -20 C260 120, 140 90, 80 240 C180 200, 250 230, 340 180 Z" fill="rgba(195, 212, 197, 0.25)" />
+      <path d="M280 -30 C230 60, 110 60, 40 180 C110 130, 180 180, 300 80 Z" fill="rgba(224, 214, 232, 0.28)" />
+      <path d="M330 20 Q200 70 110 170" stroke="#758A78" stroke-width="1.8" stroke-linecap="round" opacity="0.65"/>
+      <ellipse cx="260" cy="40" rx="22" ry="10" transform="rotate(-25 260 40)" fill="#8FA693" opacity="0.75"/>
+      <ellipse cx="215" cy="72" rx="26" ry="11" transform="rotate(-40 215 72)" fill="#9EB3A1" opacity="0.7"/>
+      <ellipse cx="165" cy="115" rx="28" ry="12" transform="rotate(-45 165 115)" fill="#7F9983" opacity="0.75"/>
+      <ellipse cx="122" cy="162" rx="24" ry="10" transform="rotate(-55 122 162)" fill="#8FA693" opacity="0.8"/>
+      <ellipse cx="240" cy="85" rx="20" ry="9" transform="rotate(15 240 85)" fill="#B5C8B8" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <div class="ambient-botanical bottom-left" aria-hidden="true">
+    <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="70" cy="270" rx="140" ry="90" fill="rgba(235, 225, 240, 0.35)" />
+      <path d="M-10 330 Q80 250 160 160" stroke="#758A78" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+      <ellipse cx="40" cy="285" rx="24" ry="10" transform="rotate(-45 40 285)" fill="#8FA693" opacity="0.7"/>
+      <ellipse cx="90" cy="235" rx="26" ry="11" transform="rotate(-40 90 235)" fill="#9EB3A1" opacity="0.75"/>
+      <ellipse cx="140" cy="180" rx="24" ry="10" transform="rotate(-35 140 180)" fill="#7F9983" opacity="0.8"/>
+    </svg>
+  </div>
+
+  <div class="ambient-botanical bottom-right" aria-hidden="true">
+    <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="250" cy="270" rx="140" ry="90" fill="rgba(215, 230, 218, 0.3)" />
+      <path d="M330 330 Q240 250 160 160" stroke="#758A78" stroke-width="1.8" stroke-linecap="round" opacity="0.6"/>
+      <ellipse cx="280" cy="285" rx="24" ry="10" transform="rotate(45 280 285)" fill="#8FA693" opacity="0.7"/>
+      <ellipse cx="230" cy="235" rx="26" ry="11" transform="rotate(40 230 235)" fill="#9EB3A1" opacity="0.75"/>
+      <ellipse cx="180" cy="180" rx="24" ry="10" transform="rotate(35 180 180)" fill="#7F9983" opacity="0.8"/>
+    </svg>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="header">
+    <div class="header-container">
+      <a href="#home" class="logo" aria-label="SoulSpace Home">
+        <svg class="logo-icon" viewBox="0 0 48 36" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+          <!-- Lotus icon matching reference -->
+          <path d="M24 6 C24 6, 28 17, 34 22 C37 25, 41 26, 41 26 C41 26, 38 29, 32 29 C26 29, 24 24, 24 24 C24 24, 22 29, 16 29 C10 29, 7 26, 7 26 C7 26, 11 25, 14 22 C20 17, 24 6, 24 6 Z"/>
+          <path d="M24 13 C26 19, 29 23, 33 26"/>
+          <path d="M24 13 C22 19, 19 23, 15 26"/>
+          <path d="M24 6 L24 29"/>
+          <path d="M12 28 C16 31, 32 31, 36 28"/>
+        </svg>
+        <span class="logo-text">SOULSPACE</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="main-wrapper" id="mainContent">
+    <!-- Page Header Section -->
+    <section class="page-intro" aria-labelledby="pageTitle">
+      <p class="section-kicker">BREATHWORK</p>
+      <h1 class="page-title" id="pageTitle">Breathe With Intention</h1>
+      <p class="page-subtitle">Let your breath become your anchor.</p>
+      
+      <!-- Lotus ornament underneath subtitle -->
+      <div class="intro-ornament" aria-hidden="true">
+        <svg viewBox="0 0 32 24" fill="none" stroke="#758C7A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 4 C16 4, 19 12, 23 15 C25 17, 28 18, 28 18 C28 18, 26 20, 22 20 C18 20, 16 16, 16 16 C16 16, 14 20, 10 20 C6 20, 4 18, 4 18 C4 18, 7 17, 9 15 C13 12, 16 4, 16 4 Z"/>
+          <path d="M16 9 L16 20"/>
+          <path d="M8 19 C11 21, 21 21, 24 19"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Main Central Card Container -->
+    <div class="breathwork-container">
+      <div class="breathwork-grid">
+        
+        <!-- LEFT COLUMN: Practice Cards & Mood Selector -->
+        <div class="practice-column">
+          <!-- Two Side-by-Side Selectable Breathing Technique Cards -->
+          <div class="techniques-row" role="radiogroup" aria-label="Select breathing technique">
+            
+            <!-- Technique 1: Box Breathing -->
+            <article class="technique-card active" id="cardBox" data-technique="box" tabindex="0" role="radio" aria-checked="true" aria-labelledby="boxTitle">
+              <div class="card-header">
+                <div class="technique-meta">
+                  <div class="technique-icon-badge" aria-hidden="true">
+                    <!-- Sprout / Leaf icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 20h10"/>
+                      <path d="M10 20c0-4.5 2-7.5 7-9 0-4-3-7-7-7-4.5 0-7.5 3-7.5 7.5C2.5 16 6 19 10 20z"/>
+                      <path d="M12 20v-8"/>
+                    </svg>
+                  </div>
+                  <div class="technique-text">
+                    <h2 class="technique-title" id="boxTitle">Box Breathing</h2>
+                    <p class="technique-subtext">Inhale • Hold • Exhale • Hold</p>
+                  </div>
+                </div>
+                <span class="technique-badge">4-4-4</span>
+              </div>
+
+              <!-- Breathing Visualizer -->
+              <div class="visualizer-wrapper">
+                <div class="circle-container box-theme" id="visualizerBox">
+                  <!-- Outer glowing lavender/purple aura -->
+                  <div class="aura-glow aura-box"></div>
+                  <!-- Rotating / pulsing indicator ring -->
+                  <div class="breathing-ring ring-box" id="ringBox">
+                    <svg class="ring-svg" viewBox="0 0 220 220">
+                      <circle class="ring-track" cx="110" cy="110" r="96" fill="none" stroke="rgba(215, 203, 230, 0.45)" stroke-width="12" />
+                      <circle class="ring-progress" id="ringProgressBox" cx="110" cy="110" r="96" fill="none" stroke="rgba(176, 153, 206, 0.85)" stroke-width="12" stroke-linecap="round" stroke-dasharray="603.18" stroke-dashoffset="603.18" transform="rotate(-90 110 110)"/>
+                    </svg>
+                  </div>
+
+                  <!-- Inner Square / Breathing Orb matching reference -->
+                  <div class="breath-orb orb-box" id="orbBox">
+                    <div class="inner-box-shape" aria-hidden="true"></div>
+                    <div class="breath-content">
+                      <span class="phase-label" id="phaseLabelBox">Inhale</span>
+                      <span class="phase-counter" id="phaseCounterBox">4 sec</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Session Status -->
+              <div class="session-stats">
+                <span class="cycle-text" id="cycleBox">Cycle 01</span>
+                <span class="time-display" id="timeDisplayBox">05:00</span>
+                <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrackBox" aria-label="Box breathing session progress">
+                  <div class="progress-fill" id="progressFillBox" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <div class="card-controls">
+                <button class="ctrl-btn btn-start" id="startBox" type="button" aria-label="Start Box Breathing">
+                  <svg class="ctrl-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <span>Start</span>
+                </button>
+                <button class="ctrl-btn btn-pause" id="pauseBox" type="button" aria-label="Pause Box Breathing" disabled>
+                  <svg class="ctrl-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                  </svg>
+                  <span>Pause</span>
+                </button>
+                <button class="ctrl-btn btn-reset" id="resetBox" type="button" aria-label="Reset Box Breathing">
+                  <svg class="ctrl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 4v6h-6"/>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                  </svg>
+                  <span>Reset</span>
+                </button>
+              </div>
+            </article>
+
+            <!-- Technique 2: Slow Breathing -->
+            <article class="technique-card" id="cardSlow" data-technique="slow" tabindex="0" role="radio" aria-checked="false" aria-labelledby="slowTitle">
+              <div class="card-header">
+                <div class="technique-meta">
+                  <div class="technique-icon-badge" aria-hidden="true">
+                    <!-- Flowing breeze / gentle wave icon -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 12c4-3 8-3 12 0s8 3 12 0"/>
+                      <path d="M4 8c4-3 8-3 12 0s8 3 12 0"/>
+                      <path d="M4 16c4-3 8-3 12 0s8 3 12 0"/>
+                    </svg>
+                  </div>
+                  <div class="technique-text">
+                    <h2 class="technique-title" id="slowTitle">Slow Breathing</h2>
+                    <p class="technique-subtext">Gentle 5–0–5 breathing</p>
+                  </div>
+                </div>
+                <span class="technique-badge">5-0-5</span>
+              </div>
+
+              <!-- Breathing Visualizer -->
+              <div class="visualizer-wrapper">
+                <div class="circle-container slow-theme" id="visualizerSlow">
+                  <!-- Outer glowing sage aura -->
+                  <div class="aura-glow aura-slow"></div>
+                  <!-- Rotating / pulsing indicator ring -->
+                  <div class="breathing-ring ring-slow" id="ringSlow">
+                    <svg class="ring-svg" viewBox="0 0 220 220">
+                      <circle class="ring-track" cx="110" cy="110" r="96" fill="none" stroke="rgba(198, 222, 203, 0.45)" stroke-width="12" />
+                      <circle class="ring-progress" id="ringProgressSlow" cx="110" cy="110" r="96" fill="none" stroke="rgba(122, 163, 133, 0.85)" stroke-width="12" stroke-linecap="round" stroke-dasharray="603.18" stroke-dashoffset="603.18" transform="rotate(-90 110 110)"/>
+                    </svg>
+                  </div>
+
+                  <!-- Inner Orb matching reference -->
+                  <div class="breath-orb orb-slow" id="orbSlow">
+                    <div class="inner-circle-shape" aria-hidden="true"></div>
+                    <div class="breath-content">
+                      <span class="phase-label" id="phaseLabelSlow">Inhale</span>
+                      <span class="phase-counter" id="phaseCounterSlow">5 sec</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Session Status -->
+              <div class="session-stats">
+                <span class="cycle-text" id="cycleSlow">Cycle 01</span>
+                <span class="time-display" id="timeDisplaySlow">05:00</span>
+                <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressTrackSlow" aria-label="Slow breathing session progress">
+                  <div class="progress-fill" id="progressFillSlow" style="width: 0%;"></div>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <div class="card-controls">
+                <button class="ctrl-btn btn-start" id="startSlow" type="button" aria-label="Start Slow Breathing">
+                  <svg class="ctrl-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <span>Start</span>
+                </button>
+                <button class="ctrl-btn btn-pause" id="pauseSlow" type="button" aria-label="Pause Slow Breathing" disabled>
+                  <svg class="ctrl-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                  </svg>
+                  <span>Pause</span>
+                </button>
+                <button class="ctrl-btn btn-reset" id="resetSlow" type="button" aria-label="Reset Slow Breathing">
+                  <svg class="ctrl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 4v6h-6"/>
+                    <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+                  </svg>
+                  <span>Reset</span>
+                </button>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- Bottom: After Your Practice / Mood Selection Bar -->
+          <div class="after-practice-section">
+            <h3 class="after-practice-heading">After your practice</h3>
+            <div class="mood-options-group" role="radiogroup" aria-label="How do you feel after practice">
+              <button class="mood-pill" data-mood="Relaxed" type="button" role="radio" aria-checked="false">
+                <span class="mood-icon">🙂</span>
+                <span class="mood-text">Relaxed</span>
+              </button>
+              <button class="mood-pill" data-mood="Refreshed" type="button" role="radio" aria-checked="false">
+                <span class="mood-icon">🌿</span>
+                <span class="mood-text">Refreshed</span>
+              </button>
+              <button class="mood-pill" data-mood="Calm" type="button" role="radio" aria-checked="false">
+                <span class="mood-icon">😌</span>
+                <span class="mood-text">Calm</span>
+              </button>
+              <button class="mood-pill" data-mood="Neutral" type="button" role="radio" aria-checked="false">
+                <span class="mood-icon">🤍</span>
+                <span class="mood-text">Neutral</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Gentle Guidance, Sound Settings & Actions -->
+        <aside class="sidebar-column" aria-label="Breathing Guidance and Settings">
+          <h2 class="sidebar-title">Gentle Guidance</h2>
+
+          <!-- Guidance Checklist Card -->
+          <div class="guidance-card">
+            <div class="guidance-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#5D7A68" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 20h10"/>
+                <path d="M10 20c0-4.5 2-7.5 7-9 0-4-3-7-7-7-4.5 0-7.5 3-7.5 7.5C2.5 16 6 19 10 20z"/>
+              </svg>
+            </div>
+            <ul class="guidance-list">
+              <li>Sit comfortably.</li>
+              <li>Relax your shoulders.</li>
+              <li>Notice your breath.</li>
+              <li>If your mind wanders, gently return to the present moment.</li>
+            </ul>
+          </div>
+
+          <!-- Duration Selector Card (Default: 5 min) -->
+          <div class="duration-card">
+            <div class="duration-header">
+              <span class="duration-label">Session Duration</span>
+              <span class="duration-current" id="durationValue">5 min</span>
+            </div>
+            <div class="duration-pills" role="radiogroup" aria-label="Session Duration">
+              <button class="duration-pill" data-minutes="3" type="button" role="radio" aria-checked="false">3 min</button>
+              <button class="duration-pill active" data-minutes="5" type="button" role="radio" aria-checked="true">5 min</button>
+              <button class="duration-pill" data-minutes="10" type="button" role="radio" aria-checked="false">10 min</button>
+            </div>
+          </div>
+
+          <!-- Sound Controls Card -->
+          <div class="sound-card">
+            <div class="sound-header">
+              <div class="sound-icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                </svg>
+              </div>
+              <div class="sound-info">
+                <div class="sound-title">Breathing Sound</div>
+                <div class="sound-sub">Soft inhale and exhale cues</div>
+              </div>
+              <!-- Switch Toggle -->
+              <label class="toggle-switch" aria-label="Toggle breathing sounds">
+                <input type="checkbox" id="soundToggle" checked>
+                <span class="toggle-slider">
+                  <span class="toggle-label-text" id="toggleStatus">On</span>
+                </span>
+              </label>
+            </div>
+
+            <!-- Volume Slider -->
+            <div class="volume-slider-group">
+              <span class="volume-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                  <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                </svg>
+              </span>
+              <input type="range" class="volume-range" id="volumeSlider" min="0" max="100" value="70" aria-label="Sound volume">
+            </div>
+
+            <!-- Audio notification / status -->
+            <p class="audio-status-msg" id="audioStatusMsg" aria-live="polite"></p>
+          </div>
+
+          <!-- Safety Note Card -->
+          <div class="safety-card">
+            <div class="safety-icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+            </div>
+            <p class="safety-text">
+              Breathe gently and comfortably. Stop if you feel dizzy or uncomfortable.
+            </p>
+          </div>
+
+          <!-- Sidebar Action Buttons -->
+          <div class="sidebar-actions">
+            <button class="btn-action-primary" id="btnSaveSidebar" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                <polyline points="17 21 17 13 7 13 7 21"/>
+                <polyline points="7 3 7 8 15 8"/>
+              </svg>
+              <span>Save Practice</span>
+            </button>
+            <button class="btn-action-secondary" id="btnReflectSidebar" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20h9"/>
+                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+              </svg>
+              <span>Write a Reflection</span>
+            </button>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+    <!-- Bottom Practice Completion Banner matching reference image -->
+    <section class="completion-banner" id="completionBanner" aria-live="polite">
+      <div class="completion-banner-inner">
+        <div class="completion-meta">
+          <div class="completion-lotus-badge" aria-hidden="true">
+            <svg viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 4 C16 4, 19 12, 23 15 C25 17, 28 18, 28 18 C28 18, 26 20, 22 20 C18 20, 16 16, 16 16 C16 16, 14 20, 10 20 C6 20, 4 18, 4 18 C4 18, 7 17, 9 15 C13 12, 16 4, 16 4 Z"/>
+              <path d="M16 9 L16 20"/>
+            </svg>
+          </div>
+          <div class="completion-text-wrap">
+            <h2 class="completion-title">You completed your breathing practice.</h2>
+            <p class="completion-sub">Take one more comfortable breath before continuing your day.</p>
+          </div>
+        </div>
+
+        <div class="completion-actions">
+          <button class="btn-action-primary banner-btn" id="btnSaveBanner" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+              <polyline points="17 21 17 13 7 13 7 21"/>
+              <polyline points="7 3 7 8 15 8"/>
+            </svg>
+            <span>Save Practice</span>
+          </button>
+          <button class="btn-action-secondary banner-btn" id="btnReflectBanner" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20h9"/>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+            </svg>
+            <span>Write a Reflection</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reflections History & Saved Records Section -->
+    <section class="history-section" id="my-reflections">
+      <div class="history-header">
+        <h2 class="history-title">My Recent Reflections</h2>
+        <span class="history-subtitle">SoulSpace local mindfulness log</span>
+      </div>
+      <div class="history-list" id="historyList">
+        <!-- Rendered dynamically from localStorage -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Reflection & Completion Modal -->
+  <div class="modal-backdrop" id="reflectionModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+      
+      <div class="modal-header-icon" aria-hidden="true">🌸</div>
+      <h2 class="modal-title" id="modalTitle">Breathing Practice Complete</h2>
+      <p class="modal-subtitle">You made time to pause and breathe.</p>
+
+      <div class="modal-body">
+        <p class="modal-question">How do you feel now?</p>
+        
+        <div class="modal-mood-group" role="radiogroup" aria-label="Select mood">
+          <button class="modal-mood-btn" data-mood="Relaxed" type="button">
+            <span>🙂</span>
+            <span>Relaxed</span>
+          </button>
+          <button class="modal-mood-btn" data-mood="Refreshed" type="button">
+            <span>🌿</span>
+            <span>Refreshed</span>
+          </button>
+          <button class="modal-mood-btn" data-mood="Calm" type="button">
+            <span>😌</span>
+            <span>Calm</span>
+          </button>
+          <button class="modal-mood-btn" data-mood="Neutral" type="button">
+            <span>🤍</span>
+            <span>Neutral</span>
+          </button>
+        </div>
+
+        <div class="modal-reflection-field">
+          <label for="reflectionInput">Write a quiet thought or reflection (optional):</label>
+          <textarea id="reflectionInput" rows="3" placeholder="How was your rhythm today? What thoughts surfaced?"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-action-primary" id="btnSaveModal" type="button">
+          <span>Save Practice</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-notice" id="toastNotice" role="status" aria-live="polite"></div>
+
+  <!-- Local Audio Elements for Inhale, Hold, and Exhale cues -->
+  <audio id="audioInhale" preload="auto" src="assets/audio/inhale.mp3"></audio>
+  <audio id="audioHold" preload="auto" src="assets/audio/hold.mp3"></audio>
+  <audio id="audioExhale" preload="auto" src="assets/audio/exhale.mp3"></audio>
+
+  <script src="breathwork.js"></script>
+</body>
+</html>

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOULSPACE - Healing Music</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            'sage-dark': '#263b33',
+            'sage-text': '#334c41',
+            'sage-accent': '#6d8c7c',
+            'warm-bg': '#f7f4ee',
+            'card-focus': '#f4f6f2',
+            'card-nature': '#eff5f1',
+            'card-relax': '#f4f0f7',
+            'card-spirit': '#f9f6ed',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f7f4ee;
+      color: #2b3a33;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    .font-cormorant {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* Soft glowing and smooth transitions */
+    .healing-card {
+      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    .healing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px -8px rgba(38, 59, 51, 0.08);
+    }
+
+    /* Audio wave bar pulse animation */
+    @keyframes barPulse {
+      0%, 100% { height: 4px; }
+      50% { height: 16px; }
+    }
+    .wave-bar {
+      width: 2.5px;
+      background-color: currentColor;
+      border-radius: 999px;
+      animation: barPulse 1.2s ease-in-out infinite;
+    }
+    .wave-bar:nth-child(2) { animation-delay: 0.2s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.4s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.15s; }
+
+    /* Custom subtle leaf background accents */
+    .bg-watercolor {
+      background: radial-gradient(circle at 50% 15%, rgba(255,255,255,0.7) 0%, rgba(247,244,238,0.95) 70%);
+    }
+  </style>
+</head>
+<body class="bg-watercolor selection:bg-emerald-100 flex flex-col justify-between min-h-screen relative p-4 sm:p-6 md:p-8 lg:p-10">
+
+  <!-- Top Left Leaves Vector -->
+  <div class="absolute top-0 left-0 pointer-events-none select-none w-48 sm:w-64 md:w-80 opacity-60 z-0">
+    <svg viewBox="0 0 300 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,0 Q70,90 30,190 Q90,140 120,60 Z" fill="#93a89a" opacity="0.45"/>
+      <path d="M0,40 Q90,80 80,180 Q140,110 130,20 Z" fill="#7d9b89" opacity="0.4"/>
+      <path d="M30,0 Q120,40 180,120 Q180,60 140,0 Z" fill="#9db5a5" opacity="0.35"/>
+      <path d="M0,110 Q50,150 90,210 Q40,200 0,160 Z" fill="#8ca897" opacity="0.3"/>
+      <path d="M2,1 Q45,75 145,115" stroke="#688574" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+    </svg>
+  </div>
+
+  <!-- Top Right Subtle Misty Mountain & Sun Illustration -->
+  <div class="absolute top-0 right-0 pointer-events-none select-none w-72 sm:w-96 md:w-[480px] opacity-40 z-0 overflow-hidden">
+    <svg viewBox="0 0 450 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="340" cy="110" r="30" fill="#fde68a" opacity="0.65" filter="blur(6px)"/>
+      <circle cx="340" cy="110" r="18" fill="#fef3c7" opacity="0.8"/>
+      <!-- Soft Mountain silhouettes -->
+      <path d="M180,220 Q280,110 390,220 Z" fill="#cbd5e1" opacity="0.5"/>
+      <path d="M260,220 Q360,130 450,220 Z" fill="#94a3b8" opacity="0.35"/>
+      <!-- Birds floating -->
+      <path d="M380,85 Q385,81 390,85 Q395,81 400,85" stroke="#64748b" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.7"/>
+      <path d="M398,75 Q402,72 406,75 Q410,72 414,75" stroke="#64748b" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <header class="relative z-10 w-full max-w-7xl mx-auto mb-6 sm:mb-8 md:mb-10">
+    <div class="grid grid-cols-1 md:grid-cols-12 items-start gap-4">
+      
+      <!-- Brand Logo / Sub-brand (Left) -->
+      <div class="md:col-span-3 flex items-start gap-3 pt-1">
+        <!-- Botanical Lotus Emblem -->
+        <svg class="w-8 h-8 text-[#3c5448] flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+          <path d="M12 21C12 21 8 16 8 11C8 8.79 9.79 7 12 7C14.21 7 16 8.79 16 11C16 16 12 21 12 21Z" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 21C12 21 4.5 17.5 4.5 12C4.5 9 6.5 7.5 8 9" stroke-linecap="round"/>
+          <path d="M12 21C12 21 19.5 17.5 19.5 12C19.5 9 17.5 7.5 16 9" stroke-linecap="round"/>
+          <circle cx="12" cy="5" r="1.5" fill="currentColor"/>
+        </svg>
+        <div>
+          <h1 class="text-xs sm:text-sm font-semibold tracking-[0.25em] text-[#283d34] uppercase font-sans">SOULSPACE</h1>
+          <p class="text-[11px] text-[#55695f] tracking-wider font-light mt-0.5">Pause. Breathe. Reflect.</p>
+        </div>
+      </div>
+
+      <!-- Center Title Section -->
+      <div class="md:col-span-6 text-center px-2 flex flex-col items-center">
+        <!-- Delicate Center Lotus Icon -->
+        <svg class="w-6 h-6 text-[#759081] mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+          <path d="M12 4C12 4 10 8 10 11C10 12.5 11 13.5 12 13.5C13 13.5 14 12.5 14 11C14 8 12 4 12 4Z" />
+          <path d="M12 13.5C10 13.5 6 12 6 9.5C6 7.5 8 7 9.5 8.5C10.5 9.5 11.5 11.5 12 13.5Z" />
+          <path d="M12 13.5C14 13.5 18 12 18 9.5C18 7.5 16 7 14.5 8.5C13.5 9.5 12.5 11.5 12 13.5Z" />
+          <path d="M4 14C8 14.5 12 14.5 12 14.5C12 14.5 16 14.5 20 14" stroke-linecap="round"/>
+        </svg>
+
+        <h2 class="text-4xl sm:text-5xl md:text-6xl font-normal text-[#243a31] tracking-tight font-cormorant leading-tight">
+          Healing Music
+        </h2>
+        <p class="text-sm sm:text-base text-[#385347] font-serif italic mt-1 text-opacity-90">
+          Gentle sounds. Deeper peace.
+        </p>
+        <p class="max-w-lg text-[11px] sm:text-xs text-[#5f746b] leading-relaxed mt-2.5 font-light px-4">
+          Let the soothing frequencies and natural melodies bring balance to your mind, calm to your heart and healing to your soul.
+        </p>
+      </div>
+
+      <!-- Right Quote Section -->
+      <div class="md:col-span-3 text-right hidden md:block pt-1">
+        <blockquote class="text-sm sm:text-[15px] font-cormorant italic text-[#4a6357] leading-snug">
+          “Music can heal<br>what words cannot.”
+        </blockquote>
+        <p class="text-[11px] text-[#6d8479] font-light mt-1">— Unknown</p>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="relative z-10 w-full max-w-7xl mx-auto my-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
+
+      <!-- CARD 1: Focus -->
+      <article class="healing-card bg-[#f4f6f2] border border-[#e3ebe4] rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+        <div>
+          <!-- Thumbnail Image with Circular Overlapping Badge -->
+          <div class="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden shadow-inner">
+            <img 
+              src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=700&q=80" 
+              alt="Books and coffee by a sunlit window"
+              class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+            <!-- Overlapping Circle Icon Badge -->
+            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 translate-y-1/2 w-11 h-11 rounded-full bg-[#789686] border-2 border-white shadow-md flex items-center justify-center text-white z-10">
+              <!-- Brain / Focus icon -->
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-2.04Z"/>
+                <path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-2.04Z"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card Header & Descriptions -->
+          <div class="text-center pt-8 px-2">
+            <h3 class="text-xl sm:text-2xl font-serif text-[#263e33] font-semibold">Focus</h3>
+            <p class="text-xs text-[#446053] font-medium mt-1">Clear your mind. Sharpen your focus.</p>
+            <p class="text-[11px] text-[#698075] mt-2 leading-relaxed">
+              Let this music help you stay present, productive and calm.
+            </p>
+          </div>
+        </div>
+
+        <!-- Audio Player Unit at Bottom -->
+        <div class="mt-6 pt-3">
+          <div class="bg-white/85 backdrop-blur-sm rounded-xl p-2.5 flex items-center justify-between border border-[#e2ece5] shadow-xs">
+            <div class="flex items-center gap-2.5">
+              <img 
+                src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=120&q=80" 
+                alt="Deep Focus track" 
+                class="w-10 h-10 rounded-lg object-cover"
+              />
+              <div class="text-left">
+                <span class="block text-xs font-semibold text-[#283d33]">Deep Focus</span>
+                <span class="text-[10px] text-[#6e847a]" id="timer-0">3:52</span>
+              </div>
+            </div>
+            <!-- Play/Pause Toggle -->
+            <button 
+              onclick="toggleAudio(0)" 
+              id="btn-0"
+              aria-label="Play Deep Focus"
+              class="w-9 h-9 rounded-full bg-[#3d5e4e] hover:bg-[#324f41] text-white flex items-center justify-center transition-transform active:scale-95 shadow-sm"
+            >
+              <svg id="icon-play-0" class="w-4 h-4 ml-0.5 fill-current" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <div id="icon-wave-0" class="hidden items-center gap-0.5 h-3">
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 2: Nature Melodies -->
+      <article class="healing-card bg-[#eff5f1] border border-[#dde7e1] rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+        <div>
+          <!-- Thumbnail Image with Circular Overlapping Badge -->
+          <div class="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden shadow-inner">
+            <img 
+              src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=700&q=80" 
+              alt="Lush forest and flowing stream"
+              class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+            <!-- Overlapping Circle Icon Badge -->
+            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 translate-y-1/2 w-11 h-11 rounded-full bg-[#5f8a73] border-2 border-white shadow-md flex items-center justify-center text-white z-10">
+              <!-- Leaf / Nature icon -->
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card Header & Descriptions -->
+          <div class="text-center pt-8 px-2">
+            <h3 class="text-xl sm:text-2xl font-serif text-[#213a2c] font-semibold">Nature Melodies</h3>
+            <p class="text-xs text-[#3f614f] font-medium mt-1">The sounds of nature. The calm within.</p>
+            <p class="text-[11px] text-[#638271] mt-2 leading-relaxed">
+              Feel the fresh air, flowing water and the peace of the earth.
+            </p>
+          </div>
+        </div>
+
+        <!-- Audio Player Unit at Bottom -->
+        <div class="mt-6 pt-3">
+          <div class="bg-white/85 backdrop-blur-sm rounded-xl p-2.5 flex items-center justify-between border border-[#d8e5dd] shadow-xs">
+            <div class="flex items-center gap-2.5">
+              <img 
+                src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=120&q=80" 
+                alt="Forest Stream track" 
+                class="w-10 h-10 rounded-lg object-cover"
+              />
+              <div class="text-left">
+                <span class="block text-xs font-semibold text-[#213a2c]">Forest Stream</span>
+                <span class="text-[10px] text-[#607e6e]" id="timer-1">5:20</span>
+              </div>
+            </div>
+            <!-- Play/Pause Toggle -->
+            <button 
+              onclick="toggleAudio(1)" 
+              id="btn-1"
+              aria-label="Play Forest Stream"
+              class="w-9 h-9 rounded-full bg-[#466a56] hover:bg-[#395746] text-white flex items-center justify-center transition-transform active:scale-95 shadow-sm"
+            >
+              <svg id="icon-play-1" class="w-4 h-4 ml-0.5 fill-current" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <div id="icon-wave-1" class="hidden items-center gap-0.5 h-3">
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 3: Relax -->
+      <article class="healing-card bg-[#f4f0f7] border border-[#e6deeb] rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+        <div>
+          <!-- Thumbnail Image with Circular Overlapping Badge -->
+          <div class="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden shadow-inner">
+            <img 
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80" 
+              alt="Pastel sunset over tranquil ocean waves"
+              class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+            <!-- Overlapping Circle Icon Badge -->
+            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 translate-y-1/2 w-11 h-11 rounded-full bg-[#9b7e9f] border-2 border-white shadow-md flex items-center justify-center text-white z-10">
+              <!-- Lotus Blossom icon -->
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 21C12 21 8.5 17 8.5 13C8.5 11 10 9 12 9C14 9 15.5 11 15.5 13C15.5 17 12 21 12 21Z"/>
+                <path d="M12 21C12 21 5.5 18 5.5 13.5C5.5 11 7 9.5 8.5 11"/>
+                <path d="M12 21C12 21 18.5 18 18.5 13.5C18.5 11 17 9.5 15.5 11"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card Header & Descriptions -->
+          <div class="text-center pt-8 px-2">
+            <h3 class="text-xl sm:text-2xl font-serif text-[#392d40] font-semibold">Relax</h3>
+            <p class="text-xs text-[#5a4864] font-medium mt-1">Release the tension. Breathe it out.</p>
+            <p class="text-[11px] text-[#7a6b82] mt-2 leading-relaxed">
+              Let the music guide you into a state of deep relaxation.
+            </p>
+          </div>
+        </div>
+
+        <!-- Audio Player Unit at Bottom -->
+        <div class="mt-6 pt-3">
+          <div class="bg-white/85 backdrop-blur-sm rounded-xl p-2.5 flex items-center justify-between border border-[#e5dceb] shadow-xs">
+            <div class="flex items-center gap-2.5">
+              <img 
+                src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=120&q=80" 
+                alt="Ocean Waves track" 
+                class="w-10 h-10 rounded-lg object-cover"
+              />
+              <div class="text-left">
+                <span class="block text-xs font-semibold text-[#392d40]">Ocean Waves</span>
+                <span class="text-[10px] text-[#7e6d87]" id="timer-2">4:36</span>
+              </div>
+            </div>
+            <!-- Play/Pause Toggle -->
+            <button 
+              onclick="toggleAudio(2)" 
+              id="btn-2"
+              aria-label="Play Ocean Waves"
+              class="w-9 h-9 rounded-full bg-[#826687] hover:bg-[#6e5373] text-white flex items-center justify-center transition-transform active:scale-95 shadow-sm"
+            >
+              <svg id="icon-play-2" class="w-4 h-4 ml-0.5 fill-current" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <div id="icon-wave-2" class="hidden items-center gap-0.5 h-3">
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- CARD 4: Spiritual Sound -->
+      <article class="healing-card bg-[#f9f6ed] border border-[#ece3d4] rounded-2xl p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
+        <div>
+          <!-- Thumbnail Image with Circular Overlapping Badge -->
+          <div class="relative w-full h-44 sm:h-48 rounded-xl overflow-hidden shadow-inner">
+            <img 
+              src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=700&q=80" 
+              alt="Tibetan singing bowl and candle"
+              class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+            />
+            <!-- Overlapping Circle Icon Badge -->
+            <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 translate-y-1/2 w-11 h-11 rounded-full bg-[#ad8a54] border-2 border-white shadow-md flex items-center justify-center text-white z-10 text-base font-serif">
+              ॐ
+            </div>
+          </div>
+
+          <!-- Card Header & Descriptions -->
+          <div class="text-center pt-8 px-2">
+            <h3 class="text-xl sm:text-2xl font-serif text-[#413620] font-semibold">Spiritual sound</h3>
+            <p class="text-xs text-[#635538] font-medium mt-1">Ancient vibrations. Inner harmony.</p>
+            <p class="text-[11px] text-[#857656] mt-2 leading-relaxed">
+              Connect with your higher self through sacred sound and mantra.
+            </p>
+          </div>
+        </div>
+
+        <!-- Audio Player Unit at Bottom -->
+        <div class="mt-6 pt-3">
+          <div class="bg-white/85 backdrop-blur-sm rounded-xl p-2.5 flex items-center justify-between border border-[#e8ddca] shadow-xs">
+            <div class="flex items-center gap-2.5">
+              <div class="w-10 h-10 rounded-lg bg-[#534063] flex items-center justify-center text-amber-200/90 shadow-xs">
+                <!-- Sacred Lotus Mandala outline -->
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <circle cx="12" cy="12" r="9"/>
+                  <circle cx="12" cy="12" r="5" stroke-dasharray="2 2"/>
+                  <path d="M12 3v18M3 12h18M5.6 5.6l12.8 12.8M5.6 18.4L18.4 5.6"/>
+                </svg>
+              </div>
+              <div class="text-left">
+                <span class="block text-xs font-semibold text-[#413620]">Om Chanting</span>
+                <span class="text-[10px] text-[#867756]" id="timer-3">6:12</span>
+              </div>
+            </div>
+            <!-- Play/Pause Toggle -->
+            <button 
+              onclick="toggleAudio(3)" 
+              id="btn-3"
+              aria-label="Play Om Chanting"
+              class="w-9 h-9 rounded-full bg-[#a3824b] hover:bg-[#8e6e3c] text-white flex items-center justify-center transition-transform active:scale-95 shadow-sm"
+            >
+              <svg id="icon-play-3" class="w-4 h-4 ml-0.5 fill-current" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+              <div id="icon-wave-3" class="hidden items-center gap-0.5 h-3">
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+                <span class="wave-bar"></span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <footer class="relative z-10 w-full max-w-7xl mx-auto mt-10 sm:mt-12 text-center pb-2">
+    <!-- Center Quotation Line -->
+    <div class="flex items-center justify-center gap-4 text-[#5f746b]">
+      <span class="h-[1px] w-12 sm:w-20 bg-[#6d8479]/40"></span>
+      <p class="text-sm sm:text-base md:text-lg font-cormorant italic tracking-wide text-[#3c5448]">
+        Let the music be your healing space
+      </p>
+      <span class="h-[1px] w-12 sm:w-20 bg-[#6d8479]/40"></span>
+    </div>
+
+    <!-- Small Lotus Emblem in Bottom Center -->
+    <div class="mt-2.5 flex justify-center">
+      <svg class="w-6 h-6 text-[#7d9b89] opacity-80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3">
+        <path d="M12 4C12 4 10 8 10 11C10 12.5 11 13.5 12 13.5C13 13.5 14 12.5 14 11C14 8 12 4 12 4Z" />
+        <path d="M12 13.5C10 13.5 6 12 6 9.5C6 7.5 8 7 9.5 8.5C10.5 9.5 11.5 11.5 12 13.5Z" />
+        <path d="M12 13.5C14 13.5 18 12 18 9.5C18 7.5 16 7 14.5 8.5C13.5 9.5 12.5 11.5 12 13.5Z" />
+        <path d="M4 14C8 14.5 12 14.5 12 14.5C12 14.5 16 14.5 20 14" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <!-- Bottom Left & Right Wave Shapes & Foliage (Vector) -->
+    <div class="fixed bottom-0 left-0 pointer-events-none select-none w-44 sm:w-56 opacity-50 z-0">
+      <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M-20,150 Q40,90 100,120 Q160,150 200,150 L-20,150 Z" fill="#e4dce8" opacity="0.4"/>
+        <path d="M0,150 Q30,60 80,100 Q120,40 10,20 Z" fill="#88a594" opacity="0.3"/>
+        <path d="M-10,120 Q40,110 70,50 Q10,70 -10,120 Z" fill="#a4bdaf" opacity="0.35"/>
+      </svg>
+    </div>
+    
+    <div class="fixed bottom-0 right-0 pointer-events-none select-none w-44 sm:w-56 opacity-50 z-0">
+      <svg viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M220,150 Q160,90 100,120 Q40,150 0,150 L220,150 Z" fill="#e8dfdb" opacity="0.4"/>
+        <path d="M200,150 Q170,60 120,100 Q80,40 190,20 Z" fill="#88a594" opacity="0.3"/>
+        <path d="M210,120 Q160,110 130,50 Q190,70 210,120 Z" fill="#a4bdaf" opacity="0.35"/>
+      </svg>
+    </div>
+  </footer>
+
+  <script>
+    // State management for audio tracks
+    const tracks = [
+      { name: 'Deep Focus', duration: 232, initialText: '3:52', active: false },
+      { name: 'Forest Stream', duration: 320, initialText: '5:20', active: false },
+      { name: 'Ocean Waves', duration: 276, initialText: '4:36', active: false },
+      { name: 'Om Chanting', duration: 372, initialText: '6:12', active: false }
+    ];
+
+    let audioCtx = null;
+    let activeNodes = [];
+    let currentTrackIdx = null;
+    let timerInterval = null;
+    let currentSeconds = 0;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    // Stop current sound generator nodes
+    function stopCurrentSynth() {
+      if (activeNodes.length > 0) {
+        activeNodes.forEach(node => {
+          try {
+            if (node.stop) node.stop();
+            if (node.disconnect) node.disconnect();
+          } catch(e) {}
+        });
+        activeNodes = [];
+      }
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }
+
+    // High quality calming ambient synthesizers using Web Audio
+    function playTrackSynth(idx) {
+      initAudio();
+      stopCurrentSynth();
+
+      const masterGain = audioCtx.createGain();
+      masterGain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+      masterGain.gain.exponentialRampToValueAtTime(0.4, audioCtx.currentTime + 1.2);
+      masterGain.connect(audioCtx.destination);
+      activeNodes.push(masterGain);
+
+      if (idx === 0) {
+        // Deep Focus: Soothing dual binaural alpha waves + warm low-pass filter
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        osc1.type = 'sine';
+        osc2.type = 'sine';
+        osc1.frequency.setValueAtTime(144, audioCtx.currentTime);     // Warm fundamental
+        osc2.frequency.setValueAtTime(154, audioCtx.currentTime);     // 10 Hz Alpha beat
+
+        const sub = audioCtx.createOscillator();
+        sub.type = 'triangle';
+        sub.frequency.setValueAtTime(72, audioCtx.currentTime);
+
+        const subGain = audioCtx.createGain();
+        subGain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        sub.connect(subGain);
+        subGain.connect(masterGain);
+
+        osc1.connect(masterGain);
+        osc2.connect(masterGain);
+
+        osc1.start();
+        osc2.start();
+        sub.start();
+        activeNodes.push(osc1, osc2, sub);
+
+      } else if (idx === 1) {
+        // Forest Stream: Filtered pink noise modulated like gentle bubbling water & breeze
+        const bufferSize = audioCtx.sampleRate * 2;
+        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          b0 = 0.99886 * b0 + white * 0.0555179;
+          b1 = 0.99332 * b1 + white * 0.0750759;
+          b2 = 0.96900 * b2 + white * 0.1538520;
+          b3 = 0.86650 * b3 + white * 0.3104856;
+          b4 = 0.55000 * b4 + white * 0.5329522;
+          b5 = -0.7616 * b5 - white * 0.0168980;
+          output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.08;
+          b6 = white * 0.115926;
+        }
+
+        const whiteNoise = audioCtx.createBufferSource();
+        whiteNoise.buffer = noiseBuffer;
+        whiteNoise.loop = true;
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(450, audioCtx.currentTime);
+        filter.Q.setValueAtTime(1.5, audioCtx.currentTime);
+
+        // LFO for bubbling water flow
+        const lfo = audioCtx.createOscillator();
+        lfo.frequency.setValueAtTime(0.3, audioCtx.currentTime);
+        const lfoGain = audioCtx.createGain();
+        lfoGain.gain.setValueAtTime(150, audioCtx.currentTime);
+        lfo.connect(lfoGain);
+        lfoGain.connect(filter.frequency);
+
+        whiteNoise.connect(filter);
+        filter.connect(masterGain);
+
+        whiteNoise.start();
+        lfo.start();
+        activeNodes.push(whiteNoise, lfo);
+
+      } else if (idx === 2) {
+        // Ocean Waves: Rhythmic breathing swells of surf noise
+        const bufferSize = audioCtx.sampleRate * 3;
+        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          output[i] = (Math.random() * 2 - 1) * 0.2;
+        }
+        const oceanSource = audioCtx.createBufferSource();
+        oceanSource.buffer = noiseBuffer;
+        oceanSource.loop = true;
+
+        const lowpass = audioCtx.createBiquadFilter();
+        lowpass.type = 'lowpass';
+        lowpass.frequency.setValueAtTime(300, audioCtx.currentTime);
+
+        // Slow 0.12Hz wave cycle
+        const waveLfo = audioCtx.createOscillator();
+        waveLfo.frequency.setValueAtTime(0.12, audioCtx.currentTime);
+        const waveGain = audioCtx.createGain();
+        waveGain.gain.setValueAtTime(250, audioCtx.currentTime);
+        waveLfo.connect(waveGain);
+        waveGain.connect(lowpass.frequency);
+
+        oceanSource.connect(lowpass);
+        lowpass.connect(masterGain);
+
+        oceanSource.start();
+        waveLfo.start();
+        activeNodes.push(oceanSource, waveLfo);
+
+      } else if (idx === 3) {
+        // Om Chanting / Singing bowl harmonic resonance
+        const freqs = [108, 216, 324, 432]; // Sacred Solfeggio & Om harmonics
+        freqs.forEach((f, i) => {
+          const osc = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          osc.type = i === 0 ? 'sine' : 'triangle';
+          osc.frequency.setValueAtTime(f, audioCtx.currentTime);
+
+          // Slow singing bowl vibrato
+          const vibrato = audioCtx.createOscillator();
+          vibrato.frequency.setValueAtTime(0.25, audioCtx.currentTime);
+          const vGain = audioCtx.createGain();
+          vGain.gain.setValueAtTime(1.8, audioCtx.currentTime);
+          vibrato.connect(vGain);
+          vGain.connect(osc.frequency);
+
+          g.gain.setValueAtTime(0.25 / (i + 1), audioCtx.currentTime);
+          osc.connect(g);
+          g.connect(masterGain);
+
+          osc.start();
+          vibrato.start();
+          activeNodes.push(osc, vibrato);
+        });
+      }
+
+      // Track timer count-up
+      currentSeconds = 0;
+      updateTimerDisplay(idx, currentSeconds);
+      timerInterval = setInterval(() => {
+        currentSeconds++;
+        updateTimerDisplay(idx, currentSeconds);
+      }, 1000);
+    }
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    function updateTimerDisplay(idx, sec) {
+      const el = document.getElementById(`timer-${idx}`);
+      if (el) el.innerText = formatTime(sec);
+    }
+
+    // Toggle button handler
+    function toggleAudio(idx) {
+      // If clicking already playing track
+      if (currentTrackIdx === idx) {
+        stopCurrentSynth();
+        resetTrackUI(idx);
+        currentTrackIdx = null;
+        return;
+      }
+
+      // If another track was playing, reset it
+      if (currentTrackIdx !== null) {
+        resetTrackUI(currentTrackIdx);
+      }
+
+      // Activate new track
+      currentTrackIdx = idx;
+      setTrackPlayingUI(idx);
+      playTrackSynth(idx);
+    }
+
+    function setTrackPlayingUI(idx) {
+      const playIcon = document.getElementById(`icon-play-${idx}`);
+      const waveIcon = document.getElementById(`icon-wave-${idx}`);
+      if (playIcon) playIcon.classList.add('hidden');
+      if (waveIcon) {
+        waveIcon.classList.remove('hidden');
+        waveIcon.classList.add('flex');
+      }
+    }
+
+    function resetTrackUI(idx) {
+      const playIcon = document.getElementById(`icon-play-${idx}`);
+      const waveIcon = document.getElementById(`icon-wave-${idx}`);
+      const timerEl = document.getElementById(`timer-${idx}`);
+      if (playIcon) playIcon.classList.remove('hidden');
+      if (waveIcon) {
+        waveIcon.classList.remove('flex');
+        waveIcon.classList.add('hidden');
+      }
+      if (timerEl) {
+        timerEl.innerText = tracks[idx].initialText;
+      }
+    }
+  </script>
+</body>
+</html>

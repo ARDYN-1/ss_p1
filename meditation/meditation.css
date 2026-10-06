@@ -1,0 +1,1213 @@
+/* ==========================================================================
+   SoulSpace — Meditation Web Application
+   Color Palette: Warm Ivory, Sage Green, Lavender, Slate Forest Text
+   Typography: Cormorant Garamond (Serif), Plus Jakarta Sans (Sans-serif)
+   ========================================================================== */
+
+:root {
+  /* Colors */
+  --bg-warm-ivory: #FAF7F2;
+  --bg-card-white: #FFFFFF;
+  --bg-card-tint: #F7F9F6;
+  --bg-card-hover: #F2F6F1;
+  --bg-pill-active: #E3EDE3;
+  --bg-pill-selected: #557158;
+
+  --color-primary-sage: #557158;
+  --color-primary-dark: #435C46;
+  --color-sage-light: #7E9B83;
+  --color-sage-border: #D6DFD5;
+  --color-sage-pill-bg: #E8EFE7;
+  
+  --color-text-dark: #1B362A;
+  --color-text-body: #506657;
+  --color-text-muted: #728678;
+  --color-text-light: #8E9E94;
+
+  --color-lavender-tint: #EEEAF4;
+  --color-lavender-accent: #8E7FA8;
+
+  /* Typography */
+  --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Shadows */
+  --shadow-card: 0 20px 48px -8px rgba(45, 62, 50, 0.08), 0 4px 16px rgba(0, 0, 0, 0.02);
+  --shadow-button: 0 4px 14px rgba(85, 113, 88, 0.25);
+  --shadow-pill: 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow-modal: 0 28px 64px rgba(25, 40, 30, 0.16);
+
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  --transition-fast: all 0.18s ease;
+}
+
+/* Base Reset & Styling */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-warm-ivory);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   Botanical Background Foliage & Watercolor Washes
+   ========================================================================== */
+.botanical-bg {
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+.botanical-top-left {
+  top: -20px;
+  left: -20px;
+  width: 320px;
+  height: 320px;
+  opacity: 0.85;
+}
+
+.botanical-top-right {
+  top: -20px;
+  right: -20px;
+  width: 360px;
+  height: 320px;
+  opacity: 0.85;
+}
+
+.botanical-bottom-left {
+  bottom: -40px;
+  left: -30px;
+  width: 320px;
+  height: 340px;
+  opacity: 0.85;
+}
+
+.botanical-bottom-right {
+  bottom: -40px;
+  right: -30px;
+  width: 360px;
+  height: 360px;
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+.site-header {
+  position: relative;
+  z-index: 20;
+  padding: 24px 64px;
+}
+
+.header-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Brand Logo */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-text-dark);
+  transition: opacity 0.2s ease;
+}
+
+.brand-logo:hover {
+  opacity: 0.88;
+}
+
+.lotus-icon {
+  width: 38px;
+  height: 29px;
+  display: block;
+}
+
+.brand-name {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--color-text-dark);
+}
+
+/* ==========================================================================
+   Page Main & Hero Section
+   ========================================================================== */
+.page-main {
+  position: relative;
+  z-index: 10;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 10px 24px 70px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hero-section {
+  max-width: 680px;
+  margin: 10px auto 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.category-badge {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  color: var(--color-primary-sage);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.page-title {
+  font-family: var(--font-serif);
+  font-size: 3.15rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+  margin-bottom: 12px;
+}
+
+.page-subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.03rem;
+  color: var(--color-text-body);
+  font-weight: 400;
+  max-width: 540px;
+  line-height: 1.55;
+  margin: 0 auto 16px;
+}
+
+/* Lotus Ornament Divider */
+.lotus-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 220px;
+  margin-top: 4px;
+}
+
+.ornament-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-sage-border), transparent);
+}
+
+.ornament-lotus {
+  width: 32px;
+  height: 23px;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Main Meditation Card
+   ========================================================================== */
+.meditation-container {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.meditation-card {
+  background-color: var(--bg-card-white);
+  border-radius: 32px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(220, 228, 218, 0.7);
+  padding: 44px 52px;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+/* ==========================================================================
+   Left Column: Timer & Controls Area
+   ========================================================================== */
+.timer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Meditating Illustration & Serene Aura */
+.meditation-art-wrap {
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.halo-circle {
+  width: 240px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.6s ease;
+}
+
+.meditation-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Subtle breathing animation when timer is active */
+.meditation-card.is-active .halo-circle {
+  animation: breathingPulse 4s ease-in-out infinite;
+}
+
+@keyframes breathingPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Small selected duration label above timer */
+.selected-duration-badge {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-bottom: 2px;
+  letter-spacing: 0.05em;
+}
+
+/* Huge Digital Serif Timer */
+.timer-display-wrap {
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.timer-digits {
+  font-family: var(--font-serif);
+  font-size: 4.5rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  letter-spacing: 0.02em;
+  font-feature-settings: "tnum";
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+  min-width: 200px;
+}
+
+/* Guidance caption under timer */
+.breath-guidance-text {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: var(--color-text-body);
+  font-weight: 400;
+  margin-bottom: 24px;
+  min-height: 24px;
+  transition: opacity 0.3s ease;
+}
+
+/* Timer Control Buttons Row */
+.timer-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.btn-ctrl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  padding: 11px 24px;
+}
+
+/* Start Button (Primary Sage Pill) */
+.btn-start {
+  background-color: var(--color-primary-sage);
+  color: #FFFFFF;
+  border: 1px solid var(--color-primary-sage);
+  box-shadow: 0 4px 12px rgba(85, 113, 88, 0.22);
+}
+
+.btn-start:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn-start:active {
+  transform: translateY(0);
+}
+
+/* Pause Button (White Outline Pill) */
+.btn-pause, .btn-reset {
+  background-color: #FFFFFF;
+  color: var(--color-text-body);
+  border: 1px solid var(--color-sage-border);
+}
+
+.btn-pause:hover, .btn-reset:hover {
+  background-color: #F8FAF7;
+  color: var(--color-text-dark);
+  border-color: #BDC8BD;
+}
+
+.btn-pause:active, .btn-reset:active {
+  background-color: #EFF3EE;
+}
+
+.ctrl-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* Progress Bar */
+.progress-bar-container {
+  width: 100%;
+  max-width: 360px;
+  height: 5px;
+  background-color: #ECEEEA;
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-bottom: 34px;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--color-primary-sage);
+  border-radius: 9999px;
+  transition: width 0.3s linear;
+}
+
+/* Choose Your Duration Section */
+.duration-selection-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.duration-title {
+  font-family: var(--font-serif);
+  font-size: 1.28rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  margin-bottom: 12px;
+}
+
+.duration-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.duration-pill {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-sage-border);
+  color: var(--color-text-body);
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 8px 22px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.duration-pill:hover {
+  border-color: #B8C7B8;
+  background-color: #F9FAF8;
+  color: var(--color-text-dark);
+}
+
+/* Active Duration Pill (Selected) */
+.duration-pill.active {
+  background-color: var(--color-primary-sage);
+  color: #FFFFFF;
+  border-color: var(--color-primary-sage);
+  box-shadow: 0 2px 8px rgba(85, 113, 88, 0.25);
+}
+
+/* ==========================================================================
+   Right Column: Gentle Guidance, Calming Audio & Mood
+   ========================================================================== */
+.guidance-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.column-heading {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  margin-bottom: 14px;
+}
+
+/* Gentle Guidance Card */
+.guidance-card {
+  background-color: var(--bg-card-tint);
+  border: 1px solid rgba(220, 228, 218, 0.7);
+  border-radius: 18px;
+  padding: 22px 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
+
+.guidance-icon-wrap {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.guidance-leaf {
+  width: 24px;
+  height: 24px;
+}
+
+.guidance-text-content {
+  font-family: var(--font-sans);
+  font-size: 0.925rem;
+  color: var(--color-text-body);
+  line-height: 1.62;
+}
+
+.guidance-text-content p {
+  margin-bottom: 3px;
+}
+
+.guidance-text-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Calming Ambient Sound Card */
+.ambient-sound-block {
+  margin-bottom: 24px;
+}
+
+.ambient-sound-card {
+  background-color: var(--bg-card-tint);
+  border: 1px solid rgba(220, 228, 218, 0.7);
+  border-radius: 16px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ambient-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.music-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--color-primary-sage);
+  flex-shrink: 0;
+}
+
+.ambient-text-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.ambient-title {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.ambient-subtext {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+/* Ambient Toggle Switch */
+.ambient-switch-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.toggle-status-text {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  min-width: 26px;
+  text-align: right;
+  transition: color 0.2s ease;
+}
+
+.toggle-status-text.active {
+  color: var(--color-primary-sage);
+}
+
+/* Clean Custom Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #D2D8D0;
+  transition: .3s;
+  border-radius: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+
+input:checked + .slider {
+  background-color: var(--color-primary-sage);
+}
+
+input:checked + .slider:before {
+  transform: translateX(20px);
+}
+
+/* Volume Control Bar */
+.volume-control-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  margin-top: 6px;
+  background-color: rgba(247, 249, 246, 0.6);
+  border-radius: 12px;
+}
+
+.volume-mute-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--color-primary-sage);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+}
+
+.vol-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.volume-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: #D9DFD6;
+  border-radius: 4px;
+  outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-primary-sage);
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-primary-sage);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+}
+
+.volume-pct {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  min-width: 32px;
+  text-align: right;
+}
+
+/* After Your Practice: Mood Selection */
+.post-practice-block {
+  margin-top: 4px;
+}
+
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.mood-btn {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-sage-border);
+  border-radius: 14px;
+  padding: 14px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.mood-btn:hover {
+  border-color: #B5C5B5;
+  background-color: #F8FAF7;
+}
+
+.mood-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--color-text-body);
+  transition: var(--transition-fast);
+}
+
+.mood-label {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--color-text-body);
+  transition: var(--transition-fast);
+}
+
+/* Active Mood State (Matches reference image for 'Relaxed') */
+.mood-btn.active {
+  background-color: var(--bg-pill-active);
+  border-color: var(--color-sage-border);
+}
+
+.mood-btn.active .mood-icon {
+  color: var(--color-text-dark);
+}
+
+.mood-btn.active .mood-label {
+  color: var(--color-text-dark);
+  font-weight: 600;
+}
+
+/* Practice Action Buttons */
+.practice-action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-action {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  padding: 13px 20px;
+}
+
+/* Save Practice Button */
+.btn-save-practice {
+  background-color: var(--color-primary-sage);
+  color: #FFFFFF;
+  border: 1px solid var(--color-primary-sage);
+  box-shadow: 0 4px 14px rgba(85, 113, 88, 0.22);
+}
+
+.btn-save-practice:hover {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn-save-practice:active {
+  transform: translateY(0);
+}
+
+/* Write a Reflection Button */
+.btn-write-reflection {
+  background-color: #FFFFFF;
+  color: var(--color-text-body);
+  border: 1px solid var(--color-sage-border);
+}
+
+.btn-write-reflection:hover {
+  background-color: #F8FAF7;
+  color: var(--color-text-dark);
+  border-color: #B5C5B5;
+  transform: translateY(-1px);
+}
+
+.btn-write-reflection:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Modals & Overlays (Completion, Reflections History)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(27, 43, 33, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-dialog {
+  background-color: #FFFFFF;
+  border-radius: 28px;
+  box-shadow: var(--shadow-modal);
+  border: 1px solid rgba(220, 228, 218, 0.8);
+  width: 100%;
+  max-width: 520px;
+  padding: 38px 40px;
+  position: relative;
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-overlay.is-open .modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  color: var(--color-text-dark);
+}
+
+.completion-header {
+  margin-bottom: 22px;
+}
+
+.completion-lotus-badge {
+  font-size: 2.2rem;
+  margin-bottom: 8px;
+  line-height: 1;
+}
+
+.completion-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  margin-bottom: 6px;
+}
+
+.completion-subtext {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--color-text-body);
+}
+
+.modal-section {
+  margin-bottom: 20px;
+}
+
+.modal-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 10px;
+}
+
+/* Modal Mood Pills */
+.modal-mood-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.modal-mood-btn {
+  background-color: var(--bg-card-tint);
+  border: 1px solid var(--color-sage-border);
+  color: var(--color-text-body);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.modal-mood-btn:hover {
+  background-color: #EDF3EC;
+}
+
+.modal-mood-btn.active {
+  background-color: var(--bg-pill-active);
+  border-color: var(--color-primary-sage);
+  color: var(--color-text-dark);
+  font-weight: 600;
+}
+
+/* Reflection Textarea */
+.reflection-textarea {
+  width: 100%;
+  border: 1px solid var(--color-sage-border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  color: var(--color-text-dark);
+  background-color: var(--bg-card-tint);
+  resize: vertical;
+  min-height: 100px;
+  outline: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.reflection-textarea:focus {
+  border-color: var(--color-primary-sage);
+  background-color: #FFFFFF;
+}
+
+/* Modal Action Buttons */
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-primary-modal {
+  flex: 1;
+  background-color: var(--color-primary-sage);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9999px;
+  padding: 12px 20px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-primary-modal:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-secondary-modal {
+  flex: 1;
+  background-color: #FFFFFF;
+  color: var(--color-text-body);
+  border: 1px solid var(--color-sage-border);
+  border-radius: 9999px;
+  padding: 12px 20px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-secondary-modal:hover {
+  background-color: #F8FAF7;
+  color: var(--color-text-dark);
+}
+
+.btn-danger-outline {
+  background: transparent;
+  border: 1px solid #E2B2B2;
+  color: #A94B4B;
+  border-radius: 9999px;
+  padding: 12px 20px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-danger-outline:hover {
+  background-color: #FDF5F5;
+}
+
+/* Saved Reflections List in Modal */
+.reflections-list-dialog {
+  max-width: 580px;
+}
+
+.reflections-content-area {
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 6px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reflection-item-card {
+  background-color: var(--bg-card-tint);
+  border: 1px solid var(--color-sage-border);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reflection-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.reflection-mood-tag {
+  background-color: var(--bg-pill-active);
+  color: var(--color-text-dark);
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-weight: 600;
+}
+
+.reflection-text-quote {
+  font-size: 0.9rem;
+  color: var(--color-text-dark);
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.empty-reflections-note {
+  text-align: center;
+  padding: 36px 16px;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   Toast Notification
+   ========================================================================== */
+.toast-notification {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(90px);
+  background-color: #26382E;
+  color: #FFFFFF;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  z-index: 200;
+  opacity: 0;
+  transition: transform 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.35s ease;
+  pointer-events: none;
+}
+
+.toast-notification.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Responsive Design (Desktop, Tablet, Mobile)
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .site-header {
+    padding: 20px 36px;
+  }
+
+  .meditation-card {
+    padding: 36px 36px;
+    gap: 36px;
+  }
+
+  .timer-digits {
+    font-size: 3.8rem;
+  }
+
+  .page-title {
+    font-size: 2.75rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .meditation-card {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin: 0 auto;
+    gap: 44px;
+  }
+
+  .timer-column {
+    border-bottom: 1px solid rgba(220, 228, 218, 0.7);
+    padding-bottom: 36px;
+  }
+
+  .duration-selection-section {
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 16px 20px;
+  }
+
+  .page-main {
+    padding: 8px 16px 50px;
+  }
+
+  .page-title {
+    font-size: 2.25rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .meditation-card {
+    padding: 28px 20px;
+    border-radius: 24px;
+  }
+
+  .halo-circle {
+    width: 200px;
+    height: 155px;
+  }
+
+  .timer-digits {
+    font-size: 3.5rem;
+  }
+
+  .btn-ctrl {
+    padding: 10px 18px;
+    font-size: 0.875rem;
+  }
+
+  .mood-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .botanical-bg {
+    opacity: 0.45;
+  }
+}

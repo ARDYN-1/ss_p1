@@ -49,6 +49,16 @@ const activities = {
   Reflection: { name: 'Quiet Reflection', card: 'Quiet Reflection', detail: 'A few minutes of reflection can help you reconnect with what matters to you.' },
 };
 
+const activityDestinations = {
+  Meditation: '/meditation/meditation.html',
+  Breathwork: '/breathwork/breathwork.html',
+  'Yoga & movement': '/yoga&movement/yoga.html',
+  'Healing Music': '/healing_music/healing_music.html',
+  'Sleep Stories': '/sleep_stories/sleep_stories.html',
+  Gratitude: '/gratitude/gratitude.html',
+  'Quiet Reflection': '/Self%20Reflection/selfReflection.html',
+};
+
 const questions = [
   {
     title: 'How are you feeling right now?',
@@ -275,13 +285,10 @@ document.querySelectorAll('.practice-card[data-auth-target] .explore-button').fo
     event.preventDefault();
     const card = button.closest('.practice-card');
     const practice = card.dataset.practice;
-    window.soulspaceRequireAuth(card.dataset.authTarget).then((isAuthenticated) => {
+    const destination = activityDestinations[practice] || card.dataset.authTarget;
+    window.soulspaceRequireAuth(destination).then((isAuthenticated) => {
       if (!isAuthenticated) return;
-      if (card.dataset.authTarget === '/journal.html') {
-        window.location.assign('/journal.html');
-        return;
-      }
-      showToast(`${practice} selected — take this moment at your own pace.`);
+      window.location.assign(destination);
     });
   });
 });
@@ -360,8 +367,11 @@ function showResult() {
   document.querySelector('#result-action').onclick = () => {
     finderDialog.close();
     const card = [...document.querySelectorAll('.practice-card')].find((item) => item.dataset.practice === result.card);
-    card?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    showToast(`${result.name} is ready when you are.`);
+    if (!card) return;
+    const destination = activityDestinations[card.dataset.practice] || card.dataset.authTarget;
+    window.soulspaceRequireAuth(destination).then((isAuthenticated) => {
+      if (isAuthenticated) window.location.assign(destination);
+    });
   };
   finderStep.hidden = true;
   document.querySelector('#finder-progress').hidden = true;

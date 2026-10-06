@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SoulSpace — Find Your Stillness | Meditation</title>
+  
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans for serene typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="meditation.css">
+</head>
+<body>
+
+  <!-- Decorative Botanical Watercolor Background Accents -->
+  <div class="botanical-bg botanical-top-left" aria-hidden="true">
+    <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-40 -40 C60 20, 140 100, 160 220" stroke="#7A9480" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+      <path d="M10 30 C30 5, 85 15, 80 48 C75 75, 25 60, 10 30 Z" fill="#8EA893" opacity="0.45"/>
+      <path d="M50 70 C75 45, 130 55, 125 90 C120 118, 65 102, 50 70 Z" fill="#7E9B83" opacity="0.4"/>
+      <path d="M90 120 C125 95, 180 115, 170 150 C160 182, 105 160, 90 120 Z" fill="#8EA893" opacity="0.45"/>
+      <path d="M125 170 C155 145, 210 168, 200 202 C190 230, 140 210, 125 170 Z" fill="#728F77" opacity="0.38"/>
+      <path d="M30 10 C15 35, 30 90, 60 85 C88 80, 70 30, 30 10 Z" fill="#9FB7A4" opacity="0.35"/>
+      <path d="M70 55 C52 80, 72 135, 102 128 C130 120, 110 72, 70 55 Z" fill="#88A38E" opacity="0.38"/>
+      <!-- Soft watercolor wash -->
+      <circle cx="80" cy="80" r="140" fill="#E2EBE2" filter="blur(40px)" opacity="0.45"/>
+    </svg>
+  </div>
+
+  <div class="botanical-bg botanical-top-right" aria-hidden="true">
+    <svg viewBox="0 0 360 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M400 -40 C300 30, 230 110, 200 240" stroke="#7A9480" stroke-width="2.5" stroke-linecap="round" opacity="0.35"/>
+      <path d="M340 30 C320 5, 265 15, 270 48 C275 75, 325 60, 340 30 Z" fill="#8EA893" opacity="0.45"/>
+      <path d="M300 70 C275 45, 220 55, 225 90 C230 118, 285 102, 300 70 Z" fill="#7E9B83" opacity="0.4"/>
+      <path d="M260 125 C225 100, 170 120, 180 155 C190 185, 245 165, 260 125 Z" fill="#8EA893" opacity="0.42"/>
+      <path d="M225 180 C190 155, 140 180, 150 215 C160 245, 210 220, 225 180 Z" fill="#728F77" opacity="0.35"/>
+      <!-- Lavender wash hint -->
+      <circle cx="280" cy="80" r="130" fill="#E8E2EE" filter="blur(45px)" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <div class="botanical-bg botanical-bottom-left" aria-hidden="true">
+    <svg viewBox="0 0 320 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M-30 380 C50 300, 130 220, 170 90" stroke="#7A9480" stroke-width="2.2" stroke-linecap="round" opacity="0.3"/>
+      <path d="M20 310 C45 330, 95 315, 90 285 C85 258, 35 275, 20 310 Z" fill="#8EA893" opacity="0.4"/>
+      <path d="M60 265 C85 290, 140 275, 132 242 C125 215, 75 230, 60 265 Z" fill="#7E9B83" opacity="0.38"/>
+      <path d="M100 210 C130 235, 185 215, 175 180 C165 150, 115 170, 100 210 Z" fill="#8EA893" opacity="0.35"/>
+      <circle cx="60" cy="270" r="130" fill="#E6EDE6" filter="blur(45px)" opacity="0.45"/>
+    </svg>
+  </div>
+
+  <div class="botanical-bg botanical-bottom-right" aria-hidden="true">
+    <svg viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M390 390 C290 310, 210 230, 190 90" stroke="#7A9480" stroke-width="2.2" stroke-linecap="round" opacity="0.32"/>
+      <path d="M330 320 C305 340, 255 325, 260 295 C265 268, 315 285, 330 320 Z" fill="#8EA893" opacity="0.4"/>
+      <path d="M290 270 C265 295, 210 280, 218 248 C225 220, 275 235, 290 270 Z" fill="#7E9B83" opacity="0.38"/>
+      <path d="M250 215 C220 240, 165 220, 175 185 C185 155, 235 175, 250 215 Z" fill="#8EA893" opacity="0.35"/>
+      <circle cx="300" cy="290" r="140" fill="#EDE4EB" filter="blur(48px)" opacity="0.45"/>
+    </svg>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="site-header">
+    <div class="header-container">
+      <!-- Logo: Lotus symbol + SOULSPACE -->
+      <a href="#home" class="brand-logo" aria-label="SoulSpace Home">
+        <svg class="lotus-icon" viewBox="0 0 42 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Stylized Lotus -->
+          <path d="M21 2C21 2 15 12 15 19C15 23 18 26 21 26C24 26 27 23 27 19C27 12 21 2 21 2Z" stroke="#486350" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M21 26C15 26 8 20 6 15C11 14 17 17 20 22" stroke="#486350" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M21 26C27 26 34 20 36 15C31 14 25 17 22 22" stroke="#486350" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M21 26C13 26 4 23 2 19C7 19 13 21 17 24" stroke="#486350" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M21 26C29 26 38 23 40 19C35 19 29 21 25 24" stroke="#486350" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <span class="brand-name">SOULSPACE</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="page-main">
+    
+    <!-- PAGE TITLE / HERO SECTION -->
+    <section class="hero-section text-center">
+      <span class="category-badge">M I N D F U L N E S S</span>
+      <h1 class="page-title">Find Your Stillness</h1>
+      <p class="page-subtitle">Take a few quiet moments to slow down, breathe, and reconnect with yourself.</p>
+      
+      <!-- Lotus Ornament -->
+      <div class="lotus-ornament" aria-hidden="true">
+        <span class="ornament-line"></span>
+        <svg class="ornament-lotus" viewBox="0 0 36 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M18 2C18 2 13 10 13 16C13 19.5 15.5 22 18 22C20.5 22 23 19.5 23 16C23 10 18 2 18 2Z" stroke="#6D8973" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M18 22C13 22 7 17 5 13C9 12 14 15 17 19" stroke="#6D8973" stroke-width="1.3" stroke-linecap="round"/>
+          <path d="M18 22C23 22 29 17 31 13C27 12 22 15 19 19" stroke="#6D8973" stroke-width="1.3" stroke-linecap="round"/>
+          <path d="M18 22C11 22 3 19 1 16C5 16 11 18 15 20.5" stroke="#6D8973" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M18 22C25 22 33 19 35 16C31 16 25 18 21 20.5" stroke="#6D8973" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <span class="ornament-line"></span>
+      </div>
+    </section>
+
+    <!-- MEDITATION CARD -->
+    <section class="meditation-container">
+      <div class="meditation-card">
+        
+        <!-- LEFT COLUMN: TIMER & CONTROLS -->
+        <div class="card-column timer-column">
+          
+          <!-- Serene Halo & Meditating Figure Illustration -->
+          <div class="meditation-art-wrap">
+            <div class="halo-circle" id="haloCircle">
+              <!-- Animated / Soft Breathing Halo SVG -->
+              <svg class="meditation-svg" viewBox="0 0 280 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="lavenderGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#F2EEF8"/>
+                    <stop offset="65%" stop-color="#E5DCF1"/>
+                    <stop offset="100%" stop-color="#FAF7F2" stop-opacity="0"/>
+                  </radialGradient>
+                  <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#B2C7B6"/>
+                    <stop offset="100%" stop-color="#8DA792"/>
+                  </linearGradient>
+                </defs>
+
+                <!-- Soft lavender circular aura -->
+                <circle cx="140" cy="115" r="70" fill="url(#lavenderGlow)"/>
+
+                <!-- Delicate fine concentric gold/sage rings -->
+                <circle cx="140" cy="115" r="78" stroke="#DCD5C5" stroke-width="0.9" opacity="0.6" stroke-dasharray="2 1"/>
+                <circle cx="140" cy="115" r="92" stroke="#E2DDCE" stroke-width="0.8" opacity="0.45"/>
+                <circle cx="140" cy="115" r="104" stroke="#ECE7DC" stroke-width="0.7" opacity="0.35"/>
+
+                <!-- Left Botanical Sprig -->
+                <g class="botanical-sprig-left" opacity="0.75">
+                  <path d="M120 165 C95 155, 75 140, 65 110" stroke="#8EA893" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M98 152 C90 142, 95 130, 105 134 C112 138, 106 148, 98 152 Z" fill="url(#leafGrad)"/>
+                  <path d="M85 136 C75 125, 78 112, 90 116 C98 120, 93 132, 85 136 Z" fill="url(#leafGrad)"/>
+                  <path d="M72 118 C60 106, 64 94, 76 98 C84 102, 80 114, 72 118 Z" fill="url(#leafGrad)"/>
+                  <path d="M66 100 C55 88, 60 76, 70 82 C78 86, 74 96, 66 100 Z" fill="url(#leafGrad)"/>
+                </g>
+
+                <!-- Right Botanical Sprig -->
+                <g class="botanical-sprig-right" opacity="0.75">
+                  <path d="M160 165 C185 155, 205 140, 215 110" stroke="#8EA893" stroke-width="1.4" stroke-linecap="round"/>
+                  <path d="M182 152 C190 142, 185 130, 175 134 C168 138, 174 148, 182 152 Z" fill="url(#leafGrad)"/>
+                  <path d="M195 136 C205 125, 202 112, 190 116 C182 120, 187 132, 195 136 Z" fill="url(#leafGrad)"/>
+                  <path d="M208 118 C220 106, 216 94, 204 98 C196 102, 200 114, 208 118 Z" fill="url(#leafGrad)"/>
+                  <path d="M214 100 C225 88, 220 76, 210 82 C202 86, 206 96, 214 100 Z" fill="url(#leafGrad)"/>
+                </g>
+
+                <!-- Meditating Figure Silhouette (Lotus Posture) -->
+                <g class="meditator-silhouette" fill="#6A7A71">
+                  <!-- Head & top bun -->
+                  <circle cx="140" cy="84" r="8.5"/>
+                  <circle cx="140" cy="74.5" r="3.2"/>
+                  <!-- Neck -->
+                  <path d="M138 92.5 H142 V96 H138 Z"/>
+                  <!-- Torso & Shoulders -->
+                  <path d="M140 96 C132 96, 126 102, 124 109 L129 133 C130 137, 150 137, 151 133 L156 109 C154 102, 148 96, 140 96 Z"/>
+                  <!-- Left Arm & Hand resting on knee -->
+                  <path d="M124 108 L114 126 C112 129, 115 136, 122 136 L131 136 C131 133, 125 132, 124 127 L130 112 Z"/>
+                  <!-- Right Arm & Hand resting on knee -->
+                  <path d="M156 108 L166 126 C168 129, 165 136, 158 136 L149 136 C149 133, 155 132, 156 127 L150 112 Z"/>
+                  <!-- Cross-legged Base / Lap -->
+                  <path d="M112 135 C110 137, 114 143, 122 144 C132 145, 148 145, 158 144 C166 143, 170 137, 168 135 C164 133, 155 135, 140 135 C125 135, 116 133, 112 135 Z"/>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Selected Duration Tracker Display (Small Text) -->
+          <div class="selected-duration-badge" id="durationBadge">5:00</div>
+
+          <!-- Main Serif Timer Display -->
+          <div class="timer-display-wrap">
+            <span class="timer-digits" id="timerDisplay">05:00</span>
+          </div>
+
+          <!-- Meditation Breath Guidance Caption -->
+          <p class="breath-guidance-text" id="guidanceCaption">Focus on your natural breath.</p>
+
+          <!-- Timer Controls (Start, Pause, Reset) -->
+          <div class="timer-controls">
+            <!-- Start Button -->
+            <button class="btn-ctrl btn-start" id="btnStart" type="button" aria-label="Start meditation">
+              <svg class="ctrl-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5V19L19 12L8 5Z"/>
+              </svg>
+              <span>Start</span>
+            </button>
+
+            <!-- Pause Button -->
+            <button class="btn-ctrl btn-pause" id="btnPause" type="button" aria-label="Pause meditation">
+              <svg class="ctrl-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M6 19H10V5H6V19ZM14 5V19H18V5H14Z"/>
+              </svg>
+              <span>Pause</span>
+            </button>
+
+            <!-- Reset Button -->
+            <button class="btn-ctrl btn-reset" id="btnReset" type="button" aria-label="Reset timer">
+              <svg class="ctrl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                <path d="M3 3v5h5"/>
+              </svg>
+              <span>Reset</span>
+            </button>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="progress-bar-container" aria-label="Meditation progress">
+            <div class="progress-bar-fill" id="progressFill" style="width: 0%;"></div>
+          </div>
+
+          <!-- Duration Selection Section -->
+          <div class="duration-selection-section">
+            <h3 class="duration-title">Choose your duration</h3>
+            <div class="duration-buttons">
+              <button class="duration-pill" data-minutes="2" type="button">2 min</button>
+              <button class="duration-pill active" data-minutes="5" type="button">5 min</button>
+              <button class="duration-pill" data-minutes="10" type="button">10 min</button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: GUIDANCE, AUDIO & MOOD -->
+        <div class="card-column guidance-column">
+          
+          <!-- Gentle Guidance Section -->
+          <div class="guidance-block">
+            <h2 class="column-heading">Gentle Guidance</h2>
+            <div class="guidance-card">
+              <div class="guidance-icon-wrap" aria-hidden="true">
+                <!-- Leaf Icon -->
+                <svg class="guidance-leaf" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18 4C11 4 6 9 6 16C8 16 12 15 15 12C18 9 18 4 18 4Z" stroke="#526E58" stroke-width="1.8" stroke-linejoin="round"/>
+                  <path d="M6 16C9 14 13 10 15 7" stroke="#526E58" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M6 16C5 18 4 20 3 21" stroke="#526E58" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <div class="guidance-text-content">
+                <p>Sit comfortably.</p>
+                <p>Relax your shoulders.</p>
+                <p>Notice your breath.</p>
+                <p>If your mind wanders, gently return</p>
+                <p>to the present moment.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Calming Audio Section -->
+          <div class="ambient-sound-block">
+            <div class="ambient-sound-card">
+              <div class="ambient-info">
+                <!-- Music Note Icon -->
+                <svg class="music-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 3V13.55C11.41 13.21 10.73 13 10 13C7.79 13 6 14.79 6 17C6 19.21 7.79 21 10 21C12.21 21 14 19.21 14 17V7H18V3H12Z"/>
+                </svg>
+                <div class="ambient-text-wrap">
+                  <span class="ambient-title">Gentle Ambient Sound</span>
+                  <span class="ambient-subtext">Soft ambient music for your meditation</span>
+                </div>
+              </div>
+              
+              <div class="ambient-switch-wrap">
+                <span class="toggle-status-text" id="toggleStatusLabel">Off</span>
+                <label class="switch" for="audioToggle">
+                  <input type="checkbox" id="audioToggle" aria-label="Toggle ambient sound">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Volume Control Bar (Subtle & Elegant) -->
+            <div class="volume-control-wrap" id="volumeWrap">
+              <button class="volume-mute-btn" id="volumeMuteBtn" type="button" aria-label="Mute / Unmute">
+                <svg class="vol-icon" id="volIcon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 9V15H7L12 20V4L7 9H3ZM16.5 12C16.5 10.23 15.48 8.71 14 7.97V16.02C15.48 15.29 16.5 13.77 16.5 12ZM14 3.23V5.29C16.89 6.15 19 8.83 19 12C19 15.17 16.89 17.85 14 18.71V20.77C18.01 19.86 21 16.28 21 12C21 7.72 18.01 4.14 14 3.23Z"/>
+                </svg>
+              </button>
+              <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.7" aria-label="Volume level">
+              <span class="volume-pct" id="volumePct">70%</span>
+            </div>
+          </div>
+
+          <!-- After Your Practice (Mood Selection) -->
+          <div class="post-practice-block">
+            <h3 class="column-heading">After your practice</h3>
+            
+            <div class="mood-grid" role="group" aria-label="Select how you feel now">
+              <!-- Mood: Relaxed -->
+              <button class="mood-btn active" data-mood="Relaxed" type="button">
+                <svg class="mood-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M9 10H9.01M15 10H15.01" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M8 14C8.5 16 10.2 17 12 17C13.8 17 15.5 16 16 14" stroke-linecap="round"/>
+                </svg>
+                <span class="mood-label">Relaxed</span>
+              </button>
+
+              <!-- Mood: Refreshed -->
+              <button class="mood-btn" data-mood="Refreshed" type="button">
+                <svg class="mood-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M12 21C12 21 7 17 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 17 12 21 12 21Z" stroke-linejoin="round"/>
+                  <path d="M12 7V21"/>
+                  <path d="M12 12C13.5 10.5 15.5 10 15.5 10"/>
+                  <path d="M12 15C10.5 13.5 8.5 13 8.5 13"/>
+                </svg>
+                <span class="mood-label">Refreshed</span>
+              </button>
+
+              <!-- Mood: Calm -->
+              <button class="mood-btn" data-mood="Calm" type="button">
+                <svg class="mood-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M8.5 10C9 9.5 10 9.5 10.5 10M13.5 10C14 9.5 15 9.5 15.5 10" stroke-linecap="round"/>
+                  <path d="M9 15C10.2 16 13.8 16 15 15" stroke-linecap="round"/>
+                </svg>
+                <span class="mood-label">Calm</span>
+              </button>
+
+              <!-- Mood: Neutral -->
+              <button class="mood-btn" data-mood="Neutral" type="button">
+                <svg class="mood-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z"/>
+                </svg>
+                <span class="mood-label">Neutral</span>
+              </button>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="practice-action-buttons">
+              <button class="btn-action btn-save-practice" id="btnSavePractice" type="button">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17 3H7C5.9 3 5.01 3.9 5.01 5L5 21L12 18L19 21V5C19 3.9 18.1 3 17 3ZM17 18L12 15.82L7 18V5H17V18Z"/>
+                </svg>
+                <span>Save Practice</span>
+              </button>
+
+              <button class="btn-action btn-write-reflection" id="btnWriteReflection" type="button">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"/>
+                  <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+                <span>Write a Reflection</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PEACEFUL COMPLETION & REFLECTION MODAL / CARD -->
+    <div class="modal-overlay" id="completionModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="completionTitle">
+      <div class="modal-dialog">
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">&times;</button>
+        
+        <div class="completion-header text-center">
+          <div class="completion-lotus-badge">🌸</div>
+          <h2 class="completion-title" id="completionTitle">Meditation Complete</h2>
+          <p class="completion-subtext">You made time for yourself.</p>
+        </div>
+
+        <!-- Mood prompt inside completion modal -->
+        <div class="modal-section">
+          <label class="modal-label">How do you feel now?</label>
+          <div class="modal-mood-grid">
+            <button class="modal-mood-btn active" data-mood="Relaxed" type="button">🙂 Relaxed</button>
+            <button class="modal-mood-btn" data-mood="Refreshed" type="button">🌿 Refreshed</button>
+            <button class="modal-mood-btn" data-mood="Calm" type="button">😌 Calm</button>
+            <button class="modal-mood-btn" data-mood="Neutral" type="button">🤍 Neutral</button>
+          </div>
+        </div>
+
+        <!-- Reflection Textarea inside completion modal -->
+        <div class="modal-section">
+          <label class="modal-label" for="reflectionText">Would you like to write a reflection?</label>
+          <textarea id="reflectionText" class="reflection-textarea" rows="4" placeholder="Write anything you'd like to remember from this moment..."></textarea>
+        </div>
+
+        <!-- Modal Footer Actions -->
+        <div class="modal-actions">
+          <button class="btn-primary-modal" id="btnSaveReflectionModal" type="button">Save Practice</button>
+          <button class="btn-secondary-modal" id="btnBackToPractices" type="button">Back to Practices</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MY REFLECTIONS DRAWER / MODAL -->
+    <div class="modal-overlay" id="reflectionsListModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="reflectionsListTitle">
+      <div class="modal-dialog reflections-list-dialog">
+        <button class="modal-close-btn" id="reflectionsListCloseBtn" aria-label="Close modal">&times;</button>
+        
+        <div class="completion-header text-center">
+          <div class="completion-lotus-badge">🌿</div>
+          <h2 class="completion-title" id="reflectionsListTitle">My Reflections</h2>
+          <p class="completion-subtext">Your mindful journey and saved practice reflections.</p>
+        </div>
+
+        <div class="reflections-content-area" id="reflectionsContentArea">
+          <!-- Populated dynamically by JavaScript -->
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-secondary-modal" id="btnCloseReflectionsList" type="button">Close</button>
+          <button class="btn-danger-outline" id="btnClearReflections" type="button">Clear History</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast-notification" id="toastNotification" role="alert" aria-live="polite">
+      <span class="toast-icon">✨</span>
+      <span class="toast-message" id="toastMessage">Practice saved to My Reflections</span>
+    </div>
+
+  </main>
+
+  <!-- HTML5 Audio Element for Ambient Track -->
+  <audio id="ambientAudio" preload="auto" loop>
+    <source src="assets/audio/spa-ambient-10min.mp3" type="audio/mp3">
+    <source src="assets/audio/gentle-ambient.mp3" type="audio/mp3">
+  </audio>
+
+  <script src="meditation.js"></script>
+</body>
+</html>
