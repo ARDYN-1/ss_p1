@@ -11,3 +11,6 @@ dependencies = [
     "python-dotenv>=1.2.4",
     "uvicorn[standard]>=0.54.0",
 ]
+
+[project.scripts]
+app = "backend.main:app"
