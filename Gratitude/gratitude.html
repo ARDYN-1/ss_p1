@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gratitude Spin — SoulSpace Spiritual Wellness</title>
+  <meta name="description"
+    content="Spin the Gratitude Wheel on SoulSpace. Pause, breathe, and reflect on what you are grateful for today with mindful inspiration and personal reflection.">
+
+  <!-- Google Fonts: Cormorant Garamond for elegant spiritual serifs, Plus Jakarta Sans for clean typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="gratitude.css">
+</head>
+
+<body>
+  <!-- Ambient watercolor background scenery -->
+  <div class="ambient-scenery-overlay" aria-hidden="true">
+    <!-- Top-left hanging watercolor leaves -->
+    <img src="assets/eucalyptus_branch.jpg" alt="" class="bg-botanical-top-left">
+
+    <!-- Top-right misty mountain & sunrise watercolor backdrop -->
+    <div class="bg-sunrise-backdrop">
+      <!-- Flying birds silhouette in the sunrise sky -->
+      <svg class="birds-silhouette" viewBox="0 0 160 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M120 18 C124 13 129 16 133 20 C137 16 142 13 146 18 C141 17 135 22 133 25 C131 22 125 17 120 18 Z"
+          fill="#718679" opacity="0.6" />
+        <path d="M142 28 C145 24 148 26 151 29 C154 26 157 24 160 28 C156 27 152 30 151 32 C149 30 145 27 142 28 Z"
+          fill="#718679" opacity="0.45" />
+        <path d="M102 30 C105 27 108 28 111 31 C114 28 117 27 120 30 C117 29 113 32 111 34 C109 32 105 29 102 30 Z"
+          fill="#718679" opacity="0.4" />
+      </svg>
+    </div>
+  </div>
+
+  <div class="page-container">
+    <!-- TOP HEADER: Branding on Left, Inspiring Scenery Quote on Right -->
+    <header class="page-header">
+      <div class="brand-container">
+        <div class="brand-logo" aria-label="SoulSpace Logo">
+          <!-- Elegant Lotus SVG Logo -->
+          <svg class="lotus-icon" viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Center petal -->
+            <path d="M18 2 C16 9 16 17 18 24 C20 17 20 9 18 2 Z" stroke="#254737" stroke-width="1.8"
+              stroke-linejoin="round" />
+            <!-- Left inner petal -->
+            <path d="M18 24 C14 17 11 11 9 6 C7 11 9 19 18 24 Z" stroke="#254737" stroke-width="1.6"
+              stroke-linejoin="round" />
+            <!-- Right inner petal -->
+            <path d="M18 24 C22 17 25 11 27 6 C29 11 27 19 18 24 Z" stroke="#254737" stroke-width="1.6"
+              stroke-linejoin="round" />
+            <!-- Outer left petal -->
+            <path d="M18 24 C11 21 6 16 3 12 C2 17 6 22 18 25 Z" stroke="#254737" stroke-width="1.5"
+              stroke-linejoin="round" />
+            <!-- Outer right petal -->
+            <path d="M18 24 C25 21 30 16 33 12 C34 17 30 22 18 25 Z" stroke="#254737" stroke-width="1.5"
+              stroke-linejoin="round" />
+            <!-- Gentle water base curve -->
+            <path d="M10 26 C14 27.5 22 27.5 26 26" stroke="#254737" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">SOULSPACE</span>
+          <span class="brand-tagline">Pause. Breathe. Reflect.</span>
+        </div>
+      </div>
+
+      <!-- Floating Lake/Sunrise Quote in Top Right -->
+      <div class="top-scenery-quote">
+        <blockquote class="poetic-quote">
+          <span class="quote-text">&ldquo;Gratitude turns ordinary moments into blessings.&rdquo;</span>
+          <cite class="quote-author">&mdash; Melody Beattie</cite>
+        </blockquote>
+      </div>
+    </header>
+
+    <!-- MAIN HEADING & SUBTITLE -->
+    <section class="hero-section">
+      <h1 class="main-title">Gratitude Spin</h1>
+      <p class="main-subtitle">Not sure what to be grateful for today? Give the wheel a spin for a little inspiration.
+      </p>
+
+      <!-- Delicate Lotus Ornamental Divider -->
+      <div class="lotus-divider" aria-hidden="true">
+        <span class="divider-line"></span>
+        <svg class="divider-lotus" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2 C10.5 6 10.5 12 12 16 C13.5 12 13.5 6 12 2 Z" stroke="#335643" stroke-width="1.4" />
+          <path d="M12 16 C8.5 11 6 7 5 4 C3.8 8 5.5 13 12 16 Z" stroke="#335643" stroke-width="1.2" />
+          <path d="M12 16 C15.5 11 18 7 19 4 C20.2 8 18.5 13 12 16 Z" stroke="#335643" stroke-width="1.2" />
+          <path d="M7 17 C10 18 14 18 17 17" stroke="#335643" stroke-width="1.2" stroke-linecap="round" />
+        </svg>
+        <span class="divider-line"></span>
+      </div>
+    </section>
+
+    <!-- 3-COLUMN MAIN INTERACTION CONTAINER -->
+    <main class="interaction-layout">
+      <!-- LEFT CARD: Today I'm Grateful For... -->
+      <section class="card-column left-column">
+        <div class="reflection-card" id="reflection-card">
+          <div class="card-header">
+            <span class="card-icon" aria-hidden="true">
+              <!-- Leaf icon -->
+              <svg viewBox="0 0 20 20" fill="none" class="ui-leaf-icon" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.5 2.5 C10 2.5 4 8.5 4 16 C11.5 16 17.5 10 17.5 2.5 Z" fill="#2d513e" />
+                <path d="M4 16 C6.5 13.5 11 10 17.5 2.5" stroke="#fcfaf4" stroke-width="1.2" />
+                <path d="M4 16 C3 17 2 18.5 1.5 19.5" stroke="#2d513e" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h2 class="card-title">Today I&rsquo;m Grateful For...</h2>
+          </div>
+
+          <div class="card-body">
+            <label for="gratitude-text" class="sr-only">Write one thing you're grateful for today</label>
+            <textarea id="gratitude-text" class="gratitude-textarea"
+              placeholder="Write one thing you're grateful for today..." rows="4" spellcheck="true"></textarea>
+          </div>
+
+          <div class="card-footer">
+            <div class="footer-note">
+              <svg class="tiny-heart-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M8 13.5 C8 13.5 1.5 9.5 1.5 5 C1.5 2.8 3.3 1.5 5 1.5 C6.3 1.5 7.4 2.3 8 3.2 C8.6 2.3 9.7 1.5 11 1.5 C12.7 1.5 14.5 2.8 14.5 5 C14.5 9.5 8 13.5 8 13.5 Z"
+                  stroke="#5d7567" stroke-width="1.4" stroke-linejoin="round" />
+              </svg>
+              <span>Small moments. Big joy.</span>
+            </div>
+
+            <button type="button" class="btn-save" id="save-button" aria-label="Save gratitude reflection">
+              <svg class="btn-leaf-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14 2 C8 2 3.2 6.8 3.2 12.8 C9.2 12.8 14 8 14 2 Z" fill="currentColor" />
+                <path d="M3.2 12.8 C5.2 10.8 8.8 8 14 2" stroke="#2a4e3b" stroke-width="1" />
+                <path d="M3.2 12.8 C2.4 13.6 1.6 14.8 1.2 15.6" stroke="currentColor" stroke-width="1.2"
+                  stroke-linecap="round" />
+              </svg>
+              <span>Save</span>
+            </button>
+          </div>
+
+          <!-- Subtle feedback toast when saved -->
+          <div class="save-status" id="save-status" role="status" aria-live="polite"></div>
+
+          <!-- Watercolor botanical leaf corner watermark -->
+          <img src="assets/eucalyptus_branch.jpg" alt="" class="card-watermark-botanical" aria-hidden="true">
+        </div>
+
+        <!-- Zen balancing stones with small wildflowers at bottom left -->
+        <div class="zen-stones-container" aria-hidden="true">
+          <img src="assets/zen_stones.jpg" alt="Balanced zen pebbles and blooming wildflowers" class="zen-stones-img">
+        </div>
+      </section>
+
+      <!-- CENTER: Interactive 6-Section Gratitude Wheel & Spin Controls -->
+      <section class="wheel-column" aria-label="Gratitude Wheel">
+        <div class="wheel-stage">
+          <!-- Top Wheel Pointer (Deep green teardrop pin with inner dot) -->
+          <div class="wheel-pointer-container" aria-hidden="true">
+            <svg class="wheel-pointer-svg" viewBox="0 0 32 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Drop shadow filter -->
+              <defs>
+                <filter id="pointer-shadow" x="-20%" y="-10%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="2.5" stdDeviation="2.5" flood-color="#14281f" flood-opacity="0.25" />
+                </filter>
+              </defs>
+              <!-- Teardrop Pin Shape -->
+              <path d="M16 44 C16 44 2 24 2 15 C2 7.268 8.268 1 16 1 C23.732 1 30 7.268 30 15 C30 24 16 44 16 44 Z"
+                fill="#254737" filter="url(#pointer-shadow)" />
+              <!-- Inner center circular dot -->
+              <circle cx="16" cy="15" r="4.2" fill="#faf7ef" />
+            </svg>
+          </div>
+
+          <!-- The Wheel Graphic (SVG) -->
+          <div class="wheel-wrapper">
+            <svg id="gratitude-wheel-svg" class="wheel-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <!-- Subtle outer ring shadow -->
+                <filter id="wheel-outer-shadow" x="-10%" y="-10%" width="120%" height="120%">
+                  <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#34483a" flood-opacity="0.12" />
+                </filter>
+
+                <!-- Center button shadow -->
+                <filter id="hub-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#12251c" flood-opacity="0.3" />
+                </filter>
+              </defs>
+
+              <!-- Outer Soft Beige Rim -->
+              <circle cx="200" cy="200" r="198" fill="#f8f5ee" stroke="#ffffff" stroke-width="4"
+                filter="url(#wheel-outer-shadow)" />
+
+              <!-- ROTATING WHEEL GROUP -->
+              <g id="wheel-rotor" class="wheel-rotor">
+                <!-- 
+                  6 Equal Segments (60 degrees each):
+                  Segment 0: Nature (centered at top, -30° to +30°)
+                  Segment 1: Someone you love (30° to 90°)
+                  Segment 2: A happy moment (90° to 150°)
+                  Segment 3: Something you learned (150° to 210°)
+                  Segment 4: Something you have (210° to 270°)
+                  Segment 5: Something about yourself (270° to 330°)
+                -->
+
+                <!-- SLICE 0: Nature (Soft Sage Green) -->
+                <path d="M 200 200 L 103 32 A 194 194 0 0 1 297 32 Z" fill="#d5e4cf" stroke="#ffffff" stroke-width="3"
+                  class="wheel-slice" data-index="0" data-name="Nature" />
+
+                <!-- SLICE 1: Someone you love (Soft Lavender Lilac) -->
+                <path d="M 200 200 L 297 32 A 194 194 0 0 1 394 200 Z" fill="#e2d8e8" stroke="#ffffff" stroke-width="3"
+                  class="wheel-slice" data-index="1" data-name="Someone you love" />
+
+                <!-- SLICE 2: A happy moment (Soft Warm Peach Yellow) -->
+                <path d="M 200 200 L 394 200 A 194 194 0 0 1 297 368 Z" fill="#fde5be" stroke="#ffffff" stroke-width="3"
+                  class="wheel-slice" data-index="2" data-name="A happy moment" />
+
+                <!-- SLICE 3: Something you learned (Soft Mint Sage) -->
+                <path d="M 200 200 L 297 368 A 194 194 0 0 1 103 368 Z" fill="#d4e2d3" stroke="#ffffff" stroke-width="3"
+                  class="wheel-slice" data-index="3" data-name="Something you learned" />
+
+                <!-- SLICE 4: Something you have (Soft Baby Blue) -->
+                <path d="M 200 200 L 103 368 A 194 194 0 0 1 6 200 Z" fill="#cae1ea" stroke="#ffffff" stroke-width="3"
+                  class="wheel-slice" data-index="4" data-name="Something you have" />
+
+                <!-- SLICE 5: Something about yourself (Soft Blush Pink) -->
+                <path d="M 200 200 L 6 200 A 194 194 0 0 1 103 32 Z" fill="#f8d5cb" stroke="#ffffff" stroke-width="3"
+                  class="wheel-slice" data-index="5" data-name="Something about yourself" />
+
+                <!-- Inner White Accent Ring Boundary -->
+                <circle cx="200" cy="200" r="59" fill="none" stroke="#ffffff" stroke-width="2.5" opacity="0.9" />
+
+                <!-- ==================== ICONS & LABELS ==================== -->
+                <!-- 0. NATURE (Top: 0°) -->
+                <g class="slice-content slice-nature" transform="translate(200, 84)">
+                  <!-- Leaf icon -->
+                  <path d="M-9 -14 C-1 -14 6 -8 6 1 C-2 1 -9 -3 -9 -14 Z" fill="none" stroke="#254737"
+                    stroke-width="1.8" />
+                  <path d="M-9 1 C-9 -5 -4 -10 6 1" stroke="#254737" stroke-width="1.3" />
+                  <path d="M-9 1 C-10 4 -12 7 -13 9" stroke="#254737" stroke-width="1.6" stroke-linecap="round" />
+                  <!-- Text -->
+                  <text x="0" y="24" class="slice-label">Nature</text>
+                </g>
+
+                <!-- 1. SOMEONE YOU LOVE (Top-Right: 60°) -->
+                <g class="slice-content slice-love" transform="translate(306, 142)">
+                  <!-- Heart icon -->
+                  <path
+                    d="M0 4 C0 4 -9 -2 -9 -8 C-9 -12 -6 -14 -3 -14 C-1 -14 0 -12 0 -11 C0 -12 1 -14 3 -14 C6 -14 9 -12 9 -8 C9 -2 0 4 0 4 Z"
+                    fill="none" stroke="#254737" stroke-width="1.8" stroke-linejoin="round" />
+                  <!-- Text: 2 lines -->
+                  <text x="0" y="19" class="slice-label">Someone</text>
+                  <text x="0" y="32" class="slice-label">you love</text>
+                </g>
+
+                <!-- 2. A HAPPY MOMENT (Bottom-Right: 120°) -->
+                <g class="slice-content slice-moment" transform="translate(306, 260)">
+                  <!-- Sun icon -->
+                  <circle cx="0" cy="-8" r="5.5" fill="none" stroke="#254737" stroke-width="1.8" />
+                  <!-- Sun rays -->
+                  <path
+                    d="M0 -17 L0 -15  M0 -1 L0 1  M-9 -8 L-7 -8  M7 -8 L9 -8  M-6.5 -14.5 L-5 -13  M5 -3 L6.5 -1.5  M-6.5 -1.5 L-5 -3  M5 -13 L6.5 -14.5"
+                    stroke="#254737" stroke-width="1.6" stroke-linecap="round" />
+                  <!-- Text: 2 lines -->
+                  <text x="0" y="19" class="slice-label">A happy</text>
+                  <text x="0" y="32" class="slice-label">moment</text>
+                </g>
+
+                <!-- 3. SOMETHING YOU LEARNED (Bottom: 180°) -->
+                <g class="slice-content slice-learned" transform="translate(200, 318)">
+                  <!-- Sprout / learned icon -->
+                  <path d="M0 6 C-1 0 -1 -8 -7 -10 C-8 -4 -5 1 0 6 Z" fill="none" stroke="#254737" stroke-width="1.6" />
+                  <path d="M0 6 C1 0 1 -8 7 -10 C8 -4 5 1 0 6 Z" fill="none" stroke="#254737" stroke-width="1.6" />
+                  <path d="M0 6 L0 11" stroke="#254737" stroke-width="1.8" stroke-linecap="round" />
+                  <!-- Text: 2 lines -->
+                  <text x="0" y="24" class="slice-label">Something</text>
+                  <text x="0" y="37" class="slice-label">you learned</text>
+                </g>
+
+                <!-- 4. SOMETHING YOU HAVE (Bottom-Left: 240°) -->
+                <g class="slice-content slice-have" transform="translate(94, 260)">
+                  <!-- Home / possess icon -->
+                  <path d="M-8 -5 L0 -13 L8 -5 V4 H3 V-1 H-3 V4 H-8 Z" fill="none" stroke="#254737" stroke-width="1.8"
+                    stroke-linejoin="round" />
+                  <path d="M4 -10 V-13 H7 V-7" stroke="#254737" stroke-width="1.5" />
+                  <!-- Text: 2 lines -->
+                  <text x="0" y="19" class="slice-label">Something</text>
+                  <text x="0" y="32" class="slice-label">you have</text>
+                </g>
+
+                <!-- 5. SOMETHING ABOUT YOURSELF (Top-Left: 300°) -->
+                <g class="slice-content slice-yourself" transform="translate(94, 142)">
+                  <!-- 4-point sparkle / star icon -->
+                  <path d="M0 -16 C1 -11 4 -8 9 -7 C4 -6 1 -3 0 2 C-1 -3 -4 -6 -9 -7 C-4 -8 -1 -11 0 -16 Z" fill="none"
+                    stroke="#254737" stroke-width="1.8" stroke-linejoin="round" />
+                  <!-- Text: 2 lines -->
+                  <text x="0" y="18" class="slice-label">Something</text>
+                  <text x="0" y="31" class="slice-label">about yourself</text>
+                </g>
+              </g>
+
+              <!-- CENTER HUB: Interactive SPIN Button -->
+              <g id="center-spin-hub" class="center-spin-hub" role="button" tabindex="0"
+                aria-label="Spin the gratitude wheel">
+                <!-- Center Green Hub Circle -->
+                <circle cx="200" cy="200" r="50" fill="#254737" stroke="#ffffff" stroke-width="3"
+                  filter="url(#hub-shadow)" />
+
+                <!-- White Leaf Icon on Center Button -->
+                <path d="M192 188 C197 186 206 186 208 193 C202 195 194 195 192 188 Z" fill="#ffffff" />
+                <path d="M208 193 C204 186 195 186 192 188" stroke="#ffffff" stroke-width="0.8" />
+                <path d="M192 188 C188 191 187 194 186 197" stroke="#ffffff" stroke-width="1.2"
+                  stroke-linecap="round" />
+
+                <!-- "SPIN" text -->
+                <text x="200" y="214" class="hub-spin-text">SPIN</text>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Radiating Ticks & "SPIN AGAIN" Button Container -->
+        <div class="spin-again-container">
+          <!-- Left Radiating Tick Dashes -->
+          <svg class="radiating-ticks left-ticks" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <line x1="20" y1="12" x2="6" y2="12" stroke="#688172" stroke-width="1.6" stroke-linecap="round" />
+            <line x1="18" y1="6" x2="7" y2="2" stroke="#688172" stroke-width="1.6" stroke-linecap="round" />
+            <line x1="18" y1="18" x2="7" y2="22" stroke="#688172" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+
+          <button type="button" class="btn-spin-again" id="spin-again-button" aria-label="Spin wheel again">
+            <!-- Refresh / circular arrow icon -->
+            <svg class="spin-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3.5 10 A6.5 6.5 0 0 1 15 5.5 M15 5.5 V2 M15 5.5 H11.5" stroke="#254737" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M16.5 10 A6.5 6.5 0 0 1 5 14.5 M5 14.5 V18 M5 14.5 H8.5" stroke="#254737" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>SPIN AGAIN</span>
+          </button>
+
+          <!-- Right Radiating Tick Dashes -->
+          <svg class="radiating-ticks right-ticks" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <line x1="4" y1="12" x2="18" y2="12" stroke="#688172" stroke-width="1.6" stroke-linecap="round" />
+            <line x1="6" y1="6" x2="17" y2="2" stroke="#688172" stroke-width="1.6" stroke-linecap="round" />
+            <line x1="6" y1="18" x2="17" y2="22" stroke="#688172" stroke-width="1.6" stroke-linecap="round" />
+          </svg>
+        </div>
+      </section>
+
+      <!-- RIGHT CARD: Your Gratitude Today -->
+      <section class="card-column right-column">
+        <div class="inspiration-card" id="inspiration-card">
+          <div class="card-header">
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 20 20" fill="none" class="ui-leaf-icon" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.5 2.5 C10 2.5 4 8.5 4 16 C11.5 16 17.5 10 17.5 2.5 Z" fill="#2d513e" />
+                <path d="M4 16 C6.5 13.5 11 10 17.5 2.5" stroke="#fcfaf4" stroke-width="1.2" />
+                <path d="M4 16 C3 17 2 18.5 1.5 19.5" stroke="#2d513e" stroke-width="1.5" stroke-linecap="round" />
+              </svg>
+            </span>
+            <h2 class="card-title">Your Gratitude Today</h2>
+          </div>
+
+          <div class="suggestion-highlight-box" id="suggestion-highlight-box">
+            <!-- Category Indicator Badge (Nature, Someone You Love, etc.) -->
+            <div class="category-badge" id="category-badge">
+              <span class="badge-dot"></span>
+              <span id="category-badge-text">Nature</span>
+            </div>
+
+            <!-- Gentle Leaf Emblem -->
+            <div class="suggestion-leaf-decor" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" class="decor-leaf" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 5 C11 5 6 10 6 16 C11 16 18 11 18 5 Z" fill="#3b634d" opacity="0.85" />
+                <path d="M6 16 C8.5 13.5 12 11 18 5" stroke="#e8f3ea" stroke-width="1.2" />
+                <path d="M6 16 C5 17.2 3.8 18.5 3 19.5" stroke="#3b634d" stroke-width="1.4" stroke-linecap="round" />
+              </svg>
+            </div>
+
+            <!-- The selected prompt suggestion -->
+            <p class="suggestion-prompt" id="suggestion-prompt">
+              Take a moment to notice something beautiful around you.
+            </p>
+          </div>
+
+          <!-- Bottom inspirational reflection note -->
+          <div class="inspiration-footer">
+            <p class="poetic-footer-text">&ldquo;Sometimes, the smallest things bring the biggest joy.&rdquo;</p>
+
+            <!-- Delicate flourish with center heart -->
+            <div class="flourish-divider" aria-hidden="true">
+              <span class="flourish-line"></span>
+              <svg class="flourish-heart" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M8 12.5 C8 12.5 1.5 8.5 1.5 4.5 C1.5 2.5 3.2 1.2 4.8 1.2 C6 1.2 7.2 2 8 2.8 C8.8 2 10 1.2 11.2 1.2 C12.8 1.2 14.5 2.5 14.5 4.5 C14.5 8.5 8 12.5 8 12.5 Z"
+                  stroke="#6b8374" stroke-width="1.3" stroke-linejoin="round" />
+              </svg>
+              <span class="flourish-line"></span>
+            </div>
+          </div>
+
+          <!-- Watercolor botanical leaf corner watermark -->
+          <img src="assets/eucalyptus_branch.jpg" alt="" class="card-watermark-botanical" aria-hidden="true">
+        </div>
+      </section>
+    </main>
+
+    <!-- SAVED JOURNAL ENTRIES DRAWER / MODAL TRIGGER (Clean, Optional & Mindful) -->
+    <section class="journal-tray-section">
+      <button type="button" class="btn-toggle-journal" id="toggle-journal-btn" aria-expanded="false"
+        aria-controls="journal-drawer">
+        <svg viewBox="0 0 18 18" fill="none" class="journal-book-icon" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 3.5 C3 2.67 3.67 2 4.5 2 H14.5 V15 H4.5 C3.67 15 3 14.33 3 13.5 V3.5 Z" stroke="currentColor"
+            stroke-width="1.3" />
+          <path d="M3 12.5 C3 11.67 3.67 11 4.5 11 H14.5" stroke="currentColor" stroke-width="1.2" />
+        </svg>
+        <span>View My Saved Gratitudes (<span id="journal-count">0</span>)</span>
+      </button>
+
+      <div class="journal-drawer" id="journal-drawer" hidden>
+        <div class="journal-drawer-inner">
+          <h3 class="journal-drawer-title">My Gratitude Journal</h3>
+          <div class="journal-entries-list" id="journal-entries-list">
+            <p class="journal-empty">No reflections saved yet today. Write what you are grateful for and click Save!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- BOTTOM SECTION: GRATITUDE QUOTES -->
+  <footer class="quotes-section">
+    <!-- Gentle Waving Top Border Divider -->
+    <div class="quotes-wave-container" aria-hidden="true">
+      <svg class="quotes-wave-svg" viewBox="0 0 1440 60" preserveAspectRatio="none" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,35 C320,60 520,10 720,28 C920,46 1120,15 1440,32 L1440,60 L0,60 Z"
+          fill="rgba(242, 235, 245, 0.75)" />
+      </svg>
+    </div>
+
+    <div class="quotes-inner-container">
+      <!-- Section Header -->
+      <div class="quotes-header">
+        <!-- Delicate Lotus Accent -->
+        <div class="quotes-lotus-ornament" aria-hidden="true">
+          <svg viewBox="0 0 24 18" fill="none" class="divider-lotus" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2 C10.5 6 10.5 12 12 16 C13.5 12 13.5 6 12 2 Z" stroke="#335643" stroke-width="1.4" />
+            <path d="M12 16 C8.5 11 6 7 5 4 C3.8 8 5.5 13 12 16 Z" stroke="#335643" stroke-width="1.2" />
+            <path d="M12 16 C15.5 11 18 7 19 4 C20.2 8 18.5 13 12 16 Z" stroke="#335643" stroke-width="1.2" />
+            <path d="M7 17 C10 18 14 18 17 17" stroke="#335643" stroke-width="1.2" stroke-linecap="round" />
+          </svg>
+        </div>
+
+        <div class="quotes-title-row">
+          <span class="title-dash" aria-hidden="true"></span>
+          <h2 class="quotes-main-title">Gratitude Quotes</h2>
+          <span class="title-dash" aria-hidden="true"></span>
+        </div>
+        <p class="quotes-subtitle">Little reminders for a bigger, kinder heart.</p>
+      </div>
+
+      <!-- 3 Elegant Quote Cards -->
+      <div class="quote-cards-grid">
+        <!-- Card 1: Warm Peach / Cream -->
+        <article class="quote-card quote-card-warm">
+          <div class="quote-mark-icon" aria-hidden="true">&ldquo;</div>
+          <blockquote class="quote-card-content">
+            <p class="quote-card-body">&ldquo;Gratitude makes what we have enough.&rdquo;</p>
+            <cite class="quote-card-author">&mdash; Anonymous</cite>
+          </blockquote>
+          <!-- Subtle watercolor leaf watermark -->
+          <img src="assets/eucalyptus_branch.jpg" alt="" class="quote-watermark" aria-hidden="true">
+        </article>
+
+        <!-- Card 2: Soft Lavender / Lilac -->
+        <article class="quote-card quote-card-lavender">
+          <div class="quote-mark-icon" aria-hidden="true">&ldquo;</div>
+          <blockquote class="quote-card-content">
+            <p class="quote-card-body">&ldquo;The more you appreciate, the more you have.&rdquo;</p>
+            <cite class="quote-card-author">&mdash; Unknown</cite>
+          </blockquote>
+          <!-- Subtle watercolor lavender watermark -->
+          <img src="assets/lavender_branch.jpg" alt="" class="quote-watermark" aria-hidden="true">
+        </article>
+
+        <!-- Card 3: Soft Sage Green -->
+        <article class="quote-card quote-card-sage">
+          <div class="quote-mark-icon" aria-hidden="true">&ldquo;</div>
+          <blockquote class="quote-card-content">
+            <p class="quote-card-body">&ldquo;Be thankful for what you are now, and keep working for what you want to be
+              tomorrow.&rdquo;</p>
+            <cite class="quote-card-author">&mdash; Unknown</cite>
+          </blockquote>
+
+          <!-- Small lotus sprout icon at bottom center -->
+          <div class="quote-center-leaf" aria-hidden="true">
+            <svg viewBox="0 0 16 16" fill="none" class="tiny-sprout" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 14 V9 M8 9 C6 7 5 4 8 2 C11 4 10 7 8 9 Z" stroke="#3b634d" stroke-width="1.3"
+                stroke-linejoin="round" />
+              <path d="M8 10 C5 10 4 8 4 6" stroke="#3b634d" stroke-width="1.2" stroke-linecap="round" />
+              <path d="M8 11 C11 11 12 9 12 7" stroke="#3b634d" stroke-width="1.2" stroke-linecap="round" />
+            </svg>
+          </div>
+
+          <!-- Subtle watercolor leaf watermark -->
+          <img src="assets/eucalyptus_branch.jpg" alt="" class="quote-watermark" aria-hidden="true">
+        </article>
+      </div>
+    </div>
+
+    <!-- Decorative Lavender Sprigs on Left and Right Bottom Corners -->
+    <div class="quotes-decor-lavender-left" aria-hidden="true">
+      <img src="assets/lavender_branch.jpg" alt="" class="corner-lavender-img">
+    </div>
+    <div class="quotes-decor-lavender-right" aria-hidden="true">
+      <img src="assets/lavender_branch.jpg" alt="" class="corner-lavender-img">
+    </div>
+  </footer>
+
+  <script src="gratitude.js"></script>
+</body>
+
+</html>
