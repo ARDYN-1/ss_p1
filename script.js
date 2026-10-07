@@ -55,7 +55,7 @@ const activityDestinations = {
   'Yoga & movement': '/yoga&movement/yoga.html',
   'Healing Music': '/healing_music/healing_music.html',
   'Sleep Stories': '/sleep_stories/sleep_stories.html',
-  Gratitude: '/gratitude/gratitude.html',
+  Gratitude: '/Gratitude/gratitude.html',
   'Quiet Reflection': '/Self%20Reflection/selfReflection.html',
 };
 

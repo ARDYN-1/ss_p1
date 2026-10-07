@@ -14,14 +14,13 @@
     "/#practice-yoga-movement",
     "/#practice-healing-music",
     "/#practice-sleep-stories",
-    "/#practice-gratitude",
     "/#practice-quiet-reflection",
     "/meditation/meditation.html",
     "/breathwork/breathwork.html",
     "/yoga&movement/yoga.html",
     "/healing_music/healing_music.html",
     "/sleep_stories/sleep_stories.html",
-    "/gratitude/gratitude.html",
+    "/Gratitude/gratitude.html",
     "/Self%20Reflection/selfReflection.html",
   ]);
   const profileMenu = document.querySelector("#profile-menu");

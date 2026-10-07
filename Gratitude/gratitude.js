@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function responseError(response, fallback) {
     if (response.status === 401) {
-      await window.soulspaceRequireAuth('/gratitude/gratitude.html');
+      await window.soulspaceRequireAuth('/Gratitude/gratitude.html');
       return new Error('Please sign in to continue.');
     }
     return new Error(fallback);
@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function initializeProtectedPage() {
     try {
-      const authenticated = await window.soulspaceRequireAuth('/gratitude/gratitude.html');
+      const authenticated = await window.soulspaceRequireAuth('/Gratitude/gratitude.html');
       if (!authenticated) return;
       pageContent.hidden = false;
       document.querySelector('.quotes-section').hidden = false;
