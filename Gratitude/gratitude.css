@@ -1,0 +1,1191 @@
+/* ==========================================================================
+   SOULSPACE — GRATITUDE SPIN
+   Peaceful, nature-inspired spiritual wellness aesthetic
+   ========================================================================== */
+
+/* --- CSS VARIABLES & COLOR PALETTE --- */
+:root {
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Primary Deep Greens */
+  --color-forest-dark: #1d3a2a;
+  --color-forest: #254737;
+  --color-forest-medium: #315844;
+  --color-forest-light: #446d57;
+
+  /* Natural Neutrals & Accents */
+  --color-cream-bg: #fcf9f2;
+  --color-cream-light: #fefcf7;
+  --color-cream-card: #f9fbf8;
+  --color-sand: #f2ebe1;
+  --color-sage-soft: #d5e4cf;
+  --color-lavender-soft: #f4edf5;
+  --color-lavender-accent: #e2d8e8;
+
+  /* Typography Colors */
+  --text-primary: #254737;
+  --text-secondary: #577061;
+  --text-muted: #798f82;
+  --text-light: #9ab0a3;
+
+  /* Card and UI Borders */
+  --border-soft: rgba(185, 204, 190, 0.42);
+  --border-focus: #507e66;
+  --border-card: rgba(200, 215, 203, 0.48);
+
+  /* Shadows */
+  --shadow-subtle: 0 4px 16px rgba(40, 65, 50, 0.03);
+  --shadow-card: 0 10px 32px rgba(35, 60, 45, 0.05);
+  --shadow-card-hover: 0 16px 40px rgba(35, 60, 45, 0.08);
+
+  /* Wheel Colors */
+  --wheel-nature: #d5e4cf;
+  --wheel-love: #e2d8e8;
+  --wheel-moment: #fde5be;
+  --wheel-learned: #d4e2d3;
+  --wheel-have: #cae1ea;
+  --wheel-yourself: #f8d5cb;
+
+  /* Transitions */
+  --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* --- BASE STYLES & RESET --- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background-color: var(--color-cream-bg);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: linear-gradient(180deg, #faf7f0 0%, #fbf9f4 40%, #f7f2ea 75%, #f4edf5 100%);
+  min-height: 100vh;
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Screen reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* --- AMBIENT SCENERY OVERLAY (WATERCOLOR LANDSCAPE) --- */
+.ambient-scenery-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 600px;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Top-left hanging eucalyptus leaves */
+.bg-botanical-top-left {
+  position: absolute;
+  top: -40px;
+  left: -20px;
+  width: 260px;
+  height: auto;
+  opacity: 0.65;
+  mix-blend-mode: multiply;
+  transform: rotate(-15deg);
+  filter: blur(0.3px);
+  user-select: none;
+}
+
+/* Top-right misty mountain & sunrise watercolor backdrop */
+.bg-sunrise-backdrop {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 580px;
+  height: 380px;
+  background-image: url('assets/soulspace_bg.jpg');
+  background-size: cover;
+  background-position: top right;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+  mask-image: radial-gradient(ellipse 90% 80% at 90% 20%, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 90% 20%, black 40%, transparent 85%);
+}
+
+.birds-silhouette {
+  position: absolute;
+  top: 60px;
+  right: 140px;
+  width: 130px;
+  height: 40px;
+  opacity: 0.7;
+}
+
+/* --- PAGE CONTAINER --- */
+.page-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 36px 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- TOP HEADER (BRANDING & POETIC SCENERY QUOTE) --- */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+/* SoulSpace Branding */
+.brand-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 36px;
+}
+
+.lotus-icon {
+  width: 36px;
+  height: 28px;
+  transition: transform 0.4s ease;
+}
+
+.brand-container:hover .lotus-icon {
+  transform: scale(1.06);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 3.5px;
+  color: var(--color-forest);
+  line-height: 1.2;
+}
+
+.brand-tagline {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  letter-spacing: 1.2px;
+  font-weight: 400;
+}
+
+/* Floating Lake Quote in Top Right */
+.top-scenery-quote {
+  max-width: 320px;
+  text-align: right;
+  padding-top: 4px;
+}
+
+.poetic-quote {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.poetic-quote .quote-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.28rem;
+  line-height: 1.35;
+  color: var(--color-forest);
+  opacity: 0.95;
+}
+
+.poetic-quote .quote-author {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-style: normal;
+  letter-spacing: 0.5px;
+}
+
+/* --- HERO SECTION: MAIN TITLE & SUBTITLE --- */
+.hero-section {
+  text-align: center;
+  margin: 12px auto 38px;
+  max-width: 760px;
+}
+
+.main-title {
+  font-family: var(--font-serif);
+  font-size: 3.3rem;
+  font-weight: 500;
+  color: var(--color-forest);
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  margin-bottom: 8px;
+}
+
+.main-subtitle {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  max-width: 620px;
+  margin: 0 auto 18px;
+  line-height: 1.55;
+}
+
+/* Lotus Ornamental Divider */
+.lotus-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 auto;
+}
+
+.divider-line {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37, 71, 55, 0.35), transparent);
+}
+
+.divider-lotus {
+  width: 24px;
+  height: 18px;
+  opacity: 0.85;
+}
+
+/* --- 3-COLUMN INTERACTION LAYOUT --- */
+.interaction-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr 1fr;
+  align-items: start;
+  gap: 36px;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+/* Common Card Styling */
+.reflection-card,
+.inspiration-card {
+  background: var(--color-cream-card);
+  border-radius: 24px;
+  border: 1px solid var(--border-card);
+  box-shadow: var(--shadow-card);
+  padding: 26px 28px 24px;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.reflection-card:hover,
+.inspiration-card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-leaf-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--color-forest);
+}
+
+.card-title {
+  font-family: var(--font-serif);
+  font-size: 1.48rem;
+  font-weight: 600;
+  color: var(--color-forest);
+  letter-spacing: -0.2px;
+}
+
+/* Corner Botanical Leaves Watermark inside Cards */
+.card-watermark-botanical {
+  position: absolute;
+  bottom: -22px;
+  right: -24px;
+  width: 140px;
+  height: auto;
+  opacity: 0.28;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  transform: rotate(-10deg);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.reflection-card:hover .card-watermark-botanical,
+.inspiration-card:hover .card-watermark-botanical {
+  opacity: 0.38;
+  transform: rotate(-7deg) scale(1.04);
+}
+
+/* --- LEFT CARD: Today I'm Grateful For... --- */
+.left-column {
+  position: relative;
+}
+
+.gratitude-textarea {
+  width: 100%;
+  background: #f2f7f3;
+  border: 1.5px solid #d5e4da;
+  border-radius: 16px;
+  padding: 16px 18px;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  resize: none;
+  min-height: 120px;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.gratitude-textarea::placeholder {
+  color: #829a8a;
+  font-weight: 400;
+}
+
+.gratitude-textarea:focus {
+  background: #ffffff;
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 4px rgba(80, 126, 102, 0.12);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.footer-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.tiny-heart-icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* Save Button */
+.btn-save {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--color-forest);
+  color: #ffffff;
+  border: none;
+  border-radius: 9999px;
+  padding: 10px 22px;
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(37, 71, 55, 0.18);
+  transition: var(--transition-smooth);
+}
+
+.btn-save:hover {
+  background-color: var(--color-forest-dark);
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px rgba(37, 71, 55, 0.25);
+}
+
+.btn-save:active {
+  transform: translateY(0);
+}
+
+.btn-leaf-icon {
+  width: 15px;
+  height: 15px;
+}
+
+/* Save feedback message */
+.save-status {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  text-align: center;
+  min-height: 20px;
+  color: var(--color-forest);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.save-status.show {
+  opacity: 1;
+}
+
+/* Zen Balancing Stones Container (Bottom Left) */
+.zen-stones-container {
+  margin-top: 18px;
+  padding-left: 8px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.zen-stones-img {
+  width: 100%;
+  height: auto;
+  opacity: 0.88;
+  mix-blend-mode: multiply;
+  filter: contrast(1.02);
+  transition: transform 0.5s ease;
+}
+
+.zen-stones-container:hover .zen-stones-img {
+  transform: scale(1.03);
+}
+
+/* --- CENTER COLUMN: GRATITUDE WHEEL --- */
+.wheel-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding-top: 4px;
+}
+
+.wheel-stage {
+  position: relative;
+  width: 370px;
+  height: 370px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Top Pointer Marker (Teardrop pin) */
+.wheel-pointer-container {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 46px;
+  z-index: 15;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 6px rgba(18, 38, 28, 0.2));
+  transition: transform 0.15s ease;
+}
+
+.wheel-pointer-container.tick {
+  transform: translateX(-50%) rotate(5deg);
+}
+
+.wheel-pointer-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Wheel Wrapper and SVG */
+.wheel-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 50%;
+}
+
+.wheel-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+/* Rotating Wheel Group */
+.wheel-rotor {
+  transform-origin: 200px 200px;
+  transition: transform 4.2s cubic-bezier(0.16, 0.86, 0.28, 1);
+  will-change: transform;
+}
+
+/* Wheel Slice styling */
+.wheel-slice {
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+.wheel-slice:hover {
+  filter: brightness(1.03);
+}
+
+/* Wheel text labels */
+.slice-label {
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: 500;
+  fill: #254737;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  pointer-events: none;
+  letter-spacing: 0.1px;
+}
+
+/* Wheel Center SPIN Hub Button */
+.center-spin-hub {
+  cursor: pointer;
+  outline: none;
+  transform-origin: 200px 200px;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.center-spin-hub:hover circle {
+  fill: var(--color-forest-dark);
+}
+
+.center-spin-hub:hover {
+  transform: scale(1.04);
+}
+
+.center-spin-hub:active {
+  transform: scale(0.97);
+}
+
+.center-spin-hub:focus-visible circle {
+  stroke: #a2cbb2;
+  stroke-width: 4;
+}
+
+.hub-spin-text {
+  font-family: var(--font-sans);
+  font-size: 14.5px;
+  font-weight: 700;
+  fill: #ffffff;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  letter-spacing: 1.8px;
+  pointer-events: none;
+}
+
+/* --- SPIN AGAIN BUTTON & RADIATING TICKS --- */
+.spin-again-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.radiating-ticks {
+  width: 22px;
+  height: 22px;
+  opacity: 0.6;
+}
+
+.btn-spin-again {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #dbe9dc;
+  border: 1px solid #c8decb;
+  color: var(--color-forest);
+  border-radius: 9999px;
+  padding: 10px 24px;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(45, 75, 55, 0.06);
+  transition: var(--transition-smooth);
+}
+
+.btn-spin-again:hover {
+  background-color: #d2e4d3;
+  transform: translateY(-1.5px);
+  box-shadow: 0 5px 14px rgba(45, 75, 55, 0.1);
+}
+
+.btn-spin-again:active {
+  transform: translateY(0);
+}
+
+.spin-icon {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.5s ease;
+}
+
+.btn-spin-again:hover .spin-icon {
+  transform: rotate(180deg);
+}
+
+/* --- RIGHT CARD: Your Gratitude Today --- */
+.right-column {
+  position: relative;
+}
+
+.inspiration-card {
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Highlight Suggestion Box */
+.suggestion-highlight-box {
+  background-color: #edf5ee;
+  border: 1px solid #d5e5d8;
+  border-radius: 18px;
+  padding: 24px 22px;
+  text-align: center;
+  margin-bottom: 22px;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #d2e4d6;
+  border-radius: 9999px;
+  padding: 3px 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--color-forest);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-forest);
+}
+
+.suggestion-leaf-decor {
+  margin-bottom: 10px;
+}
+
+.decor-leaf {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+
+.suggestion-prompt {
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--color-forest);
+  font-weight: 500;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.suggestion-prompt.fade {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+/* Inspiration Card Footer */
+.inspiration-footer {
+  margin-top: auto;
+  text-align: center;
+}
+
+.poetic-footer-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.08rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.flourish-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.flourish-line {
+  width: 32px;
+  height: 1px;
+  background: rgba(107, 131, 116, 0.35);
+}
+
+.flourish-heart {
+  width: 14px;
+  height: 12px;
+}
+
+/* --- SAVED GRATITUDES EXPANDABLE TRAY --- */
+.journal-tray-section {
+  max-width: 680px;
+  margin: 10px auto 30px;
+  text-align: center;
+}
+
+.btn-toggle-journal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--border-soft);
+  color: var(--text-secondary);
+  border-radius: 9999px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.btn-toggle-journal:hover {
+  background: #ffffff;
+  color: var(--color-forest);
+  border-color: var(--border-focus);
+}
+
+.journal-book-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.journal-drawer {
+  margin-top: 14px;
+  text-align: left;
+}
+
+.journal-drawer-inner {
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid var(--border-card);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.journal-drawer-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-forest);
+  margin-bottom: 12px;
+}
+
+.journal-entries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.journal-empty {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 8px 0;
+}
+
+.journal-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #f7faf7;
+  border-radius: 10px;
+  border-left: 3px solid var(--color-forest);
+}
+
+.journal-item-text {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.journal-item-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.btn-delete-entry {
+  background: none;
+  border: none;
+  color: #a47676;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.btn-delete-entry:hover {
+  background: #fae8e8;
+  color: #8c3d3d;
+}
+
+/* --- BOTTOM SECTION: GRATITUDE QUOTES --- */
+.quotes-section {
+  position: relative;
+  background: linear-gradient(180deg, rgba(244, 237, 245, 0.4) 0%, rgba(240, 233, 243, 0.85) 100%);
+  padding: 0 0 54px;
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.quotes-wave-container {
+  width: 100%;
+  line-height: 0;
+  margin-bottom: 24px;
+}
+
+.quotes-wave-svg {
+  width: 100%;
+  height: 48px;
+  display: block;
+}
+
+.quotes-inner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.quotes-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.quotes-lotus-ornament {
+  margin-bottom: 8px;
+}
+
+.quotes-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 6px;
+}
+
+.title-dash {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37, 71, 55, 0.4), transparent);
+}
+
+.quotes-main-title {
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  font-weight: 500;
+  color: var(--color-forest);
+  letter-spacing: -0.2px;
+}
+
+.quotes-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+/* 3 Quote Cards Grid */
+.quote-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.quote-card {
+  border-radius: 20px;
+  padding: 30px 28px 26px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(45, 65, 50, 0.035);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quote-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(45, 65, 50, 0.07);
+}
+
+/* Card 1: Warm Peach/Cream */
+.quote-card-warm {
+  background-color: #fdf8ee;
+  border: 1px solid #eedec8;
+}
+
+/* Card 2: Soft Lavender/Lilac */
+.quote-card-lavender {
+  background-color: #f6eff8;
+  border: 1px solid #dfcce3;
+}
+
+/* Card 3: Soft Sage */
+.quote-card-sage {
+  background-color: #eef5ef;
+  border: 1px solid #c9decb;
+}
+
+.quote-mark-icon {
+  font-family: var(--font-serif);
+  font-size: 2.4rem;
+  line-height: 1;
+  color: #8fa797;
+  text-align: center;
+  margin-bottom: 10px;
+  opacity: 0.85;
+}
+
+.quote-card-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quote-card-body {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.18rem;
+  line-height: 1.45;
+  color: var(--color-forest);
+  margin-bottom: 12px;
+}
+
+.quote-card-author {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-style: normal;
+  letter-spacing: 0.3px;
+}
+
+.quote-center-leaf {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.tiny-sprout {
+  width: 18px;
+  height: 18px;
+}
+
+/* Watermarks inside Quote Cards */
+.quote-watermark {
+  position: absolute;
+  bottom: -15px;
+  width: 110px;
+  height: auto;
+  opacity: 0.22;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.quote-card-warm .quote-watermark {
+  left: -10px;
+  transform: rotate(20deg);
+}
+
+.quote-card-lavender .quote-watermark {
+  left: -10px;
+  transform: rotate(15deg);
+}
+
+.quote-card-sage .quote-watermark {
+  right: -10px;
+  transform: rotate(-15deg);
+}
+
+/* Lavender corner decorative graphics */
+.quotes-decor-lavender-left,
+.quotes-decor-lavender-right {
+  position: absolute;
+  bottom: -20px;
+  width: 160px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.quotes-decor-lavender-left {
+  left: -20px;
+  transform: rotate(15deg);
+}
+
+.quotes-decor-lavender-right {
+  right: -20px;
+  transform: rotate(-15deg) scaleX(-1);
+}
+
+.corner-lavender-img {
+  width: 100%;
+  height: auto;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 1140px) {
+  .page-container {
+    padding: 24px 24px 36px;
+  }
+
+  .interaction-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  /* Put wheel full width in center or stack */
+  .wheel-column {
+    grid-column: 1 / -1;
+    order: -1;
+    margin-bottom: 12px;
+  }
+
+  .left-column {
+    order: 1;
+  }
+
+  .right-column {
+    order: 2;
+  }
+
+  .quote-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+}
+
+@media (max-width: 860px) {
+  .page-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+  }
+
+  .brand-container {
+    justify-content: center;
+  }
+
+  .top-scenery-quote {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .main-title {
+    font-size: 2.7rem;
+  }
+
+  .interaction-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .zen-stones-container {
+    margin: 14px auto 0;
+  }
+
+  .quote-cards-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .bg-sunrise-backdrop {
+    width: 380px;
+    height: 240px;
+    opacity: 0.35;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: 20px 16px 28px;
+  }
+
+  .main-title {
+    font-size: 2.2rem;
+  }
+
+  .wheel-stage {
+    width: 320px;
+    height: 320px;
+  }
+
+  .reflection-card,
+  .inspiration-card {
+    padding: 20px 18px;
+    border-radius: 20px;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .btn-save {
+    justify-content: center;
+  }
+
+  .quotes-main-title {
+    font-size: 1.8rem;
+  }
+}
