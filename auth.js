@@ -1,6 +1,7 @@
 (() => {
   const authMessage = document.querySelector("#auth-message");
   const journalStatus = document.querySelector("#journal-auth-status");
+  const gratitudeStatus = document.querySelector("#gratitude-auth-status");
   const siteAuthStatus = document.querySelector("#site-auth-status");
   const authMode = document.body.dataset.authMode;
   const returnToKey = "soulspace-return-to";
@@ -82,7 +83,7 @@
   }
 
   function showError(message) {
-    const target = authMessage || journalStatus || siteAuthStatus;
+    const target = authMessage || journalStatus || gratitudeStatus || siteAuthStatus;
     if (!target) return;
     target.textContent = message;
     target.hidden = false;

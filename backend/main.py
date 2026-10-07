@@ -54,6 +54,7 @@ PUBLIC_ASSET_DIRS = {
     "healing_music",
     "sleep_stories",
     "gratitude",
+    "Gratitude",
     "Self Reflection",
 }
 HOP_BY_HOP_HEADERS = {
@@ -91,6 +92,10 @@ class JournalInput(BaseModel):
     content: str
 
 
+class GratitudeInput(BaseModel):
+    message: str
+
+
 class ActivityInput(BaseModel):
     activity: str
 
@@ -113,6 +118,14 @@ def _journal_table():
             status_code=503,
             detail="Journal storage is not configured. Set AWS_REGION and DYNAMODB_TABLE, and provide AWS credentials or an IAM role.",
         )
+    return _dynamodb_resource(region).Table(table_name)
+
+
+def _gratitude_table():
+    table_name = os.getenv("GRATITUDE_TABLE", "SOULSPACE_Gratitude")
+    region = os.getenv("AWS_REGION") or os.getenv("AWS_DEFAULT_REGION")
+    if not region:
+        raise HTTPException(status_code=503, detail="Gratitude storage is not configured. Set AWS_REGION and provide AWS credentials or an IAM role.")
     return _dynamodb_resource(region).Table(table_name)
 
 
@@ -161,23 +174,23 @@ def _dynamo_error(error: Exception) -> HTTPException:
     if isinstance(error, ClientError):
         code = error.response.get("Error", {}).get("Code", "Unknown")
         if code == "ResourceNotFoundException":
-            return HTTPException(status_code=503, detail="The configured DynamoDB journal table was not found.")
+            return HTTPException(status_code=503, detail="The configured DynamoDB table was not found.")
         if code in {"AccessDeniedException", "AccessDenied", "UnauthorizedOperation"}:
-            return HTTPException(status_code=503, detail="AWS credentials do not have permission to access the journal table.")
+            return HTTPException(status_code=503, detail="AWS credentials do not have permission to access the configured DynamoDB table.")
         if code == "ValidationException":
             return HTTPException(
                 status_code=503,
-                detail="The DynamoDB table must use a string user_id partition key and a string date sort key.",
+                detail="The configured DynamoDB table keys do not match this request.",
             )
         logger.error("DynamoDB request failed with %s.", code)
-        return HTTPException(status_code=503, detail="Journal storage is temporarily unavailable.")
+        return HTTPException(status_code=503, detail="DynamoDB storage is temporarily unavailable.")
     if isinstance(error, (NoCredentialsError, PartialCredentialsError)):
-        return HTTPException(status_code=503, detail="AWS credentials are not configured for journal storage.")
+        return HTTPException(status_code=503, detail="AWS credentials are not configured for DynamoDB storage.")
     if isinstance(error, BotoCoreError):
         logger.error("DynamoDB request could not be completed (%s).", type(error).__name__)
-        return HTTPException(status_code=503, detail="Journal storage is temporarily unavailable.")
+        return HTTPException(status_code=503, detail="DynamoDB storage is temporarily unavailable.")
     logger.error("Unexpected journal storage failure (%s).", type(error).__name__)
-    return HTTPException(status_code=503, detail="Journal storage is temporarily unavailable.")
+    return HTTPException(status_code=503, detail="DynamoDB storage is temporarily unavailable.")
 
 
 def _public_origin(request: Request) -> str:
@@ -356,6 +369,82 @@ def save_journal(body: JournalInput, user_id: str = Depends(require_user_id)):
         logger.warning("Could not record journal activity (%s).", type(error).__name__)
 
     return {"date": entry_date, "content": body.content, "message": "Your journal has been saved."}
+
+
+@app.post("/api/gratitude/")
+def save_gratitude(body: GratitudeInput, user_id: str = Depends(require_user_id)):
+    message = body.message.strip()
+    if not message:
+        raise HTTPException(status_code=422, detail="Write a gratitude message before saving.")
+    if len(message) > 3000:
+        raise HTTPException(status_code=413, detail="This gratitude message is too long to save.")
+
+    created_at = datetime.now(timezone.utc).isoformat(timespec="microseconds").replace("+00:00", "Z")
+    entry = {
+        "user_id": user_id,
+        "created_at": created_at,
+        "message": message,
+        "updated_at": created_at,
+    }
+    try:
+        _gratitude_table().put_item(Item=entry)
+    except HTTPException:
+        raise
+    except (ClientError, BotoCoreError, NoCredentialsError, PartialCredentialsError) as error:
+        raise _dynamo_error(error) from None
+
+    try:
+        _record_activity(user_id, "Gratitude")
+    except Exception as error:
+        # A gratitude save remains successful even if the optional activity metric is unavailable.
+        logger.warning("Could not record gratitude activity (%s).", type(error).__name__)
+
+    return {"success": True, "entry": {"created_at": created_at, "message": message}}
+
+
+@app.get("/api/gratitude/")
+def list_gratitude(user_id: str = Depends(require_user_id)):
+    try:
+        table = _gratitude_table()
+        query_args = {
+            "KeyConditionExpression": Key("user_id").eq(user_id),
+            "ScanIndexForward": False,
+            "ProjectionExpression": "#created_at, #message",
+            "ExpressionAttributeNames": {"#created_at": "created_at", "#message": "message"},
+        }
+        entries = []
+        while True:
+            result = table.query(**query_args)
+            entries.extend(result.get("Items", []))
+            last_key = result.get("LastEvaluatedKey")
+            if not last_key:
+                break
+            query_args["ExclusiveStartKey"] = last_key
+    except HTTPException:
+        raise
+    except (ClientError, BotoCoreError, NoCredentialsError, PartialCredentialsError) as error:
+        raise _dynamo_error(error) from None
+
+    entries.sort(key=lambda entry: entry.get("created_at", ""), reverse=True)
+    return {"entries": [{"created_at": entry["created_at"], "message": entry.get("message", "")} for entry in entries]}
+
+
+@app.delete("/api/gratitude/{created_at}")
+def delete_gratitude(created_at: str, user_id: str = Depends(require_user_id)):
+    if not created_at or len(created_at) > 40:
+        raise HTTPException(status_code=422, detail="Provide a valid gratitude entry.")
+    try:
+        result = _gratitude_table().delete_item(
+            Key={"user_id": user_id, "created_at": created_at},
+            ReturnValues="ALL_OLD",
+        )
+    except HTTPException:
+        raise
+    except (ClientError, BotoCoreError, NoCredentialsError, PartialCredentialsError) as error:
+        raise _dynamo_error(error) from None
+    if not result.get("Attributes"):
+        raise HTTPException(status_code=404, detail="Gratitude entry not found.")
+    return {"success": True}
 
 
 @app.post("/api/activity/")

@@ -99,6 +99,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const journalDrawer = document.getElementById('journal-drawer');
   const journalEntriesList = document.getElementById('journal-entries-list');
   const journalCount = document.getElementById('journal-count');
+  const pageContent = document.getElementById('gratitude-page');
+  const authStatus = document.getElementById('gratitude-auth-status');
+  const themeToggle = document.getElementById('gratitude-theme-toggle');
 
   // --- STATE ---
   let isSpinning = false;
@@ -290,113 +293,188 @@ document.addEventListener('DOMContentLoaded', () => {
 
   spinAgainBtn.addEventListener('click', spinWheel);
 
-  // --- LOCAL STORAGE GRATITUDE JOURNAL ---
-  const STORAGE_KEY = 'soulspace_gratitude_entries';
+  // --- AUTHENTICATED GRATITUDE JOURNAL ---
+  const THEME_KEY = 'soulspace-theme';
+  let savedEntries = [];
+  let isSaving = false;
 
-  function getSavedEntries() {
-    try {
-      const data = localStorage.getItem(STORAGE_KEY);
-      return data ? JSON.parse(data) : [];
-    } catch (e) {
-      return [];
-    }
+  function applyTheme(theme) {
+    const dark = theme === 'dark';
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    themeToggle.setAttribute('aria-pressed', String(dark));
+    themeToggle.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} mode`);
+    themeToggle.querySelector('.theme-toggle-icon').textContent = dark ? '☀' : '☾';
+    themeToggle.querySelector('.theme-toggle-label').textContent = dark ? 'Light mode' : 'Dark mode';
   }
 
-  function saveEntry(text, categoryName) {
-    const entries = getSavedEntries();
-    const newEntry = {
-      id: Date.now(),
-      text: text.trim(),
-      category: categoryName || CATEGORIES[currentCategoryIndex].name,
-      date: new Date().toLocaleDateString(undefined, {
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      })
-    };
-    entries.unshift(newEntry);
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-    } catch (e) { }
-    renderJournalList();
+  let initialTheme = 'light';
+  try { initialTheme = localStorage.getItem(THEME_KEY) === 'dark' ? 'dark' : 'light'; } catch { /* Use light theme if storage is unavailable. */ }
+  applyTheme(initialTheme);
+  themeToggle.addEventListener('click', () => {
+    const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(nextTheme);
+    try { localStorage.setItem(THEME_KEY, nextTheme); } catch { /* The current page theme still applies. */ }
+  });
+
+  function showStatus(message, type = 'success') {
+    saveStatus.textContent = message;
+    saveStatus.dataset.status = type;
+    saveStatus.classList.add('show');
+    window.clearTimeout(showStatus.timeoutId);
+    showStatus.timeoutId = window.setTimeout(() => saveStatus.classList.remove('show'), 3600);
   }
 
-  function deleteEntry(id) {
-    let entries = getSavedEntries();
-    entries = entries.filter(e => e.id !== id);
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
-    } catch (e) { }
-    renderJournalList();
+  function formatEntryDate(value) {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return 'Recently';
+    return new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' }).format(date);
   }
 
   function renderJournalList() {
-    const entries = getSavedEntries();
-    journalCount.textContent = entries.length;
-
+    const entries = [...savedEntries].sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+    journalCount.textContent = String(entries.length);
+    journalEntriesList.replaceChildren();
     if (entries.length === 0) {
-      journalEntriesList.innerHTML = `
-        <p class="journal-empty">No reflections saved yet today. Write what you are grateful for and click Save!</p>
-      `;
+      const empty = document.createElement('p');
+      empty.className = 'journal-empty';
+      empty.textContent = 'No reflections saved yet. Write what you are grateful for and click Save!';
+      journalEntriesList.append(empty);
       return;
     }
 
-    journalEntriesList.innerHTML = entries.map(entry => `
-      <div class="journal-item" data-id="${entry.id}">
-        <div style="flex: 1;">
-          <p class="journal-item-text">${escapeHtml(entry.text)}</p>
-          <span class="journal-item-date">${entry.date} &bull; <em>${escapeHtml(entry.category)}</em></span>
-        </div>
-        <button type="button" class="btn-delete-entry" data-id="${entry.id}" title="Remove reflection">&times;</button>
-      </div>
-    `).join('');
+    entries.forEach((entry) => {
+      const item = document.createElement('article');
+      item.className = 'journal-item';
+      const copy = document.createElement('div');
+      copy.className = 'journal-item-copy';
+      const message = document.createElement('p');
+      message.className = 'journal-item-text';
+      message.textContent = entry.message;
+      const date = document.createElement('time');
+      date.className = 'journal-item-date';
+      date.dateTime = entry.created_at;
+      date.textContent = formatEntryDate(entry.created_at);
+      copy.append(message, date);
 
-    // Attach delete listeners
-    journalEntriesList.querySelectorAll('.btn-delete-entry').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const id = Number(e.currentTarget.getAttribute('data-id'));
-        deleteEntry(id);
-      });
+      const remove = document.createElement('button');
+      remove.type = 'button';
+      remove.className = 'btn-delete-entry';
+      remove.textContent = '×';
+      remove.title = 'Remove reflection';
+      remove.setAttribute('aria-label', `Remove gratitude entry from ${formatEntryDate(entry.created_at)}`);
+      remove.addEventListener('click', () => deleteEntry(entry.created_at, remove));
+      item.append(copy, remove);
+      journalEntriesList.append(item);
     });
   }
 
-  function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
+  async function responseError(response, fallback) {
+    if (response.status === 401) {
+      await window.soulspaceRequireAuth('/gratitude/gratitude.html');
+      return new Error('Please sign in to continue.');
+    }
+    return new Error(fallback);
   }
 
-  // Save Button Click Handler
-  saveBtn.addEventListener('click', () => {
-    const text = gratitudeTextarea.value.trim();
+  async function loadGratitude() {
+    journalEntriesList.setAttribute('aria-busy', 'true');
+    try {
+      const response = await fetch('/api/gratitude/', { credentials: 'same-origin', headers: { Accept: 'application/json' } });
+      if (!response.ok) throw await responseError(response, 'Your gratitude entries could not be loaded. Please try again.');
+      const result = await response.json();
+      if (!result || !Array.isArray(result.entries)) throw new Error('Your gratitude entries could not be loaded. Please try again.');
+      savedEntries = result.entries;
+      renderJournalList();
+    } catch (error) {
+      journalEntriesList.replaceChildren();
+      const state = document.createElement('p');
+      state.className = 'journal-empty';
+      state.textContent = error.message || 'Your gratitude entries could not be loaded. Please try again.';
+      journalEntriesList.append(state);
+      const retry = document.createElement('button');
+      retry.type = 'button';
+      retry.className = 'gratitude-history-retry';
+      retry.textContent = 'Try again';
+      retry.addEventListener('click', loadGratitude, { once: true });
+      journalEntriesList.append(retry);
+      console.warn('Unable to load gratitude history.');
+    } finally {
+      journalEntriesList.removeAttribute('aria-busy');
+    }
+  }
 
-    if (!text) {
-      showStatus('Please write a reflection to save 🌿', '#8a4c4c');
+  async function deleteEntry(createdAt, button) {
+    button.disabled = true;
+    try {
+      const response = await fetch(`/api/gratitude/${encodeURIComponent(createdAt)}`, {
+        method: 'DELETE', credentials: 'same-origin', headers: { Accept: 'application/json' },
+      });
+      if (!response.ok) throw await responseError(response, 'Unable to remove that gratitude entry right now. Please try again.');
+      savedEntries = savedEntries.filter((entry) => entry.created_at !== createdAt);
+      renderJournalList();
+      showStatus('Gratitude entry removed.', 'success');
+    } catch (error) {
+      button.disabled = false;
+      showStatus(error.message || 'Unable to remove that gratitude entry right now. Please try again.', 'error');
+    }
+  }
+
+  saveBtn.addEventListener('click', async () => {
+    const message = gratitudeTextarea.value.trim();
+    if (!message) {
+      showStatus('Please write a reflection to save.', 'error');
       gratitudeTextarea.focus();
       return;
     }
+    if (message.length > 3000) {
+      showStatus('Your reflection is too long to save. Please shorten it.', 'error');
+      gratitudeTextarea.focus();
+      return;
+    }
+    if (isSaving) return;
 
-    const currentCat = CATEGORIES[currentCategoryIndex].name;
-    saveEntry(text, currentCat);
+    isSaving = true;
+    saveBtn.disabled = true;
+    saveBtn.querySelector('span').textContent = 'Saving…';
+    try {
+      const response = await fetch('/api/gratitude/', {
+        method: 'POST', credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ message }),
+      });
+      if (!response.ok) throw await responseError(response, 'Unable to save your gratitude right now. Please try again.');
+      const result = await response.json();
+      if (!result?.success || !result.entry?.created_at) throw new Error('Unable to save your gratitude right now. Please try again.');
 
-    showStatus('Saved to your journal 🌿', '#254737');
+      savedEntries.unshift(result.entry);
+      renderJournalList();
+      gratitudeTextarea.value = '';
+      showStatus('Saved to your gratitude journal.', 'success');
+      const drawerWasHidden = journalDrawer.hasAttribute('hidden');
+      journalDrawer.removeAttribute('hidden');
+      toggleJournalBtn.setAttribute('aria-expanded', 'true');
+      if (drawerWasHidden) journalDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-    // Subtle feedback animation on button
-    saveBtn.style.transform = 'scale(0.95)';
-    setTimeout(() => {
-      saveBtn.style.transform = '';
-    }, 150);
+    } catch (error) {
+      showStatus(error.message || 'Unable to save your gratitude right now. Please try again.', 'error');
+    } finally {
+      isSaving = false;
+      saveBtn.disabled = false;
+      saveBtn.querySelector('span').textContent = 'Save';
+    }
   });
 
-  function showStatus(message, color) {
-    saveStatus.textContent = message;
-    saveStatus.style.color = color;
-    saveStatus.classList.add('show');
-
-    setTimeout(() => {
-      saveStatus.classList.remove('show');
-    }, 3200);
+  async function initializeProtectedPage() {
+    try {
+      const authenticated = await window.soulspaceRequireAuth('/gratitude/gratitude.html');
+      if (!authenticated) return;
+      pageContent.hidden = false;
+      document.querySelector('.quotes-section').hidden = false;
+      authStatus.hidden = true;
+      await loadGratitude();
+    } catch {
+      authStatus.textContent = 'Your gratitude space could not be opened. Please refresh and try again.';
+    }
   }
 
   // Toggle Journal Drawer
@@ -411,6 +489,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Initialize saved journal reflections on page load
-  renderJournalList();
+  initializeProtectedPage();
 });

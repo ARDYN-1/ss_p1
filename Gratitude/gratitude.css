@@ -458,6 +458,27 @@ body {
   opacity: 1;
 }
 
+.save-status[data-status="error"] { color: #9a4b59; }
+html[data-theme="dark"] .save-status[data-status="error"] { color: #f1aebc; }
+.journal-item-copy { flex: 1; min-width: 0; }
+.journal-item-text { overflow-wrap: anywhere; }
+.gratitude-history-retry {
+  margin-top: 8px;
+  padding: 7px 12px;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  color: var(--text-primary);
+  background: var(--color-cream-card);
+  font: 500 0.82rem var(--font-sans);
+  cursor: pointer;
+}
+.gratitude-history-retry:hover { border-color: var(--border-focus); }
+html[data-theme="dark"] .gratitude-history-retry {
+  color: var(--text-primary);
+  background: #302b47;
+  border-color: var(--border-card);
+}
+
 /* Zen Balancing Stones Container (Bottom Left) */
 .zen-stones-container {
   margin-top: 18px;
@@ -1165,8 +1186,8 @@ body {
   }
 
   .wheel-stage {
-    width: 320px;
-    height: 320px;
+    width: min(320px, calc(100vw - 40px));
+    height: min(320px, calc(100vw - 40px));
   }
 
   .reflection-card,
@@ -1188,4 +1209,233 @@ body {
   .quotes-main-title {
     font-size: 1.8rem;
   }
+}
+
+/* --- AUTH GATE & PAGE NAVIGATION --- */
+.gratitude-auth-status {
+  width: min(92vw, 480px);
+  margin: 24vh auto 0;
+  padding: 18px 22px;
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
+  background: var(--color-cream-card);
+  color: var(--text-primary);
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+
+.gratitude-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.gratitude-nav-link,
+.gratitude-theme-toggle {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 16px;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--text-primary);
+  font: 600 0.85rem var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.gratitude-nav-link:hover,
+.gratitude-theme-toggle:hover {
+  border-color: var(--border-focus);
+  background: var(--color-cream-light);
+  transform: translateY(-1px);
+}
+
+.gratitude-nav-link:focus-visible,
+.gratitude-theme-toggle:focus-visible,
+.btn-delete-entry:focus-visible {
+  outline: 3px solid var(--border-focus);
+  outline-offset: 3px;
+}
+
+.theme-toggle-icon { font-size: 1.1rem; line-height: 1; }
+
+@media (max-width: 860px) {
+  .gratitude-nav { order: 2; flex-wrap: wrap; }
+  .top-scenery-quote { order: 3; }
+}
+
+@media (max-width: 480px) {
+  .page-header { gap: 12px; }
+  .gratitude-nav { width: 100%; }
+  .gratitude-nav-link,
+  .gratitude-theme-toggle { flex: 1 1 120px; }
+  .wheel-stage { max-width: 100%; }
+  .quotes-inner-container { padding-right: 18px; padding-left: 18px; }
+  .quotes-title-row { gap: 10px; }
+  .title-dash { width: 30px; }
+}
+
+/* --- SOULSPACE DARK THEME --- */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-forest-dark: #e9e2f4;
+  --color-forest: #e8e1f2;
+  --color-forest-medium: #d8cde9;
+  --color-forest-light: #c2b4dc;
+  --color-cream-bg: #171629;
+  --color-cream-light: #29263d;
+  --color-cream-card: rgba(39, 36, 60, 0.92);
+  --color-sand: #29263d;
+  --color-lavender-soft: #29263d;
+  --text-primary: #f1edf8;
+  --text-secondary: #c1b9d0;
+  --text-muted: #aaa4bd;
+  --text-light: #9189a6;
+  --border-soft: rgba(209, 193, 239, 0.2);
+  --border-card: rgba(209, 193, 239, 0.16);
+  --border-focus: #c7a4e2;
+  --shadow-subtle: 0 6px 20px rgba(5, 4, 16, 0.2);
+  --shadow-card: 0 14px 38px rgba(5, 4, 16, 0.3);
+  --shadow-card-hover: 0 18px 44px rgba(5, 4, 16, 0.42);
+  background: #171629;
+}
+
+html[data-theme="dark"] body {
+  color: var(--text-primary);
+  background: radial-gradient(ellipse at 12% 0%, rgba(88, 69, 126, 0.28), transparent 38%),
+    radial-gradient(ellipse at 90% 12%, rgba(54, 66, 112, 0.24), transparent 34%),
+    linear-gradient(180deg, #171629 0%, #1d1b32 55%, #211d35 100%);
+}
+
+html[data-theme="dark"] .ambient-scenery-overlay { opacity: 0.16; }
+html[data-theme="dark"] .brand-title,
+html[data-theme="dark"] .main-title,
+html[data-theme="dark"] .card-title,
+html[data-theme="dark"] .journal-drawer-title,
+html[data-theme="dark"] .quotes-main-title,
+html[data-theme="dark"] .quote-card-body,
+html[data-theme="dark"] .poetic-quote .quote-text,
+html[data-theme="dark"] .suggestion-prompt,
+html[data-theme="dark"] .category-badge,
+html[data-theme="dark"] .journal-item-text { color: var(--text-primary); }
+html[data-theme="dark"] .main-subtitle,
+html[data-theme="dark"] .brand-tagline,
+html[data-theme="dark"] .poetic-quote .quote-author,
+html[data-theme="dark"] .footer-note,
+html[data-theme="dark"] .poetic-footer-text,
+html[data-theme="dark"] .quotes-subtitle,
+html[data-theme="dark"] .quote-card-author,
+html[data-theme="dark"] .journal-item-date,
+html[data-theme="dark"] .journal-empty { color: var(--text-secondary); }
+html[data-theme="dark"] .lotus-icon path,
+html[data-theme="dark"] .divider-lotus path,
+html[data-theme="dark"] .quotes-lotus-ornament svg path,
+html[data-theme="dark"] .tiny-heart-icon path,
+html[data-theme="dark"] .flourish-heart path { stroke: #d7b2e9; }
+html[data-theme="dark"] .ui-leaf-icon path:first-child { fill: #c7a4e2; }
+html[data-theme="dark"] .ui-leaf-icon path:nth-child(2) { stroke: #28243d; }
+
+html[data-theme="dark"] .reflection-card,
+html[data-theme="dark"] .inspiration-card,
+html[data-theme="dark"] .journal-drawer-inner,
+html[data-theme="dark"] .gratitude-auth-status {
+  background: linear-gradient(145deg, rgba(48, 44, 71, 0.94), rgba(35, 33, 55, 0.96));
+  border-color: var(--border-card);
+  box-shadow: var(--shadow-card);
+}
+html[data-theme="dark"] .gratitude-textarea {
+  color: #f1edf8;
+  background: #1d1b31;
+  border-color: rgba(209, 193, 239, 0.22);
+}
+html[data-theme="dark"] .gratitude-textarea::placeholder { color: #aaa4bd; }
+html[data-theme="dark"] .gratitude-textarea:focus {
+  background: #211f37;
+  border-color: #c7a4e2;
+  box-shadow: 0 0 0 4px rgba(199, 164, 226, 0.16);
+}
+html[data-theme="dark"] .btn-save {
+  color: #211b31;
+  background: #d7b2e9;
+  box-shadow: 0 5px 16px rgba(7, 4, 18, 0.35);
+}
+html[data-theme="dark"] .btn-save:hover { background: #e1c2ee; }
+html[data-theme="dark"] .btn-save .btn-leaf-icon path:nth-child(2) { stroke: #211b31; }
+html[data-theme="dark"] .save-status { color: #d5c1e6; }
+html[data-theme="dark"] .journal-tray-section .btn-toggle-journal,
+html[data-theme="dark"] .gratitude-nav-link,
+html[data-theme="dark"] .gratitude-theme-toggle {
+  color: var(--text-primary);
+  background: rgba(44, 40, 67, 0.86);
+  border-color: var(--border-card);
+}
+html[data-theme="dark"] .gratitude-nav-link:hover,
+html[data-theme="dark"] .gratitude-theme-toggle:hover,
+html[data-theme="dark"] .journal-tray-section .btn-toggle-journal:hover {
+  background: #38334f;
+  border-color: rgba(215, 178, 233, 0.5);
+}
+html[data-theme="dark"] .journal-item {
+  background: rgba(27, 25, 46, 0.82);
+  border-left-color: #c7a4e2;
+  border-radius: 12px;
+}
+html[data-theme="dark"] .btn-delete-entry { color: #e3a9b8; }
+html[data-theme="dark"] .btn-delete-entry:hover { color: #ffd8e0; background: rgba(164, 78, 104, 0.24); }
+html[data-theme="dark"] .suggestion-highlight-box {
+  background: rgba(36, 33, 56, 0.9);
+  border-color: var(--border-card);
+}
+html[data-theme="dark"] .category-badge {
+  background: #302b47;
+  border-color: var(--border-card);
+}
+html[data-theme="dark"] .badge-dot { background-color: #c7a4e2; }
+html[data-theme="dark"] .quotes-section {
+  background: linear-gradient(180deg, rgba(35, 32, 55, 0.9), rgba(28, 25, 46, 0.98));
+}
+html[data-theme="dark"] .quotes-wave-svg path { fill: rgba(35, 32, 55, 0.9); }
+html[data-theme="dark"] .quote-card-warm,
+html[data-theme="dark"] .quote-card-lavender,
+html[data-theme="dark"] .quote-card-sage {
+  background: linear-gradient(145deg, rgba(49, 44, 70, 0.95), rgba(38, 35, 59, 0.96));
+  border-color: var(--border-card);
+  box-shadow: var(--shadow-card);
+}
+html[data-theme="dark"] .quote-mark-icon { color: #c7a4e2; }
+html[data-theme="dark"] .divider-line,
+html[data-theme="dark"] .title-dash,
+html[data-theme="dark"] .flourish-line { opacity: 0.65; }
+html[data-theme="dark"] .divider-lotus,
+html[data-theme="dark"] .quotes-lotus-ornament svg,
+html[data-theme="dark"] .tiny-sprout { filter: brightness(1.8) saturate(0.75); }
+html[data-theme="dark"] .card-watermark-botanical,
+html[data-theme="dark"] .quote-watermark,
+html[data-theme="dark"] .corner-lavender-img,
+html[data-theme="dark"] .zen-stones-img { opacity: 0.12; mix-blend-mode: screen; }
+html[data-theme="dark"] .wheel-pointer-svg path { fill: #3a3154; }
+html[data-theme="dark"] .wheel-pointer-svg circle { fill: #f1edf8; }
+html[data-theme="dark"] .center-spin-hub circle { fill: #3a3154; }
+html[data-theme="dark"] .center-spin-hub:hover circle { fill: #51416d; }
+html[data-theme="dark"] .btn-spin-again {
+  color: #f1edf8;
+  background: #302b47;
+  border-color: var(--border-card);
+}
+html[data-theme="dark"] .btn-spin-again:hover { background: #3a3454; }
+html[data-theme="dark"] .spin-icon path { stroke: #e8e1f2; }
+
+html[data-theme="dark"] :focus-visible { outline-color: #d7b2e9; }
+html[data-theme="dark"] :disabled { opacity: 0.55; cursor: not-allowed; }
+
+@media (max-width: 480px) {
+  .journal-item { gap: 8px; padding: 10px; }
+  .journal-item-date { white-space: normal; }
+  .journal-drawer-inner { padding: 17px 14px; }
 }
