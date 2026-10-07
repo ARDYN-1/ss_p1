@@ -1169,3 +1169,69 @@ body[data-filter="lesson"] .sidebar-quote-card {
         text-align: center;
     }
 }
+/* Shared SOULSPACE theme and mobile refinements for Spiritual Reflection */
+.reflection-navbar { min-height:68px; display:flex; align-items:center; justify-content:space-between; gap:16px; padding:10px max(20px,calc((100vw - 1260px)/2)); position:relative; z-index:5; background:rgba(250,247,242,.94); border-bottom:1px solid var(--c-border-warm); }
+.reflection-brand { display:inline-flex; align-items:center; gap:9px; color:var(--c-forest-800); font-family:var(--font-heading); font-size:17px; font-weight:700; letter-spacing:.12em; text-decoration:none; }
+.reflection-lotus { color:var(--c-sage-500); font-size:23px; }
+.reflection-nav-actions { display:flex; align-items:center; gap:9px; }
+.reflection-home-button,.reflection-theme-toggle { min-height:40px; display:inline-flex; align-items:center; justify-content:center; gap:7px; padding:8px 14px; border:1px solid var(--c-border-mid); border-radius:999px; background:var(--c-cream-card); color:var(--c-text-body); font:600 13px var(--font-body); text-decoration:none; cursor:pointer; }
+.reflection-home-button:hover,.reflection-theme-toggle:hover { border-color:var(--c-sage-400); background:var(--c-sage-50); }
+.reflection-navbar a:focus-visible,.reflection-navbar button:focus-visible { outline:3px solid #8c77ba; outline-offset:3px; }
+html[data-theme="dark"] { color-scheme:dark; --c-forest-900:#111329; --c-forest-800:#e9e7f5; --c-forest-700:#ccc8e6; --c-forest-600:#b5b0d5; --c-forest-500:#a59dcf; --c-sage-600:#a9c6c0; --c-sage-500:#9dbeb7; --c-sage-400:#b3a5d9; --c-sage-300:#c3b8e3; --c-sage-200:#d8d1eb; --c-sage-100:#282741; --c-sage-50:#202337; --c-ivory-page:#111329; --c-cream-card:#20243a; --c-cream-alt:#24263d; --c-cream-tint:#292a43; --c-border-warm:#45425f; --c-border-mid:#514d6b; --c-border-dark:#696583; --c-text-title:#f1effa; --c-text-sub:#ded9f0; --c-text-body:#d2d0e1; --c-text-muted:#c3c5d6; --c-text-faint:#b7bbcd; --c-tint-sage:#252d3a; --c-tint-beige:#302c3b; --c-tint-rose:#332b3b; --c-tint-blue:#252c3d; --c-tint-lavend:#302b40; --shadow-card:0 12px 30px rgba(0,0,0,.24); --shadow-card-hover:0 16px 34px rgba(0,0,0,.32); }
+html[data-theme="dark"],html[data-theme="dark"] body { background:#111329; color:var(--c-text-body); }
+html[data-theme="dark"] .reflection-navbar { background:rgba(23,25,48,.94); border-color:#3e3b59; }
+html[data-theme="dark"] .reflection-brand,html[data-theme="dark"] .hero-title,html[data-theme="dark"] .card-title,html[data-theme="dark"] .modal-title { color:var(--c-text-title); }
+html[data-theme="dark"] .hero-section { background:linear-gradient(135deg,#171a36,#211d3c 52%,#192d3b); border-color:#403c5c; }
+html[data-theme="dark"] .hero-subtitle,html[data-theme="dark"] .hero-description,html[data-theme="dark"] .card-text,html[data-theme="dark"] .lesson-quote,html[data-theme="dark"] .hero-quote-text,html[data-theme="dark"] .hero-quote-author,html[data-theme="dark"] .footer-quote-text { color:#d0cee0; }
+html[data-theme="dark"] .filters-container { background:#171a31; border-color:#393752; }
+html[data-theme="dark"] .filter-btn,html[data-theme="dark"] .reflection-home-button,html[data-theme="dark"] .reflection-theme-toggle { color:#e5e2f2; background:#24263d; border-color:#4b4867; }
+html[data-theme="dark"] .filter-btn:hover,html[data-theme="dark"] .reflection-home-button:hover,html[data-theme="dark"] .reflection-theme-toggle:hover { background:#302d4b; border-color:#8e7ebc; }
+html[data-theme="dark"] .filter-btn.active { background:#40395e; color:#f0eaff; border-color:#9382c0; }
+html[data-theme="dark"] .main-wrapper,html[data-theme="dark"] .page-footer { background:transparent; }
+html[data-theme="dark"] .content-card,html[data-theme="dark"] .sidebar-quote-card,html[data-theme="dark"] .modal-dialog { color:var(--c-text-body); background:#20243a; border-color:#484560; box-shadow:var(--shadow-card); }
+html[data-theme="dark"] .category-badge,html[data-theme="dark"] .moral-pill,html[data-theme="dark"] .gita-badge,html[data-theme="dark"] .modal-sanskrit-box,html[data-theme="dark"] .modal-lesson-quote,html[data-theme="dark"] .moral-highlight { color:#e1deef; background:#2a2b45; border-color:#4a4865; }
+html[data-theme="dark"] .action-arrow-btn,html[data-theme="dark"] .modal-close-btn { color:#f0edfa; background:#30304b; border-color:#56516f; }
+html[data-theme="dark"] .modal-backdrop { background:rgba(7,8,20,.78); }
+html[data-theme="dark"] .modal-paragraph,html[data-theme="dark"] .modal-reference-tag,html[data-theme="dark"] .moral-label { color:#d2d0e1; }
+html[data-theme="dark"] .page-footer { border-color:#45415f; }
+html[data-theme="dark"] input,html[data-theme="dark"] textarea { color:#f0eff7; background:#191d33; border-color:#575371; }
+html[data-theme="dark"] input::placeholder,html[data-theme="dark"] textarea::placeholder { color:#aeb1c6; }
+@media(max-width:768px) {
+ .reflection-navbar { min-height:62px; padding:9px 16px; }
+ .reflection-brand { font-size:15px; }
+ .reflection-home-button,.reflection-theme-toggle { min-height:38px; padding:7px 11px; font-size:12px; }
+ .hero-section { padding:26px 18px 22px; }
+ .hero-container { width:100%; gap:20px; }
+ .hero-content { padding:0; }
+ .hero-title { font-size:clamp(30px,8vw,38px); line-height:1.05; overflow-wrap:anywhere; }
+ .hero-description br { display:none; }
+ .hero-artwork-wrapper,.hero-image-blend { width:100%; min-width:0; }
+ .hero-image { width:100%; height:auto; max-height:340px; object-fit:cover; }
+ .hero-quote-block { padding:14px 16px; }
+ .filters-container { padding:13px 12px; }
+ .filters-inner { justify-content:center; gap:8px; }
+ .filter-btn { max-width:100%; padding:9px 12px; }
+ .main-wrapper { padding:0 14px 22px; }
+ .spiritual-grid,.lessons-grid { grid-template-columns:minmax(0,1fr); gap:14px; }
+ .content-card,.card-content { min-width:0; }
+ .card-footer { gap:8px; }
+ .moral-label { overflow-wrap:anywhere; }
+ .modal-dialog { width:min(calc(100% - 24px),720px); max-height:calc(100dvh - 24px); overflow:auto; }
+}
+@media(max-width:380px) {
+ .reflection-navbar { padding-right:11px; padding-left:11px; }
+ .reflection-brand { gap:5px; font-size:13px; letter-spacing:.08em; }
+ .reflection-nav-actions { gap:5px; }
+ .reflection-home-button,.reflection-theme-toggle { padding:6px 9px; font-size:11px; }
+ .main-wrapper { padding-right:10px; padding-left:10px; }
+ .card-content { padding-right:14px; padding-left:14px; }
+}
+@media(max-width:768px) {
+ .hero-artwork-wrapper { width:100%; flex-direction:column; align-items:stretch; gap:10px; }
+ .hero-image-blend { width:100%; height:auto; aspect-ratio:16/9; margin:0; -webkit-mask-image:none; mask-image:none; border-radius:14px; overflow:hidden; }
+ .hero-quote-block { width:100%; max-width:none; text-align:center; padding:12px 14px; background:rgba(255,255,255,.35); border:1px solid var(--c-border-warm); }
+ .hero-quote-text { font-size:20px; }
+ body[data-filter="all"] .sidebar-quote-card,body[data-filter="story"] .sidebar-quote-card,body[data-filter="sloka"] .sidebar-quote-card { grid-column:1; grid-row:auto; min-height:0; }
+ .spiritual-grid { grid-template-columns:minmax(0,1fr); }
+}
+html[data-theme="dark"] .hero-quote-block { background:rgba(39,39,65,.84); border-color:#514d6b; }

@@ -279,11 +279,11 @@
               </div>
               
               <div class="ambient-switch-wrap">
-                <span class="toggle-status-text" id="toggleStatusLabel">Off</span>
-                <label class="switch" for="audioToggle">
-                  <input type="checkbox" id="audioToggle" aria-label="Toggle ambient sound">
-                  <span class="slider round"></span>
-                </label>
+                  <span class="toggle-status-text" id="toggleStatusLabel">Paused</span>
+                <div class="ambient-buttons">
+                  <button class="ambient-play-button" id="ambientPlayBtn" type="button">Play</button>
+                  <button class="ambient-pause-button" id="ambientPauseBtn" type="button" disabled>Pause</button>
+                </div>
               </div>
             </div>
 
@@ -294,8 +294,8 @@
                   <path d="M3 9V15H7L12 20V4L7 9H3ZM16.5 12C16.5 10.23 15.48 8.71 14 7.97V16.02C15.48 15.29 16.5 13.77 16.5 12ZM14 3.23V5.29C16.89 6.15 19 8.83 19 12C19 15.17 16.89 17.85 14 18.71V20.77C18.01 19.86 21 16.28 21 12C21 7.72 18.01 4.14 14 3.23Z"/>
                 </svg>
               </button>
-              <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.7" aria-label="Volume level">
-              <span class="volume-pct" id="volumePct">70%</span>
+              <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.05" value="0.2" aria-label="Volume level">
+              <span class="volume-pct" id="volumePct">20%</span>
             </div>
           </div>
 
@@ -436,9 +436,8 @@
   </main>
 
   <!-- HTML5 Audio Element for Ambient Track -->
-  <audio id="ambientAudio" preload="auto" loop>
-    <source src="assets/audio/spa-ambient-10min.mp3" type="audio/mp3">
-    <source src="assets/audio/gentle-ambient.mp3" type="audio/mp3">
+  <audio id="ambientAudio" preload="none" loop>
+    <source src="../assets/audio/gentle_ambient_meditation.mp3" type="audio/mpeg">
   </audio>
 
   <script src="meditation.js"></script>

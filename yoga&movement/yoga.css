@@ -1918,3 +1918,32 @@ html[data-theme="dark"] .practice-home-button:focus-visible,html[data-theme="dar
 @media (prefers-reduced-motion: reduce) {
   html[data-theme] body,.feature-card,.practice-card,.practice-mode-card,.reflection-modal,.practice-home-button,.theme-toggle { transition:none; }
 }
+
+/* Intentional dark palette and light interaction polish */
+html[data-theme="dark"] .site-header { background:rgba(23,27,48,.94); border-color:#41415f; }
+html[data-theme="dark"] .page-main,html[data-theme="dark"] .practices-section,html[data-theme="dark"] .main-feature-section { color:#d1d2e3; }
+html[data-theme="dark"] .hero-title,html[data-theme="dark"] .section-title,html[data-theme="dark"] .feature-main-title,html[data-theme="dark"] .steps-column-title,html[data-theme="dark"] .current-step-label,html[data-theme="dark"] .step-item-title { color:#f1eff8; }
+html[data-theme="dark"] .hero-supporting-lead,html[data-theme="dark"] .hero-supporting-text,html[data-theme="dark"] .section-subtitle,html[data-theme="dark"] .card-description,html[data-theme="dark"] .feature-subtitle,html[data-theme="dark"] .step-counter-text,html[data-theme="dark"] .current-step-instruction,html[data-theme="dark"] .visual-hint,html[data-theme="dark"] .safety-text,html[data-theme="dark"] .footer-tagline { color:#c8cada; }
+html[data-theme="dark"] .practice-card,html[data-theme="dark"] .feature-card,html[data-theme="dark"] .practice-mode-card,html[data-theme="dark"] .reflection-modal,html[data-theme="dark"] .modal-sheet { background:rgba(32,36,58,.95); border-color:#4b4968; color:#d1d2e3; box-shadow:0 16px 40px rgba(4,5,18,.28); }
+html[data-theme="dark"] .practice-card.active { background:#29283f; border-color:#9b88c8; }
+html[data-theme="dark"] .meta-pill,html[data-theme="dark"] .card-duration-pill,html[data-theme="dark"] .step-number-badge,html[data-theme="dark"] .step-badge-pill,html[data-theme="dark"] .calm-breath-cue { background:#2a2b45; color:#e0deed; border-color:#53516e; }
+html[data-theme="dark"] .step-row-item { color:#d1d2e3; border-color:#44435f; }
+html[data-theme="dark"] .step-row-item.active { background:#34314e; color:#f1eff8; border-color:#9886c3; }
+html[data-theme="dark"] .practice-home-button,html[data-theme="dark"] .theme-toggle { background:#252740; color:#eceaf5; border-color:#565372; }
+html[data-theme="dark"] .practice-home-button:hover,html[data-theme="dark"] .theme-toggle:hover { background:#302e4b; color:#fff; border-color:#9784c1; }
+html[data-theme="dark"] input,html[data-theme="dark"] textarea { color:#f1eff8; background:#181b31; border-color:#5b5676; }
+html[data-theme="dark"] textarea::placeholder { color:#adb1c5; }
+html[data-theme="dark"] .visual-media-box { background:#17192d; border-color:#5a5675; }
+.exercise-video-iframe { position:absolute; inset:0; width:100%; height:100%; border:0; border-radius:inherit; z-index:4; background:#111; }
+.visual-media-box { aspect-ratio:16/9; height:auto; min-height:0; overflow:hidden; }
+.visual-media-box > .pose-visual-stage { position:absolute; inset:0; width:100%; height:100%; }
+.visual-media-box > .pose-visual-stage .pose-svg-wrapper { width:100%; height:100%; }
+.visual-media-box .media-overlay-scrim[hidden] { display:none; }
+.practice-card,.feature-card,.practice-mode-card,.btn-card-start,.btn-timer-next,.btn-timer-pause { transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease,transform .18s ease; }
+.practice-card:hover { transform:translateY(-2px); box-shadow:0 16px 36px rgba(28,52,39,.11); }
+.btn-card-start:hover,.btn-timer-next:hover,.btn-timer-pause:hover { transform:translateY(-1px); }
+.feature-card { border:1px solid var(--color-sage-border); }
+@media(max-width:900px) { .visual-media-box { width:100%; } .feature-body-grid { min-width:0; } }
+@media(max-width:600px) { .hero-container,.section-container,.feature-body-grid { min-width:0; } .visual-media-box { width:100%; } .feature-card { padding:clamp(14px,4vw,24px); } }
+@media(prefers-reduced-motion:reduce) { .practice-card,.feature-card,.practice-mode-card,.btn-card-start,.btn-timer-next,.btn-timer-pause { transition:none; } }
+@media(max-width:360px) { .ambient-botanical { display:none; } html,body { overflow-x:clip; } }

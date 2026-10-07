@@ -4,6 +4,20 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+    const themeButton = document.querySelector('.reflection-theme-toggle');
+    if (themeButton) {
+        const applyTheme = (theme, persist = false) => {
+            const dark = theme === 'dark';
+            document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+            document.documentElement.style.colorScheme = dark ? 'dark' : 'light';
+            themeButton.setAttribute('aria-pressed', String(dark));
+            themeButton.setAttribute('aria-label', `Switch to ${dark ? 'light' : 'dark'} theme`);
+            themeButton.querySelector('[data-theme-name]').textContent = dark ? 'Dark' : 'Light';
+            if (persist) { try { localStorage.setItem('soulspace-theme', dark ? 'dark' : 'light'); } catch {} }
+        };
+        applyTheme(document.documentElement.dataset.theme);
+        themeButton.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark', true));
+    }
     initFilters();
     initModal();
 });

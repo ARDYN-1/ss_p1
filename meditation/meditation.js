@@ -55,7 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Calming Audio Controls
   const ambientAudio = document.getElementById('ambientAudio');
+  ambientAudio.volume = 0.2;
   const audioToggle = document.getElementById('audioToggle');
+  const ambientPlayBtn = document.getElementById('ambientPlayBtn');
+  const ambientPauseBtn = document.getElementById('ambientPauseBtn');
   const toggleStatusLabel = document.getElementById('toggleStatusLabel');
   const volumeSlider = document.getElementById('volumeSlider');
   const volumePct = document.getElementById('volumePct');
@@ -172,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 4. AUDIO SYSTEM CONTROLLER (HTML5 Audio + Web Audio Fallback)
   // =========================================================================
   function playAmbientSound() {
-    if (!state.isAudioOn || !state.isRunning) return;
+    if (!state.isAudioOn) return;
 
     // Apply volume setting
     const currentVol = parseFloat(volumeSlider.value);
@@ -181,12 +184,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // Attempt HTML5 Audio playback first
     const playPromise = ambientAudio.play();
     if (playPromise !== undefined) {
-      playPromise.catch((err) => {
+      playPromise.catch(() => {
         // Fallback gracefully to Web Audio synthesized calming drone
         startWebAudioAmbient();
       });
     }
   }
+
+  function setAmbientPlaying(playing) {
+    state.isAudioOn = playing;
+    syncAmbientControls(playing);
+    if (playing) playAmbientSound();
+    else pauseAmbientSound();
+  }
+
+  function syncAmbientControls(playing, status = playing ? 'Playing' : 'Paused') {
+    toggleStatusLabel.textContent = status;
+    ambientPlayBtn.disabled = playing;
+    ambientPauseBtn.disabled = !playing;
+  }
+
+  ambientPlayBtn.addEventListener('click', () => setAmbientPlaying(true));
+  ambientPauseBtn.addEventListener('click', () => setAmbientPlaying(false));
 
   function pauseAmbientSound() {
     try {
@@ -212,7 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Audio Toggle Switch Handler
-  audioToggle.addEventListener('change', (e) => {
+  if (audioToggle) audioToggle.addEventListener('change', (e) => {
     state.isAudioOn = e.target.checked;
     
     if (state.isAudioOn) {
@@ -237,15 +256,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Volume Mute/Unmute Button Handler
-  let previousVolume = 0.7;
+  let previousVolume = 0.2;
   volumeMuteBtn.addEventListener('click', () => {
     if (ambientAudio.volume > 0) {
       previousVolume = ambientAudio.volume;
       volumeSlider.value = 0;
       updateAudioVolume(0);
     } else {
-      volumeSlider.value = previousVolume || 0.7;
-      updateAudioVolume(previousVolume || 0.7);
+      volumeSlider.value = previousVolume || 0.2;
+      updateAudioVolume(previousVolume || 0.2);
     }
   });
 
@@ -291,6 +310,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start ambient sound if toggle is ON
     if (state.isAudioOn) {
+      syncAmbientControls(true);
       playAmbientSound();
     }
 
@@ -321,6 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Pause ambient sound simultaneously
     pauseAmbientSound();
+    if (state.isAudioOn) syncAmbientControls(false, 'Paused with session');
   }
 
   function resetTimer() {
@@ -368,6 +389,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. Automatically stop ambient audio
     pauseAmbientSound();
     resetAmbientSound();
+    state.isAudioOn = false;
+    syncAmbientControls(false);
 
     // 3. Update caption
     guidanceCaption.textContent = "🌸 Meditation Complete. Take a peaceful moment.";

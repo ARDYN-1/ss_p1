@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (() => { let theme = null; try { theme = localStorage.getItem('soulspace-theme'); } catch {} document.documentElement.dataset.theme = theme === 'dark' || theme === 'light' ? theme : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); })();
+    </script>
     <meta name="description"
         content="Explore heart-touching spiritual stories and sacred verses from the Bhagavad Gita. Let their wisdom inspire you, guide your thoughts and bring more light into your everyday life.">
     <title>Spiritual Reflection | SoulSpace</title>
@@ -16,6 +19,16 @@
 </head>
 
 <body data-filter="all">
+
+    <nav class="reflection-navbar" aria-label="Main navigation">
+        <a class="reflection-brand" href="/" aria-label="SoulSpace home"><span class="reflection-lotus" aria-hidden="true">✿</span><span>SOULSPACE</span></a>
+        <div class="reflection-nav-actions">
+            <a class="reflection-home-button" href="/">Home</a>
+            <button class="reflection-theme-toggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
+                <span aria-hidden="true">☾</span><span data-theme-name>Light</span>
+            </button>
+        </div>
+    </nav>
 
     <!-- ==========================================
          HERO SECTION

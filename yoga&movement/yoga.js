@@ -528,6 +528,10 @@ document.addEventListener("DOMContentLoaded", () => {
     featureSubtitle.textContent = practice.subtitle;
     featureDurationText.textContent = practice.durationText;
     featureYoutubeLink.href = practice.videoUrl;
+    const existingPlayer = visualMediaBox && visualMediaBox.querySelector('iframe');
+    if (existingPlayer) existingPlayer.remove();
+    const overlay = visualMediaBox && visualMediaBox.querySelector('.media-overlay-scrim');
+    if (overlay) overlay.hidden = false;
     mediaDurationTag.textContent = practice.videoTag;
 
     // 3. Reset View States
@@ -816,22 +820,42 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Visual Media Box Click -> Open YouTube Video
+  // Load the current YouTube video in-page only after the user presses Play.
   if (visualMediaBox) {
-    visualMediaBox.addEventListener("click", () => {
+    const playEmbeddedVideo = () => {
       const practice = practicesData[state.currentPracticeId];
-      if (practice && practice.videoUrl) {
-        window.open(practice.videoUrl, "_blank", "noopener,noreferrer");
-      }
+      const videoId = practice && practice.videoUrl && practice.videoUrl.match(/[?&]v=([A-Za-z0-9_-]{11})/);
+      if (!videoId || visualMediaBox.querySelector('iframe')) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${videoId[1]}?playsinline=1&rel=0`;
+      iframe.title = practice.title;
+      iframe.loading = 'lazy';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.allow = 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.className = 'exercise-video-iframe';
+      visualMediaBox.appendChild(iframe);
+      const overlay = visualMediaBox.querySelector('.media-overlay-scrim');
+      if (overlay) overlay.hidden = true;
+    };
+    visualMediaBox.addEventListener("click", playEmbeddedVideo);
+    const featureVideoLink = document.getElementById('featureYoutubeLink');
+    if (featureVideoLink) featureVideoLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      playEmbeddedVideo();
+      visualMediaBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    const deskBreakVideoLink = document.getElementById('videoLinkDeskBreak');
+    if (deskBreakVideoLink) deskBreakVideoLink.addEventListener('click', (event) => {
+      event.preventDefault();
+      selectPractice('deskBreak', false, true);
+      playEmbeddedVideo();
     });
 
     visualMediaBox.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        const practice = practicesData[state.currentPracticeId];
-        if (practice && practice.videoUrl) {
-          window.open(practice.videoUrl, "_blank", "noopener,noreferrer");
-        }
+        playEmbeddedVideo();
       }
     });
   }

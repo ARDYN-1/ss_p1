@@ -1780,3 +1780,53 @@ body::after {
     will-change: auto;
   }
 }
+
+/* Targeted responsive corrections */
+@media (max-width:620px) {
+ .site-header { min-height:68px; height:auto; flex-wrap:wrap; padding:10px 14px; gap:8px; }
+ .header-actions { min-width:0; flex:1 1 100%; justify-content:flex-end; gap:6px; }
+ .header-actions>* { min-width:0; }
+ .header-cta,.soulguru-launch,.profile-toggle,.theme-toggle { min-height:36px; padding:7px 9px; font-size:10px; }
+ .hero { width:calc(100% - 28px); }
+ .hero-copy { min-width:0; padding:29px 20px 24px; }
+ .hero h1 { font-size:clamp(38px,11vw,52px); line-height:.99; overflow-wrap:anywhere; }
+ .hero-description { width:100%; }
+ .hero-actions { align-items:flex-start; }
+ .hero-actions .browse-link { margin-top:0; }
+ .hero-art { min-height:clamp(180px,54vw,230px); }
+ .section-heading { flex-wrap:wrap; }
+ .practice-count { margin-top:0; }
+ .practice-card { grid-template-columns:minmax(92px,31%) minmax(0,1fr); }
+ .card-content,.card-title-row,.practice-card h3 { min-width:0; }
+ .practice-card h3 { overflow-wrap:anywhere; }
+ .duration { flex:0 0 auto; }
+ .weekly-activity-heading { gap:12px; flex-wrap:wrap; }
+ .weekly-days { grid-template-columns:repeat(7,minmax(0,1fr)); }
+ .weekly-day { min-width:0; }
+ .site-footer { align-items:flex-start; }
+ body::before,body::after { animation:none; will-change:auto; }
+}
+@media (max-width:380px) {
+ .header-cta { font-size:0; gap:0; }
+ .header-cta span { font-size:16px; }
+ #profile-toggle-label,.soulguru-launch-label,.theme-toggle>[data-theme-name] { display:none; }
+ .header-actions { flex-basis:auto; gap:5px; }
+ .hero-copy { padding-right:16px; padding-left:16px; }
+ .hero-copy>.eyebrow { font-size:7px; letter-spacing:.9px; }
+ .practice-card { grid-template-columns:88px minmax(0,1fr); }
+ .card-content { padding-right:9px; padding-left:10px; }
+ .duration { font-size:7px; }
+}
+@media (min-width:621px) and (max-width:900px) {
+ .site-header { padding-right:22px; padding-left:22px; }
+ .header-actions { gap:6px; }
+ .hero { grid-template-columns:minmax(0,1.05fr) minmax(0,.8fr); }
+ .hero-copy { padding-left:26px; }
+ .hero h1 { font-size:clamp(38px,5vw,49px); }
+ .hero-art { min-height:330px; }
+}
+@media (min-width:621px) and (max-width:900px) {
+ .site-header { height:auto; min-height:72px; flex-wrap:wrap; padding-top:10px; padding-bottom:10px; }
+ .header-actions { flex:1 1 100%; justify-content:flex-end; }
+ .main-nav { margin-left:auto; }
+}

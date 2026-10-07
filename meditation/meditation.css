@@ -1258,3 +1258,52 @@ html[data-theme="dark"] .btn-ctrl.btn-secondary,html[data-theme="dark"] .btn-act
 @media (prefers-reduced-motion: reduce) {
   html[data-theme] body,.meditation-card,.guidance-card,.ambient-sound-card,.reflection-modal,.reflections-list-modal,.practice-home-button,.theme-toggle { transition:none; }
 }
+
+/* Dark-mode contrast and ambient player states */
+html[data-theme="dark"] { --bg-warm-ivory:#111329; --bg-card-white:#20243a; --bg-card-tint:#252940; --bg-card-hover:#2b2d48; --bg-pill-active:#393452; --bg-pill-selected:#8173ae; --color-primary-sage:#a8c7c0; --color-primary-dark:#d8d5e8; --color-sage-light:#b2a4d5; --color-sage-border:#4b4967; --color-sage-pill-bg:#292a43; --color-text-dark:#f1eff8; --color-text-body:#d0d0e2; --color-text-muted:#bfc2d5; --color-text-light:#b2b7ce; --color-lavender-tint:#302d48; --color-lavender-accent:#c2b2e0; }
+html[data-theme="dark"] body { background:linear-gradient(145deg,#111329,#1b1b37 54%,#112a36); color:var(--color-text-body); }
+html[data-theme="dark"] .site-header { background:rgba(25,26,51,.94); border-color:#41405f; }
+html[data-theme="dark"] .page-title,html[data-theme="dark"] .column-heading,html[data-theme="dark"] .duration-title,html[data-theme="dark"] .completion-title,html[data-theme="dark"] .feature-main-title { color:#f1eff8; }
+html[data-theme="dark"] .page-subtitle,html[data-theme="dark"] .card-description,html[data-theme="dark"] .guidance-text-content,html[data-theme="dark"] .ambient-subtext,html[data-theme="dark"] .post-practice-block,html[data-theme="dark"] .completion-subtext,html[data-theme="dark"] .modal-label,html[data-theme="dark"] .reflection-meta-row,html[data-theme="dark"] .footer-container { color:#c9cada; }
+html[data-theme="dark"] .practice-home-button,html[data-theme="dark"] .theme-toggle { background:#252740; color:#eceaf5; border-color:#565372; }
+html[data-theme="dark"] .practice-home-button:hover,html[data-theme="dark"] .theme-toggle:hover { background:#302e4b; color:#fff; border-color:#9784c1; }
+html[data-theme="dark"] .meditation-card,html[data-theme="dark"] .guidance-card,html[data-theme="dark"] .ambient-sound-card,html[data-theme="dark"] .reflection-modal,html[data-theme="dark"] .reflections-list-modal,html[data-theme="dark"] .modal-dialog { background:rgba(32,36,58,.96); border-color:#4a4968; color:#d0d0e2; box-shadow:0 18px 44px rgba(3,5,18,.3); }
+html[data-theme="dark"] .guidance-card *,html[data-theme="dark"] .ambient-sound-card *,html[data-theme="dark"] .reflection-modal *,html[data-theme="dark"] .reflections-list-modal * { color:inherit; }
+html[data-theme="dark"] .guidance-card h2,html[data-theme="dark"] .guidance-card h3,html[data-theme="dark"] .ambient-title,html[data-theme="dark"] .mood-label,html[data-theme="dark"] .modal-title { color:#f1eff8; }
+html[data-theme="dark"] .duration-pill,html[data-theme="dark"] .duration-option,html[data-theme="dark"] .mood-btn,html[data-theme="dark"] .modal-mood-btn,html[data-theme="dark"] .reflection-item,html[data-theme="dark"] .ambient-buttons button { background:#292b45; color:#e2dfef; border-color:#55516e; }
+html[data-theme="dark"] .duration-pill.active,html[data-theme="dark"] .duration-option.is-selected,html[data-theme="dark"] .mood-btn.active,html[data-theme="dark"] .modal-mood-btn.active { background:#484065; color:#fff; border-color:#aa97d1; }
+html[data-theme="dark"] .btn-ctrl,html[data-theme="dark"] .btn-action,html[data-theme="dark"] .btn-primary-modal,html[data-theme="dark"] .btn-secondary-modal,html[data-theme="dark"] .volume-mute-btn { color:#f1eff8; border-color:#5b5676; }
+html[data-theme="dark"] input,html[data-theme="dark"] textarea { color:#f1eff8; background:#181b31; border-color:#5b5676; }
+html[data-theme="dark"] input::placeholder,html[data-theme="dark"] textarea::placeholder { color:#adb1c5; }
+html[data-theme="dark"] .timer-digits,html[data-theme="dark"] .selected-duration-badge { color:#f4f0ff; }
+html[data-theme="dark"] .modal-overlay { background:rgba(6,8,19,.78); }
+.ambient-buttons { display:flex; gap:8px; }
+.ambient-buttons button { min-height:36px; padding:7px 14px; border:1px solid var(--color-sage-border); border-radius:999px; background:var(--bg-card-white); color:var(--color-text-dark); font:600 .8rem var(--font-sans); cursor:pointer; }
+.ambient-buttons button:disabled { opacity:.55; cursor:default; }
+.ambient-buttons .ambient-play-button { background:var(--color-primary-sage); color:#fff; }
+.ambient-buttons .ambient-play-button:disabled { background:#778a7a; color:#fff; }
+.ambient-buttons button:focus-visible { outline:3px solid #a990c4; outline-offset:3px; }
+@media(max-width:480px) { .ambient-sound-card { flex-wrap:wrap; gap:12px; } .ambient-info { min-width:0; } .ambient-switch-wrap { width:100%; justify-content:flex-start; } .volume-control-wrap { width:100%; } }
+@media(max-width:380px) {
+ .meditation-container,.meditation-card,.timer-column,.guidance-column { width:100%; min-width:0; }
+ .meditation-card { padding:20px 14px; gap:28px; }
+ .timer-column { overflow:hidden; }
+ .meditation-art-wrap { max-width:100%; overflow:hidden; }
+ .halo-circle { width:min(200px,100%); max-width:100%; }
+ .meditation-svg { overflow:hidden; }
+ .timer-controls { flex-wrap:wrap; gap:7px; }
+ .btn-ctrl { flex:1 1 64px; min-width:0; padding:9px 8px; }
+ .botanical-bg { display:none; }
+}
+@media(max-width:380px) {
+ .brand-logo { gap:5px; }
+ .brand-name { font-size:.75rem; letter-spacing:.1em; }
+ .lotus-icon { width:27px; }
+ .practice-header-actions { gap:.25rem; }
+ .practice-home-button,.theme-toggle { min-height:34px; padding:.35rem .45rem; font-size:.66rem; }
+}
+html[data-theme="dark"] .btn-start { background:#74669b; color:#fff; border-color:#a895d0; box-shadow:0 4px 14px rgba(123,104,170,.25); }
+html[data-theme="dark"] .btn-start:hover { background:#8274a8; border-color:#b6a5dc; }
+html[data-theme="dark"] .btn-pause,html[data-theme="dark"] .btn-reset { background:#2c2d49; color:#eceaf5; border-color:#5c5979; }
+html[data-theme="dark"] .btn-pause:hover,html[data-theme="dark"] .btn-reset:hover { background:#393653; color:#fff; border-color:#9584bd; }
+html[data-theme="dark"] .btn-ctrl:disabled { opacity:1; background:#2a2c44; color:#c2c3d2; border-color:#4e5068; box-shadow:none; cursor:not-allowed; }
